@@ -75,7 +75,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: binaries-${{ matrix.target }}
-          path: ga-semantics-mcp-${{ matrix.target }}.*
+          path: ga-semantics-${{ matrix.target }}.*
 
   npm-publish:
     needs: build
