@@ -7,6 +7,8 @@ license = "MIT OR Apache-2.0"
 description = "Geometric Algebra semantic layer with Bagua taxonomy for knowledge graphs"
 keywords = ["geometric-algebra", "clifford-algebra", "knowledge-graph", "bagua", "semantics"]
 categories = ["science", "data-structures", "algorithms"]
+repository = "https://github.com/trac41799/ga-bagua-semantic-kg"
+readme = "../README.md"
 
 [features]
 default = ["serde"]

@@ -2,13 +2,18 @@
 name = "ga-semantics-mcp"
 version = "0.1.0"
 edition = "2021"
-description = "MCP server for ga-semantics — AI agent tool interface"
+rust-version = "1.78.0"
+license = "MIT OR Apache-2.0"
+description = "GA-Bagua Semantic KG MCP server — LLM semantic memory with 29 tools for AI agents"
+keywords = ["mcp", "knowledge-graph", "semantic-memory", "bagua", "ai", "llm"]
+categories = ["science", "command-line-utilities"]
+repository = "https://github.com/trac41799/ga-bagua-semantic-kg"
 
 [[bin]]
 name = "ga-semantics-mcp"
 path = "src/main.rs"
 
 [dependencies]
-ga-semantics-core = { path = "../ga-semantics-core", features = ["store"] }
+ga-semantics-core = { version = "0.1.0", features = ["store"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
