@@ -4,6 +4,24 @@
 
 ---
 
+## Quick Start
+
+```bash
+# Install via npm (recommended)
+npm install -g ga-semantics-mcp
+
+# Or via Cargo
+cargo install ga-semantics-cli
+
+# Encode a concept
+ga-semantics-cli encode 0.04 -0.09 -0.51 0.68 0.21 -0.26 0.17 -0.34
+
+# See full delivery guide
+open docs/DELIVERY.md
+```
+
+---
+
 ## 1. Executive Summary
 
 **ga-semantics** is a lightweight Rust library that represents semantic relationships as geometric algebra operations, with 8 intuitive role labels — generative, receptive, causal, transmissive, constraining, influential, clarifying, balancing — providing an interpretable relationship taxonomy.
