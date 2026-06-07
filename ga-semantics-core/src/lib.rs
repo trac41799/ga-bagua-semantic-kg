@@ -2,6 +2,7 @@ pub mod bagua;
 pub mod blade;
 pub mod encoding;
 pub mod error;
+pub mod index;
 pub mod multivector;
 pub mod relation_type;
 pub mod rotor;
@@ -23,6 +24,7 @@ pub use error::AlgebraicError;
 pub use multivector::Multivector;
 pub use relation_type::RelationType;
 pub use rotor::Rotor;
+#[allow(deprecated)]
 pub use encoding::{hash_encode, llm_encode, multivector_describe, multivector_to_roles,
     text_to_multivector, word_to_multivector};
 pub use semantics::{Context, analogy, analogy_confidence, compose_chain, compose_relations,
@@ -37,6 +39,7 @@ pub mod advanced {
 
 pub mod prelude {
     pub use crate::blade::Blade;
+    #[allow(deprecated)]
     pub use crate::encoding::{hash_encode, llm_encode, multivector_describe, multivector_to_roles,
         text_to_multivector, word_to_multivector};
     pub use crate::multivector::Multivector;

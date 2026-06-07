@@ -186,6 +186,18 @@ impl Multivector {
         crate::relation_type::RelationType::from_trigram(trigram)
     }
 
+    /// Encoding sharpness: how concentrated the encoding is on its dominant role.
+    /// Returns value in [0, 1] where higher = more clearly defined concept.
+    /// Random uniform vectors have sharpness ~0.13-0.18; well-encoded concepts
+    /// have sharpness ~0.30-0.50. Used as a signal-quality gate in classification.
+    pub fn encoding_sharpness(&self) -> f64 {
+        let coeffs = &self.coefficients;
+        let max_abs = coeffs.iter().map(|c| c.abs()).fold(0.0f64, f64::max);
+        let sum_abs: f64 = coeffs.iter().map(|c| c.abs()).sum();
+        if sum_abs < f64::EPSILON { return 0.0; }
+        max_abs / sum_abs
+    }
+
     pub fn role_weights(&self) -> [f64; 8] {
         self.coefficients
     }
@@ -494,5 +506,56 @@ mod tests {
         let b = Multivector::new([1.001, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]);
         assert!(!a.approx_eq(&b, 1e-4));
         assert!(a.approx_eq(&b, 0.01));
+    }
+
+    #[test]
+    fn encoding_sharpness_one_role_is_one() {
+        let a = Multivector::from_blade(Blade::E1, 1.0);
+        assert!((a.encoding_sharpness() - 1.0).abs() < 1e-10);
+    }
+
+    #[test]
+    fn encoding_sharpness_uniform_is_low() {
+        let a = Multivector::new([1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
+        assert!((a.encoding_sharpness() - 0.125).abs() < 1e-10);
+    }
+
+    #[test]
+    fn encoding_sharpness_zero_is_zero() {
+        let a = Multivector::zero();
+        assert_eq!(a.encoding_sharpness(), 0.0);
+    }
+
+    #[test]
+    fn encoding_sharpness_hand_tuned_is_moderate() {
+        // LLM-encoded concept (Rate Limiter)
+        let a = crate::encoding::llm_encode(&[0.04, -0.09, -0.51, 0.68, 0.21, -0.26, 0.17, -0.34]);
+        let sharp = a.encoding_sharpness();
+        assert!(sharp > 0.25, "hand-tuned encoding should have sharpness > 0.25, got {}", sharp);
+        assert!(sharp < 0.65, "encoding is not single-role, got {}", sharp);
+    }
+
+    #[test]
+    fn encoding_sharpness_random_is_below_threshold() {
+        use crate::encoding::llm_encode;
+        let mut below = 0usize;
+        let mut seed: u64 = 0xCAFE;
+        for _ in 0..100 {
+            seed = seed.wrapping_mul(1103515245).wrapping_add(12345);
+            let s = seed;
+            let raw = [
+                ((s as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                ((s.wrapping_mul(3) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                ((s.wrapping_mul(7) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                ((s.wrapping_mul(11) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                ((s.wrapping_mul(13) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                ((s.wrapping_mul(17) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                ((s.wrapping_mul(19) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                ((s.wrapping_mul(23) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+            ];
+            let mv = llm_encode(&raw);
+            if mv.encoding_sharpness() < 0.25 { below += 1; }
+        }
+        assert!(below >= 75, ">75% of random encodings should fall below 0.25 sharpness (got {}/100)", below);
     }
 }

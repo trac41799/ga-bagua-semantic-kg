@@ -102,6 +102,7 @@ pub fn word_to_multivector(word: &str) -> Multivector {
 }
 
 #[cfg(test)]
+#[allow(deprecated)]
 mod tests {
     use super::*;
 

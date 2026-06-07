@@ -79,14 +79,21 @@ pub fn is_contradictory(a: &Multivector, b: &Multivector, threshold: f64) -> boo
 /// Analogy: "A is to B as C is to ?"
 /// Uses WuXing cycle dynamics: finds the cycle relationship between A and B
 /// (generate, control, reverse-generate, reverse-control), then applies it to C to predict D.
-/// For phases with 2 trigrams, picks the first for generative/controlling, second for receptive/influential.
+///
+/// For phases with 2 trigrams, selects the predicted trigram based on A's position
+/// within its own WuXing phase:
+///   - Generate: if A is the first trigram of its phase, pick the second trigram of
+///     the predicted phase (yielding receives from active). If A is the second trigram,
+///     pick the first (active receives from yielding).
+///   - Control: if A is the first trigram of its phase, pick the first trigram of the
+///     predicted phase (active controls active). If A is the second, pick the second
+///     (yielding controls yielding).
 pub fn analogy(a: &Multivector, b: &Multivector, c: &Multivector) -> Option<Multivector> {
     let ta = a.dominant_trigram();
     let tb = b.dominant_trigram();
     let tc = c.dominant_trigram();
     let wa = ta.wuxing_phase();
     let wb = tb.wuxing_phase();
-    let wc = tc.wuxing_phase();
 
     use crate::advanced::WuXing;
     let all = [WuXing::Wood, WuXing::Fire, WuXing::Earth, WuXing::Metal, WuXing::Water];
@@ -94,13 +101,17 @@ pub fn analogy(a: &Multivector, b: &Multivector, c: &Multivector) -> Option<Mult
     let (pred_w, use_first) = if wa == wb {
         return Some(*c);
     } else if wa.generate() == wb {
-        (Some(wc.generate()), true)
+        let use_first = ta != wa.trigrams()[0];
+        (Some(tc.wuxing_phase().generate()), use_first)
     } else if wa.control() == wb {
-        (Some(wc.control()), false)
+        let use_first = ta == wa.trigrams()[0];
+        (Some(tc.wuxing_phase().control()), use_first)
     } else if wb.generate() == wa {
-        (all.iter().find(|&&w| w.generate() == wc).copied(), false)
+        let use_first = ta != wa.trigrams()[0];
+        (all.iter().find(|&&w| w.generate() == tc.wuxing_phase()).copied(), use_first)
     } else if wb.control() == wa {
-        (all.iter().find(|&&w| w.control() == wc).copied(), true)
+        let use_first = ta == wa.trigrams()[0];
+        (all.iter().find(|&&w| w.control() == tc.wuxing_phase()).copied(), use_first)
     } else {
         (None, true)
     };

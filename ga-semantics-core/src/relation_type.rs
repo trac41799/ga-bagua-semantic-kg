@@ -106,6 +106,27 @@ impl RelationType {
         let wa = ta.wuxing_phase();
         let wb = tb.wuxing_phase();
 
+        // Encoding quality gate: if either concept is near-random (diffuse
+        // across all 8 roles), the WuXing cycle match is unreliable.
+        // Random uniform-normalised vectors average ~0.16 sharpness;
+        // LLM-encoded concepts average ~0.30-0.47.
+        const SHARPNESS_THRESHOLD: f64 = 0.25;
+        let quality = a.encoding_sharpness().min(b.encoding_sharpness());
+        if quality < SHARPNESS_THRESHOLD {
+            let rel = if wa.generate() == wb {
+                RelationType::Generative
+            } else if wb.generate() == wa {
+                RelationType::Receptive
+            } else if wa.control() == wb {
+                RelationType::Constraining
+            } else if wb.control() == wa {
+                RelationType::Influential
+            } else {
+                RelationType::Receptive
+            };
+            return (rel, 0.0);
+        }
+
         if wa.generate() == wb {
             return (RelationType::Generative, 1.0);
         }
@@ -127,7 +148,7 @@ impl RelationType {
         if ta == tb {
             return (RelationType::Receptive, 0.6);
         }
-
+        
         let hex = crate::bagua::Hexagram::from_multivector_pair(a, b);
         let hex_rel = match (hex.upper(), hex.lower()) {
             (crate::bagua::Trigram::Qian, _) => RelationType::Generative,
@@ -243,5 +264,54 @@ mod tests {
         for r in &RelationType::ALL {
             assert_eq!(r.blade(), r.bagua().blade());
         }
+    }
+
+    #[test]
+    fn from_pair_diffuse_encodings_get_low_confidence() {
+        let a = Multivector::new([1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]);
+        let b = Multivector::new([1.0, -1.0, 1.0, -1.0, 1.0, -1.0, 1.0, -1.0]);
+        let (_, conf) = RelationType::from_pair(&a, &b);
+        assert!(conf < 0.25, "diffuse encodings should get low confidence, got {}", conf);
+    }
+
+    #[test]
+    fn from_pair_sharp_encodings_keep_high_confidence() {
+        let a = Multivector::from_blade(Blade::E1, 1.0);
+        let b = Multivector::from_blade(Blade::E2, 1.0);
+        let (rel, conf) = RelationType::from_pair(&a, &b);
+        assert_eq!(rel, RelationType::Receptive);
+        assert!((conf - 1.0).abs() < 1e-10,
+            "sharp blade encodings generate/receive cycle should give conf=1.0, got {}", conf);
+    }
+
+    #[test]
+    fn from_pair_random_encodings_filtered_by_gate() {
+        use crate::encoding::llm_encode;
+        let mut high_conf = 0usize;
+        let mut seed: u64 = 0xBEEF;
+        for _ in 0..1000 {
+            seed = seed.wrapping_mul(1103515245).wrapping_add(12345);
+            let s1 = seed;
+            seed = seed.wrapping_mul(1103515245).wrapping_add(12345);
+            let s2 = seed;
+            let make = |s: u64| {
+                let raw = [
+                    ((s as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                    ((s.wrapping_mul(3) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                    ((s.wrapping_mul(7) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                    ((s.wrapping_mul(11) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                    ((s.wrapping_mul(13) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                    ((s.wrapping_mul(17) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                    ((s.wrapping_mul(19) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                    ((s.wrapping_mul(23) as f64) / (u64::MAX as f64)) * 2.0 - 1.0,
+                ];
+                llm_encode(&raw)
+            };
+            let (_, conf) = RelationType::from_pair(&make(s1), &make(s2));
+            if conf > 0.3 { high_conf += 1; }
+        }
+        let high_pct = high_conf as f64 / 1000.0 * 100.0;
+        assert!(high_pct < 15.0,
+            "<15% of random pairs should get >0.3 confidence (got {:.1}%)", high_pct);
     }
 }

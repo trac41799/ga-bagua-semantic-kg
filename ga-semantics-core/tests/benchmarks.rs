@@ -2,6 +2,8 @@ use ga_semantics_core::prelude::*;
 use ga_semantics_core::RelationType;
 use std::time::Instant;
 
+#[allow(deprecated)]
+
 fn xorshift(seed: &mut u64) -> f64 {
     *seed ^= *seed << 13;
     *seed ^= *seed >> 17;
