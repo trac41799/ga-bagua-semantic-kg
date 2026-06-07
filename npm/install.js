@@ -13,7 +13,7 @@ const pipelineAsync = promisify(pipeline);
 
 const OWNER = "trac41799";
 const REPO = "ga-bagua-semantic-kg";
-const VERSION = "0.1.3";
+const VERSION = "0.1.4";
 
 const PLATFORM_MAP = {
   "win32-x64": "x86_64-pc-windows-msvc",
