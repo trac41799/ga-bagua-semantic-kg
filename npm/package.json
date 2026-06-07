@@ -1,0 +1,46 @@
+{
+  "name": "ga-semantics-mcp",
+  "version": "0.1.0",
+  "description": "GA-Bagua Semantic KG — MCP server for LLM semantic memory (Claude, Cursor, OpenCode, etc.)",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "knowledge-graph",
+    "semantic-memory",
+    "bagua",
+    "geometric-algebra",
+    "ai",
+    "claude",
+    "llm"
+  ],
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_ORG/ga-bagua-semantic-kg"
+  },
+  "homepage": "https://github.com/YOUR_ORG/ga-bagua-semantic-kg#readme",
+  "bin": {
+    "ga-semantics-mcp": "run.js"
+  },
+  "files": [
+    "run.js",
+    "install.js",
+    "README.md"
+  ],
+  "scripts": {
+    "install": "node install.js",
+    "postinstall": "node install.js"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ]
+}

@@ -1,0 +1,14 @@
+[package]
+name = "ga-semantics-mcp"
+version = "0.1.0"
+edition = "2021"
+description = "MCP server for ga-semantics — AI agent tool interface"
+
+[[bin]]
+name = "ga-semantics-mcp"
+path = "src/main.rs"
+
+[dependencies]
+ga-semantics-core = { path = "../ga-semantics-core", features = ["store"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

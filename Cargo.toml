@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "ga-semantics-core",
+    "ga-semantics-cli",
+    "ga-semantics-mcp",
+]
+resolver = "2"
