@@ -26,71 +26,332 @@ Concept → LLM (one-shot, ~200 tokens) → [0.25, 0.15, -0.10, 0.55, 0.40, 0.05
 
 ## LLM Prompt: Self-Install
 
-**Paste this into any LLM (Claude, GPT, Copilot, Gemini, etc.) to install automatically:**
+**Paste the prompt for your LLM client below.**
+
+---
+
+### Claude Desktop
 
 ```
-Install the GA-Bagua Semantic KG MCP server on my machine. This is a knowledge
-graph tool that lets you encode concepts into 8-number semantic vectors and
-reason about relationships algebraically.
+I want you to install the GA-Bagua Semantic KG MCP server for Claude Desktop.
+This is a local knowledge graph engine that gives you 29 semantic reasoning tools.
 
-Steps:
-1. Detect my OS and architecture (Windows/macOS/Linux, x64/arm64)
-2. Download the correct pre-built binary from:
-   https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest
-3. Place it somewhere accessible (e.g., ~/.local/bin/ or %USERPROFILE%\tools\)
-4. On macOS/Linux, chmod +x the binary
-5. Configure my LLM client to use it as an MCP server:
-   - For Claude Desktop: edit %APPDATA%\Claude\claude_desktop_config.json
-   - For Cursor: edit ~/.cursor/mcp.json
-   - For OpenCode: edit ~/.config/opencode/opencode.json
-   - For Claude Code: edit ~/.claude/mcp.json
-   Add to the mcpServers object:
-     "ga-bagua-semantic-kg": { "command": "<full path to binary>" }
-6. Download the encoding skill from:
-   https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/docs/skills/bagua-encoder/SKILL.md
-   Save it to the appropriate skills directory for my client.
-7. Verify: ask me to encode a "Rate Limiter" concept, then verify the dominant
-   role is "constraining" with confidence > 0.5.
+Step 1 — Detect my OS and download the binary:
+- Windows: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-pc-windows-msvc.zip
+- macOS Intel: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-apple-darwin.tar.gz
+- macOS Apple Silicon: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-apple-darwin.tar.gz
+- Linux x64: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-unknown-linux-gnu.tar.gz
+- Linux ARM64: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-unknown-linux-gnu.tar.gz
 
-After installation, read docs/SYSTEM_GUIDE.md from the repo for full API details.
+Step 2 — Extract and place the binary:
+- Windows: extract the .zip, move ga-semantics-mcp-x86_64-pc-windows-msvc.exe to %USERPROFILE%\.local\bin\ga-semantics-mcp.exe (create the folder if needed)
+- macOS/Linux: tar -xzf the archive, move the binary to ~/.local/bin/ga-semantics-mcp, run chmod +x ~/.local/bin/ga-semantics-mcp
+
+Step 3 — Configure Claude Desktop:
+Read the existing file at:
+- Windows: %APPDATA%\Claude\claude_desktop_config.json
+- macOS: ~/Library/Application Support/Claude/claude_desktop_config.json
+- Linux: ~/.config/Claude/claude_desktop_config.json
+
+If the file exists, merge this into the mcpServers object. If it doesn't exist, create it:
+{
+  "mcpServers": {
+    "ga-bagua-semantic-kg": {
+      "command": "<full path to the binary from Step 2>"
+    }
+  }
+}
+
+Step 4 — Download the encoding skill:
+Save https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/docs/skills/bagua-encoder/SKILL.md
+to %APPDATA%\Claude\skills\bagua-encoder\SKILL.md (Windows) or
+~/.config/Claude/skills/bagua-encoder/SKILL.md (macOS/Linux).
+Create directories as needed.
+
+Step 5 — Verify:
+Ask me to restart Claude Desktop, then test by saying:
+"Encode 'Rate Limiter' using llm_encode with dominant role constraining"
+Use the coefficients: [0.04, -0.09, -0.51, 0.68, 0.21, -0.26, 0.17, -0.34]
+The tool should return success with dominant_role: "constraining".
+
+Full documentation: https://github.com/trac41799/ga-bagua-semantic-kg/blob/main/docs/SYSTEM_GUIDE.md
+```
+
+---
+
+### OpenCode
+
+```
+I want you to install the GA-Bagua Semantic KG MCP server for OpenCode CLI.
+This is a local knowledge graph engine that gives you 29 semantic reasoning tools.
+
+Step 1 — Detect my OS and download the binary:
+- Windows: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-pc-windows-msvc.zip
+- macOS Intel: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-apple-darwin.tar.gz
+- macOS Apple Silicon: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-apple-darwin.tar.gz
+- Linux x64: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-unknown-linux-gnu.tar.gz
+- Linux ARM64: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-unknown-linux-gnu.tar.gz
+
+Step 2 — Extract and place the binary:
+- Windows: extract the .zip, move the .exe to %USERPROFILE%\.local\bin\ga-semantics-mcp.exe (create folder if needed)
+- macOS/Linux: tar -xzf the archive, move binary to ~/.local/bin/ga-semantics-mcp, run chmod +x ~/.local/bin/ga-semantics-mcp
+
+Step 3 — Configure OpenCode:
+Read or create ~/.config/opencode/opencode.json (Linux/macOS) or %USERPROFILE%\.config\opencode\opencode.json (Windows).
+Merge this into the file (add to existing mcpServers if present):
+{
+  "mcpServers": {
+    "ga-bagua-semantic-kg": {
+      "command": "<full path to the binary from Step 2>"
+    }
+  }
+}
+
+Step 4 — Install the encoding skill:
+Download https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/docs/skills/bagua-encoder/SKILL.md
+Save to ~/.config/opencode/skills/bagua-encoder/SKILL.md (Linux/macOS) or
+%USERPROFILE%\.config\opencode\skills\bagua-encoder\SKILL.md (Windows).
+Create directories as needed.
+
+Step 5 — Verify:
+Ask me to restart OpenCode, then test by saying:
+"Use llm_encode for 'Rate Limiter' with coefficients [0.04, -0.09, -0.51, 0.68, 0.21, -0.26, 0.17, -0.34]"
+The result should show dominant_role: "constraining".
+```
+
+---
+
+### Cursor
+
+```
+I want you to install the GA-Bagua Semantic KG MCP server for Cursor IDE.
+This gives you 29 semantic reasoning tools including encoding, classification, and analogy solving.
+
+Step 1 — Detect my OS and download the binary:
+- Windows: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-pc-windows-msvc.zip
+- macOS Intel: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-apple-darwin.tar.gz
+- macOS Apple Silicon: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-apple-darwin.tar.gz
+- Linux x64: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-unknown-linux-gnu.tar.gz
+- Linux ARM64: download https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-unknown-linux-gnu.tar.gz
+
+Step 2 — Extract and place:
+- Windows: extract .zip, move .exe to %USERPROFILE%\.cursor\bin\ga-semantics-mcp.exe (create folders)
+- macOS/Linux: tar -xzf, move to ~/.cursor/bin/ga-semantics-mcp, chmod +x ~/.cursor/bin/ga-semantics-mcp
+
+Step 3 — Configure Cursor:
+Read or create ~/.cursor/mcp.json (macOS/Linux) or %USERPROFILE%\.cursor\mcp.json (Windows).
+Add:
+{
+  "mcpServers": {
+    "ga-bagua-semantic-kg": {
+      "command": "<full path to the binary>"
+    }
+  }
+}
+
+Step 4 — Install the skill:
+Download and save: https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/docs/skills/bagua-encoder/SKILL.md
+To ~/.cursor/skills/bagua-encoder/SKILL.md (macOS/Linux) or %USERPROFILE%\.cursor\skills\bagua-encoder\SKILL.md (Windows).
+
+Step 5 — Verify:
+In Cursor's Composer agent mode, say:
+"Use llm_encode tool for concept 'Rate Limiter' with coefficients [0.04, -0.09, -0.51, 0.68, 0.21, -0.26, 0.17, -0.34]"
+Should return dominant_role: "constraining".
+```
+
+---
+
+### Claude Code (CLI)
+
+```
+Install the GA-Bagua Semantic KG MCP server for Claude Code CLI.
+
+Step 1 — Download the right binary for my OS:
+- Windows: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-pc-windows-msvc.zip
+- macOS Intel: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-apple-darwin.tar.gz
+- macOS Apple Silicon: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-apple-darwin.tar.gz
+- Linux x64: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-unknown-linux-gnu.tar.gz
+- Linux ARM64: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-unknown-linux-gnu.tar.gz
+
+Step 2 — Extract and place:
+- Windows: extract .zip, move .exe to %USERPROFILE%\.claude\bin\ga-semantics-mcp.exe
+- macOS/Linux: tar -xzf, move to ~/.claude/bin/ga-semantics-mcp, chmod +x ~/.claude/bin/ga-semantics-mcp
+
+Step 3 — Configure Claude Code:
+Read or create ~/.claude/mcp.json (macOS/Linux) or ~/.claude/claude_desktop_config.json.
+Add:
+{
+  "mcpServers": {
+    "ga-bagua-semantic-kg": {
+      "command": "<full path to binary>"
+    }
+  }
+}
+
+Step 4 — Install skill:
+Save https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/docs/skills/bagua-encoder/SKILL.md
+to ~/.claude/skills/bagua-encoder/SKILL.md (macOS/Linux) or %USERPROFILE%\.claude\skills\bagua-encoder\SKILL.md (Windows).
+
+Step 5 — Verify by running: echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | <path-to-binary>
+Should output 29 tools. Then in Claude Code, use "llm_encode" with [0.04, -0.09, -0.51, 0.68, 0.21, -0.26, 0.17, -0.34].
+```
+
+---
+
+### Continue.dev (VS Code / JetBrains)
+
+```
+Install the GA-Bagua Semantic KG MCP server for Continue.dev.
+
+Step 1 — Download binary for my OS:
+- Windows: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-pc-windows-msvc.zip
+- macOS Intel: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-apple-darwin.tar.gz
+- macOS Apple Silicon: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-apple-darwin.tar.gz
+- Linux x64: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-unknown-linux-gnu.tar.gz
+- Linux ARM64: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-unknown-linux-gnu.tar.gz
+
+Step 2 — Extract and place:
+- Windows: extract .zip, move .exe to %USERPROFILE%\.continue\bin\ga-semantics-mcp.exe
+- macOS/Linux: tar -xzf, move to ~/.continue/bin/ga-semantics-mcp, chmod +x ~/.continue/bin/ga-semantics-mcp
+
+Step 3 — Configure Continue:
+Read or create ~/.continue/config.json. Add under "experimental":
+{
+  "experimental": {
+    "modelContextProtocolServers": [
+      {
+        "name": "ga-bagua-semantic-kg",
+        "command": "<full path to binary>"
+      }
+    ]
+  }
+}
+
+Step 4 — Install skill:
+Save https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/docs/skills/bagua-encoder/SKILL.md
+to ~/.continue/skills/bagua-encoder/SKILL.md (macOS/Linux) or %USERPROFILE%\.continue\skills\bagua-encoder\SKILL.md (Windows).
+
+Step 5 — Verify in Continue chat: use @mcp to list tools, then call llm_encode.
+```
+
+---
+
+### Cline (VS Code)
+
+```
+Install the GA-Bagua Semantic KG MCP server for Cline in VS Code.
+
+Step 1 — Download binary:
+- Windows: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-pc-windows-msvc.zip
+- macOS Intel: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-apple-darwin.tar.gz
+- macOS Apple Silicon: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-apple-darwin.tar.gz
+- Linux x64: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-unknown-linux-gnu.tar.gz
+- Linux ARM64: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-unknown-linux-gnu.tar.gz
+
+Step 2 — Extract:
+- Windows: extract .zip, move .exe to %USERPROFILE%\.cline\bin\ga-semantics-mcp.exe
+- macOS/Linux: tar -xzf, move to ~/.cline/bin/ga-semantics-mcp, chmod +x
+
+Step 3 — Open VS Code, press Ctrl+Shift+P, type "Cline: Open MCP Config".
+If the file doesn't exist, create it with:
+{
+  "mcpServers": {
+    "ga-bagua-semantic-kg": {
+      "command": "<full path to binary>"
+    }
+  }
+}
+If it exists, merge the ga-bagua-semantic-kg entry into the existing mcpServers object.
+
+Step 4 — Install skill:
+Save https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/docs/skills/bagua-encoder/SKILL.md
+to %USERPROFILE%\.cline\skills\bagua-encoder\SKILL.md (Windows) or ~/.cline/skills/bagua-encoder/SKILL.md (macOS/Linux).
+
+Step 5 — In Cline chat, run: llm_encode(name="Rate Limiter", coefficients=[0.04, -0.09, -0.51, 0.68, 0.21, -0.26, 0.17, -0.34])
+```
+
+---
+
+### Windsurf
+
+```
+Install the GA-Bagua Semantic KG MCP server for Windsurf.
+
+Step 1 — Download binary for my OS:
+- Windows: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-pc-windows-msvc.zip
+- macOS Intel: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-apple-darwin.tar.gz
+- macOS Apple Silicon: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-apple-darwin.tar.gz
+- Linux x64: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-x86_64-unknown-linux-gnu.tar.gz
+- Linux ARM64: https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest/download/ga-semantics-mcp-aarch64-unknown-linux-gnu.tar.gz
+
+Step 2 — Extract and place:
+- Windows: extract .zip, move .exe to %USERPROFILE%\.windsurf\bin\ga-semantics-mcp.exe
+- macOS/Linux: tar -xzf, move to ~/.windsurf/bin/ga-semantics-mcp, chmod +x
+
+Step 3 — Configure Windsurf:
+Read or create ~/.windsurf/mcp_config.json. Add:
+{
+  "mcpServers": {
+    "ga-bagua-semantic-kg": {
+      "command": "<full path to binary>"
+    }
+  }
+}
+
+Step 4 — Install skill:
+Save https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/docs/skills/bagua-encoder/SKILL.md
+to ~/.windsurf/skills/bagua-encoder/SKILL.md (macOS/Linux) or %USERPROFILE%\.windsurf\skills\bagua-encoder\SKILL.md (Windows).
+
+Step 5 — Verify in Cascade: ask it to call llm_encode.
+```
+
+---
+
+### Generic / Other MCP Clients
+
+```
+Install the GA-Bagua Semantic KG MCP server for my MCP-compatible LLM client.
+
+Step 1 — Download the binary for my platform:
+https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest
+
+Step 2 — Extract:
+- Windows .zip: extract, place .exe somewhere on PATH
+- macOS/Linux .tar.gz: tar -xzf, place binary in ~/.local/bin/, chmod +x
+
+Step 3 — Configure my MCP client to run:
+{
+  "command": "<full path to binary>",
+  "args": []
+}
+With server name: "ga-bagua-semantic-kg"
+
+Step 4 — Download the encoding skill:
+https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/docs/skills/bagua-encoder/SKILL.md
+Save to your client's skills/instructions directory.
+
+Step 5 — Verify with: echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | <binary-path>
 ```
 
 ---
 
 ## Manual Installation
 
-### Option 1: Pre-built binary
-
-Download from [GitHub Releases](https://github.com/trac41799/ga-bagua-semantic-kg/releases/latest):
-
-| Platform | Binary |
-|----------|--------|
-| Windows x64 | `ga-semantics-mcp-x86_64-pc-windows-msvc.exe` |
-| macOS Intel | `ga-semantics-mcp-x86_64-apple-darwin` |
-| macOS Apple Silicon | `ga-semantics-mcp-aarch64-apple-darwin` |
-| Linux x64 | `ga-semantics-mcp-x86_64-unknown-linux-gnu` |
-| Linux ARM64 | `ga-semantics-mcp-aarch64-unknown-linux-gnu` |
-
-Extract (`.zip` on Windows, `.tar.gz` on others). Each archive contains the binary
-plus `bagua-encoder-skill.md` — the LLM encoding guide.
-
-### Option 2: npm
+### npm
 
 ```bash
 npm install -g ga-semantics-mcp
-# or run ad-hoc:
+# or
 npx ga-semantics-mcp
 ```
 
-### Option 3: Cargo (Rust)
+### Cargo
 
 ```bash
 cargo install ga-semantics-mcp
 ```
 
-Requires Rust 1.78+.
-
-### Option 4: Build from source
+### Build from source
 
 ```bash
 git clone https://github.com/trac41799/ga-bagua-semantic-kg.git
@@ -102,143 +363,17 @@ Pure Rust — no C compiler needed.
 
 ---
 
-## Client Configuration
+## Encoding Crib Sheet
 
-After installing the binary, configure your LLM client's MCP settings:
-
-<details>
-<summary><b>Claude Desktop</b></summary>
-
-`%APPDATA%\Claude\claude_desktop_config.json` (Windows) |
-`~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) |
-`~/.config/Claude/claude_desktop_config.json` (Linux)
-
-```json
-{
-  "mcpServers": {
-    "ga-bagua-semantic-kg": {
-      "command": "ga-semantics-mcp"
-    }
-  }
-}
-```
-</details>
-
-<details>
-<summary><b>OpenCode</b></summary>
-
-`~/.config/opencode/opencode.json` or `.opencode/opencode.json`
-
-```json
-{
-  "mcpServers": {
-    "ga-bagua-semantic-kg": {
-      "command": "ga-semantics-mcp"
-    }
-  }
-}
-```
-
-Skill: copy `docs/skills/bagua-encoder/SKILL.md` to `.opencode/skills/bagua-encoder/SKILL.md`
-</details>
-
-<details>
-<summary><b>Cursor</b></summary>
-
-`~/.cursor/mcp.json` or `.cursor/mcp.json`
-
-```json
-{
-  "mcpServers": {
-    "ga-bagua-semantic-kg": {
-      "command": "ga-semantics-mcp"
-    }
-  }
-}
-```
-</details>
-
-<details>
-<summary><b>Claude Code (CLI)</b></summary>
-
-`.claude/mcp.json` or `~/.claude/claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "ga-bagua-semantic-kg": {
-      "command": "ga-semantics-mcp"
-    }
-  }
-}
-```
-</details>
-
-<details>
-<summary><b>Continue.dev</b></summary>
-
-`~/.continue/config.json`
-
-```json
-{
-  "experimental": {
-    "modelContextProtocolServers": [
-      { "name": "ga-bagua-semantic-kg", "command": "ga-semantics-mcp" }
-    ]
-  }
-}
-```
-</details>
-
-<details>
-<summary><b>Windsurf</b></summary>
-
-`~/.windsurf/mcp_config.json`
-
-```json
-{
-  "mcpServers": {
-    "ga-bagua-semantic-kg": {
-      "command": "ga-semantics-mcp"
-    }
-  }
-}
-```
-</details>
-
-<details>
-<summary><b>Cline (VS Code)</b></summary>
-
-Use `Ctrl+Shift+P` → "Cline: Open MCP Config"
-
-```json
-{
-  "mcpServers": {
-    "ga-bagua-semantic-kg": {
-      "command": "ga-semantics-mcp"
-    }
-  }
-}
-```
-</details>
-
-After configuring, restart your client. You should see 29 tools available (hammer icon
-in Claude, tool list in Cursor/OpenCode).
-
----
-
-## Encoding Skill
-
-The LLM needs the encoding guide to produce correct 8-coefficient vectors.
 Save [SKILL.md](docs/skills/bagua-encoder/SKILL.md) to your client's skill directory,
-or paste this crib sheet into your LLM instructions:
+or embed this directly in your LLM instructions:
 
 ```
-Encode concepts using 8 roles in order: [receptive, causal, transmissive,
-constraining, clarifying, influential, balancing, generative].
+Encode concepts with 8 roles in order:
+[receptive, causal, transmissive, constraining, clarifying, influential, balancing, generative]
 
 Scale: >0.5 strong | 0.2–0.5 moderate | 0.05–0.2 slight | -0.05–0.05 irrelevant
-| <-0.05 counter-acts | <-0.5 strongly counter-acts.
+| <-0.05 counter-acts | <-0.5 strongly counter-acts
 
 Normalize to unit length. Output ONLY a JSON array of 8 floats.
 ```
@@ -250,23 +385,12 @@ Normalize to unit length. Output ONLY a JSON array of 8 floats.
 ```rust
 use ga_semantics_core::prelude::*;
 
-// Encode from LLM-produced coefficients
 let mv = llm_encode(&[0.25, 0.15, -0.10, 0.55, 0.40, 0.05, 0.30, 0.20]);
-
-// Inspect: "moderately constraining; slightly receptive..."
-println!("{}", multivector_describe(&mv));
-
-// Classify relationship (deterministic, 100% accuracy)
+let desc = multivector_describe(&mv);
 let (rel, conf) = RelationType::from_pair(&a, &b);
-// → (Receptive, 0.60): "essentially the same thing"
+let sim = dominant_similarity(&a, &b);
+let d = analogy(&a, &b, &c);
 
-// Role-weighted similarity for retrieval
-let sim = dominant_similarity(&a, &b);  // [-1, 1]
-
-// Analogies: A:B :: C:?
-let d = analogy(&a, &b, &c);  // Option<Multivector>
-
-// JSON file-backed concept store
 #[cfg(feature = "store")]
 {
     let mut store = ConceptStore::open("knowledge.json")?;
@@ -275,7 +399,6 @@ let d = analogy(&a, &b, &c);  // Option<Multivector>
 }
 ```
 
-Add to `Cargo.toml`:
 ```toml
 [dependencies]
 ga-semantics-core = { version = "0.1", features = ["store"] }
@@ -285,7 +408,7 @@ ga-semantics-core = { version = "0.1", features = ["store"] }
 
 ## MCP Tools
 
-The server exposes **29 tools** for LLM agents:
+The server exposes **29 tools**:
 
 | Category | Tools |
 |----------|-------|
@@ -301,33 +424,11 @@ The server exposes **29 tools** for LLM agents:
 
 | Document | Contents |
 |----------|----------|
-| **[System Guide](docs/SYSTEM_GUIDE.md)** | Full technical reference: GA math, Bagua taxonomy, WuXing cycles, API surface, benchmarks |
-| **[Delivery Guide](docs/DELIVERY.md)** | Per-client installation, troubleshooting, distribution architecture |
-| **[Encoding Skill](docs/skills/bagua-encoder/SKILL.md)** | The LLM encoding protocol — 8 roles, rubric, examples |
+| **[System Guide](docs/SYSTEM_GUIDE.md)** | Full technical reference — GA math, Bagua, WuXing, API, benchmarks |
+| **[Delivery Guide](docs/DELIVERY.md)** | Per-client configs, troubleshooting, distribution architecture |
+| **[Encoding Skill](docs/skills/bagua-encoder/SKILL.md)** | LLM encoding protocol — 8 roles, rubric, examples |
 
 ---
-
-## Architecture
-
-```
-┌──────────────────────────────────────────────────────┐
-│ Layer 4: MCP server / CLI / Python bindings          │
-│ Layer 3: semantics.rs — similarity, analogy, retrieval│
-│ Layer 2: Cl(3) multivector engine, geometric product  │
-│ Layer 1: encoding.rs — llm_encode, role descriptions  │
-│ Layer 0: bagua.rs — trigrams, WuXing, 64 hexagrams   │
-└──────────────────────────────────────────────────────┘
-```
-
-**Why 8 dimensions instead of 384–4096?**
-Each dimension has a fixed human-readable label (e.g., index 3 = "constraining").
-The 8 numbers are self-documenting — you can read a concept's encoding and
-understand what it is without a lookup table.
-
-**Why WuXing instead of A⁻¹ * B?**
-A⁻¹ * B measures geometric similarity, not functional relationship.
-WuXing cycles (Wood→Fire→Earth→Metal→Water) are deterministic —
-Metal always controls Wood, no training needed, zero error.
 
 ## License
 
