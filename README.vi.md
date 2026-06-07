@@ -8,15 +8,6 @@
 
 <div align="center">
 
-```
-                    ☰                        Càn / Sáng tạo
-                ☱       ☴                  Đoài / Cân bằng      Tốn / Ảnh hưởng
-                    ☲                        Ly / Làm rõ
-                ☳       ☶                  Chấn / Nhân quả      Cấn / Ràng buộc
-                    ☵                        Khảm / Truyền dẫn
-                    ☷                        Khôn / Tiếp nhận
-```
-
 # GA-Bagua Đồ thị Tri thức Ngữ nghĩa
 
 **Bộ nhớ ngữ nghĩa cho LLM — 8 chiều, 64 trạng thái quẻ, không cần huấn luyện.**
@@ -28,6 +19,15 @@
 [![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
 
 </div>
+
+```
+                    ☰                        Càn / Sáng tạo
+                ☱       ☴                  Đoài / Cân bằng      Tốn / Ảnh hưởng
+                    ☲                        Ly / Làm rõ
+                ☳       ☶                  Chấn / Nhân quả      Cấn / Ràng buộc
+                    ☵                        Khảm / Truyền dẫn
+                    ☷                        Khôn / Tiếp nhận
+```
 
 ---
 
