@@ -6,28 +6,18 @@
 
 ---
 
-<div align="center">
+<p align="center">
+  <img src="docs/img/logo.png" alt="GA-Bagua Semantic KG" width="600">
+</p>
 
-# GA-Bagua Semantic KG
-
-**LLM semantic memory — 8 dimensions, 64 hexagram states, zero training.**
-
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-core?label=core)](https://crates.io/crates/ga-semantics-core)
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp)](https://crates.io/crates/ga-semantics-mcp)
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-cli?label=cli)](https://crates.io/crates/ga-semantics-cli)
-[![npm](https://img.shields.io/npm/v/ga-semantics-mcp?color=red)](https://www.npmjs.com/package/ga-semantics-mcp)
-[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
-
-</div>
-
-```
-                    ☰                        Heaven / Generative
-                ☱       ☴                  Lake / Balancing     Wind / Influential
-                    ☲                        Fire / Clarifying
-                ☳       ☶                  Thunder / Causal     Mountain / Constraining
-                    ☵                        Water / Transmissive
-                    ☷                        Earth / Receptive
-```
+<p align="center">
+  <strong>LLM semantic memory — 8 dimensions, 64 hexagram states, zero training.</strong><br>
+  <a href="https://crates.io/crates/ga-semantics-core"><img src="https://img.shields.io/crates/v/ga-semantics-core?label=core" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/ga-semantics-mcp"><img src="https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/ga-semantics-cli"><img src="https://img.shields.io/crates/v/ga-semantics-cli?label=cli" alt="Crates.io"></a>
+  <a href="https://www.npmjs.com/package/ga-semantics-mcp"><img src="https://img.shields.io/npm/v/ga-semantics-mcp?color=red" alt="npm"></a>
+  <a href="#license"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="License"></a>
+</p>
 
 ---
 
@@ -224,21 +214,44 @@ ga-semantics-core = { version = "0.1", features = ["store"] }
 
 ---
 
+<table>
+<tr>
+<td valign="top">
+
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  Layer 4 ── MCP server (29 tools) + CLI + Python        │
-│  Layer 3 ── semantics.rs — similarity, analogy, store   │
-│  Layer 2 ── Cl(3) multivector engine — geometric product│
-│  Layer 1 ── encoding.rs — llm_encode, role descriptions │
-│  Layer 0 ── bagua.rs — trigrams, WuXing, 64 hexagrams   │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│  Layer 4: MCP + CLI + Python            │
+│  Layer 3: similarity, analogy, store    │
+│  Layer 2: Cl(3) multivector engine      │
+│  Layer 1: llm_encode, role descriptions │
+│  Layer 0: trigrams, WuXing, hexagrams   │
+└─────────────────────────────────────────┘
 ```
 
 **8 blades × 8 roles × 5 phases × 64 hexagrams** — a complete closed-form
 semantic algebra with deterministic relationship classification via WuXing
 generate/control cycles, not error-prone algebraic transformations.
+
+</td>
+<td width="400">
+  <img src="docs/img/architecture.png" alt="System Architecture" width="400">
+</td>
+</tr>
+</table>
+
+<br>
+
+<p align="center">
+  <img src="docs/img/ga-bagua-encoding.jpg" alt="Encoding Pipeline" width="700">
+</p>
+
+<br>
+
+<p align="center">
+  <img src="docs/img/ga-bagua-wuxing.jpg" alt="WuXing Generating and Controlling Cycles" width="500">
+</p>
 
 ---
 
