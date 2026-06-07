@@ -6,28 +6,18 @@
 
 ---
 
-<div align="center">
+<p align="center">
+  <img src="docs/img/logo.png" alt="GA-Bagua 의미 지식 그래프" width="600">
+</p>
 
-# GA-Bagua 의미 지식 그래프
-
-**LLM 의미 기억 — 8차원, 64괘 상태, 훈련 불필요.**
-
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-core?label=core)](https://crates.io/crates/ga-semantics-core)
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp)](https://crates.io/crates/ga-semantics-mcp)
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-cli?label=cli)](https://crates.io/crates/ga-semantics-cli)
-[![npm](https://img.shields.io/npm/v/ga-semantics-mcp?color=red)](https://www.npmjs.com/package/ga-semantics-mcp)
-[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
-
-</div>
-
-```
-                    ☰                        건 / 창조
-                ☱       ☴                  태 / 균형      손 / 영향
-                    ☲                        리 / 명료화
-                ☳       ☶                  진 / 인과      간 / 제약
-                    ☵                        감 / 전달
-                    ☷                        곤 / 수용
-```
+<p align="center">
+  <strong>LLM 의미 기억 — 8차원, 64괘 상태, 훈련 불필요.</strong><br>
+  <a href="https://crates.io/crates/ga-semantics-core"><img src="https://img.shields.io/crates/v/ga-semantics-core?label=core" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/ga-semantics-mcp"><img src="https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/ga-semantics-cli"><img src="https://img.shields.io/crates/v/ga-semantics-cli?label=cli" alt="Crates.io"></a>
+  <a href="https://www.npmjs.com/package/ga-semantics-mcp"><img src="https://img.shields.io/npm/v/ga-semantics-mcp?color=red" alt="npm"></a>
+  <a href="#license"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="License"></a>
+</p>
 
 ---
 
@@ -224,21 +214,44 @@ ga-semantics-core = { version = "0.1", features = ["store"] }
 
 ---
 
+<table>
+<tr>
+<td valign="top">
+
 ## 아키텍처
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  4층 ── MCP 서버 (29개 도구) + CLI + Python             │
-│  3층 ── semantics.rs — 유사도, 유추, 저장소             │
-│  2층 ── Cl(3) 다중벡터 엔진 — 기하 곱                   │
-│  1층 ── encoding.rs — llm_encode, 역할 설명             │
-│  0층 ── bagua.rs — 팔괘, 오행, 64괘                    │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│  Layer 4: MCP + CLI + Python            │
+│  Layer 3: 유사도, 유추, 저장소          │
+│  Layer 2: Cl(3) 다중벡터 엔진           │
+│  Layer 1: llm_encode, 역할 설명         │
+│  Layer 0: 팔괘, 오행, 64괘              │
+└─────────────────────────────────────────┘
 ```
 
 **8개 블레이드 × 8개 역할 × 5개 행 × 64개 괘** — 오행의 상생/상극
 주기를 통한 결정론적 관계 분류를 갖춘 완전한 폐쇄형 의미 대수학.
 오류가 발생하기 쉬운 대수 변환이 아닙니다.
+
+</td>
+<td width="400">
+  <img src="docs/img/architecture.png" alt="시스템 아키텍처" width="400">
+</td>
+</tr>
+</table>
+
+<br>
+
+<p align="center">
+  <img src="docs/img/ga-bagua-encoding.jpg" alt="인코딩 파이프라인" width="700">
+</p>
+
+<br>
+
+<p align="center">
+  <img src="docs/img/ga-bagua-wuxing.jpg" alt="오행 순환" width="500">
+</p>
 
 ---
 

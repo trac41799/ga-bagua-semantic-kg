@@ -6,28 +6,18 @@
 
 ---
 
-<div align="center">
+<p align="center">
+  <img src="docs/img/logo.png" alt="GA-Bagua 语义知识图谱" width="600">
+</p>
 
-# GA-Bagua 语义知识图谱
-
-**LLM 语义记忆 — 8 个维度，64 卦状态，零训练。**
-
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-core?label=core)](https://crates.io/crates/ga-semantics-core)
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp)](https://crates.io/crates/ga-semantics-mcp)
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-cli?label=cli)](https://crates.io/crates/ga-semantics-cli)
-[![npm](https://img.shields.io/npm/v/ga-semantics-mcp?color=red)](https://www.npmjs.com/package/ga-semantics-mcp)
-[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
-
-</div>
-
-```
-                    ☰                        乾 / 创造
-                ☱       ☴                 兑 / 平衡     巽 / 渗透
-                    ☲                        離 / 澄清
-                ☳       ☶                 震 / 因果     艮 / 约束
-                    ☵                        坎 / 传递
-                    ☷                        坤 / 接纳
-```
+<p align="center">
+  <strong>LLM 语义记忆 — 8 个维度，64 卦状态，零训练。</strong><br>
+  <a href="https://crates.io/crates/ga-semantics-core"><img src="https://img.shields.io/crates/v/ga-semantics-core?label=core" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/ga-semantics-mcp"><img src="https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/ga-semantics-cli"><img src="https://img.shields.io/crates/v/ga-semantics-cli?label=cli" alt="Crates.io"></a>
+  <a href="https://www.npmjs.com/package/ga-semantics-mcp"><img src="https://img.shields.io/npm/v/ga-semantics-mcp?color=red" alt="npm"></a>
+  <a href="#license"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="License"></a>
+</p>
 
 ---
 
@@ -224,21 +214,44 @@ ga-semantics-core = { version = "0.1", features = ["store"] }
 
 ---
 
+<table>
+<tr>
+<td valign="top">
+
 ## 架构
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  第 4 层 ── MCP 服务器（29 个工具）+ CLI + Python       │
-│  第 3 层 ── semantics.rs — 相似度、类比、存储           │
-│  第 2 层 ── Cl(3) 多重向量引擎 — 几何积                 │
-│  第 1 层 ── encoding.rs — llm_encode、角色描述           │
-│  第 0 层 ── bagua.rs — 八卦、五行、64 卦                │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│  第 4 层 ── MCP + CLI + Python         │
+│  第 3 层 ── 相似度、类比、存储          │
+│  第 2 层 ── Cl(3) 多重向量引擎          │
+│  第 1 层 ── llm_encode、角色描述         │
+│  第 0 层 ── 八卦、五行、64 卦            │
+└─────────────────────────────────────────┘
 ```
 
 **8 个基面 × 8 种角色 × 5 个阶段 × 64 卦** — 一个完整的封闭形式
 语义代数，通过五行的生成/克制周期进行确定性关系分类，
 而非容易出错的代数变换。
+
+</td>
+<td width="400">
+  <img src="docs/img/architecture.png" alt="系统架构" width="400">
+</td>
+</tr>
+</table>
+
+<br>
+
+<p align="center">
+  <img src="docs/img/ga-bagua-encoding.jpg" alt="编码流程" width="700">
+</p>
+
+<br>
+
+<p align="center">
+  <img src="docs/img/ga-bagua-wuxing.jpg" alt="五行相生相克周期" width="500">
+</p>
 
 ---
 

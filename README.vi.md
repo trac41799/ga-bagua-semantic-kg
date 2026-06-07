@@ -6,28 +6,18 @@
 
 ---
 
-<div align="center">
+<p align="center">
+  <img src="docs/img/logo.png" alt="GA-Bagua Đồ thị Tri thức Ngữ nghĩa" width="600">
+</p>
 
-# GA-Bagua Đồ thị Tri thức Ngữ nghĩa
-
-**Bộ nhớ ngữ nghĩa cho LLM — 8 chiều, 64 trạng thái quẻ, không cần huấn luyện.**
-
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-core?label=core)](https://crates.io/crates/ga-semantics-core)
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp)](https://crates.io/crates/ga-semantics-mcp)
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-cli?label=cli)](https://crates.io/crates/ga-semantics-cli)
-[![npm](https://img.shields.io/npm/v/ga-semantics-mcp?color=red)](https://www.npmjs.com/package/ga-semantics-mcp)
-[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
-
-</div>
-
-```
-                    ☰                        Càn / Sáng tạo
-                ☱       ☴                  Đoài / Cân bằng      Tốn / Ảnh hưởng
-                    ☲                        Ly / Làm rõ
-                ☳       ☶                  Chấn / Nhân quả      Cấn / Ràng buộc
-                    ☵                        Khảm / Truyền dẫn
-                    ☷                        Khôn / Tiếp nhận
-```
+<p align="center">
+  <strong>Bộ nhớ ngữ nghĩa cho LLM — 8 chiều, 64 trạng thái quẻ, không cần huấn luyện.</strong><br>
+  <a href="https://crates.io/crates/ga-semantics-core"><img src="https://img.shields.io/crates/v/ga-semantics-core?label=core" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/ga-semantics-mcp"><img src="https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/ga-semantics-cli"><img src="https://img.shields.io/crates/v/ga-semantics-cli?label=cli" alt="Crates.io"></a>
+  <a href="https://www.npmjs.com/package/ga-semantics-mcp"><img src="https://img.shields.io/npm/v/ga-semantics-mcp?color=red" alt="npm"></a>
+  <a href="#license"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="License"></a>
+</p>
 
 ---
 
@@ -224,21 +214,44 @@ ga-semantics-core = { version = "0.1", features = ["store"] }
 
 ---
 
+<table>
+<tr>
+<td valign="top">
+
 ## Kiến trúc
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  Layer 4 ── MCP server (29 công cụ) + CLI + Python      │
-│  Layer 3 ── semantics.rs — tương tự, loại suy, kho      │
-│  Layer 2 ── Cl(3) đa vectơ — tích hình học               │
-│  Layer 1 ── encoding.rs — llm_encode, mô tả vai trò      │
-│  Layer 0 ── bagua.rs — bát quái, ngũ hành, 64 quẻ       │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│  Layer 4: MCP + CLI + Python            │
+│  Layer 3: tương tự, loại suy, kho      │
+│  Layer 2: Cl(3) đa vectơ                │
+│  Layer 1: llm_encode, mô tả vai trò    │
+│  Layer 0: bát quái, ngũ hành, 64 quẻ   │
+└─────────────────────────────────────────┘
 ```
 
 **8 blade × 8 vai trò × 5 hành × 64 quẻ** — một đại số ngữ nghĩa
 khép kín hoàn chỉnh với phân loại quan hệ xác định thông qua chu kỳ
 tương sinh/tương khắc của Ngũ Hành, thay vì các phép biến đổi đại số dễ sai sót.
+
+</td>
+<td width="400">
+  <img src="docs/img/architecture.png" alt="Kiến trúc Hệ thống" width="400">
+</td>
+</tr>
+</table>
+
+<br>
+
+<p align="center">
+  <img src="docs/img/ga-bagua-encoding.jpg" alt="Quy trình Mã hóa" width="700">
+</p>
+
+<br>
+
+<p align="center">
+  <img src="docs/img/ga-bagua-wuxing.jpg" alt="Chu kỳ Ngũ Hành" width="500">
+</p>
 
 ---
 

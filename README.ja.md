@@ -6,28 +6,18 @@
 
 ---
 
-<div align="center">
+<p align="center">
+  <img src="docs/img/logo.png" alt="GA-Bagua セマンティック知識グラフ" width="600">
+</p>
 
-# GA-Bagua セマンティック知識グラフ
-
-**LLMの意味記憶 — 8次元、64卦状態、学習不要。**
-
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-core?label=core)](https://crates.io/crates/ga-semantics-core)
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp)](https://crates.io/crates/ga-semantics-mcp)
-[![Crates.io](https://img.shields.io/crates/v/ga-semantics-cli?label=cli)](https://crates.io/crates/ga-semantics-cli)
-[![npm](https://img.shields.io/npm/v/ga-semantics-mcp?color=red)](https://www.npmjs.com/package/ga-semantics-mcp)
-[![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
-
-</div>
-
-```
-                    ☰                        乾 / 生成
-                ☱       ☴                 兌 / 均衡     巽 / 浸透
-                    ☲                        離 / 明確化
-                ☳       ☶                 震 / 因果     艮 / 制約
-                    ☵                        坎 / 伝達
-                    ☷                        坤 / 受容
-```
+<p align="center">
+  <strong>LLMの意味記憶 — 8次元、64卦状態、学習不要。</strong><br>
+  <a href="https://crates.io/crates/ga-semantics-core"><img src="https://img.shields.io/crates/v/ga-semantics-core?label=core" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/ga-semantics-mcp"><img src="https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/ga-semantics-cli"><img src="https://img.shields.io/crates/v/ga-semantics-cli?label=cli" alt="Crates.io"></a>
+  <a href="https://www.npmjs.com/package/ga-semantics-mcp"><img src="https://img.shields.io/npm/v/ga-semantics-mcp?color=red" alt="npm"></a>
+  <a href="#license"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="License"></a>
+</p>
 
 ---
 
@@ -224,21 +214,44 @@ ga-semantics-core = { version = "0.1", features = ["store"] }
 
 ---
 
+<table>
+<tr>
+<td valign="top">
+
 ## アーキテクチャ
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  第4層 ── MCPサーバー（29ツール）+ CLI + Python         │
-│  第3層 ── semantics.rs — 類似度、類推、ストア           │
-│  第2層 ── Cl(3) 多重ベクトルエンジン — 幾何積           │
-│  第1層 ── encoding.rs — llm_encode、役割説明            │
-│  第0層 ── bagua.rs — 八卦、五行、64卦                  │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│  Layer 4: MCP + CLI + Python            │
+│  Layer 3: 類似度、類推、ストア          │
+│  Layer 2: Cl(3) 多重ベクトルエンジン    │
+│  Layer 1: llm_encode、役割説明          │
+│  Layer 0: 八卦、五行、64卦              │
+└─────────────────────────────────────────┘
 ```
 
 **8ブレード × 8役割 × 5行 × 64卦** — 五行の相生・相克サイクルによる
 決定論的な関係分類を備えた、完全な閉形式の意味代数。
 エラーが発生しやすい代数変換ではありません。
+
+</td>
+<td width="400">
+  <img src="docs/img/architecture.png" alt="システムアーキテクチャ" width="400">
+</td>
+</tr>
+</table>
+
+<br>
+
+<p align="center">
+  <img src="docs/img/ga-bagua-encoding.jpg" alt="エンコードパイプライン" width="700">
+</p>
+
+<br>
+
+<p align="center">
+  <img src="docs/img/ga-bagua-wuxing.jpg" alt="五行のサイクル" width="500">
+</p>
 
 ---
 
