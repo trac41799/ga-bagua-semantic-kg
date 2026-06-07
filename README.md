@@ -1,5 +1,22 @@
 <div align="center">
 
+[**English**](README.md) · [**中文**](README.zh.md) · [**Tiếng Việt**](README.vi.md) · [**한국어**](README.ko.md) · [**日本語**](README.ja.md)
+
+</div>
+
+---
+
+<div align="center">
+
+```
+                    ☰                        Heaven / Generative
+                ☱       ☴                  Lake / Balancing     Wind / Influential
+                    ☲                        Fire / Clarifying
+                ☳       ☶                  Thunder / Causal     Mountain / Constraining
+                    ☵                        Water / Transmissive
+                    ☷                        Earth / Receptive
+```
+
 # GA-Bagua Semantic KG
 
 **LLM semantic memory — 8 dimensions, 64 hexagram states, zero training.**
@@ -11,15 +28,6 @@
 [![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)](#license)
 
 </div>
-
-```
-                    ☰                        Heaven / Generative
-                ☱       ☴                  Lake / Balancing     Wind / Influential
-                    ☲                        Fire / Clarifying
-                ☳       ☶                  Thunder / Causal     Mountain / Constraining
-                    ☵                        Water / Transmissive
-                    ☷                        Earth / Receptive
-```
 
 ---
 
