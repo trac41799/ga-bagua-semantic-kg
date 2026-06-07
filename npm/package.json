@@ -1,6 +1,6 @@
 {
   "name": "ga-semantics-mcp",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "GA-Bagua Semantic KG — MCP server for LLM semantic memory (Claude, Cursor, OpenCode, etc.)",
   "keywords": [
     "mcp",

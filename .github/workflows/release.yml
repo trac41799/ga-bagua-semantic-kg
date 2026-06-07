@@ -47,22 +47,29 @@ jobs:
           echo "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
 
       - name: Build
-        run: cargo build --release -p ga-semantics-mcp --target ${{ matrix.target }}
+        run: |
+          cargo build --release -p ga-semantics-mcp --target ${{ matrix.target }}
+          cargo build --release -p ga-semantics-cli --target ${{ matrix.target }}
 
       - name: Package (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          Copy-Item "target/${{ matrix.target }}/release/ga-semantics-mcp.exe" "ga-semantics-mcp-${{ matrix.target }}.exe"
+          $ext = ".exe"
+          $mcp = "ga-semantics-mcp-${{ matrix.target }}$ext"
+          $cli = "ga-semantics-${{ matrix.target }}$ext"
+          Copy-Item "target/${{ matrix.target }}/release/ga-semantics-mcp$ext" $mcp
+          Copy-Item "target/${{ matrix.target }}/release/ga-semantics$ext" $cli
           Copy-Item "docs/skills/bagua-encoder/SKILL.md" "bagua-encoder-skill.md"
-          Compress-Archive -Path "ga-semantics-mcp-${{ matrix.target }}.exe","bagua-encoder-skill.md" -DestinationPath "ga-semantics-mcp-${{ matrix.target }}.zip"
+          Compress-Archive -Path $mcp,$cli,"bagua-encoder-skill.md" -DestinationPath "ga-semantics-${{ matrix.target }}.zip"
 
       - name: Package (Unix)
         if: runner.os != 'Windows'
         run: |
           cp target/${{ matrix.target }}/release/ga-semantics-mcp ga-semantics-mcp-${{ matrix.target }}
+          cp target/${{ matrix.target }}/release/ga-semantics ga-semantics-${{ matrix.target }}
           cp docs/skills/bagua-encoder/SKILL.md bagua-encoder-skill.md
-          tar -czf ga-semantics-mcp-${{ matrix.target }}.tar.gz ga-semantics-mcp-${{ matrix.target }} bagua-encoder-skill.md
+          tar -czf ga-semantics-${{ matrix.target }}.tar.gz ga-semantics-mcp-${{ matrix.target }} ga-semantics-${{ matrix.target }} bagua-encoder-skill.md
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

@@ -2,14 +2,19 @@
 name = "ga-semantics-cli"
 version = "0.1.0"
 edition = "2021"
-description = "CLI for ga-semantics — interactive and batch semantic operations"
+rust-version = "1.78.0"
+license = "MIT OR Apache-2.0"
+description = "GA-Bagua Semantic KG CLI — encode, classify, solve analogies, manage local knowledge graph"
+keywords = ["knowledge-graph", "semantics", "bagua", "cli", "encoding"]
+categories = ["command-line-utilities", "science"]
+repository = "https://github.com/trac41799/ga-bagua-semantic-kg"
 
 [[bin]]
 name = "ga-semantics"
 path = "src/main.rs"
 
 [dependencies]
-ga-semantics-core = { path = "../ga-semantics-core" }
+ga-semantics-core = { path = "../ga-semantics-core", features = ["store"] }
 clap = { version = "4", features = ["derive", "std", "help", "usage", "error-context"], default-features = false }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
