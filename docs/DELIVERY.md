@@ -14,7 +14,7 @@
 
 ### Option A: Pre-built binary (recommended)
 
-Download from [GitHub Releases](https://github.com/YOUR_ORG/ga-bagua-semantic-kg/releases):
+Download from [GitHub Releases](https://github.com/trac41799/ga-bagua-semantic-kg/releases):
 
 | Platform | Binary |
 |----------|--------|
@@ -50,7 +50,7 @@ Requires Rust 1.78+. No C compiler needed (pure Rust, no C dependencies).
 ### Option D: Build from source
 
 ```bash
-git clone https://github.com/YOUR_ORG/ga-bagua-semantic-kg.git
+git clone https://github.com/trac41799/ga-bagua-semantic-kg.git
 cd ga-bagua-semantic-kg
 cargo build --release -p ga-semantics-mcp
 # Binary at: target/release/ga-semantics-mcp[.exe]

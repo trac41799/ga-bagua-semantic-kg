@@ -37,9 +37,9 @@ Then configure your LLM client (Claude Desktop, Cursor, OpenCode, etc.):
 
 ## Documentation
 
-- [System Guide](https://github.com/YOUR_ORG/ga-bagua-semantic-kg/blob/main/docs/SYSTEM_GUIDE.md) — complete technical reference
-- [Delivery Guide](https://github.com/YOUR_ORG/ga-bagua-semantic-kg/blob/main/docs/DELIVERY.md) — configuration for every LLM client
-- [Encoding Skill](https://github.com/YOUR_ORG/ga-bagua-semantic-kg/blob/main/docs/skills/bagua-encoder/SKILL.md) — the LLM encoding protocol
+- [System Guide](https://github.com/trac41799/ga-bagua-semantic-kg/blob/main/docs/SYSTEM_GUIDE.md) — complete technical reference
+- [Delivery Guide](https://github.com/trac41799/ga-bagua-semantic-kg/blob/main/docs/DELIVERY.md) — configuration for every LLM client
+- [Encoding Skill](https://github.com/trac41799/ga-bagua-semantic-kg/blob/main/docs/skills/bagua-encoder/SKILL.md) — the LLM encoding protocol
 
 ## License
 

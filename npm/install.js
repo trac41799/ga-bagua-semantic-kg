@@ -11,7 +11,7 @@ const { promisify } = require("util");
 
 const pipelineAsync = promisify(pipeline);
 
-const OWNER = "YOUR_ORG";
+const OWNER = "trac41799";
 const REPO = "ga-bagua-semantic-kg";
 const VERSION = "0.1.0";
 
