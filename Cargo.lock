@@ -63,7 +63,7 @@ name = "ga-semantics-cli"
 version = "0.1.0"
 dependencies = [
  "clap",
- "ga-semantics-core",
+ "ga-semantics-core 0.1.0",
  "serde",
  "serde_json",
 ]
@@ -76,6 +76,26 @@ dependencies = [
  "serde",
  "serde_json",
  "thiserror",
+]
+
+[[package]]
+name = "ga-semantics-core"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d88c2dad71647e48618a752d4b3bd9bbeef0157634948674178c358a7f86dc80"
+dependencies = [
+ "serde",
+ "serde_json",
+ "thiserror",
+]
+
+[[package]]
+name = "ga-semantics-mcp"
+version = "0.1.0"
+dependencies = [
+ "ga-semantics-core 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

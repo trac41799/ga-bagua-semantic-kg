@@ -5,7 +5,7 @@ edition = "2021"
 rust-version = "1.78.0"
 license = "MIT OR Apache-2.0"
 description = "GA-Bagua Semantic KG MCP server — LLM semantic memory with 29 tools for AI agents"
-keywords = ["mcp", "knowledge-graph", "semantic-memory", "bagua", "ai", "llm"]
+keywords = ["mcp", "knowledge-graph", "semantic-memory", "bagua", "llm"]
 categories = ["science", "command-line-utilities"]
 repository = "https://github.com/trac41799/ga-bagua-semantic-kg"
 
