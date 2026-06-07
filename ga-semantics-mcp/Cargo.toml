@@ -17,3 +17,9 @@ path = "src/main.rs"
 ga-semantics-core = { path = "../ga-semantics-core", features = ["store"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+clap = { version = "4", features = ["derive"] }
+
+# HTTP transport for remote deployment
+axum = "0.7"
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.5", features = ["cors"] }

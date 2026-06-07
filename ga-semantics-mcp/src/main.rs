@@ -1,12 +1,35 @@
+use clap::Parser;
 use ga_semantics_core::prelude::*;
-use ga_semantics_core::RelationType;
 use ga_semantics_core::store::ConceptStore;
+use ga_semantics_core::RelationType;
 use std::io::{self, BufRead, Write};
 use std::sync::Mutex;
 
 static STORE: Mutex<Option<ConceptStore>> = Mutex::new(None);
 
+#[derive(Parser)]
+#[command(name = "ga-semantics-mcp", about = "GA-Bagua Semantic KG MCP server")]
+struct Args {
+    /// Run as HTTP server instead of stdio MCP
+    #[arg(long)]
+    http: bool,
+
+    /// Port for HTTP server (default: 3100)
+    #[arg(long, default_value = "3100")]
+    port: u16,
+}
+
 fn main() {
+    let args = Args::parse();
+
+    if args.http {
+        start_http_server(args.port);
+    } else {
+        run_stdio();
+    }
+}
+
+fn run_stdio() {
     let stdin = io::stdin();
     let stdout = io::stdout();
 
@@ -23,6 +46,46 @@ fn main() {
         let _ = writeln!(out, "{}", response);
         let _ = out.flush();
     }
+}
+
+fn start_http_server(port: u16) {
+    use axum::http::Method;
+    use axum::routing::{get, post};
+    use axum::{Json, Router};
+    use std::net::SocketAddr;
+    use tower_http::cors::{Any, CorsLayer};
+
+    let cors = CorsLayer::new()
+        .allow_methods([Method::GET, Method::POST])
+        .allow_origin(Any)
+        .allow_headers(Any);
+
+    let app = Router::new()
+        .route("/health", get(|| async { "ok" }))
+        .route(
+            "/mcp",
+            post(|body: String| async move {
+                let response = handle_request(&body);
+                Json(
+                    serde_json::from_str::<serde_json::Value>(&response)
+                        .unwrap_or(serde_json::json!({"error": "internal error"})),
+                )
+            }),
+        )
+        .layer(cors);
+
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
+    println!("MCP HTTP server listening on http://0.0.0.0:{}/mcp", port);
+
+    let rt = tokio::runtime::Runtime::new().expect("Failed to start tokio runtime");
+    rt.block_on(async {
+        axum::serve(
+            tokio::net::TcpListener::bind(addr).await.unwrap(),
+            app,
+        )
+        .await
+        .unwrap();
+    });
 }
 
 fn handle_request(body: &str) -> String {
