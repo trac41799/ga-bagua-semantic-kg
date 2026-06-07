@@ -7,7 +7,7 @@
 ---
 
 <p align="center">
-  <img src="docs/img/logo-bw-fresh.png" alt="GA-Bagua Semantic KG" width="600">
+  <img src="docs/img/logo-bw.png" alt="GA-Bagua Semantic KG" width="600">
 </p>
 
 <p align="center">
