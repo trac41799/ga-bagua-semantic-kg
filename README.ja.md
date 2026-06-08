@@ -7,7 +7,7 @@
 ---
 
 <p align="center">
-  <img src="docs/img/logo.png" alt="GA-Bagua セマンティック知識グラフ" width="600">
+  <img src="docs/img/logo-bw.png" alt="GA-Bagua セマンティック知識グラフ" width="600">
 </p>
 
 <p align="center">

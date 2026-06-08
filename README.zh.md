@@ -7,7 +7,7 @@
 ---
 
 <p align="center">
-  <img src="docs/img/logo.png" alt="GA-Bagua 语义知识图谱" width="600">
+  <img src="docs/img/logo-bw.png" alt="GA-Bagua 语义知识图谱" width="600">
 </p>
 
 <p align="center">

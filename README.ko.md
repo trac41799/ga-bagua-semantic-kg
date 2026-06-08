@@ -7,7 +7,7 @@
 ---
 
 <p align="center">
-  <img src="docs/img/logo.png" alt="GA-Bagua 의미 지식 그래프" width="600">
+  <img src="docs/img/logo-bw.png" alt="GA-Bagua 의미 지식 그래프" width="600">
 </p>
 
 <p align="center">
