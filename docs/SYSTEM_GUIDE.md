@@ -78,9 +78,10 @@ Traditional approaches to semantic reasoning with LLMs hit walls:
 The system has four layers, each building on the one below:
 
 ```
-Layer 4 (Application):  MCP server, CLI, Python bindings
-Layer 3 (Semantics):    similarity, classification, analogy, retrieval, contradiction
-Layer 2 (Math):         Cl(3) geometric algebra: Multivector, Blade, geometric product, rotor
+Layer 4 (Application):  MCP server (33 tools), CLI (+4 ideate subcommands), Python bindings
+Layer 4.5 (Expansion):  Document Intelligence (ga-doc-intel), Cognitive Systems (ga-cognitive), Ideation
+Layer 3 (Semantics):    similarity, classification, analogy, retrieval, contradiction, belief_revise
+Layer 2 (Math):         Cl(3) geometric algebra: Multivector, Blade, geometric product, rotor, hexagram_step
 Layer 1 (Encoding):     LLM skill → 8 coefficients → unit-norm Multivector
 Layer 0 (Taxonomy):     Bagua trigrams, WuXing phases, hexagram interpretations
 ```
@@ -104,6 +105,8 @@ Layer 0 (Taxonomy):     Bagua trigrams, WuXing phases, hexagram interpretations
 | `ga-semantics-core` | All math, encoding, semantics, Bagua/WuXing, store (feature-gated) |
 | `ga-semantics-cli` | CLI for encoding, benchmarking, interactive exploration |
 | `ga-semantics-mcp` | MCP server exposing 29 tools to LLM hosts (Claude Desktop, etc.) |
+| `ga-doc-intel` | Document intelligence: alignment, synthesis, coherence, fallacy detection, contract audit |
+| `ga-cognitive` | Cognitive systems: agent tracking, compatibility, learning paths, goal decomposition |
 
 ---
 
@@ -929,6 +932,46 @@ It is designed to be used with LLM hosts like Claude Desktop or any MCP-compatib
 - All tools use JSON Schema with proper `type`, `properties`, `required`, `enum`, and
   `oneOf` fields for LLM-friendly API contracts.
 
+### 11.3 Application Expansion (v0.5.0)
+
+The project was expanded in June 2026 with three application subsystems:
+
+#### Document Intelligence (`ga-doc-intel`)
+
+Multi-document semantic analysis built on the core algebra:
+
+| Module | Operation | Description |
+|--------|-----------|-------------|
+| `document.rs` | `DocumentStore` | Document container linked to ConceptStore with `document_id` |
+| `alignment.rs` | `align_documents()` | Cross-document claim pairing with 4-way relation classification |
+| `synthesis.rs` | `find_gaps()` | WuXing phase coverage analysis for research gap detection |
+| `coherence.rs` | `intra_coherence()`, `inter_coherence()` | Contradiction detection within/across documents |
+| `fallacy.rs` | `analyze_argument()` | Argument graph with circular, non-sequitur, contradiction detection |
+| `contract.rs` | `audit_contract()` | Smart contract intent vs implementation semantic audit |
+
+#### Cognitive Systems (`ga-cognitive`)
+
+Multi-agent belief tracking and relationship reasoning:
+
+| Module | Operation | Description |
+|--------|-----------|-------------|
+| `agent.rs` | `AgentStore` | Multi-agent belief storage with agent_id-tagged ConceptStore |
+| `belief.rs` | `BeliefTimeline` | Revision tracking via rotor comparison + drift measurement |
+| `compatibility.rs` | `personality_compatibility()`, `form_best_team()` | WuXing-based compatibility and team formation |
+| `learning.rs` | `generate_learning_path()` | WuXing-ordered curriculum generation |
+| `goal.rs` | `GoalTree` | Hierarchical goal decomposition with coherence checking |
+
+#### Creative Ideation (in-core, `bagua.rs`)
+
+64-hexagram perspective exploration via algebraic rotor transforms:
+
+| Operation | Description |
+|-----------|-------------|
+| `hexagram_step(seed, hexagram)` | Rotor-transform a seed to a target hexagram |
+| `hexagram_explore(seed, top_n)` | Top-N divergent perspectives sorted by geometric distance |
+
+Exposed via 4 MCP tools (`ideate_seed`, `ideate_step`, `ideate_explore`, `ideate_blend`) and 4 CLI subcommands.
+
 ---
 
 ## 12. Limitations & Future Work
@@ -1014,3 +1057,20 @@ It is designed to be used with LLM hosts like Claude Desktop or any MCP-compatib
 | `docs/skills/bagua-encoder/SKILL.md` | LLM encoding protocol |
 | `docs/engineering/strategy-to-excellence.md` | 7-layer improvement roadmap |
 | `docs/engineering/semantic-accuracy-benchmark.md` | Original benchmark report |
+| `ga-doc-intel/src/document.rs` | Document container, DocumentStore |
+| `ga-doc-intel/src/alignment.rs` | Cross-document semantic alignment |
+| `ga-doc-intel/src/synthesis.rs` | WuXing phase coverage + gap detection |
+| `ga-doc-intel/src/coherence.rs` | Intra/inter document contradiction detection |
+| `ga-doc-intel/src/fallacy.rs` | Argument graph + fallacy detection |
+| `ga-doc-intel/src/contract.rs` | Smart contract audit |
+| `ga-cognitive/src/agent.rs` | Multi-agent belief store |
+| `ga-cognitive/src/belief.rs` | Belief revision + timeline tracking |
+| `ga-cognitive/src/compatibility.rs` | Personality compatibility + team formation |
+| `ga-cognitive/src/learning.rs` | Learning path generation |
+| `ga-cognitive/src/goal.rs` | Goal decomposition + coherence |
+| `ga-semantics-core/tests/cross_lingual_benchmark.rs` | Cross-lingual alignment benchmark (B5) |
+| `ga-semantics-core/tests/ideation_benchmark.rs` | Creative ideation benchmark (B11) |
+| `ga-doc-intel/tests/benchmarks.rs` | Doc Intel benchmarks (B1-B4) |
+| `ga-doc-intel/tests/contract_benchmark.rs` | Contract audit benchmark (B6) |
+| `ga-cognitive/tests/benchmarks.rs` | Cognitive benchmarks (B7-B10) |
+| `docs/engineering/benchmarks.md` | Official benchmark documentation |

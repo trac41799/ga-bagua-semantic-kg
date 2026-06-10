@@ -247,6 +247,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "ga-cognitive"
+version = "0.1.0"
+dependencies = [
+ "ga-semantics-core",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "ga-doc-intel"
+version = "0.1.0"
+dependencies = [
+ "ga-semantics-core",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "ga-semantics-cli"
 version = "0.1.0"
 dependencies = [

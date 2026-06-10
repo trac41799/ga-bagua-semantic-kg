@@ -355,7 +355,7 @@ fn wuxing_index_benchmark() {
         // Bucketed same-role search
         let idx_start = Instant::now();
         for _ in 0..query_count {
-            let _ = index.query_same_role(&query, top_k);
+            let _ = index.query_same_role(&query, top_k, false);
         }
         let idx_time = idx_start.elapsed();
 

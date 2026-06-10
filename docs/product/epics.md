@@ -259,3 +259,72 @@
 - [ ] Batch eval runs benchmark JSON and reports summary
 - [ ] `ga-semantics --help` and `ga-semantics <subcommand> --help` are complete
 - [ ] CI publishes `ga-semantics` binary to GitHub Releases
+
+---
+
+## Epic 9: Document Intelligence Framework
+
+**Goal:** Provide multi-document semantic analysis — alignment, synthesis, coherence, and argument validation.
+
+### User Stories
+
+| ID | Story | Priority | Acceptance Criteria |
+|----|-------|----------|---------------------|
+| US-9.1 | As a researcher, I want to align claims across documents so that I can find supporting and conflicting evidence | P0 | `align_documents(A, B)` returns matched, conflicting, and supporting claim pairs |
+| US-9.2 | As an analyst, I want to detect research gaps via WuXing phase coverage so that I can identify under-explored areas | P0 | `find_gaps(doc_ids)` returns phases with zero coverage |
+| US-9.3 | As a compliance officer, I want to check policy coherence so that I can find contradictory rules | P1 | `intra_coherence(doc_id)` and `inter_coherence(A, B)` detect contradictions |
+| US-9.4 | As a debater, I want to detect logical fallacies so that I can strengthen arguments | P1 | `analyze_argument(encodings)` detects circular, non-sequitur, contradiction |
+| US-9.5 | As a translator, I want to verify cross-lingual concept alignment so that I can catch translation drift | P2 | Same concept in different languages produces similar encodings |
+| US-9.6 | As an auditor, I want to compare smart contract intent vs implementation so that I can detect semantic vulnerabilities | P2 | `audit_contract(intent, impl)` returns risk level and diverging roles |
+
+### Definition of Done
+
+- [x] `ga-doc-intel` crate with 6 modules
+- [x] 24 unit tests passing
+- [x] 5 validation benchmarks (B1-B4, B6)
+- [x] Document container + alignment + synthesis + coherence + fallacy + contract audit
+
+---
+
+## Epic 10: Cognitive Systems Framework
+
+**Goal:** Track agent beliefs, measure compatibility, generate learning paths, and verify goal coherence.
+
+### User Stories
+
+| ID | Story | Priority | Acceptance Criteria |
+|----|-------|----------|---------------------|
+| US-10.1 | As an AI developer, I want to track agent beliefs as multivectors so that I can detect inconsistencies | P0 | `AgentStore` with multi-agent belief CRUD |
+| US-10.2 | As an AI developer, I want to detect cognitive dissonance so that I can flag contradictory beliefs | P0 | Pairwise `is_contradictory()` across agent beliefs |
+| US-10.3 | As an HR tool, I want to measure personality compatibility via WuXing cycles so that I can form balanced teams | P1 | `personality_compatibility(A, B)` returns score and interpretation |
+| US-10.4 | As an educator, I want to generate learning paths ordered by WuXing cycles so that I can design curricula | P1 | `generate_learning_path(concepts)` returns phase-ordered sequence |
+| US-10.5 | As a planner, I want to decompose goals and check coherence so that I can validate subgoal completeness | P1 | `GoalTree` with contradiction detection and phase coverage |
+
+### Definition of Done
+
+- [x] `ga-cognitive` crate with 5 modules
+- [x] 21 unit tests passing
+- [x] 4 validation benchmarks (B7-B10)
+- [x] Agent store + belief tracking + compatibility + learning path + goal decomposition
+
+---
+
+## Epic 11: Creative Ideation Engine
+
+**Goal:** Use the 64 I-Ching hexagrams as structured creative prompts via algebraic rotor transforms.
+
+### User Stories
+
+| ID | Story | Priority | Acceptance Criteria |
+|----|-------|----------|---------------------|
+| US-11.1 | As a creative, I want to encode a problem as a seed for hexagram exploration so that I can generate novel perspectives | P1 | `ideate_seed` creates a seed multivector from problem description |
+| US-11.2 | As a creative, I want to step through hexagram space via rotors so that I get structurally different viewpoints | P1 | `ideate_explore` returns top-N perspectives sorted by geometric distance |
+| US-11.3 | As a creative, I want to blend two concepts via geometric product so that I can explore emergent combinations | P2 | `ideate_blend` returns the hexagram interpretation of A × B |
+
+### Definition of Done
+
+- [x] `hexagram_step()` and `hexagram_explore()` in core
+- [x] 4 MCP tools (ideate_seed, step, explore, blend)
+- [x] 4 CLI subcommands
+- [x] 1 validation benchmark (B11)
+- [x] 4 unique perspectives covering 3 trigrams per seed

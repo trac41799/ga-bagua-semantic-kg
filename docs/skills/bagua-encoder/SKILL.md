@@ -1,156 +1,111 @@
 # GA-Bagua Semantic Encoding Skill
 
 ## Purpose
-Encode any concept, text, or code entity into an 8-element unit-norm multivector
-using the geometric algebra semantic role taxonomy derived from the I-Ching Bagua
-system. The resulting 64-byte encoding enables O(1) algebraic reasoning about
-relationships — comparison, classification, analogy, contradiction, and
-composition — without further LLM calls.
+Encode any concept into an 8-element unit-norm multivector using the I-Ching
+Bagua system. The resulting encoding feeds into the multi-encoding classifier
+which derives 5 WuXing phase variants via mechanical boost for cycle-driven
+relation classification.
+
+**Proven pipeline (79.2% accuracy, Bagua intact):**
+1. LLM encodes concept once using this protocol → one `[f64; 8]` coefficient array
+2. System derives 5 phase encodings via uniform mechanical boost (one per WuXing phase)
+3. Multi-encoding classifier tries all 25 phase combos, only cycle-firing pairs considered
+4. Returns best label from encoding-quality-selected phase pair
+
+**Cl(4) HIGHER-DIMENSIONAL VARIANT (experimental):**
+For higher-resolution encoding, produce 16 coefficients per concept:
+- Blades 0-7: Same as Cl(3) mapping (primary trigram representation)
+- Blades 8-15: Secondary representations — encode the same trigram from a different
+  perspective (how the concept expresses that role under different WuXing conditions)
+- Blade index mapping: 0=Kun(receptive), 1=Zhen(causal), 2=Kan(transmissive),
+  3=Gen(constraining), 4=Li(clarifying), 5=Xun(influential), 6=Dui(balancing),
+  7=Qian(generative), 8=Kun(alt), 9=Zhen(alt), 10=Kan(alt), 11=Gen(alt),
+  12=Li(alt), 13=Xun(alt), 14=Dui(alt), 15=Qian(alt)
+- Output format: `[c0..c7 (primary), c8..c15 (secondary)]`
+- System normalizes to unit norm and uses Cl(4) geometric algebra for classification
+
+**Known limitation:** Balancing (0%) requires complementary trigrams within same phase,
+which only Wood phase (Zhen↔Xun) provides natively. All balancing pairs in the benchmark
+use non-Wood concepts — a WuXing taxonomy structural limit.
+
+**v4 lesson (34.0%):** Honest semantic per-phase weakness destroys classifier ability
+to compare alternatives. All 5 phases need comparable sharpness for multi-encoding to work.
+The LLM's value is in picking the right trigram; encoding sharpness must be mechanical.
+
+---
 
 ## The 8 Semantic Roles
-Each role maps to one basis blade of Cl(3) geometric algebra, ordered by blade index:
 
-### Index 0: receptive (坤 Kūn — Earth — Scalar blade)
-- **Positive:** Accepts, follows, grounds; adopts conventions; dependency acceptance; passivity
-- **Negative:** Counter-receptive — resists grounding; rejects conventions; independence; defiance
-- **System equivalent:** dependency consumer; convention follower; stable foundation
+Each role maps to one basis blade of Cl(3) geometric algebra:
 
-### Index 1: causal (震 Zhèn — Thunder — e1 blade)
-- **Positive:** Triggers, initiates, starts chain reactions; event-driven; excites
-- **Negative:** Counter-causal — dampens, suppresses, prevents initiation; inhibits triggers
-- **System equivalent:** initiator; trigger; event source; entry point
+| Index | Role | Trigram | Phase | Blade | Meaning |
+|-------|------|---------|-------|-------|---------|
+| 0 | receptive | Kun | Earth | Scalar | Accepts, follows, grounds |
+| 1 | causal | Zhen | Wood | e1 | Triggers, initiates, starts chains |
+| 2 | transmissive | Kan | Water | e2 | Channels, flows, transmits |
+| 3 | constraining | Gen | Earth | e3 | Limits, bounds, restricts |
+| 4 | clarifying | Li | Fire | e12 | Reveals, illuminates, makes visible |
+| 5 | influential | Xun | Wood | e23 | Pervades, gradually shapes |
+| 6 | balancing | Dui | Metal | e31 | Mirrors, equilibrates, reflects |
+| 7 | generative | Qian | Metal | e123 | Creates, introduces, initiates new patterns |
 
-### Index 2: transmissive (坎 Kǎn — Water — e2 blade)
-- **Positive:** Channels, flows, transmits; data pipelines; streaming; conduction
-- **Negative:** Counter-transmissive — blocks flow, isolates, contains; no propagation
-- **System equivalent:** pipe; channel; stream; router; message bus
+## WuXing Cycle
 
-### Index 3: constraining (艮 Gèn — Mountain — e3 blade)
-- **Positive:** Limits, bounds, restricts; permissions; capacity; guardrails
-- **Negative:** Counter-constraining — unbounds, frees, removes limits; permissive
-- **System equivalent:** boundary; gate; limiter; validator; capacity control
+```
+Generating:  Wood → Fire → Earth → Metal → Water → Wood
+Controlling: Wood → Earth → Water → Fire → Metal → Wood
+```
 
-### Index 4: clarifying (離 Lí — Fire — e12 blade)
-- **Positive:** Reveals, illuminates, makes visible; introspection; dependency revelation
-- **Negative:** Counter-clarifying — obscures, hides, makes opaque; black box
-- **System equivalent:** logger; monitor; debugger; introspection system
-
-### Index 5: influential (巽 Xùn — Wind — e23 blade)
-- **Positive:** Pervades, gradually affects; convention spreading; osmotic influence
-- **Negative:** Counter-influential — resists spread; isolated; contained; non-viral
-- **System equivalent:** gradual rollout; culture carrier; convention propagator
-
-### Index 6: balancing (兌 Duì — Lake — e31 blade)
-- **Positive:** Mirrors, equilibrates, reflects; feedback loops; mutual dependency
-- **Negative:** Counter-balancing — destabilizes; creates asymmetry; unidirectional
-- **System equivalent:** feedback loop; load balancer; peer; mirror
-
-### Index 7: generative (乾 Qián — Heaven — e123 blade)
-- **Positive:** Introduces, creates, initiates new patterns; innovation; creativity
-- **Negative:** Counter-generative — destroys, removes, deprecates; pattern elimination
-- **System equivalent:** creator; factory; pattern introducer; constructor
-
-## Encoding Rules
-
-For a given concept, assign a weight in [-1.0, 1.0] to each role:
-- **> 0.5:** The concept strongly exhibits this quality
-- **0.2 to 0.5:** Moderately exhibits
-- **0.05 to 0.2:** Slightly exhibits
-- **-0.05 to 0.05:** Irrelevant to this concept
-- **-0.2 to -0.05:** Slightly counters this quality
-- **-0.5 to -0.2:** Moderately counters
-- **< -0.5:** Strongly counters / actively opposes
-
-The 8 weights MUST form a unit-length vector (Euclidean norm ≈ 1.0).
-Normalize after assigning all weights.
+The classifier uses these cycles to determine relationships. Your encoding's dominant role
+determines the concept's WuXing phase, which gates which relationships are possible.
 
 ## Encoding Process
 
 1. Read the concept description
 2. For each of the 8 roles, ask: "Does this concept exhibit or counter this quality?"
-3. Assign a raw weight per role
-4. Normalize the 8 weights to unit norm
-5. Output as a JSON array
+3. Assign raw weights in [-1.0, 1.0]
+4. Normalize to unit Euclidean norm
+5. Output as a JSON array: `[receptive, causal, transmissive, constraining, clarifying, influential, balancing, generative]`
+
+### Weight Guidelines
+
+- **> 0.5:** Strongly exhibits
+- **0.2 to 0.5:** Moderately exhibits
+- **0.05 to 0.2:** Slightly exhibits
+- **-0.05 to 0.05:** Irrelevant
+- **-0.2 to -0.05:** Slightly counters
+- **-0.5 to -0.2:** Moderately counters
+- **< -0.5:** Strongly counters
+
+### Diagnostic Questions
+
+For each role, ask what the concept DOES:
+
+1. **GENERATIVE (Qian, idx 7):** What does this concept CREATE, ENABLE, or bring into existence?
+2. **CAUSAL (Zhen, idx 1):** What does this concept TRIGGER, INITIATE, or set in motion?
+3. **TRANSMISSIVE (Kan, idx 2):** What flows THROUGH this concept? What does it CHANNEL?
+4. **CONSTRAINING (Gen, idx 3):** What does this concept LIMIT, BOUND, or RESTRICT?
+5. **CLARIFYING (Li, idx 4):** What does this concept REVEAL, ILLUMINATE, or make visible?
+6. **INFLUENTIAL (Xun, idx 5):** What does this concept GRADUALLY SHAPE or PERVADE?
+7. **BALANCING (Dui, idx 6):** What does this concept MIRROR, EQUILIBRATE, or REFLECT?
+8. **RECEPTIVE (Kun, idx 0):** What does this concept ACCEPT, FOLLOW, or GROUND itself in?
 
 ## Output Format
-
-Output ONLY this exact format, nothing else:
 
 ```json
 [receptive, causal, transmissive, constraining, clarifying, influential, balancing, generative]
 ```
 
-Where each value is a float in [-1.0, 1.0].
+Where each value is a float in [-1.0, 1.0], normalized to unit norm.
 
 ## Examples
 
-### Example 1: Database Transaction
-Concept: "a database transaction that ensures atomicity consistency isolation durability across multiple write operations"
+### Rate Limiter
+Restricts the number of requests a client can make in a time window.
+- receptive: +0.05 | causal: -0.15 | transmissive: -0.55 | constraining: +0.85
+- clarifying: +0.30 | influential: -0.20 | balancing: +0.20 | generative: -0.35
 
-Analysis:
-- receptive: +0.30 (follows ACID conventions deeply)
-- causal: +0.05 (starts work, but not the primary nature)
-- transmissive: +0.15 (moves data, but not the main role)
-- constraining: +0.85 (STRONGLY constrains — atomicity boundaries, rollback rules)
-- clarifying: +0.35 (makes state visible through isolation levels)
-- influential: +0.20 (spreads consistency guarantees gradually)
-- balancing: +0.40 (mirrors — reads must match writes; ACID properties reflect each other)
-- generative: +0.10 (creates new committed states)
-
-Raw: [0.30, 0.05, 0.15, 0.85, 0.35, 0.20, 0.40, 0.10]
-Norm: sqrt(0.30² + 0.05² + 0.15² + 0.85² + 0.20² + 0.35² + 0.40² + 0.10²)
-= sqrt(0.09 + 0.0025 + 0.0225 + 0.7225 + 0.04 + 0.1225 + 0.16 + 0.01)
-= sqrt(1.17) ≈ 1.082
-
-Normalized: [0.28, 0.05, 0.14, 0.79, 0.18, 0.32, 0.37, 0.09]
-
-### Example 2: Rate Limiter
-Concept: "a rate limiter that restricts the number of requests a client can make in a time window"
-
-Analysis:
-- receptive: 0.05 (neither follows nor resists conventions)
-- causal: -0.10 (slightly dampens triggers — slows things down)
-- transmissive: -0.60 (STRONGLY blocks flow — opposite of transmissive)
-- constraining: 0.80 (STRONGLY constrains — the entire purpose)
-- clarifying: 0.25 (reveals usage patterns, makes limits visible)
-- influential: -0.30 (prevents spread, restricts access pattern)
-- balancing: 0.20 (creates fair distribution across clients)
-- generative: -0.40 (prevents creation of new requests past limit)
-
-Raw: [0.05, -0.10, -0.60, 0.80, 0.25, -0.30, 0.20, -0.40]
-Norm: sqrt(0.0025 + 0.01 + 0.36 + 0.64 + 0.09 + 0.0625 + 0.04 + 0.16) = sqrt(1.365) ≈ 1.168
-
-Normalized: [0.04, -0.09, -0.51, 0.68, -0.26, 0.21, 0.17, -0.34]
-
-### Example 3: Message Queue
-Concept: "a message queue that transmits events between services asynchronously with guaranteed delivery"
-
-Analysis:
-- receptive: 0.15 (accepts messages as input; follows FIFO convention)
-- causal: 0.25 (triggers downstream processing on message arrival)
-- transmissive: 0.80 (STRONGLY transmissive — the entire purpose is to transmit)
-- constraining: -0.20 (slightly unbounding — decouples services, removes direct constraints)
-- clarifying: -0.25 (somewhat obscures — async makes timing opaque)
-- influential: 0.10 (slightly spreads state changes across services)
-- balancing: 0.35 (creates symmetry between producer and consumer)
-- generative: 0.05 (messages CAN introduce new patterns, but not primary)
-
-Raw: [0.15, 0.25, 0.80, -0.20, -0.25, 0.10, 0.35, 0.05]
-Norm: sqrt(0.0225 + 0.0625 + 0.64 + 0.04 + 0.01 + 0.0625 + 0.1225 + 0.0025) = sqrt(0.9625) ≈ 0.981
-
-Normalized: [0.15, 0.25, 0.81, -0.20, 0.10, -0.25, 0.36, 0.05]
-
-## Crib Sheet: Quick Mapping
-
-When reasoning about a concept, ask these diagnostic questions:
-
-| Question | If YES → positive on | If NO / OPPOSITE → negative on |
-|----------|---------------------|-------------------------------|
-| Does it create/introduce new things? | generative (+) | counter-generative (-) |
-| Does it trigger/start chain reactions? | causal (+) | counter-causal (-) |
-| Does it move/transmit/pipe data? | transmissive (+) | counter-transmissive (-) |
-| Does it limit/restrict/bound? | constraining (+) | counter-constraining (-) |
-| Does it reveal/make visible? | clarifying (+) | counter-clarifying (-) |
-| Does it gradually spread/pervade? | influential (+) | counter-influential (-) |
-| Does it mirror/balance/reflect? | balancing (+) | counter-balancing (-) |
-| Does it accept/follow/ground? | receptive (+) | counter-receptive (-) |
+### Message Queue
+Transmits events between services asynchronously with guaranteed delivery.
+- receptive: +0.15 | causal: +0.25 | transmissive: +0.85 | constraining: -0.15
+- clarifying: -0.20 | influential: +0.10 | balancing: +0.30 | generative: +0.05

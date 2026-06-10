@@ -3,5 +3,7 @@ members = [
     "ga-semantics-core",
     "ga-semantics-cli",
     "ga-semantics-mcp",
+    "ga-doc-intel",
+    "ga-cognitive",
 ]
 resolver = "2"

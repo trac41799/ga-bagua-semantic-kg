@@ -11,9 +11,10 @@ Week 3:    Semantic Operations API
 Week 4:    Benchmarks & Validation
 Week 5:    Python Bindings & Publishing
 Week 6-7:  MCP Server & CLI Delivery
+Week 8-10: Application Expansion (Doc Intel, Cognitive, Ideation)
 ```
 
-**Total Duration:** ~7 weeks (37 working days)
+**Total Duration:** ~10 weeks (50 working days)
 **Launch Target:** Mid August 2026
 
 ---
@@ -226,6 +227,43 @@ Two standalone binaries built on top of the `ga-semantics` Rust library:
 
 ---
 
+## Phase 7: Application Expansion
+
+**Duration:** Week 8-10 (June 8 – June 20, 2026)  
+**Status:** 🟢 Complete
+
+### Overview
+
+Three application subsystems built on the core algebra engine:
+
+| Subsystem | Crate | Ideas | Operations |
+|-----------|-------|-------|------------|
+| **Document Intelligence** | `ga-doc-intel` | Argument mapping, document alignment, research synthesis, policy coherence, cross-lingual alignment, smart contract audit | 10 |
+| **Cognitive Systems** | `ga-cognitive` | Agent belief tracking, personality compatibility, learning path generation, goal decomposition | 15 |
+| **Creative Ideation** | in-core (`bagua.rs`) | 64-hexagram perspective exploration, concept blending | 4 |
+
+### Milestones
+
+| Milestone | Target Date | Deliverable |
+|-----------|-------------|-------------|
+| M7.1 | June 8 | Core changes: `document_id`/`agent_id` in store, `hexagram_step()`, `belief_revise()` |
+| M7.2 | June 9 | `ga-doc-intel` crate: 6 modules + 24 tests |
+| M7.3 | June 9 | `ga-cognitive` crate: 5 modules + 21 tests |
+| M7.4 | June 9 | Ideation MCP tools (4) + CLI subcommands (4) |
+| M7.5 | June 10 | 9 validation benchmarks (B1-B11) |
+| M7.6 | June 10 | Documentation and final QA |
+
+### Exit Criteria
+
+- [x] 2 new workspace crates compile and pass tests (45 tests)
+- [x] 29 new operations across MCP and CLI
+- [x] 9 validation benchmarks all pass
+- [x] 0 new clippy warnings
+- [x] 179 existing core tests continue to pass
+- [x] All project docs updated
+
+---
+
 **Duration:** TBD (after decision gate approval)
 **Status:** ⬜ Pending
 
@@ -250,6 +288,7 @@ Two standalone binaries built on top of the `ga-semantics` Rust library:
 | v0.2.0 | Python bindings + benchmarks | August 2026 |
 | v0.3.0 | SIMD optimization + batch operations | September 2026 |
 | v0.4.0 | MCP server + CLI binaries | October 2026 |
+| v0.5.0 | Application expansion (doc-intel, cognitive, ideation) | June 2026 |
 | v1.0.0 | Production-ready + ACC integration | November 2026 |
 
 ---

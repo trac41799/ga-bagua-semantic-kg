@@ -1,0 +1,1061 @@
+{
+  "concepts": [
+    {
+      "index": 0,
+      "name": "Marketing Budget",
+      "coefficients": [
+        0.05,
+        0.05,
+        0.1,
+        0.85,
+        -0.05,
+        0.25,
+        0.1,
+        0.1
+      ]
+    },
+    {
+      "index": 1,
+      "name": "Sales Pipeline",
+      "coefficients": [
+        0.1,
+        0.15,
+        0.8,
+        -0.05,
+        -0.1,
+        0.15,
+        0.2,
+        0.2
+      ]
+    },
+    {
+      "index": 2,
+      "name": "Revenue Target",
+      "coefficients": [
+        0.1,
+        0.3,
+        0.1,
+        -0.1,
+        0.15,
+        0.1,
+        0.15,
+        0.85
+      ]
+    },
+    {
+      "index": 3,
+      "name": "Support Ticket",
+      "coefficients": [
+        0.1,
+        0.75,
+        0.2,
+        0.05,
+        0.1,
+        0.3,
+        0.1,
+        0.2
+      ]
+    },
+    {
+      "index": 4,
+      "name": "Quarterly Report",
+      "coefficients": [
+        0.15,
+        0.1,
+        0.1,
+        0.15,
+        0.25,
+        0.8,
+        0.1,
+        0.1
+      ]
+    },
+    {
+      "index": 5,
+      "name": "Employee Handbook",
+      "coefficients": [
+        0.15,
+        0.05,
+        0.05,
+        0.8,
+        0.3,
+        0.25,
+        0.1,
+        0.05
+      ]
+    },
+    {
+      "index": 6,
+      "name": "Vendor Contract",
+      "coefficients": [
+        0.1,
+        0.05,
+        0.05,
+        0.85,
+        0.15,
+        0.2,
+        0.15,
+        0.05
+      ]
+    },
+    {
+      "index": 7,
+      "name": "Innovation Fund",
+      "coefficients": [
+        0.05,
+        0.25,
+        0.15,
+        -0.15,
+        0.1,
+        0.15,
+        0.1,
+        0.88
+      ]
+    },
+    {
+      "index": 8,
+      "name": "Feedback Loop",
+      "coefficients": [
+        0.25,
+        0.1,
+        0.25,
+        0.05,
+        0.15,
+        0.2,
+        0.78,
+        0.1
+      ]
+    },
+    {
+      "index": 9,
+      "name": "Onboarding Process",
+      "coefficients": [
+        0.2,
+        0.15,
+        0.75,
+        0.05,
+        0.15,
+        0.1,
+        0.25,
+        0.15
+      ]
+    },
+    {
+      "index": 10,
+      "name": "Market Trend",
+      "coefficients": [
+        0.15,
+        0.2,
+        0.1,
+        0.05,
+        0.78,
+        0.25,
+        0.15,
+        0.2
+      ]
+    },
+    {
+      "index": 11,
+      "name": "Compliance Audit",
+      "coefficients": [
+        0.1,
+        0.1,
+        0.1,
+        0.3,
+        0.15,
+        0.8,
+        0.15,
+        0.1
+      ]
+    },
+    {
+      "index": 12,
+      "name": "Severance Package",
+      "coefficients": [
+        0.76,
+        0.05,
+        0.15,
+        0.15,
+        0.1,
+        0.1,
+        0.2,
+        0.1
+      ]
+    },
+    {
+      "index": 13,
+      "name": "Industry Standard",
+      "coefficients": [
+        0.2,
+        0.1,
+        0.15,
+        0.2,
+        0.1,
+        0.8,
+        0.2,
+        0.05
+      ]
+    },
+    {
+      "index": 14,
+      "name": "Team Standup",
+      "coefficients": [
+        0.15,
+        0.15,
+        0.15,
+        0.05,
+        0.15,
+        0.2,
+        0.8,
+        0.1
+      ]
+    },
+    {
+      "index": 15,
+      "name": "Predator",
+      "coefficients": [
+        0.05,
+        0.15,
+        0.1,
+        0.85,
+        0.1,
+        0.15,
+        0.15,
+        0.15
+      ]
+    },
+    {
+      "index": 16,
+      "name": "Decomposer",
+      "coefficients": [
+        0.8,
+        0.05,
+        0.2,
+        0.1,
+        0.15,
+        0.1,
+        0.2,
+        0.05
+      ]
+    },
+    {
+      "index": 17,
+      "name": "Photosynthesis",
+      "coefficients": [
+        0.05,
+        0.2,
+        0.15,
+        0.05,
+        0.1,
+        0.15,
+        0.1,
+        0.86
+      ]
+    },
+    {
+      "index": 18,
+      "name": "Water Cycle",
+      "coefficients": [
+        0.15,
+        0.2,
+        0.8,
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.15
+      ]
+    },
+    {
+      "index": 19,
+      "name": "Keystone Species",
+      "coefficients": [
+        0.1,
+        0.25,
+        0.15,
+        0.1,
+        0.1,
+        0.8,
+        0.2,
+        0.25
+      ]
+    },
+    {
+      "index": 20,
+      "name": "Mutation",
+      "coefficients": [
+        0.1,
+        0.85,
+        0.15,
+        0.05,
+        0.1,
+        0.1,
+        0.15,
+        0.2
+      ]
+    },
+    {
+      "index": 21,
+      "name": "Homeostasis",
+      "coefficients": [
+        0.15,
+        0.05,
+        0.15,
+        0.15,
+        0.15,
+        0.1,
+        0.8,
+        0.1
+      ]
+    },
+    {
+      "index": 22,
+      "name": "Natural Selection",
+      "coefficients": [
+        0.05,
+        0.1,
+        0.1,
+        0.85,
+        0.15,
+        0.25,
+        0.15,
+        0.1
+      ]
+    },
+    {
+      "index": 23,
+      "name": "Ecological Succession",
+      "coefficients": [
+        0.15,
+        0.15,
+        0.1,
+        0.05,
+        0.1,
+        0.85,
+        0.2,
+        0.15
+      ]
+    },
+    {
+      "index": 24,
+      "name": "Symbiosis",
+      "coefficients": [
+        0.2,
+        0.1,
+        0.15,
+        0.05,
+        0.15,
+        0.1,
+        0.8,
+        0.2
+      ]
+    },
+    {
+      "index": 25,
+      "name": "DNA Replication",
+      "coefficients": [
+        0.1,
+        0.2,
+        0.15,
+        0.05,
+        0.1,
+        0.1,
+        0.15,
+        0.85
+      ]
+    },
+    {
+      "index": 26,
+      "name": "Firewall",
+      "coefficients": [
+        0.05,
+        0.05,
+        0.2,
+        0.85,
+        0.15,
+        0.25,
+        0.15,
+        0.05
+      ]
+    },
+    {
+      "index": 27,
+      "name": "Load Balancer",
+      "coefficients": [
+        0.15,
+        0.1,
+        0.25,
+        0.05,
+        0.1,
+        0.15,
+        0.8,
+        0.1
+      ]
+    },
+    {
+      "index": 28,
+      "name": "Database Index",
+      "coefficients": [
+        0.1,
+        0.1,
+        0.15,
+        0.05,
+        0.85,
+        0.05,
+        0.1,
+        0.1
+      ]
+    },
+    {
+      "index": 29,
+      "name": "Message Broker",
+      "coefficients": [
+        0.15,
+        0.25,
+        0.8,
+        -0.15,
+        -0.2,
+        0.1,
+        0.3,
+        0.05
+      ]
+    },
+    {
+      "index": 30,
+      "name": "Circuit Breaker",
+      "coefficients": [
+        0.05,
+        -0.25,
+        -0.2,
+        0.85,
+        0.25,
+        -0.1,
+        0.2,
+        -0.15
+      ]
+    },
+    {
+      "index": 31,
+      "name": "Deprecation Policy",
+      "coefficients": [
+        0.2,
+        0.1,
+        0.05,
+        0.3,
+        0.15,
+        0.85,
+        0.15,
+        0.1
+      ]
+    },
+    {
+      "index": 32,
+      "name": "Feature Flag",
+      "coefficients": [
+        0.1,
+        0.21,
+        0.16,
+        -0.1,
+        0.1,
+        0.82,
+        0.31,
+        0.37
+      ]
+    },
+    {
+      "index": 33,
+      "name": "Health Check Endpoint",
+      "coefficients": [
+        0.18,
+        0.12,
+        0.12,
+        0.12,
+        0.9,
+        0.12,
+        0.18,
+        0.06
+      ]
+    },
+    {
+      "index": 34,
+      "name": "Event Sourcing Log",
+      "coefficients": [
+        0.8,
+        0.1,
+        0.2,
+        0.1,
+        0.1,
+        0.25,
+        0.15,
+        0.1
+      ]
+    },
+    {
+      "index": 35,
+      "name": "Chaos Engineering",
+      "coefficients": [
+        0.05,
+        0.75,
+        0.1,
+        0.25,
+        0.2,
+        0.3,
+        0.15,
+        0.2
+      ]
+    },
+    {
+      "index": 36,
+      "name": "Rate Limiter",
+      "coefficients": [
+        0.04,
+        -0.09,
+        -0.51,
+        0.68,
+        0.21,
+        -0.26,
+        0.17,
+        -0.34
+      ]
+    },
+    {
+      "index": 37,
+      "name": "API Gateway",
+      "coefficients": [
+        0.22,
+        0.34,
+        0.84,
+        0.06,
+        -0.11,
+        0.17,
+        0.28,
+        0.06
+      ]
+    }
+  ],
+  "failing_pairs": [
+    {
+      "concept_a": "Marketing Budget",
+      "concept_b": "Employee Handbook",
+      "expected_label": "receptive",
+      "current_label": "constraining",
+      "a_coefficients": [
+        0.05,
+        0.05,
+        0.1,
+        0.85,
+        -0.05,
+        0.25,
+        0.1,
+        0.1
+      ],
+      "b_coefficients": [
+        0.15,
+        0.05,
+        0.05,
+        0.8,
+        0.3,
+        0.25,
+        0.1,
+        0.05
+      ],
+      "prompt": "Re-encode Marketing Budget and Employee Handbook to align with Receptive relationship.",
+      "target_phase_for_a": "Earth",
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Sales Pipeline",
+      "concept_b": "Revenue Target",
+      "expected_label": "generative",
+      "current_label": "transmissive",
+      "a_coefficients": [
+        0.1,
+        0.15,
+        0.8,
+        -0.05,
+        -0.1,
+        0.15,
+        0.2,
+        0.2
+      ],
+      "b_coefficients": [
+        0.1,
+        0.3,
+        0.1,
+        -0.1,
+        0.15,
+        0.1,
+        0.15,
+        0.85
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nSales Pipeline -> Revenue Target\nExpected: generative (Introduces, creates, initiates new patterns), Got: receptive (Accepts, follows, grounds; adopts conventions)\n\nCurrent encodings:\n  Sales Pipeline: Kan (Water phase)\n  Revenue Target: Qian (Metal phase)\n\nFIX: Re-encode \"Sales Pipeline\" into Earth phase. Available trigrams: [Kun, Gen].\nReason: For an generative relationship with B in Metal phase, A must be in Earth.\nAsk: What does \"Sales Pipeline\" DO in the Earth roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Revenue Target\" into Wood phase (trigrams: [Zhen, Xun]).\nReason: With A in Water, B must be in Wood for generative.\n",
+      "target_phase_for_a": "Metal",
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Quarterly Report",
+      "concept_b": "Revenue Target",
+      "expected_label": "clarifying",
+      "current_label": "influential",
+      "a_coefficients": [
+        0.15,
+        0.1,
+        0.1,
+        0.15,
+        0.25,
+        0.8,
+        0.1,
+        0.1
+      ],
+      "b_coefficients": [
+        0.1,
+        0.3,
+        0.1,
+        -0.1,
+        0.15,
+        0.1,
+        0.15,
+        0.85
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nQuarterly Report -> Revenue Target\nExpected: clarifying (Reveals, illuminates, makes visible; introspection), Got: influential (Pervades, gradually affects; convention spreading)\n\nCurrent encodings:\n  Quarterly Report: Xun (Wood phase)\n  Revenue Target: Qian (Metal phase)\n\nFIX: Re-encode \"Quarterly Report\" into Metal phase. Available trigrams: [Qian, Dui].\nReason: For an clarifying relationship with B in Metal phase, A must be in Metal.\nAsk: What does \"Quarterly Report\" DO in the Metal roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Revenue Target\" into Wood phase (trigrams: [Zhen, Xun]).\nReason: With A in Wood, B must be in Wood for clarifying.\n",
+      "target_phase_for_a": null,
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Vendor Contract",
+      "concept_b": "Employee Handbook",
+      "expected_label": "receptive",
+      "current_label": "constraining",
+      "a_coefficients": [
+        0.1,
+        0.05,
+        0.05,
+        0.85,
+        0.15,
+        0.2,
+        0.15,
+        0.05
+      ],
+      "b_coefficients": [
+        0.15,
+        0.05,
+        0.05,
+        0.8,
+        0.3,
+        0.25,
+        0.1,
+        0.05
+      ],
+      "prompt": "Re-encode Vendor Contract and Employee Handbook to align with Receptive relationship.",
+      "target_phase_for_a": "Earth",
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Feedback Loop",
+      "concept_b": "Market Trend",
+      "expected_label": "balancing",
+      "current_label": "clarifying",
+      "a_coefficients": [
+        0.25,
+        0.1,
+        0.25,
+        0.05,
+        0.15,
+        0.2,
+        0.78,
+        0.1
+      ],
+      "b_coefficients": [
+        0.15,
+        0.2,
+        0.1,
+        0.05,
+        0.78,
+        0.25,
+        0.15,
+        0.2
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nFeedback Loop -> Market Trend\nExpected: balancing (Mirrors, equilibrates, reflects; feedback loops), Got: influential (Pervades, gradually affects; convention spreading)\n\nCurrent encodings:\n  Feedback Loop: Dui (Metal phase)\n  Market Trend: Li (Fire phase)\n\nFIX: Re-encode \"Feedback Loop\" into Fire phase. Available trigrams: [Li].\nReason: For an balancing relationship with B in Fire phase, A must be in Fire.\nAsk: What does \"Feedback Loop\" DO in the Fire roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Market Trend\" into Metal phase (trigrams: [Qian, Dui]).\nReason: With A in Metal, B must be in Metal for balancing.\n",
+      "target_phase_for_a": null,
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Onboarding Process",
+      "concept_b": "Innovation Fund",
+      "expected_label": "generative",
+      "current_label": "transmissive",
+      "a_coefficients": [
+        0.2,
+        0.15,
+        0.75,
+        0.05,
+        0.15,
+        0.1,
+        0.25,
+        0.15
+      ],
+      "b_coefficients": [
+        0.05,
+        0.25,
+        0.15,
+        -0.15,
+        0.1,
+        0.15,
+        0.1,
+        0.88
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nOnboarding Process -> Innovation Fund\nExpected: generative (Introduces, creates, initiates new patterns), Got: receptive (Accepts, follows, grounds; adopts conventions)\n\nCurrent encodings:\n  Onboarding Process: Kan (Water phase)\n  Innovation Fund: Qian (Metal phase)\n\nFIX: Re-encode \"Onboarding Process\" into Earth phase. Available trigrams: [Kun, Gen].\nReason: For an generative relationship with B in Metal phase, A must be in Earth.\nAsk: What does \"Onboarding Process\" DO in the Earth roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Innovation Fund\" into Wood phase (trigrams: [Zhen, Xun]).\nReason: With A in Water, B must be in Wood for generative.\n",
+      "target_phase_for_a": "Metal",
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Market Trend",
+      "concept_b": "Industry Standard",
+      "expected_label": "influential",
+      "current_label": "clarifying",
+      "a_coefficients": [
+        0.15,
+        0.2,
+        0.1,
+        0.05,
+        0.78,
+        0.25,
+        0.15,
+        0.2
+      ],
+      "b_coefficients": [
+        0.2,
+        0.1,
+        0.15,
+        0.2,
+        0.1,
+        0.8,
+        0.2,
+        0.05
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nMarket Trend -> Industry Standard\nExpected: influential (Pervades, gradually affects; convention spreading), Got: receptive (Accepts, follows, grounds; adopts conventions)\n\nCurrent encodings:\n  Market Trend: Li (Fire phase)\n  Industry Standard: Xun (Wood phase)\n\nFIX: Re-encode \"Market Trend\" into Earth phase. Available trigrams: [Kun, Gen].\nReason: For an influential relationship with B in Wood phase, A must be in Earth.\nAsk: What does \"Market Trend\" DO in the Earth roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Industry Standard\" into Water phase (trigrams: [Kan]).\nReason: With A in Fire, B must be in Water for influential.\n",
+      "target_phase_for_a": "Wood",
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Compliance Audit",
+      "concept_b": "Marketing Budget",
+      "expected_label": "clarifying",
+      "current_label": "influential",
+      "a_coefficients": [
+        0.1,
+        0.1,
+        0.1,
+        0.3,
+        0.15,
+        0.8,
+        0.15,
+        0.1
+      ],
+      "b_coefficients": [
+        0.05,
+        0.05,
+        0.1,
+        0.85,
+        -0.05,
+        0.25,
+        0.1,
+        0.1
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nCompliance Audit -> Marketing Budget\nExpected: clarifying (Reveals, illuminates, makes visible; introspection), Got: constraining (Limits, bounds, restricts; permissions, capacity)\n\nCurrent encodings:\n  Compliance Audit: Xun (Wood phase)\n  Marketing Budget: Gen (Earth phase)\n\nFIX: Re-encode \"Compliance Audit\" into Earth phase. Available trigrams: [Kun, Gen].\nReason: For an clarifying relationship with B in Earth phase, A must be in Earth.\nAsk: What does \"Compliance Audit\" DO in the Earth roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Marketing Budget\" into Wood phase (trigrams: [Zhen, Xun]).\nReason: With A in Wood, B must be in Wood for clarifying.\n",
+      "target_phase_for_a": null,
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Team Standup",
+      "concept_b": "Feedback Loop",
+      "expected_label": "balancing",
+      "current_label": "clarifying",
+      "a_coefficients": [
+        0.15,
+        0.15,
+        0.15,
+        0.05,
+        0.15,
+        0.2,
+        0.8,
+        0.1
+      ],
+      "b_coefficients": [
+        0.25,
+        0.1,
+        0.25,
+        0.05,
+        0.15,
+        0.2,
+        0.78,
+        0.1
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nTeam Standup -> Feedback Loop\nExpected: balancing (Mirrors, equilibrates, reflects; feedback loops), Got: receptive (Accepts, follows, grounds; adopts conventions)\n\nCurrent encodings:\n  Team Standup: Dui (Metal phase)\n  Feedback Loop: Dui (Metal phase)\n\nFIX: Re-encode \"Team Standup\" into Metal phase. Available trigrams: [Qian, Dui].\nReason: For an balancing relationship with B in Metal phase, A must be in Metal.\nAsk: What does \"Team Standup\" DO in the Metal roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Feedback Loop\" into Metal phase (trigrams: [Qian, Dui]).\nReason: With A in Metal, B must be in Metal for balancing.\n",
+      "target_phase_for_a": null,
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Water Cycle",
+      "concept_b": "Photosynthesis",
+      "expected_label": "generative",
+      "current_label": "transmissive",
+      "a_coefficients": [
+        0.15,
+        0.2,
+        0.8,
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.15
+      ],
+      "b_coefficients": [
+        0.05,
+        0.2,
+        0.15,
+        0.05,
+        0.1,
+        0.15,
+        0.1,
+        0.86
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nWater Cycle -> Photosynthesis\nExpected: generative (Introduces, creates, initiates new patterns), Got: receptive (Accepts, follows, grounds; adopts conventions)\n\nCurrent encodings:\n  Water Cycle: Kan (Water phase)\n  Photosynthesis: Qian (Metal phase)\n\nFIX: Re-encode \"Water Cycle\" into Earth phase. Available trigrams: [Kun, Gen].\nReason: For an generative relationship with B in Metal phase, A must be in Earth.\nAsk: What does \"Water Cycle\" DO in the Earth roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Photosynthesis\" into Wood phase (trigrams: [Zhen, Xun]).\nReason: With A in Water, B must be in Wood for generative.\n",
+      "target_phase_for_a": "Metal",
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Mutation",
+      "concept_b": "Natural Selection",
+      "expected_label": "generative",
+      "current_label": "causal",
+      "a_coefficients": [
+        0.1,
+        0.85,
+        0.15,
+        0.05,
+        0.1,
+        0.1,
+        0.15,
+        0.2
+      ],
+      "b_coefficients": [
+        0.05,
+        0.1,
+        0.1,
+        0.85,
+        0.15,
+        0.25,
+        0.15,
+        0.1
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nMutation -> Natural Selection\nExpected: generative (Introduces, creates, initiates new patterns), Got: constraining (Limits, bounds, restricts; permissions, capacity)\n\nCurrent encodings:\n  Mutation: Zhen (Wood phase)\n  Natural Selection: Gen (Earth phase)\n\nFIX: Re-encode \"Mutation\" into Fire phase. Available trigrams: [Li].\nReason: For an generative relationship with B in Earth phase, A must be in Fire.\nAsk: What does \"Mutation\" DO in the Fire roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Natural Selection\" into Fire phase (trigrams: [Li]).\nReason: With A in Wood, B must be in Fire for generative.\n",
+      "target_phase_for_a": "Earth",
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Homeostasis",
+      "concept_b": "Symbiosis",
+      "expected_label": "balancing",
+      "current_label": "clarifying",
+      "a_coefficients": [
+        0.15,
+        0.05,
+        0.15,
+        0.15,
+        0.15,
+        0.1,
+        0.8,
+        0.1
+      ],
+      "b_coefficients": [
+        0.2,
+        0.1,
+        0.15,
+        0.05,
+        0.15,
+        0.1,
+        0.8,
+        0.2
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nHomeostasis -> Symbiosis\nExpected: balancing (Mirrors, equilibrates, reflects; feedback loops), Got: receptive (Accepts, follows, grounds; adopts conventions)\n\nCurrent encodings:\n  Homeostasis: Dui (Metal phase)\n  Symbiosis: Dui (Metal phase)\n\nFIX: Re-encode \"Homeostasis\" into Metal phase. Available trigrams: [Qian, Dui].\nReason: For an balancing relationship with B in Metal phase, A must be in Metal.\nAsk: What does \"Homeostasis\" DO in the Metal roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Symbiosis\" into Metal phase (trigrams: [Qian, Dui]).\nReason: With A in Metal, B must be in Metal for balancing.\n",
+      "target_phase_for_a": null,
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Symbiosis",
+      "concept_b": "Keystone Species",
+      "expected_label": "balancing",
+      "current_label": "receptive",
+      "a_coefficients": [
+        0.2,
+        0.1,
+        0.15,
+        0.05,
+        0.15,
+        0.1,
+        0.8,
+        0.2
+      ],
+      "b_coefficients": [
+        0.1,
+        0.25,
+        0.15,
+        0.1,
+        0.1,
+        0.8,
+        0.2,
+        0.25
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nSymbiosis -> Keystone Species\nExpected: balancing (Mirrors, equilibrates, reflects; feedback loops), Got: constraining (Limits, bounds, restricts; permissions, capacity)\n\nCurrent encodings:\n  Symbiosis: Dui (Metal phase)\n  Keystone Species: Xun (Wood phase)\n\nFIX: Re-encode \"Symbiosis\" into Wood phase. Available trigrams: [Zhen, Xun].\nReason: For an balancing relationship with B in Wood phase, A must be in Wood.\nAsk: What does \"Symbiosis\" DO in the Wood roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Keystone Species\" into Metal phase (trigrams: [Qian, Dui]).\nReason: With A in Metal, B must be in Metal for balancing.\n",
+      "target_phase_for_a": null,
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Load Balancer",
+      "concept_b": "Database Index",
+      "expected_label": "balancing",
+      "current_label": "receptive",
+      "a_coefficients": [
+        0.15,
+        0.1,
+        0.25,
+        0.05,
+        0.1,
+        0.15,
+        0.8,
+        0.1
+      ],
+      "b_coefficients": [
+        0.1,
+        0.1,
+        0.15,
+        0.05,
+        0.85,
+        0.05,
+        0.1,
+        0.1
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nLoad Balancer -> Database Index\nExpected: balancing (Mirrors, equilibrates, reflects; feedback loops), Got: influential (Pervades, gradually affects; convention spreading)\n\nCurrent encodings:\n  Load Balancer: Dui (Metal phase)\n  Database Index: Li (Fire phase)\n\nFIX: Re-encode \"Load Balancer\" into Fire phase. Available trigrams: [Li].\nReason: For an balancing relationship with B in Fire phase, A must be in Fire.\nAsk: What does \"Load Balancer\" DO in the Fire roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Database Index\" into Metal phase (trigrams: [Qian, Dui]).\nReason: With A in Metal, B must be in Metal for balancing.\n",
+      "target_phase_for_a": null,
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Rate Limiter",
+      "concept_b": "Circuit Breaker",
+      "expected_label": "receptive",
+      "current_label": "constraining",
+      "a_coefficients": [
+        0.04,
+        -0.09,
+        -0.51,
+        0.68,
+        0.21,
+        -0.26,
+        0.17,
+        -0.34
+      ],
+      "b_coefficients": [
+        0.05,
+        -0.25,
+        -0.2,
+        0.85,
+        0.25,
+        -0.1,
+        0.2,
+        -0.15
+      ],
+      "prompt": "Re-encode Rate Limiter and Circuit Breaker to align with Receptive relationship.",
+      "target_phase_for_a": "Earth",
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Mutation",
+      "concept_b": "Innovation Fund",
+      "expected_label": "causal",
+      "current_label": "generative",
+      "a_coefficients": [
+        0.1,
+        0.85,
+        0.15,
+        0.05,
+        0.1,
+        0.1,
+        0.15,
+        0.2
+      ],
+      "b_coefficients": [
+        0.05,
+        0.25,
+        0.15,
+        -0.15,
+        0.1,
+        0.15,
+        0.1,
+        0.88
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nMutation -> Innovation Fund\nExpected: causal (Triggers, starts a chain reaction; event-driven), Got: influential (Pervades, gradually affects; convention spreading)\n\nCurrent encodings:\n  Mutation: Zhen (Wood phase)\n  Innovation Fund: Qian (Metal phase)\n\nFIX: Re-encode \"Mutation\" into Fire phase. Available trigrams: [Li].\nReason: For an causal relationship with B in Metal phase, A must be in Fire.\nAsk: What does \"Mutation\" DO in the Fire roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Innovation Fund\" into Water phase (trigrams: [Kan]).\nReason: With A in Wood, B must be in Water for causal.\n",
+      "target_phase_for_a": null,
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Load Balancer",
+      "concept_b": "Homeostasis",
+      "expected_label": "receptive",
+      "current_label": "transmissive",
+      "a_coefficients": [
+        0.15,
+        0.1,
+        0.25,
+        0.05,
+        0.1,
+        0.15,
+        0.8,
+        0.1
+      ],
+      "b_coefficients": [
+        0.15,
+        0.05,
+        0.15,
+        0.15,
+        0.15,
+        0.1,
+        0.8,
+        0.1
+      ],
+      "prompt": "Re-encode Load Balancer and Homeostasis to align with Receptive relationship.",
+      "target_phase_for_a": "Metal",
+      "target_phase_for_b": null
+    },
+    {
+      "concept_a": "Compliance Audit",
+      "concept_b": "Circuit Breaker",
+      "expected_label": "clarifying",
+      "current_label": "influential",
+      "a_coefficients": [
+        0.1,
+        0.1,
+        0.1,
+        0.3,
+        0.15,
+        0.8,
+        0.15,
+        0.1
+      ],
+      "b_coefficients": [
+        0.05,
+        -0.25,
+        -0.2,
+        0.85,
+        0.25,
+        -0.1,
+        0.2,
+        -0.15
+      ],
+      "prompt": "RELATION CLASSIFICATION FAILURE:\nCompliance Audit -> Circuit Breaker\nExpected: clarifying (Reveals, illuminates, makes visible; introspection), Got: constraining (Limits, bounds, restricts; permissions, capacity)\n\nCurrent encodings:\n  Compliance Audit: Xun (Wood phase)\n  Circuit Breaker: Gen (Earth phase)\n\nFIX: Re-encode \"Compliance Audit\" into Earth phase. Available trigrams: [Kun, Gen].\nReason: For an clarifying relationship with B in Earth phase, A must be in Earth.\nAsk: What does \"Compliance Audit\" DO in the Earth roles? Encode the strongest matching role as dominant.\nALTERNATIVE: Re-encode \"Circuit Breaker\" into Wood phase (trigrams: [Zhen, Xun]).\nReason: With A in Wood, B must be in Wood for clarifying.\n",
+      "target_phase_for_a": null,
+      "target_phase_for_b": null
+    }
+  ],
+  "usage_instructions": "For each failing pair, call the LLM with the prompt to re-encode both concepts.\nThe LLM should respond with a JSON object: {\"a\": [coeff0,...,coeff7], \"b\": [coeff0,...,coeff7]}\nEach coefficient array must be 8 floats in [-1.0, 1.0].\nSave all responses as data/llm_feedback_results.json"
+}

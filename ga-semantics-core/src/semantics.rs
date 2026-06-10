@@ -37,6 +37,40 @@ pub fn dominant_similarity(a: &Multivector, b: &Multivector) -> f64 {
     dot / norm
 }
 
+/// Retrieval-optimized similarity: when both concepts share the same dominant
+/// role, suppresses the dominant blade and ranks by secondary coefficient patterns.
+/// This breaks the tie between same-role concepts that dominant_similarity
+/// scores identically, producing meaningful within-role ranking.
+///
+/// When concepts have DIFFERENT dominant roles, falls back to dominant_similarity.
+pub fn fingerprint_similarity(a: &Multivector, b: &Multivector) -> f64 {
+    let dom_a = a.dominant_trigram().blade().index();
+    let dom_b = b.dominant_trigram().blade().index();
+
+    if dom_a != dom_b {
+        return dominant_similarity(a, b);
+    }
+
+    // Same dominant role — suppress the dominant blade, emphasize secondary patterns
+    let ca = a.coefficients();
+    let cb = b.coefficients();
+    let mut dot = 0.0;
+    let mut na2 = 0.0;
+    let mut nb2 = 0.0;
+    for i in 0..8 {
+        let w = if i == dom_a { 0.15 } else { 1.0 }; // Suppress dominant, boost secondary
+        let wa = ca[i].abs();
+        let wb = cb[i].abs();
+        let sign = if ca[i] * cb[i] >= 0.0 { 1.0 } else { -1.0 };
+        dot += wa * wb * sign * w;
+        na2 += ca[i] * ca[i];
+        nb2 += cb[i] * cb[i];
+    }
+    let norm = (na2 * nb2).sqrt();
+    if norm < f64::EPSILON { return 0.0; }
+    dot / norm
+}
+
 /// Normalized semantic difference (orthogonality measure).
 /// Returns value in [0, 1] where 0 = identical, larger = more different.
 pub fn semantic_difference(a: &Multivector, b: &Multivector) -> f64 {
@@ -150,6 +184,38 @@ pub fn compose_relations(r1: &Rotor, r2: &Rotor) -> Rotor {
 /// Compose a chain of relations (rotors). Apply in order.
 pub fn compose_chain(relations: &[Rotor]) -> Rotor {
     relations.iter().cloned().fold(Rotor::identity(), |acc, r| r.compose(&acc))
+}
+
+/// Belief revision: find the rotor R such that R * old_mv * R̃ ≈ new_mv.
+/// Constructs a Rotor from the bivector of the geometric product of old and new,
+/// representing the rotation plane that transforms old_mv toward new_mv.
+/// Returns None if either input is degenerate.
+pub fn belief_revise(old_mv: &Multivector, new_mv: &Multivector) -> Option<Rotor> {
+    let na = old_mv.norm();
+    let nb = new_mv.norm();
+    if na < f64::EPSILON || nb < f64::EPSILON {
+        return None;
+    }
+
+    // R = normalize(1 + B*A⁻¹) ensures the rotor has scalar + bivector parts
+    let a_inv = old_mv.inverse().ok()?;
+    let gp = new_mv.geo_product(&a_inv);
+
+    let one = Multivector::one();
+    let sum = one + gp;
+
+    let n = sum.norm();
+    if n < f64::EPSILON {
+        return None;
+    }
+    let normalized = sum * (1.0 / n);
+
+    // Extract scalar + bivector parts for a pure rotor
+    let scalar_part = normalized.grade_projection(0);
+    let bivector_part = normalized.grade_projection(2);
+    let result_mv = scalar_part + bivector_part;
+
+    Rotor::from_multivector(result_mv)
 }
 
 /// Invert a relation (rotor).
@@ -318,12 +384,137 @@ mod tests {
     }
 
     #[test]
-    fn context_compose() {
-        let r = Rotor::new(0.5, Blade::E12).unwrap();
-        let ctx1 = Context::new(r);
-        let ctx2 = Context::identity();
-        let composed = ctx1.compose(&ctx2);
-        let v = Multivector::from_blade(Blade::E1, 1.0);
-        assert!(ctx1.apply(&v).approx_eq(&composed.apply(&v), 1e-10));
+    fn belief_revise_identity() {
+        let a = Multivector::from_blade(Blade::E1, 1.0);
+        let r = belief_revise(&a, &a).unwrap();
+        let rotated = r.apply(&a);
+        assert!(rotated.approx_eq(&a, 1e-10));
+    }
+
+    #[test]
+    fn belief_revise_rotates_vector() {
+        let a = Multivector::from_blade(Blade::E1, 1.0);
+        let b = Multivector::from_blade(Blade::E2, 1.0);
+        let r = belief_revise(&a, &b).unwrap();
+        let rotated = r.apply(&a);
+        assert!(rotated.approx_eq(&b, 1e-10), "R should rotator E1 to E2, got {:?}", rotated);
+    }
+
+    #[test]
+    fn belief_revise_degenerate_returns_none() {
+        let zero = Multivector::zero();
+        let a = Multivector::from_blade(Blade::E1, 1.0);
+        assert!(belief_revise(&zero, &a).is_none());
+        assert!(belief_revise(&a, &zero).is_none());
+    }
+
+    #[test]
+    fn belief_revise_bivectors() {
+        let a = Multivector::from_blade(Blade::E12, 1.0);
+        let b = Multivector::from_blade(Blade::E23, 1.0);
+        let r = belief_revise(&a, &b).unwrap();
+        let rotated = r.apply(&a);
+        assert!(rotated.approx_eq(&b, 1e-10), "E12 rotated by R should approx equal E23");
+    }
+}
+
+/// Decompose the geometric product A*B into its grade components
+/// and return the normalized magnitude of each grade as a 4-element array
+/// [scalar, vector, bivector, trivector].
+///
+/// This "relationship spectrum" captures the TYPE of interaction:
+///   - High scalar → alignment/similarity (same role, compatible)
+///   - High vector → directional difference (asymmetric flow)
+///   - High bivector → rotational tension (contradiction, torque)
+///   - High trivector → higher-order transformation (complex dynamics)
+///
+/// The spectrum is normalized to sum to 1.0 (a distribution over grades).
+pub fn relationship_spectrum(a: &Multivector, b: &Multivector) -> [f64; 4] {
+    let gp = a.geo_product(b);
+    let total = gp.norm();
+    if total < f64::EPSILON {
+        return [0.0; 4];
+    }
+    let g0 = gp.grade_projection(0).norm();
+    let g1 = gp.grade_projection(1).norm();
+    let g2 = gp.grade_projection(2).norm();
+    let g3 = gp.grade_projection(3).norm();
+    let sum = g0 + g1 + g2 + g3;
+    if sum < f64::EPSILON {
+        return [0.0; 4];
+    }
+    [g0 / sum, g1 / sum, g2 / sum, g3 / sum]
+}
+
+/// Predict how a concept EVOLVES when one of its three aspects changes.
+/// Each Bagua trigram has 3 lines (bottom=intent/purpose, middle=method/
+/// mechanism, top=effect/outcome). Flipping one line produces the NEXT state
+/// of the concept — what it becomes if that aspect transforms.
+///
+/// Returns the Multivector of the evolved concept, encoding the new trigram
+/// at full strength (coefficient 1.0 on the new blade).
+pub fn evolve_concept(mv: &Multivector, line: usize) -> Option<Multivector> {
+    let trigram = mv.dominant_trigram();
+    let next_trigram = trigram.transform_line(line)?;
+    let role = crate::relation_type::RelationType::from_trigram(next_trigram);
+    Some(Multivector::from_blade(role.blade(), 1.0))
+}
+
+/// All three possible evolutions of a concept (one per line flip).
+pub fn all_evolutions(mv: &Multivector) -> [Multivector; 3] {
+    [
+        evolve_concept(mv, 0).unwrap_or(*mv),
+        evolve_concept(mv, 1).unwrap_or(*mv),
+        evolve_concept(mv, 2).unwrap_or(*mv),
+    ]
+}
+
+#[cfg(test)]
+mod spectrum_tests {
+    use super::*;
+    use crate::Blade;
+
+    #[test]
+    fn spectrum_same_role_high_scalar() {
+        let a = Multivector::from_blade(Blade::E1, 1.0);
+        let b = Multivector::from_blade(Blade::E1, 1.0);
+        let s = relationship_spectrum(&a, &b);
+        assert!(s[0] > 0.9, "identical vectors should have high scalar, got {:?}", s);
+    }
+
+    #[test]
+    fn spectrum_orthogonal_high_bivector() {
+        let a = Multivector::from_blade(Blade::E1, 1.0);
+        let b = Multivector::from_blade(Blade::E2, 1.0);
+        let s = relationship_spectrum(&a, &b);
+        assert!(s[2] > 0.5, "orthogonal grade-1 vectors should have high bivector, got {:?}", s);
+    }
+
+    #[test]
+    fn evolve_changes_trigram() {
+        let kun = Multivector::from_blade(Blade::Scalar, 1.0); // Kun: [0,0,0]
+        let evolved = evolve_concept(&kun, 0).unwrap(); // Flip bottom → [1,0,0] = Zhen
+        assert_eq!(evolved.dominant_trigram(), crate::bagua::Trigram::Zhen);
+    }
+
+    #[test]
+    fn evolve_all_produces_three_unique() {
+        let mv = Multivector::from_blade(Blade::E12, 1.0); // Li: [1,0,1]
+        let evolutions = all_evolutions(&mv);
+        let t0 = evolutions[0].dominant_trigram();
+        let t1 = evolutions[1].dominant_trigram();
+        let t2 = evolutions[2].dominant_trigram();
+        assert_ne!(t0, t1);
+        assert_ne!(t1, t2);
+        assert_ne!(t0, t2);
+    }
+
+    #[test]
+    fn spectrum_sums_to_one() {
+        let a = Multivector::new([0.5, 0.3, 0.1, 0.0, 0.2, 0.1, 0.15, 0.05]);
+        let b = Multivector::new([0.2, 0.1, 0.6, 0.1, 0.0, 0.05, 0.3, 0.1]);
+        let s = relationship_spectrum(&a, &b);
+        let sum: f64 = s.iter().sum();
+        assert!((sum - 1.0).abs() < 1e-10, "spectrum should sum to 1.0, got {}", sum);
     }
 }

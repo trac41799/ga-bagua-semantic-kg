@@ -185,3 +185,50 @@ ga-semantics analogy --file king.json queen.json man.json
 
 # Classify relation between two concepts
 ga-semantics classify --json '[1,0,0,0,0,0,0,0]' '[0,1,0,0,0,0,0,0]'
+
+---
+
+## 10. Document Intelligence (ga-doc-intel)
+
+| Operation | Input | Output | Description |
+|-----------|-------|--------|-------------|
+| Create document | `(name, source?, language?)` | `document_id` | Create a document container |
+| Add claim | `(doc_id, name, text, encoding)` | `claim_id` | Attach an encoded claim to a document |
+| List claims | `doc_id` | `Vec<StoredConcept>` | List all claims in a document |
+| Align pair | `(doc_a_id, doc_b_id)` | `AlignmentReport` | Pairwise claim similarity + relation classification |
+| Align multi | `&[doc_id]` | `AlignmentReport` | N×N cross-document alignment matrix |
+| Synthesize | `&[doc_id]` | `SynthesisReport` | WuXing phase coverage + gap detection |
+| Intra coherence | `doc_id` | `CoherenceReport` | Contradiction check within a single document |
+| Inter coherence | `(doc_a_id, doc_b_id)` | `CoherenceReport` | Cross-document contradiction check |
+| Analyze argument | `&[(role, encoding)]` | `Vec<FallacyResult>` | Detect circular, non-sequitur, contradiction fallacies |
+| Audit contract | `(intent_enc, impl_enc)` | `ContractAuditReport` | Semantic drift + risk level between spec and code |
+
+---
+
+## 11. Cognitive Systems (ga-cognitive)
+
+| Operation | Input | Output | Description |
+|-----------|-------|--------|-------------|
+| Create agent | `agent_name` | `agent_id` | Initialize agent belief store |
+| Add belief | `(agent_id, name, text, encoding)` | `belief_id` | Store a belief linked to an agent |
+| List beliefs | `agent_id` | `Vec<StoredConcept>` | List all beliefs for an agent |
+| Revise belief | `(old_enc, new_enc)` | `Rotor` | Track belief state change via rotor |
+| Detect dissonance | `agent_id` | `Vec<contradiction_pair>` | Find internal contradictions in beliefs |
+| Compare agents | `(agent_a, agent_b)` | `SimilarityMatrix` | Cross-agent belief similarity |
+| Personality compatibility | `(enc_a, enc_b)` | `CompatibilityReport` | WuXing-based compatibility scoring |
+| Form team | `&[(name, enc)], team_size` | `Vec<name>` | Optimal team via phase diversity |
+| Generate learning path | `&[(name, enc)]` | `LearningPath` | WuXing cycle ordered sequence |
+| Detect prerequisites | `&[(name, enc)]` | `Vec<(A, B)>` | Constraining-cycle prerequisite detection |
+| Decompose goal | `(name, enc, subgoals)` | `GoalTree` | Hierarchical goal decomposition |
+| Goal coherence | `GoalTree` | `f64` | Contradiction + phase coverage score |
+
+---
+
+## 12. Creative Ideation (in-core)
+
+| Operation | Input | Output | Description |
+|-----------|-------|--------|-------------|
+| Hexagram step | `(seed_mv, target_hexagram)` | `Multivector` | Rotor-transform seed to a hexagram perspective |
+| Hexagram explore | `(seed_mv, top_n)` | `Vec<(Hexagram, MV, interpretation)>` | Top-N divergent perspectives |
+| Ideate seed | `(name, coefficients)` | `Multivector` | Encode a problem as ideation seed |
+| Ideate blend | `(enc_a, enc_b)` | `(Multivector, Hexagram)` | Geometric product blend + hexagram interpretation |

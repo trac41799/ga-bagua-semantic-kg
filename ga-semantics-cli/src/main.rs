@@ -51,6 +51,9 @@ enum Command {
     Hexagram(HexagramArgs),
     /// Explore WuXing phase cycles
     Wuxing(WuxingArgs),
+    /// Creative ideation via 64 hexagram perspectives
+    #[command(subcommand)]
+    Ideate(IdeateCommand),
     /// Manage the knowledge graph store
     #[command(subcommand)]
     Store(StoreCommand),
@@ -165,6 +168,40 @@ enum StoreCommand {
     #[command(name = "get")]
     Get {
         id: i64,
+    },
+}
+
+// ── Ideation ─────────────────────────────────────────────────────────
+
+#[derive(Subcommand)]
+enum IdeateCommand {
+    /// Seed a problem for ideation
+    Seed {
+        /// Concept name
+        name: String,
+        /// 8 coefficients
+        coefficients: Vec<f64>,
+    },
+    /// Step to a hexagram perspective
+    Step {
+        /// 8 coefficients as JSON array or CSV
+        seed: String,
+        /// Hexagram number (1-64)
+        hexagram: u8,
+    },
+    /// Explore top hexagram perspectives
+    Explore {
+        /// 8 coefficients as JSON array or CSV
+        seed: String,
+        #[arg(short = 'n', long, default_value = "8")]
+        top_n: usize,
+    },
+    /// Blend two concepts via geometric product
+    Blend {
+        /// First concept coefficients
+        a: String,
+        /// Second concept coefficients
+        b: String,
     },
 }
 
@@ -430,6 +467,7 @@ fn run_command(cli: &Cli) -> Result<(), String> {
             }
             emit(cli, out);
         }
+        Command::Ideate(cmd) => run_ideate(cli, cmd)?,
         Command::Store(sub) => run_store(cli, sub)?,
         Command::Bench(sub) => run_bench(cli, sub)?,
     }
@@ -493,6 +531,71 @@ fn run_store(cli: &Cli, cmd: &StoreCommand) -> Result<(), String> {
                 }
                 None => return Err(format!("concept {} not found", id)),
             }
+        }
+    }
+    Ok(())
+}
+
+fn run_ideate(cli: &Cli, cmd: &IdeateCommand) -> Result<(), String> {
+    use ga_semantics_core::advanced::{hexagram_explore, hexagram_step, Hexagram};
+
+    match cmd {
+        IdeateCommand::Seed { name, coefficients } => {
+            if coefficients.len() != 8 { return Err("Need exactly 8 coefficients".into()); }
+            let mut coeff = [0.0f64; 8];
+            coeff.copy_from_slice(&coefficients[0..8]);
+            let raw_mv = Multivector::new(coeff);
+            let n = raw_mv.norm();
+            let seed_mv = if n > f64::EPSILON { raw_mv * (1.0 / n) } else { Multivector::one() };
+            let dt = seed_mv.dominant_trigram();
+            emit(cli, serde_json::json!({
+                "concept": name, "seed": seed_mv.coefficients(),
+                "dominant_trigram": dt.name(),
+                "dominant_phase": format!("{:?}", dt.wuxing_phase()),
+                "norm": seed_mv.norm(),
+            }));
+        }
+        IdeateCommand::Step { seed, hexagram } => {
+            let sv = parse_mv(seed);
+            let hex = Hexagram::from_number(*hexagram);
+            match hexagram_step(&sv, &hex) {
+                Some(result) => {
+                    let roles = multivector_to_roles(&result);
+                    emit(cli, serde_json::json!({
+                        "hexagram": hex.binary_number() + 1,
+                        "name": hex.name(), "pinyin": hex.pinyin(),
+                        "interpretation": hex.interpretation(),
+                        "perspective": result.coefficients(),
+                        "top_roles": roles.iter().take(3).map(|(n,w,_d)| serde_json::json!({"role":n,"weight":w})).collect::<Vec<_>>(),
+                    }));
+                }
+                None => return Err("Degenerate seed multivector".into()),
+            }
+        }
+        IdeateCommand::Explore { seed, top_n } => {
+            let sv = parse_mv(seed);
+            let results = hexagram_explore(&sv, *top_n);
+            for (i, (hex, _mv, interp)) in results.iter().enumerate() {
+                println!("  #{:<2} Hexagram {:>2}: {} — {}", i + 1, hex.binary_number() + 1, hex.name(), interp);
+            }
+            if !cli.json && !cli.csv && !cli.quiet {
+                println!("\nExplored {} of 64 hexagrams.", results.len());
+            }
+        }
+        IdeateCommand::Blend { a, b } => {
+            let mv_a = parse_mv(a);
+            let mv_b = parse_mv(b);
+            let blend = mv_a.geo_product(&mv_b);
+            let normalized = if blend.norm() > f64::EPSILON { blend * (1.0 / blend.norm()) } else { Multivector::one() };
+            let hex = Hexagram::from_multivector_pair(&mv_a, &mv_b);
+            let roles = multivector_to_roles(&normalized);
+            emit(cli, serde_json::json!({
+                "blend": normalized.coefficients(),
+                "hexagram": hex.binary_number() + 1,
+                "name": hex.name(), "pinyin": hex.pinyin(),
+                "interpretation": hex.interpretation(),
+                "top_roles": roles.iter().take(3).map(|(n,w,_d)| serde_json::json!({"role":n,"weight":w})).collect::<Vec<_>>(),
+            }));
         }
     }
     Ok(())
@@ -565,6 +668,7 @@ fn bench_one(name: &str, f: impl Fn()) {
 #[cfg(test)]
 mod tests {
     use super::{parse_mv, parse_trigram};
+    use ga_semantics_core::prelude::Multivector;
 
     #[test]
     fn parse_json_array() {
@@ -584,5 +688,16 @@ mod tests {
         assert!(parse_trigram("qian").is_ok());
         assert!(parse_trigram("li").is_ok());
         assert!(parse_trigram("bad").is_err());
+    }
+
+    #[test]
+    fn ideate_seed_and_step() {
+        let seed = Multivector::new([0.15, 0.55, 0.30, -0.15, 0.10, -0.10, 0.25, 0.60]);
+        let seed_norm = seed.norm();
+        let hex = ga_semantics_core::advanced::Hexagram::from_number(1);
+        let result = ga_semantics_core::advanced::hexagram_step(&seed, &hex);
+        assert!(result.is_some());
+        let shifted = result.unwrap();
+        assert!((shifted.norm() - seed_norm).abs() < 1e-6);
     }
 }

@@ -1,0 +1,695 @@
+[
+  {
+    "idx_a": 0,
+    "idx_b": 7,
+    "label": "constraining",
+    "rationale": "Budget caps Innovation spending",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 0,
+    "idx_b": 1,
+    "label": "constraining",
+    "rationale": "Budget bounds Pipeline capacity",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 0,
+    "idx_b": 9,
+    "label": "constraining",
+    "rationale": "Budget restricts Onboarding scale",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 1,
+    "idx_b": 0,
+    "label": "generative",
+    "rationale": "Pipeline activity justifies Budget allocation",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 1,
+    "idx_b": 11,
+    "label": "generative",
+    "rationale": "Pipeline health triggers Compliance review",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 1,
+    "idx_b": 10,
+    "label": "transmissive",
+    "rationale": "Pipeline data feeds Market analysis",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 2,
+    "idx_b": 0,
+    "label": "influential",
+    "rationale": "Revenue goals shape Budget planning",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 2,
+    "idx_b": 1,
+    "label": "influential",
+    "rationale": "Targets influence Pipeline priorities",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 2,
+    "idx_b": 7,
+    "label": "generative",
+    "rationale": "Revenue creates room for Innovation",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 3,
+    "idx_b": 9,
+    "label": "causal",
+    "rationale": "Ticket triggers Onboarding fixes",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 3,
+    "idx_b": 1,
+    "label": "clarifying",
+    "rationale": "Ticket patterns reveal Pipeline bottlenecks",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 4,
+    "idx_b": 11,
+    "label": "clarifying",
+    "rationale": "Report reveals Compliance status",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 4,
+    "idx_b": 10,
+    "label": "clarifying",
+    "rationale": "Report illuminates Market position",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 5,
+    "idx_b": 0,
+    "label": "constraining",
+    "rationale": "Handbook bounds how Budget is allocated",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 5,
+    "idx_b": 9,
+    "label": "constraining",
+    "rationale": "Handbook constrains Onboarding procedures",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 5,
+    "idx_b": 12,
+    "label": "receptive",
+    "rationale": "Handbook accepts Severance policy terms",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 6,
+    "idx_b": 0,
+    "label": "constraining",
+    "rationale": "Contract limits Budget flexibility",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 6,
+    "idx_b": 2,
+    "label": "constraining",
+    "rationale": "Contract constrains Revenue recognition",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 6,
+    "idx_b": 7,
+    "label": "receptive",
+    "rationale": "Contract enables Innovation funding terms",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 7,
+    "idx_b": 1,
+    "label": "influential",
+    "rationale": "Innovation reshapes Pipeline approach",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 7,
+    "idx_b": 9,
+    "label": "generative",
+    "rationale": "Innovation creates new Onboarding methods",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 7,
+    "idx_b": 10,
+    "label": "generative",
+    "rationale": "Innovation generates Market differentiation",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 8,
+    "idx_b": 9,
+    "label": "influential",
+    "rationale": "Feedback gradually improves Onboarding",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 8,
+    "idx_b": 3,
+    "label": "receptive",
+    "rationale": "Feedback accepts Support ticket data",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 8,
+    "idx_b": 4,
+    "label": "clarifying",
+    "rationale": "Feedback illuminates Report accuracy",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 9,
+    "idx_b": 1,
+    "label": "generative",
+    "rationale": "Onboarding produces Pipeline-ready staff",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 9,
+    "idx_b": 4,
+    "label": "generative",
+    "rationale": "Onboarding creates measurable Report outcomes",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 9,
+    "idx_b": 13,
+    "label": "receptive",
+    "rationale": "Onboarding adapts to Industry Standards",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 10,
+    "idx_b": 1,
+    "label": "influential",
+    "rationale": "Trends shape Pipeline strategy",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 10,
+    "idx_b": 4,
+    "label": "influential",
+    "rationale": "Trends influence Report narrative",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 10,
+    "idx_b": 7,
+    "label": "generative",
+    "rationale": "Trends create Innovation opportunities",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 11,
+    "idx_b": 5,
+    "label": "clarifying",
+    "rationale": "Audit reveals Handbook gaps",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 11,
+    "idx_b": 9,
+    "label": "clarifying",
+    "rationale": "Audit exposes Onboarding deficiencies",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 11,
+    "idx_b": 13,
+    "label": "receptive",
+    "rationale": "Audit follows Industry Standards",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 13,
+    "idx_b": 5,
+    "label": "constraining",
+    "rationale": "Standards bound Handbook content",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 13,
+    "idx_b": 11,
+    "label": "influential",
+    "rationale": "Standards shape Audit criteria",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 15,
+    "idx_b": 16,
+    "label": "constraining",
+    "rationale": "Predator limits Decomposer activity",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 15,
+    "idx_b": 25,
+    "label": "constraining",
+    "rationale": "Predator bounds DNA propagation",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 16,
+    "idx_b": 17,
+    "label": "receptive",
+    "rationale": "Decomposer receives Photosynthesis products",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 16,
+    "idx_b": 25,
+    "label": "receptive",
+    "rationale": "Decomposer accepts old DNA material",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 17,
+    "idx_b": 15,
+    "label": "generative",
+    "rationale": "Photosynthesis creates energy for Predator food",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 17,
+    "idx_b": 25,
+    "label": "generative",
+    "rationale": "Photosynthesis enables DNA replication energy",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 17,
+    "idx_b": 23,
+    "label": "generative",
+    "rationale": "Photosynthesis creates biomass for Succession",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 18,
+    "idx_b": 15,
+    "label": "generative",
+    "rationale": "Water creates Predator habitats",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 18,
+    "idx_b": 21,
+    "label": "generative",
+    "rationale": "Water enables Homeostasis regulation",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 18,
+    "idx_b": 23,
+    "label": "generative",
+    "rationale": "Water facilitates Succession progress",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 18,
+    "idx_b": 25,
+    "label": "generative",
+    "rationale": "Water enables DNA replication chemistry",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 19,
+    "idx_b": 15,
+    "label": "influential",
+    "rationale": "Keystone shapes Predator-prey dynamics",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 19,
+    "idx_b": 16,
+    "label": "influential",
+    "rationale": "Keystone influences Decomposer communities",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 19,
+    "idx_b": 21,
+    "label": "influential",
+    "rationale": "Keystone affects ecosystem Homeostasis",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 19,
+    "idx_b": 22,
+    "label": "influential",
+    "rationale": "Keystone shapes Selection pressures",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 20,
+    "idx_b": 15,
+    "label": "generative",
+    "rationale": "Mutation creates Predator adaptation",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 20,
+    "idx_b": 16,
+    "label": "generative",
+    "rationale": "Mutation creates novel Decomposer enzymes",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 20,
+    "idx_b": 25,
+    "label": "generative",
+    "rationale": "Mutation generates DNA variation",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 21,
+    "idx_b": 15,
+    "label": "constraining",
+    "rationale": "Homeostasis constrains Predator population swings",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 21,
+    "idx_b": 18,
+    "label": "balancing",
+    "rationale": "Homeostasis balances Water retention",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 21,
+    "idx_b": 23,
+    "label": "balancing",
+    "rationale": "Homeostasis equilibrates Succession pace",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 22,
+    "idx_b": 15,
+    "label": "constraining",
+    "rationale": "Selection constrains Predator evolution",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 22,
+    "idx_b": 25,
+    "label": "constraining",
+    "rationale": "Selection limits which DNA persists",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 22,
+    "idx_b": 23,
+    "label": "influential",
+    "rationale": "Selection shapes Succession trajectory",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 23,
+    "idx_b": 15,
+    "label": "influential",
+    "rationale": "Succession changes Predator habitat",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 23,
+    "idx_b": 21,
+    "label": "influential",
+    "rationale": "Succession gradually alters Homeostasis",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 23,
+    "idx_b": 25,
+    "label": "influential",
+    "rationale": "Succession shapes DNA pool diversity",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 24,
+    "idx_b": 16,
+    "label": "balancing",
+    "rationale": "Symbiosis mirrors Decomposer nutrient cycling",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 24,
+    "idx_b": 21,
+    "label": "balancing",
+    "rationale": "Symbiosis equilibrates ecosystem Homeostasis",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 25,
+    "idx_b": 15,
+    "label": "generative",
+    "rationale": "DNA creates Predator traits",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 25,
+    "idx_b": 23,
+    "label": "generative",
+    "rationale": "DNA provides genetic basis for Succession",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 26,
+    "idx_b": 37,
+    "label": "constraining",
+    "rationale": "Firewall restricts API Gateway access",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 26,
+    "idx_b": 34,
+    "label": "constraining",
+    "rationale": "Firewall limits Event logging sources",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 26,
+    "idx_b": 35,
+    "label": "constraining",
+    "rationale": "Firewall constrains Chaos experiment scope",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 27,
+    "idx_b": 30,
+    "label": "balancing",
+    "rationale": "Balancer equilibrates Circuit Breaker load",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 27,
+    "idx_b": 34,
+    "label": "balancing",
+    "rationale": "Balancer distributes Event processing",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 27,
+    "idx_b": 36,
+    "label": "balancing",
+    "rationale": "Balancer mirrors Rate Limiter distribution",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 28,
+    "idx_b": 27,
+    "label": "clarifying",
+    "rationale": "Index reveals Balancer query patterns",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 28,
+    "idx_b": 36,
+    "label": "clarifying",
+    "rationale": "Index exposes Rate Limiter throttling points",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 29,
+    "idx_b": 27,
+    "label": "transmissive",
+    "rationale": "Broker channels to Load Balancer",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 29,
+    "idx_b": 33,
+    "label": "transmissive",
+    "rationale": "Broker transmits health check events",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 29,
+    "idx_b": 35,
+    "label": "transmissive",
+    "rationale": "Broker flows Chaos experiment results",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 30,
+    "idx_b": 26,
+    "label": "constraining",
+    "rationale": "Breaker limits Firewall traffic during failure",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 30,
+    "idx_b": 28,
+    "label": "constraining",
+    "rationale": "Breaker constrains DB access during outage",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 30,
+    "idx_b": 34,
+    "label": "constraining",
+    "rationale": "Breaker bounds Event log writes",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 31,
+    "idx_b": 28,
+    "label": "influential",
+    "rationale": "Deprecation shapes Index migration path",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 31,
+    "idx_b": 37,
+    "label": "influential",
+    "rationale": "Deprecation influences Gateway versioning",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 32,
+    "idx_b": 26,
+    "label": "influential",
+    "rationale": "Flags gradually shape Firewall rules",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 32,
+    "idx_b": 28,
+    "label": "influential",
+    "rationale": "Flags influence Index query patterns",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 32,
+    "idx_b": 33,
+    "label": "influential",
+    "rationale": "Flags shape Health check behavior",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 33,
+    "idx_b": 27,
+    "label": "clarifying",
+    "rationale": "Health reveals Balancer utilization",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 33,
+    "idx_b": 29,
+    "label": "clarifying",
+    "rationale": "Health exposes Broker queue depth",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 33,
+    "idx_b": 36,
+    "label": "clarifying",
+    "rationale": "Health illuminates Rate Limiter status",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 34,
+    "idx_b": 29,
+    "label": "receptive",
+    "rationale": "Event log accepts Broker messages",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 34,
+    "idx_b": 32,
+    "label": "receptive",
+    "rationale": "Event log accepts Feature flag changes",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 35,
+    "idx_b": 26,
+    "label": "causal",
+    "rationale": "Chaos triggers Firewall failover",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 35,
+    "idx_b": 27,
+    "label": "causal",
+    "rationale": "Chaos triggers Load redistribution",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 35,
+    "idx_b": 29,
+    "label": "causal",
+    "rationale": "Chaos triggers Broker reconnection patterns",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 36,
+    "idx_b": 27,
+    "label": "constraining",
+    "rationale": "Limiter constrains Balancer traffic",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 36,
+    "idx_b": 34,
+    "label": "constraining",
+    "rationale": "Limiter bounds Event log throughput",
+    "confidence": "plausible"
+  },
+  {
+    "idx_a": 37,
+    "idx_b": 27,
+    "label": "transmissive",
+    "rationale": "Gateway channels to Load Balancer",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 37,
+    "idx_b": 33,
+    "label": "transmissive",
+    "rationale": "Gateway routes to Health check endpoints",
+    "confidence": "certain"
+  },
+  {
+    "idx_a": 37,
+    "idx_b": 35,
+    "label": "transmissive",
+    "rationale": "Gateway channels Chaos experiment traffic",
+    "confidence": "plausible"
+  }
+]

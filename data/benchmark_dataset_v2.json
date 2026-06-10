@@ -1,0 +1,1375 @@
+{
+  "split": {
+    "strategy": "stratified by domain: SW 12/5, Biz 12/5, Bio 11/5 train/test",
+    "test_concept_count": 15,
+    "train_relation_count": 28,
+    "train_relation_indices": [
+      0,
+      2,
+      3,
+      10,
+      11,
+      15,
+      16,
+      17,
+      18,
+      21,
+      22,
+      23,
+      25,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      45,
+      46,
+      47,
+      51
+    ],
+    "test_relation_indices": [
+      1,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12,
+      13,
+      14,
+      19,
+      20,
+      24,
+      26,
+      27,
+      28,
+      29,
+      41,
+      42,
+      43,
+      44,
+      48,
+      49,
+      50,
+      52
+    ],
+    "test_concept_indices": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      29,
+      30,
+      31,
+      32,
+      33,
+      45,
+      46,
+      47,
+      48,
+      49
+    ],
+    "train_concept_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+    ],
+    "train_concept_count": 35,
+    "test_relation_count": 25
+  },
+  "concepts": [
+    {
+      "index": 0,
+      "name": "Rate Limiter",
+      "description": "Restricts the number of requests a client can make in a time window",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.0431531852002103,
+        -0.1294595556006309,
+        -0.47468503720231336,
+        0.7336041484035751,
+        0.2589191112012618,
+        -0.1726127408008412,
+        0.1726127408008412,
+        -0.3020722964014721
+      ]
+    },
+    {
+      "index": 1,
+      "name": "Message Queue",
+      "description": "Transmits events between services asynchronously with guaranteed delivery",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.14907119849998599,
+        0.29814239699997197,
+        0.8447367914999206,
+        -0.14907119849998599,
+        -0.19876159799998133,
+        0.14907119849998599,
+        0.29814239699997197,
+        0.04969039949999533
+      ]
+    },
+    {
+      "index": 2,
+      "name": "Database Index",
+      "description": "Data structure that accelerates record lookup by organizing keys for fast retrieval",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.10910894511799618,
+        0.27277236279499045,
+        0.8183170883849713,
+        0.21821789023599236,
+        0.38188130791298663,
+        0.05455447255899809,
+        0.0,
+        0.21821789023599236
+      ]
+    },
+    {
+      "index": 3,
+      "name": "API Gateway",
+      "description": "Routes incoming client requests to appropriate backend services",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.2198598839717251,
+        0.1648949129787938,
+        0.8794395358869004,
+        0.3297898259575876,
+        0.10992994198586255,
+        0.0,
+        0.1648949129787938,
+        0.054964970992931274
+      ]
+    },
+    {
+      "index": 4,
+      "name": "Load Balancer",
+      "description": "Distributes traffic evenly across multiple server instances",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.15037641213512565,
+        -0.05012547071170856,
+        0.3508782949819598,
+        -0.05012547071170856,
+        0.15037641213512565,
+        0.10025094142341712,
+        0.902258472810754,
+        0.05012547071170856
+      ]
+    },
+    {
+      "index": 5,
+      "name": "Circuit Breaker",
+      "description": "Prevents cascading failures by stopping calls to failing services",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.04244763599780088,
+        -0.16979054399120352,
+        -0.5093716319736106,
+        0.721609811962615,
+        0.29713345198460617,
+        -0.08489527199560176,
+        0.16979054399120352,
+        -0.2546858159868053
+      ]
+    },
+    {
+      "index": 6,
+      "name": "Monitoring Dashboard",
+      "description": "Observes system health metrics and alerts on anomalies",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.19900743804199786,
+        0.29851115706299675,
+        0.14925557853149837,
+        -0.049751859510499465,
+        0.8457816116784909,
+        0.19900743804199786,
+        0.29851115706299675,
+        0.049751859510499465
+      ]
+    },
+    {
+      "index": 7,
+      "name": "Feature Flag",
+      "description": "Toggle that enables gradual rollout of new functionality to user subsets",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.10153461651336192,
+        0.25383654128340477,
+        0.20306923302672383,
+        0.10153461651336192,
+        0.15230192477004287,
+        0.8122769321068953,
+        0.25383654128340477,
+        0.35537115779676665
+      ]
+    },
+    {
+      "index": 8,
+      "name": "Logging System",
+      "description": "Records every operation for audit trails and debugging",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.31066822384709863,
+        0.15533411192354932,
+        0.10355607461569956,
+        0.0,
+        0.8802266342334462,
+        0.15533411192354932,
+        0.05177803730784978,
+        0.2588901865392489
+      ]
+    },
+    {
+      "index": 9,
+      "name": "Configuration Store",
+      "description": "Central repository for application configuration values",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.792593923901217,
+        0.11322770341445959,
+        0.3396831102433787,
+        0.22645540682891918,
+        0.3962969619506085,
+        0.16984155512168936,
+        0.056613851707229795,
+        0.056613851707229795
+      ]
+    },
+    {
+      "index": 10,
+      "name": "Authentication Provider",
+      "description": "Verifies identity before granting access to protected resources",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.20025046972870358,
+        0.15018785229652767,
+        0.10012523486435179,
+        0.8510644963469901,
+        0.30037570459305535,
+        0.15018785229652767,
+        0.0,
+        0.30037570459305535
+      ]
+    },
+    {
+      "index": 11,
+      "name": "Cache Layer",
+      "description": "Stores frequently accessed data in memory for fast retrieval",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.18325416653445784,
+        0.24433888871261047,
+        0.8551861104941366,
+        0.12216944435630524,
+        0.06108472217815262,
+        0.24433888871261047,
+        0.06108472217815262,
+        0.3054236108907631
+      ]
+    },
+    {
+      "index": 12,
+      "name": "Event Stream Processor",
+      "description": "Transforms and enriches data in real-time event pipelines",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.15617376188860604,
+        0.26028960314767674,
+        0.8329267300725656,
+        -0.05205792062953535,
+        0.2082316825181414,
+        0.26028960314767674,
+        0.05205792062953535,
+        0.3123475237772121
+      ]
+    },
+    {
+      "index": 13,
+      "name": "Database Transaction",
+      "description": "Ensures atomicity consistency isolation and durability across writes",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.14691063206231753,
+        0.19588084274975673,
+        0.09794042137487836,
+        0.832493581686466,
+        0.14691063206231753,
+        0.19588084274975673,
+        0.3427914748120742,
+        0.2448510534371959
+      ]
+    },
+    {
+      "index": 14,
+      "name": "Deprecation Policy",
+      "description": "Planned phase-out that gradually shapes migration away from old APIs",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.10425720702853739,
+        0.20851441405707477,
+        0.15638581054280606,
+        0.3649002245998808,
+        0.26064301757134345,
+        0.8340576562282991,
+        0.0,
+        0.15638581054280606
+      ]
+    },
+    {
+      "index": 15,
+      "name": "Health Check Endpoint",
+      "description": "Diagnostic API that reveals whether a service is functioning correctly",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.11111111111111112,
+        -0.05555555555555556,
+        0.16666666666666666,
+        0.0,
+        0.9444444444444444,
+        0.11111111111111112,
+        0.22222222222222224,
+        0.05555555555555556
+      ]
+    },
+    {
+      "index": 16,
+      "name": "Schema Registry",
+      "description": "Enforces data format rules across all producers and consumers",
+      "domain": "software_architecture",
+      "coefficients": [
+        0.14621105364857379,
+        0.09747403576571587,
+        0.24368508941428965,
+        0.8285293040085848,
+        0.19494807153143173,
+        0.24368508941428965,
+        0.3411591251800055,
+        0.09747403576571587
+      ]
+    },
+    {
+      "index": 17,
+      "name": "Marketing Budget",
+      "description": "Financial allocation that caps promotional spending per quarter",
+      "domain": "business_operations",
+      "coefficients": [
+        0.14638501094227996,
+        0.09759000729485331,
+        0.3415650255319866,
+        0.8295150620062531,
+        0.19518001458970663,
+        0.2927700218845599,
+        0.04879500364742666,
+        0.19518001458970663
+      ]
+    },
+    {
+      "index": 18,
+      "name": "Sales Pipeline",
+      "description": "Staged funnel through which leads progress from contact to close",
+      "domain": "business_operations",
+      "coefficients": [
+        0.2082316825181414,
+        0.15617376188860604,
+        0.26028960314767674,
+        0.8329267300725656,
+        0.3123475237772121,
+        0.15617376188860604,
+        0.15617376188860604,
+        0.15617376188860604
+      ]
+    },
+    {
+      "index": 19,
+      "name": "Customer Support Ticket",
+      "description": "User-reported issue that initiates a diagnostic and resolution workflow",
+      "domain": "business_operations",
+      "coefficients": [
+        0.26279416561381835,
+        0.8409413299642188,
+        0.2102353324910547,
+        0.10511766624552735,
+        0.315352998736582,
+        0.157676499368291,
+        0.0,
+        0.2102353324910547
+      ]
+    },
+    {
+      "index": 20,
+      "name": "Quarterly Report",
+      "description": "Structured document revealing financial performance to stakeholders",
+      "domain": "business_operations",
+      "coefficients": [
+        0.15450786078738146,
+        0.25751310131230243,
+        0.20601048104984196,
+        0.0,
+        0.8755445444618283,
+        0.3090157215747629,
+        0.05150262026246049,
+        0.05150262026246049
+      ]
+    },
+    {
+      "index": 21,
+      "name": "Revenue Target",
+      "description": "Ambitious income goal that motivates organizational effort",
+      "domain": "business_operations",
+      "coefficients": [
+        0.103834826330233,
+        0.3115044789906992,
+        0.1557522394953496,
+        -0.103834826330233,
+        0.207669652660466,
+        0.1557522394953496,
+        0.882596023806981,
+        0.103834826330233
+      ]
+    },
+    {
+      "index": 22,
+      "name": "Employee Handbook",
+      "description": "Comprehensive policy document defining acceptable workplace conduct",
+      "domain": "business_operations",
+      "coefficients": [
+        0.19222773253288514,
+        0.048056933133221284,
+        0.2402846656661064,
+        0.8169678632647618,
+        0.2883415987993277,
+        0.3363985319325489,
+        0.19222773253288514,
+        0.048056933133221284
+      ]
+    },
+    {
+      "index": 23,
+      "name": "Vendor Contract",
+      "description": "Binding legal agreement that obligates both parties to specific terms",
+      "domain": "business_operations",
+      "coefficients": [
+        0.14285714285714288,
+        0.19047619047619052,
+        0.04761904761904763,
+        0.8095238095238096,
+        0.28571428571428575,
+        0.23809523809523814,
+        0.33333333333333337,
+        0.19047619047619052
+      ]
+    },
+    {
+      "index": 24,
+      "name": "Innovation Fund",
+      "description": "Ring-fenced capital pool that enables experimental projects to launch",
+      "domain": "business_operations",
+      "coefficients": [
+        0.10570328451633842,
+        0.2642582112908459,
+        0.21140656903267677,
+        -0.10570328451633842,
+        0.10570328451633842,
+        0.21140656903267677,
+        0.0,
+        0.8984779183888727
+      ]
+    },
+    {
+      "index": 25,
+      "name": "Customer Feedback Loop",
+      "description": "Systematic process for collecting analyzing and responding to user input",
+      "domain": "business_operations",
+      "coefficients": [
+        0.2880092164423916,
+        0.19200614429492774,
+        0.24000768036865966,
+        0.0,
+        0.3360107525161235,
+        0.2880092164423916,
+        0.768024577179711,
+        0.19200614429492774
+      ]
+    },
+    {
+      "index": 26,
+      "name": "Onboarding Program",
+      "description": "Structured workflow that channels new hires from orientation to productivity",
+      "domain": "business_operations",
+      "coefficients": [
+        0.24693239916239743,
+        0.19754591932991794,
+        0.8395701571521512,
+        0.14815943949743846,
+        0.2963188789948769,
+        0.24693239916239743,
+        0.049386479832479485,
+        0.14815943949743846
+      ]
+    },
+    {
+      "index": 27,
+      "name": "Market Trend Analysis",
+      "description": "Research that shapes strategic direction through accumulated insight",
+      "domain": "business_operations",
+      "coefficients": [
+        0.15210603796901814,
+        0.15210603796901814,
+        0.3549140885943756,
+        0.0,
+        0.3549140885943756,
+        0.8112322025014301,
+        0.05070201265633938,
+        0.20280805062535753
+      ]
+    },
+    {
+      "index": 28,
+      "name": "Compliance Audit",
+      "description": "Formal examination that reveals regulatory adherence or gaps",
+      "domain": "business_operations",
+      "coefficients": [
+        0.09938079899999067,
+        0.14907119849998599,
+        0.19876159799998133,
+        0.14907119849998599,
+        0.8447367914999206,
+        0.24845199749997665,
+        0.3478327964999673,
+        0.09938079899999067
+      ]
+    },
+    {
+      "index": 29,
+      "name": "Severance Agreement",
+      "description": "Structured compensation that accepts the termination of employment",
+      "domain": "business_operations",
+      "coefficients": [
+        0.816026113253443,
+        0.14400460822119582,
+        0.24000768036865971,
+        0.33601075251612356,
+        0.1920061442949278,
+        0.04800153607373195,
+        0.28800921644239164,
+        0.14400460822119582
+      ]
+    },
+    {
+      "index": 30,
+      "name": "Industry Regulation",
+      "description": "Widely adopted standard that pervasively shapes how companies operate",
+      "domain": "business_operations",
+      "coefficients": [
+        0.04879500364742666,
+        0.14638501094227996,
+        0.19518001458970663,
+        0.39036002917941326,
+        0.09759000729485331,
+        0.8295150620062531,
+        0.2927700218845599,
+        0.04879500364742666
+      ]
+    },
+    {
+      "index": 31,
+      "name": "Team Standup Meeting",
+      "description": "Daily sync meeting that mirrors progress and equilibrates team awareness",
+      "domain": "business_operations",
+      "coefficients": [
+        0.10206207261596577,
+        0.15309310892394865,
+        0.2551551815399144,
+        0.10206207261596577,
+        0.3061862178478973,
+        0.20412414523193154,
+        0.8675276172357089,
+        0.051031036307982884
+      ]
+    },
+    {
+      "index": 32,
+      "name": "Supply Chain",
+      "description": "Network that channels goods from raw materials to end customers",
+      "domain": "business_operations",
+      "coefficients": [
+        0.20683507599800768,
+        0.15512630699850574,
+        0.8790490729915326,
+        0.15512630699850574,
+        0.15512630699850574,
+        0.2585438449975096,
+        0.05170876899950192,
+        0.20683507599800768
+      ]
+    },
+    {
+      "index": 33,
+      "name": "Hiring Freeze",
+      "description": "Organizational mandate that constrains workforce expansion",
+      "domain": "business_operations",
+      "coefficients": [
+        0.09724332766526306,
+        -0.09724332766526306,
+        -0.2917299829957891,
+        0.8265682851547359,
+        0.19448665533052611,
+        0.24310831916315762,
+        0.0,
+        -0.3403516468284206
+      ]
+    },
+    {
+      "index": 34,
+      "name": "Predator",
+      "description": "Animal that limits prey population through hunting and consumption",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.0,
+        0.1411081302575396,
+        0.2822162605150792,
+        0.7996127381260577,
+        0.04703604341917987,
+        0.3292523039342591,
+        0.37628834735343897,
+        0.09407208683835974
+      ]
+    },
+    {
+      "index": 35,
+      "name": "Decomposer",
+      "description": "Organism that breaks down dead matter and recycles it into soil nutrients",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.23836564731139806,
+        0.14301938838683884,
+        0.3813850356982369,
+        0.0,
+        0.04767312946227961,
+        0.33371190623595726,
+        0.28603877677367767,
+        0.7627700713964738
+      ]
+    },
+    {
+      "index": 36,
+      "name": "Photosynthesis",
+      "description": "Biological process that creates energy-rich compounds from sunlight",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.24253562503633297,
+        0.14552137502179976,
+        0.38805700005813276,
+        0.0,
+        0.048507125007266595,
+        0.29104275004359953,
+        0.048507125007266595,
+        0.824621125123532
+      ]
+    },
+    {
+      "index": 37,
+      "name": "Water Cycle",
+      "description": "Continuous movement channeling water between atmosphere land and oceans",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.19611613513818407,
+        0.14708710135363803,
+        0.8334935743372822,
+        0.0,
+        0.04902903378454602,
+        0.29417420270727607,
+        0.3432032364918221,
+        0.19611613513818407
+      ]
+    },
+    {
+      "index": 38,
+      "name": "Keystone Species",
+      "description": "Species whose presence pervasively shapes the entire ecosystem structure",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.0,
+        0.19402850002906644,
+        0.14552137502179982,
+        0.24253562503633302,
+        0.04850712500726661,
+        0.8246211251235323,
+        0.3395498750508662,
+        0.29104275004359964
+      ]
+    },
+    {
+      "index": 39,
+      "name": "Mutation",
+      "description": "Random genetic change that triggers variation within a population",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.05170876899950192,
+        0.8790490729915326,
+        0.0,
+        0.05170876899950192,
+        0.15512630699850574,
+        0.2585438449975096,
+        0.0,
+        0.3619613829965134
+      ]
+    },
+    {
+      "index": 40,
+      "name": "Homeostasis",
+      "description": "Self-regulating process that maintains equilibrium in living systems",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.15269597956778627,
+        0.15269597956778627,
+        0.20359463942371506,
+        0.30539195913557254,
+        0.050898659855928764,
+        0.2544932992796438,
+        0.8652772175507889,
+        0.050898659855928764
+      ]
+    },
+    {
+      "index": 41,
+      "name": "Natural Selection",
+      "description": "Environmental pressure that constrains which traits propagate",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.049507377148833714,
+        0.14852213144650114,
+        0.0,
+        0.8416254115301731,
+        0.24753688574416857,
+        0.3960590171906697,
+        0.09901475429766743,
+        0.19802950859533486
+      ]
+    },
+    {
+      "index": 42,
+      "name": "Ecological Succession",
+      "description": "Gradual process through which an ecosystem transforms over time",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.0,
+        0.16058631827165676,
+        0.16058631827165676,
+        0.0,
+        0.21411509102887571,
+        0.9099891368727216,
+        0.05352877275721893,
+        0.2676438637860946
+      ]
+    },
+    {
+      "index": 43,
+      "name": "Symbiosis",
+      "description": "Close interaction where different species mutually benefit and balance each other",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.19402850002906638,
+        0.14552137502179976,
+        0.33954987505086615,
+        0.0,
+        0.048507125007266595,
+        0.29104275004359953,
+        0.824621125123532,
+        0.24253562503633297
+      ]
+    },
+    {
+      "index": 44,
+      "name": "DNA Replication",
+      "description": "Molecular process that creates identical copies of genetic material",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.1587768372074886,
+        0.10585122480499253,
+        0.1587768372074886,
+        0.0,
+        0.052925612402496265,
+        0.052925612402496265,
+        0.1587768372074886,
+        0.9526610232449335
+      ]
+    },
+    {
+      "index": 45,
+      "name": "Immune Response",
+      "description": "Defensive cascade that triggers when the body detects foreign pathogens",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.14350946197048198,
+        0.8132202844993979,
+        0.33485541126445795,
+        0.28701892394096395,
+        0.09567297464698798,
+        0.23918243661746996,
+        0.19134594929397597,
+        0.14350946197048198
+      ]
+    },
+    {
+      "index": 46,
+      "name": "Enzyme Catalyst",
+      "description": "Protein that accelerates biochemical reactions without being consumed",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.15724272550828784,
+        0.3144854510165757,
+        0.26207120918047974,
+        0.0,
+        0.052414241836095946,
+        0.10482848367219189,
+        0.0,
+        0.8910421112136309
+      ]
+    },
+    {
+      "index": 47,
+      "name": "Hormone Signal",
+      "description": "Chemical messenger that transmits regulatory information through the body",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.05050762722761054,
+        0.30304576336566325,
+        0.8586296628693791,
+        0.0,
+        0.10101525445522108,
+        0.2525381361380527,
+        0.30304576336566325,
+        0.05050762722761054
+      ]
+    },
+    {
+      "index": 48,
+      "name": "Cell Membrane",
+      "description": "Semi-permeable boundary that bounds cellular contents",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.14779939172464396,
+        0.09853292781642932,
+        0.34486524735750257,
+        0.8375298864396492,
+        0.0,
+        0.14779939172464396,
+        0.2955987834492879,
+        0.19706585563285864
+      ]
+    },
+    {
+      "index": 49,
+      "name": "Neural Plasticity",
+      "description": "Brain ability to gradually reshape connections in response to experience",
+      "domain": "biological_systems",
+      "coefficients": [
+        0.2043904521230384,
+        0.2043904521230384,
+        0.1532928390922788,
+        0.0,
+        0.0510976130307596,
+        0.8686594215229132,
+        0.2043904521230384,
+        0.3065856781845576
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "index": 0,
+      "idx_a": 0,
+      "idx_b": 3,
+      "label": "constraining",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 1,
+      "idx_a": 1,
+      "idx_b": 12,
+      "label": "transmissive",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 2,
+      "idx_a": 2,
+      "idx_b": 11,
+      "label": "clarifying",
+      "confidence": "plausible",
+      "cross_domain": false
+    },
+    {
+      "index": 3,
+      "idx_a": 3,
+      "idx_b": 4,
+      "label": "transmissive",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 4,
+      "idx_a": 4,
+      "idx_b": 12,
+      "label": "balancing",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 5,
+      "idx_a": 5,
+      "idx_b": 12,
+      "label": "constraining",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 6,
+      "idx_a": 6,
+      "idx_b": 15,
+      "label": "clarifying",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 7,
+      "idx_a": 7,
+      "idx_b": 14,
+      "label": "influential",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 8,
+      "idx_a": 8,
+      "idx_b": 15,
+      "label": "receptive",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 9,
+      "idx_a": 9,
+      "idx_b": 14,
+      "label": "receptive",
+      "confidence": "plausible",
+      "cross_domain": false
+    },
+    {
+      "index": 10,
+      "idx_a": 10,
+      "idx_b": 3,
+      "label": "constraining",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 11,
+      "idx_a": 11,
+      "idx_b": 2,
+      "label": "influential",
+      "confidence": "plausible",
+      "cross_domain": false
+    },
+    {
+      "index": 12,
+      "idx_a": 12,
+      "idx_b": 6,
+      "label": "causal",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 13,
+      "idx_a": 13,
+      "idx_b": 4,
+      "label": "receptive",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 14,
+      "idx_a": 16,
+      "idx_b": 12,
+      "label": "constraining",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 15,
+      "idx_a": 17,
+      "idx_b": 24,
+      "label": "constraining",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 16,
+      "idx_a": 18,
+      "idx_b": 21,
+      "label": "generative",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 17,
+      "idx_a": 19,
+      "idx_b": 20,
+      "label": "causal",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 18,
+      "idx_a": 20,
+      "idx_b": 21,
+      "label": "clarifying",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 19,
+      "idx_a": 22,
+      "idx_b": 33,
+      "label": "constraining",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 20,
+      "idx_a": 23,
+      "idx_b": 32,
+      "label": "constraining",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 21,
+      "idx_a": 24,
+      "idx_b": 21,
+      "label": "generative",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 22,
+      "idx_a": 25,
+      "idx_b": 27,
+      "label": "balancing",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 23,
+      "idx_a": 26,
+      "idx_b": 24,
+      "label": "transmissive",
+      "confidence": "plausible",
+      "cross_domain": false
+    },
+    {
+      "index": 24,
+      "idx_a": 27,
+      "idx_b": 30,
+      "label": "influential",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 25,
+      "idx_a": 28,
+      "idx_b": 17,
+      "label": "clarifying",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 26,
+      "idx_a": 29,
+      "idx_b": 33,
+      "label": "receptive",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 27,
+      "idx_a": 30,
+      "idx_b": 22,
+      "label": "influential",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 28,
+      "idx_a": 31,
+      "idx_b": 25,
+      "label": "balancing",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 29,
+      "idx_a": 32,
+      "idx_b": 21,
+      "label": "transmissive",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 30,
+      "idx_a": 34,
+      "idx_b": 39,
+      "label": "constraining",
+      "confidence": "plausible",
+      "cross_domain": false
+    },
+    {
+      "index": 31,
+      "idx_a": 35,
+      "idx_b": 36,
+      "label": "receptive",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 32,
+      "idx_a": 36,
+      "idx_b": 40,
+      "label": "generative",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 33,
+      "idx_a": 37,
+      "idx_b": 36,
+      "label": "transmissive",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 34,
+      "idx_a": 38,
+      "idx_b": 42,
+      "label": "influential",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 35,
+      "idx_a": 39,
+      "idx_b": 41,
+      "label": "causal",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 36,
+      "idx_a": 40,
+      "idx_b": 43,
+      "label": "balancing",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 37,
+      "idx_a": 41,
+      "idx_b": 39,
+      "label": "constraining",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 38,
+      "idx_a": 42,
+      "idx_b": 35,
+      "label": "influential",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 39,
+      "idx_a": 43,
+      "idx_b": 38,
+      "label": "balancing",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 40,
+      "idx_a": 44,
+      "idx_b": 40,
+      "label": "generative",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 41,
+      "idx_a": 45,
+      "idx_b": 47,
+      "label": "causal",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 42,
+      "idx_a": 46,
+      "idx_b": 44,
+      "label": "generative",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 43,
+      "idx_a": 47,
+      "idx_b": 48,
+      "label": "transmissive",
+      "confidence": "certain",
+      "cross_domain": false
+    },
+    {
+      "index": 44,
+      "idx_a": 48,
+      "idx_b": 44,
+      "label": "constraining",
+      "confidence": "plausible",
+      "cross_domain": false
+    },
+    {
+      "index": 45,
+      "idx_a": 0,
+      "idx_b": 19,
+      "label": "constraining",
+      "confidence": "certain",
+      "cross_domain": true
+    },
+    {
+      "index": 46,
+      "idx_a": 39,
+      "idx_b": 24,
+      "label": "causal",
+      "confidence": "plausible",
+      "cross_domain": true
+    },
+    {
+      "index": 47,
+      "idx_a": 4,
+      "idx_b": 40,
+      "label": "balancing",
+      "confidence": "certain",
+      "cross_domain": true
+    },
+    {
+      "index": 48,
+      "idx_a": 30,
+      "idx_b": 16,
+      "label": "constraining",
+      "confidence": "certain",
+      "cross_domain": true
+    },
+    {
+      "index": 49,
+      "idx_a": 37,
+      "idx_b": 32,
+      "label": "transmissive",
+      "confidence": "plausible",
+      "cross_domain": true
+    },
+    {
+      "index": 50,
+      "idx_a": 38,
+      "idx_b": 30,
+      "label": "influential",
+      "confidence": "plausible",
+      "cross_domain": true
+    },
+    {
+      "index": 51,
+      "idx_a": 28,
+      "idx_b": 5,
+      "label": "clarifying",
+      "confidence": "certain",
+      "cross_domain": true
+    },
+    {
+      "index": 52,
+      "idx_a": 44,
+      "idx_b": 12,
+      "label": "generative",
+      "confidence": "plausible",
+      "cross_domain": true
+    }
+  ],
+  "meta": {
+    "description": "GA-Bagua v2 semantic knowledge graph benchmark dataset (SKILL.md v2 encodings)",
+    "num_concepts": 50,
+    "num_relations": 53,
+    "semantic_roles": [
+      "receptive",
+      "causal",
+      "transmissive",
+      "constraining",
+      "clarifying",
+      "influential",
+      "balancing",
+      "generative"
+    ],
+    "domain_counts": {
+      "biological_systems": 16,
+      "software_architecture": 17,
+      "business_operations": 17
+    },
+    "generated_at": "2026-06-08T10:02:46.6005645+09:00",
+    "domains": [
+      "software_architecture",
+      "business_operations",
+      "biological_systems"
+    ],
+    "encoding_protocol": "SKILL.md v2: relational encoding (what does it DO?)"
+  }
+}

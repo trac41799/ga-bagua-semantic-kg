@@ -1,0 +1,236 @@
+﻿[
+    {
+        "concept_a":  "Marketing Budget",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Employee Handbook",
+        "raw_response":  "",
+        "expected_label":  "receptive",
+        "current_label":  "constraining"
+    },
+    {
+        "concept_a":  "Sales Pipeline",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Revenue Target",
+        "raw_response":  "",
+        "expected_label":  "generative",
+        "current_label":  "transmissive"
+    },
+    {
+        "concept_a":  "Quarterly Report",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Revenue Target",
+        "raw_response":  "",
+        "expected_label":  "clarifying",
+        "current_label":  "influential"
+    },
+    {
+        "concept_a":  "Vendor Contract",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Employee Handbook",
+        "raw_response":  "",
+        "expected_label":  "receptive",
+        "current_label":  "constraining"
+    },
+    {
+        "concept_a":  "Feedback Loop",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Market Trend",
+        "raw_response":  "",
+        "expected_label":  "balancing",
+        "current_label":  "clarifying"
+    },
+    {
+        "concept_a":  "Onboarding Process",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Innovation Fund",
+        "raw_response":  "",
+        "expected_label":  "generative",
+        "current_label":  "transmissive"
+    },
+    {
+        "concept_a":  "Market Trend",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Industry Standard",
+        "raw_response":  "",
+        "expected_label":  "influential",
+        "current_label":  "clarifying"
+    },
+    {
+        "concept_a":  "Compliance Audit",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Marketing Budget",
+        "raw_response":  "",
+        "expected_label":  "clarifying",
+        "current_label":  "influential"
+    },
+    {
+        "concept_a":  "Team Standup",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Feedback Loop",
+        "raw_response":  "",
+        "expected_label":  "balancing",
+        "current_label":  "clarifying"
+    },
+    {
+        "concept_a":  "Water Cycle",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Photosynthesis",
+        "raw_response":  "",
+        "expected_label":  "generative",
+        "current_label":  "transmissive"
+    },
+    {
+        "concept_a":  "Mutation",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Natural Selection",
+        "raw_response":  "",
+        "expected_label":  "generative",
+        "current_label":  "causal"
+    },
+    {
+        "concept_a":  "Homeostasis",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Symbiosis",
+        "raw_response":  "",
+        "expected_label":  "balancing",
+        "current_label":  "clarifying"
+    },
+    {
+        "concept_a":  "Symbiosis",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Keystone Species",
+        "raw_response":  "",
+        "expected_label":  "balancing",
+        "current_label":  "receptive"
+    },
+    {
+        "concept_a":  "Load Balancer",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Database Index",
+        "raw_response":  "",
+        "expected_label":  "balancing",
+        "current_label":  "receptive"
+    },
+    {
+        "concept_a":  "Rate Limiter",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Circuit Breaker",
+        "raw_response":  "",
+        "expected_label":  "receptive",
+        "current_label":  "constraining"
+    },
+    {
+        "concept_a":  "Mutation",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Innovation Fund",
+        "raw_response":  "",
+        "expected_label":  "causal",
+        "current_label":  "generative"
+    },
+    {
+        "concept_a":  "Load Balancer",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Homeostasis",
+        "raw_response":  "",
+        "expected_label":  "receptive",
+        "current_label":  "transmissive"
+    },
+    {
+        "concept_a":  "Compliance Audit",
+        "new_b":  [
+                      null
+                  ],
+        "new_a":  [
+                      null
+                  ],
+        "concept_b":  "Circuit Breaker",
+        "raw_response":  "",
+        "expected_label":  "clarifying",
+        "current_label":  "influential"
+    }
+]

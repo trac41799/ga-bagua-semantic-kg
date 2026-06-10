@@ -523,6 +523,87 @@ fn handle_tool_call(id: Option<serde_json::Value>, params: &serde_json::Value) -
             *STORE.lock().unwrap() = None;
             serde_json::json!({"status":"closed"})
         }
+        "ideate_seed" => {
+            let name = args["name"].as_str().unwrap_or("problem");
+            let coeffs_arr: Vec<f64> = args["coefficients"].as_array()
+                .map(|a| a.iter().filter_map(|v| v.as_f64()).collect())
+                .unwrap_or_default();
+            if coeffs_arr.len() != 8 {
+                return json_error(id, -32602, "coefficients must be exactly 8 floats".to_string());
+            }
+            let mut coeff = [0.0f64; 8];
+            coeff.copy_from_slice(&coeffs_arr[0..8]);
+            let raw_mv = Multivector::new(coeff);
+            let n = raw_mv.norm();
+            let seed_mv = if n > f64::EPSILON { raw_mv * (1.0 / n) } else { Multivector::one() };
+            let dominant_trigram = seed_mv.dominant_role().bagua();
+            serde_json::json!({
+                "concept": name,
+                "seed_coefficients": seed_mv.coefficients(),
+                "dominant_trigram": dominant_trigram.name(),
+                "dominant_phase": format!("{:?}", dominant_trigram.wuxing_phase()),
+                "norm": seed_mv.norm(),
+            })
+        }
+        "ideate_step" => {
+            let seed = parse_mv(&args["seed"]);
+            let hex_num = args["hexagram"].as_u64().unwrap_or(1).min(64).max(1);
+            use ga_semantics_core::advanced::{Hexagram, hexagram_step};
+            let hex = Hexagram::from_number(hex_num as u8);
+            match hexagram_step(&seed, &hex) {
+                Some(result) => {
+                    let roles = multivector_to_roles(&result);
+                    serde_json::json!({
+                        "hexagram_number": hex_num,
+                        "hexagram_name": hex.name(),
+                        "hexagram_pinyin": hex.pinyin(),
+                        "interpretation": hex.interpretation(),
+                        "shifted_perspective": result.coefficients(),
+                        "top_roles": roles.iter().take(3).map(|(n,w,d)| serde_json::json!({"role":n,"weight":w,"description":d})).collect::<Vec<_>>(),
+                    })
+                }
+                None => serde_json::json!({ "error": "degenerate seed — cannot step" }),
+            }
+        }
+        "ideate_explore" => {
+            let seed = parse_mv(&args["seed"]);
+            let top_n = args["top_n"].as_u64().unwrap_or(8).min(64).max(1) as usize;
+            use ga_semantics_core::advanced::hexagram_explore;
+            let results = hexagram_explore(&seed, top_n);
+            let ranked: Vec<serde_json::Value> = results.iter().enumerate().map(|(i, (hex, mv, interp))| {
+                let roles = multivector_to_roles(mv);
+                serde_json::json!({
+                    "rank": i + 1,
+                    "hexagram_number": hex.binary_number() + 1,
+                    "hexagram_name": hex.name(),
+                    "interpretation": interp,
+                    "coefficients": mv.coefficients(),
+                    "top_roles": roles.iter().take(2).map(|(n,w,_d)| serde_json::json!({"role":n,"weight":w})).collect::<Vec<_>>(),
+                })
+            }).collect();
+            serde_json::json!({
+                "seed_concept": multivector_describe(&seed),
+                "perspectives_explored": results.len(),
+                "perspectives": ranked,
+            })
+        }
+        "ideate_blend" => {
+            let a = parse_mv(&args["a"]);
+            let b = parse_mv(&args["b"]);
+            let blend = a.geo_product(&b);
+            let normalized = if blend.norm() > f64::EPSILON { blend * (1.0 / blend.norm()) } else { Multivector::one() };
+            use ga_semantics_core::advanced::Hexagram;
+            let hex = Hexagram::from_multivector_pair(&a, &b);
+            let roles = multivector_to_roles(&normalized);
+            serde_json::json!({
+                "blend_coefficients": normalized.coefficients(),
+                "hexagram_number": hex.binary_number() + 1,
+                "hexagram_name": hex.name(),
+                "hexagram_pinyin": hex.pinyin(),
+                "interpretation": hex.interpretation(),
+                "top_roles": roles.iter().take(3).map(|(n,w,d)| serde_json::json!({"role":n,"weight":w,"description":d})).collect::<Vec<_>>(),
+            })
+        }
         _ => return json_error(id, -32601, format!("Unknown tool: {name}")),
     };
     json_result(id, result)
@@ -672,6 +753,18 @@ fn get_tools() -> Vec<serde_json::Value> {
         tool("batch_process",
             "Execute multiple semantic operations in one call. Array of {name, arguments} objects.",
             serde_json::json!({"type":"object","properties":{"operations":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string"},"arguments":{"type":"object"}}}}},"required":["operations"]})),
+        tool("ideate_seed",
+            "Encode a problem as a seed multivector for creative ideation. Use this to start the hexagram-based brainstorming process.",
+            serde_json::json!({"type":"object","properties":{"name":{"type":"string","description":"Name of the problem/concept"},"coefficients":{"type":"array","description":"8 encoding coefficients from LLM","items":{"type":"number"},"minItems":8,"maxItems":8}},"required":["name","coefficients"]})),
+        tool("ideate_step",
+            "Step to a specific hexagram from a seed multivector. Returns a shifted perspective — a different way of looking at the problem.",
+            serde_json::json!({"type":"object","properties":{"seed":mv8_schema("Seed multivector coefficients"),"hexagram":{"type":"integer","description":"Hexagram number (1-64)","minimum":1,"maximum":64}},"required":["seed","hexagram"]})),
+        tool("ideate_explore",
+            "Explore the top-N most divergent hexagram perspectives from a seed. Returns ranked list of shifted perspectives sorted by distance.",
+            serde_json::json!({"type":"object","properties":{"seed":mv8_schema("Seed multivector coefficients"),"top_n":{"type":"integer","description":"Number of perspectives to return (1-64)","minimum":1,"maximum":64}},"required":["seed","top_n"]})),
+        tool("ideate_blend",
+            "Blend two concept multivectors via geometric product. Returns the emergent hexagram interpretation — what arises when these concepts combine.",
+            serde_json::json!({"type":"object","properties":{"a":mv8_schema("First concept coefficients"),"b":mv8_schema("Second concept coefficients")},"required":["a","b"]})),
     ]
 }
 

@@ -215,6 +215,16 @@ impl Hexagram {
         HEXAGRAM_NAMES[u][l]
     }
 
+    pub fn from_number(n: u8) -> Self {
+        let bn = (n - 1).min(63);
+        let upper_idx = (bn >> 3) as usize;
+        let lower_idx = (bn & 0b111) as usize;
+        Hexagram {
+            upper: Trigram::from_index(upper_idx).unwrap_or(Trigram::Qian),
+            lower: Trigram::from_index(lower_idx).unwrap_or(Trigram::Kun),
+        }
+    }
+
     pub fn from_multivector_pair(a: &Multivector, b: &Multivector) -> Self {
         let upper = a.dominant_trigram();
         let product = a.geo_product(b);
@@ -237,7 +247,103 @@ impl Hexagram {
     pub fn role_pair_name(self) -> String {
         format!("{} over {}", self.upper.translation(), self.lower.translation())
     }
+
+    /// Classify the relationship type from hexagram interpretation.
+    /// Default: upper trigram determines the label (active force principle).
+    /// Overrides: specific hexagrams where interpretation text suggests
+    /// a different relationship quality than the upper trigram alone.
+    pub fn relation_type(self) -> (crate::relation_type::RelationType, f64) {
+        let bn = self.binary_number() as usize;
+        // Check override table first
+        if let Some(Some(rt)) = HEXAGRAM_RELATION_OVERRIDE.get(bn) {
+            return (*rt, 0.8);
+        }
+        // Default: upper trigram maps to relation type
+        let rt = crate::relation_type::RelationType::from_trigram(self.upper);
+        (rt, 0.7)
+    }
 }
+
+/// Hexagram-to-relation overrides where the interpretation text
+/// suggests a different relationship than the upper trigram default.
+/// Indexed by binary_number (0-63).
+/// binary_number = upper_index << 3 | lower_index
+/// trigram order: Kun=0, Gen=1, Kan=2, Xun=3, Zhen=4, Li=5, Dui=6, Qian=7
+const HEXAGRAM_RELATION_OVERRIDE: [Option<crate::relation_type::RelationType>; 64] = {
+    use crate::relation_type::RelationType::*;
+    let mut map = [None; 64];
+
+    // Row 0: Kun upper (default=Receptive)
+    // [0][1]=復 Return — cyclic renewal, re-emerging → Causal
+    map[0 << 3 | 1] = Some(Causal);
+    // [0][3]=謙 Modesty — balanced assessment → Balancing
+    map[0 << 3 | 3] = Some(Balancing);
+    // [0][4]=豫 Enthusiasm — excited engagement with emerging possibilities → Generative
+    map[0 << 3 | 4] = Some(Generative);
+    // [0][5]=比 Holding Together — mutual affiliation → Influential
+    map[0 << 3 | 5] = Some(Influential);
+    // [0][6]=剥 Splitting Apart — crumbling reveals truth → Clarifying
+    map[0 << 3 | 6] = Some(Clarifying);
+    // [0][7]=晉 Progress — steady advancement, illumination → Generative
+    map[0 << 3 | 7] = Some(Generative);
+
+    // Row 1: Gen upper (default=Constraining)
+    // [1][3]=蹇 Obstruction — blockage demanding circumvention → Constraining ✓
+
+    // Row 2: Kan upper (default=Transmissive)
+    // [2][5]=井 The Well — deep resource sustaining others → Generative
+    map[2 << 3 | 5] = Some(Generative);
+    // [2][6]=困 Oppression — exhaustion under pressure → Constraining
+    map[2 << 3 | 6] = Some(Constraining);
+    // [2][7]=未濟 Before Completion — anticipation/preparation → Clarifying
+    map[2 << 3 | 7] = Some(Clarifying);
+
+    // Row 3: Xun upper (default=Influential)
+    // [3][0]=升 Pushing Upward — rising by serving structure beneath → Generative
+    map[3 << 3 | 0] = Some(Generative);
+    // [3][4]=蠱 Decay — rot exposing structural weakness → Clarifying
+    map[3 << 3 | 4] = Some(Clarifying);
+    // [3][5]=鼎 The Cauldron — transformation through refinement → Generative
+    map[3 << 3 | 5] = Some(Generative);
+    // [3][6]=姤 Coming to Meet — meeting of complementary forces → Balancing
+    map[3 << 3 | 6] = Some(Balancing);
+    // [3][7]=大過 Great Excess — overreach beyond capacity → Constraining
+    map[3 << 3 | 7] = Some(Constraining);
+
+    // Row 4: Zhen upper (default=Causal)
+    // [4][1]=豐 Abundance — overflowing richness → Generative
+    map[4 << 3 | 1] = Some(Generative);
+    // [4][3]=咸 Influence — mutual attraction and resonance → Influential
+    map[4 << 3 | 3] = Some(Influential);
+    // [4][6]=兌 Pure Lake — joyous reflection → Balancing
+    map[4 << 3 | 6] = Some(Balancing);
+
+    // Row 5: Li upper (default=Clarifying)
+    // [5][2]=比 Holding Together — clustering by affinity → Influential
+    map[5 << 3 | 2] = Some(Influential);
+    // [5][7]=噬嗑 Biting Through — decisive action cutting through → Causal
+    map[5 << 3 | 7] = Some(Causal);
+
+    // Row 6: Dui upper (default=Balancing)
+    // [6][0]=否 Standstill — creative meets passive → Constraining
+    map[6 << 3 | 0] = Some(Constraining);
+    // [6][7]=夬 Breakthrough — dam breaking after pressure → Causal
+    map[6 << 3 | 7] = Some(Causal);
+
+    // Row 7: Qian upper (default=Generative)
+    // [7][0]=否 Standstill — creative above, receptive below, intention blocked → Constraining
+    map[7 << 3 | 0] = Some(Constraining);
+    // [7][1]=无妄 Innocence — spontaneous right action → Balancing
+    map[7 << 3 | 1] = Some(Balancing);
+    // [7][2]=訟 Conflict — tension demanding resolution → Constraining
+    map[7 << 3 | 2] = Some(Constraining);
+    // [7][3]=遯 Retreat — strategic withdrawal → Constraining
+    map[7 << 3 | 3] = Some(Constraining);
+    // [7][5]=姤 Coming to Meet — convergence of opposites → Balancing
+    map[7 << 3 | 5] = Some(Balancing);
+
+    map
+};
 
 /// Binary trigram index (0-7): Kun=0, Gen=1, Kan=2, Xun=3, Zhen=4, Li=5, Dui=6, Qian=7
 fn trigram_binary_index(t: Trigram) -> u8 {
@@ -374,6 +480,82 @@ pub fn trigram_transform_details(t: Trigram) -> Vec<(Trigram, &'static str)> {
 
 // ── Tests ──────────────────────────────────────────────────────────────────
 
+/// Convert a trigram to its corresponding blade (wrapper for public API).
+pub fn trigram_to_blade(t: &Trigram) -> Blade {
+    t.blade()
+}
+
+/// Compute a "shifted perspective" of a multivector through the lens of a target hexagram.
+/// Builds a rotor from the seed's dominant trigram blade to the target hexagram's upper
+/// trigram blade and applies it to the seed multivector.
+pub fn hexagram_step(seed: &Multivector, target: &Hexagram) -> Option<Multivector> {
+    let seed_trigram = seed.dominant_trigram();
+    let from_blade = seed_trigram.blade();
+    let to_blade = target.upper().blade();
+
+    let n = seed.norm();
+    if n < f64::EPSILON {
+        return None;
+    }
+
+    let from_mv = Multivector::from_blade(from_blade, 1.0);
+    let to_mv = Multivector::from_blade(to_blade, 1.0);
+
+    let from_inv = from_mv.inverse().ok()?;
+    let gp = to_mv.geo_product(&from_inv);
+
+    // R = normalize(1 + B*A⁻¹) ensures the rotor has scalar + bivector parts
+    let one = Multivector::one();
+    let sum = one + gp;
+
+    let rn = sum.norm();
+    if rn < f64::EPSILON {
+        return None;
+    }
+    let normalized = sum * (1.0 / rn);
+
+    let scalar = normalized.grade_projection(0);
+    let bivector = normalized.grade_projection(2);
+    let combined = scalar + bivector;
+
+    let rotor = crate::Rotor::from_multivector(combined)?;
+    Some(rotor.apply(seed))
+}
+
+/// Explore all 64 hexagram perspectives from a seed multivector.
+/// Returns the top_n most-different perspectives, each as (Hexagram, transformed_multivector, interpretation_string).
+pub fn hexagram_explore(seed: &Multivector, top_n: usize) -> Vec<(Hexagram, Multivector, String)> {
+    let mut results: Vec<(Hexagram, Multivector, String)> = Vec::new();
+
+    for upper in &Trigram::ALL {
+        for lower in &Trigram::ALL {
+            let hex = Hexagram::new(*upper, *lower);
+            if let Some(transformed) = hexagram_step(seed, &hex) {
+                let interpretation = format!(
+                    "Hexagram {}: {} ({}) - {}",
+                    hex.binary_number() + 1,
+                    hex.name(),
+                    hex.pinyin(),
+                    hex.interpretation()
+                );
+                results.push((hex, transformed, interpretation));
+            }
+        }
+    }
+
+    // Sort by geometric distance from seed (farthest = most different perspective)
+    results.sort_by(|a, b| {
+        let da = (a.1 - *seed).norm();
+        let db = (b.1 - *seed).norm();
+        db.partial_cmp(&da).unwrap_or(std::cmp::Ordering::Equal)
+    });
+
+    if results.len() > top_n {
+        results.truncate(top_n);
+    }
+    results
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -506,6 +688,60 @@ mod tests {
                 assert!(!h.interpretation().is_empty(), "no interpretation for ({u:?}, {l:?})");
                 assert!(!h.pinyin().is_empty());
             }
+        }
+    }
+
+    #[test]
+    fn trigram_to_blade_is_consistent() {
+        for t in &Trigram::ALL {
+            assert_eq!(trigram_to_blade(t), t.blade());
+        }
+    }
+
+    #[test]
+    fn hexagram_step_produces_different_mv() {
+        let seed = Multivector::new([0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]); // Zhen (E1, grade 1)
+        let target = Hexagram::new(Trigram::Kan, Trigram::Kun); // Kan upper (E2, grade 1)
+        let result = hexagram_step(&seed, &target);
+        assert!(result.is_some(), "same-grade blades should produce a rotor");
+        let transformed = result.unwrap();
+        assert!(!transformed.approx_eq(&seed, 1e-10), "transformed mv should differ from seed");
+    }
+
+    #[test]
+    fn hexagram_step_degenerate_seed_returns_none() {
+        let seed = Multivector::zero();
+        let target = Hexagram::new(Trigram::Qian, Trigram::Kun);
+        assert!(hexagram_step(&seed, &target).is_none());
+    }
+
+    #[test]
+    fn hexagram_step_same_grade_works() {
+        let seed = Multivector::new([0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]); // Li (E12, grade 2)
+        let target = Hexagram::new(Trigram::Xun, Trigram::Kun); // Xun upper (E23, grade 2)
+        let result = hexagram_step(&seed, &target);
+        assert!(result.is_some(), "same-grade blades should produce a rotor");
+    }
+
+    #[test]
+    fn hexagram_explore_returns_results() {
+        let seed = Multivector::new([0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]);
+        let results = hexagram_explore(&seed, 10);
+        assert!(!results.is_empty(), "should return at least some results");
+        assert!(results.len() <= 10);
+        for (_, _, interpretation) in &results {
+            assert!(!interpretation.is_empty());
+        }
+    }
+
+    #[test]
+    fn hexagram_explore_results_sorted_by_distance_descending() {
+        let seed = Multivector::new([0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]);
+        let results = hexagram_explore(&seed, 64);
+        for i in 1..results.len() {
+            let d_prev = (results[i - 1].1 - seed).norm();
+            let d_curr = (results[i].1 - seed).norm();
+            assert!(d_prev >= d_curr - 1e-10, "results should be sorted by distance descending");
         }
     }
 }

@@ -167,7 +167,7 @@ impl Multivector {
     }
 
     /// Returns the canonical Bagua trigram with the strongest coefficient (internal).
-    pub(crate) fn dominant_trigram(&self) -> crate::bagua::Trigram {
+    pub fn dominant_trigram(&self) -> crate::bagua::Trigram {
         let mut max_idx = 0usize;
         let mut max_val = self.coefficients[0].abs();
         for i in 1..8 {
