@@ -1,18 +1,61 @@
 # GA-Bagua Semantic KG — Delivery & Installation Guide
 
-## Quick Start (3 steps)
+## Quick Start (1 command)
 
+```bash
+curl -fsSL https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/npm/setup.js | node -
 ```
-1. Install the binary
-2. Wire it into your LLM client config  
-3. Install the encoding skill
+
+or on Windows PowerShell:
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/trac41799/ga-bagua-semantic-kg/main/npm/setup.js" -OutFile "$env:TEMP\ga-setup.js"; node "$env:TEMP\ga-setup.js"
 ```
+
+The setup script auto-detects your coding agents and configures everything.
 
 ---
 
 ## Step 1: Install the Server Binary
 
-### Option A: Pre-built binary (recommended)
+### Option A: Auto-Setup (recommended — no npm needed)
+
+The one-liner above handles everything: binary download, MCP config, and skill installation.
+
+To re-run just the setup with an already-downloaded binary:
+```bash
+npx ga-semantics-setup --skip-binary
+```
+
+Setup options:
+```
+--help              Show help
+--quiet             Minimal output
+--yes               Auto-confirm all prompts
+--path <dir>        Binary install directory (default: ~/.ga-semantics/bin)
+--skip-binary       Skip binary download
+--skip-config       Skip MCP config installation
+--skip-skills       Skip skill file installation
+--agents <list>     Only configure specific agents (comma-separated)
+--list-agents       List detected agents without configuring
+```
+
+### Option B: Via npm
+
+```bash
+npm install -g ga-semantics-mcp
+```
+
+Then run the setup wizard to configure agents:
+```bash
+npx ga-semantics-setup
+```
+
+Or start the server directly:
+```bash
+npx ga-semantics-mcp
+```
+
+### Option C: Pre-built binary
 
 Download from [GitHub Releases](https://github.com/trac41799/ga-bagua-semantic-kg/releases):
 
@@ -26,20 +69,7 @@ Download from [GitHub Releases](https://github.com/trac41799/ga-bagua-semantic-k
 
 Place it somewhere on your PATH, or note the full path for the config step.
 
-### Option B: Via npm (Node.js wrapper)
-
-```bash
-npm install -g ga-semantics-mcp
-```
-
-This downloads the right binary for your platform and makes `ga-semantics-mcp` available
-globally. Also works with `npx`:
-
-```bash
-npx ga-semantics-mcp
-```
-
-### Option C: Via Cargo (Rust toolchain required)
+### Option D: Via Cargo (Rust toolchain required)
 
 ```bash
 cargo install ga-semantics-mcp
@@ -47,7 +77,7 @@ cargo install ga-semantics-mcp
 
 Requires Rust 1.78+. No C compiler needed (pure Rust, no C dependencies).
 
-### Option D: Build from source
+### Option E: Build from source
 
 ```bash
 git clone https://github.com/trac41799/ga-bagua-semantic-kg.git
@@ -67,6 +97,8 @@ Should return a JSON-RPC response with server info.
 ---
 
 ## Step 2: Configure Your LLM Client
+
+The setup script auto-detects and configures these agents. Manual instructions below for reference.
 
 ### Claude Desktop
 
@@ -250,6 +282,8 @@ ga-semantics-cli wuxing
 
 ## Step 3: Install the Encoding Skill
 
+The setup script installs the skill automatically. Manual steps below for reference.
+
 The LLM needs the encoding guide to produce correct 8-coefficient vectors.
 Copy `docs/skills/bagua-encoder/SKILL.md` to your client's skill directory:
 
@@ -258,6 +292,9 @@ Copy `docs/skills/bagua-encoder/SKILL.md` to your client's skill directory:
 | OpenCode CLI | `.opencode/skills/bagua-encoder/SKILL.md` (project) or `~/.config/opencode/skills/bagua-encoder/SKILL.md` (global) |
 | Claude Code | `.claude/skills/bagua-encoder/SKILL.md` |
 | Cursor | `.cursor/skills/bagua-encoder/SKILL.md` |
+| Continue.dev | `.continue/skills/bagua-encoder/SKILL.md` |
+| Windsurf | `.windsurf/skills/bagua-encoder/SKILL.md` |
+| Cline | `.cline/skills/bagua-encoder/SKILL.md` |
 | General | Any directory the LLM's `@docs` or context system can read |
 
 Alternatively, embed the crib sheet directly in your instructions:

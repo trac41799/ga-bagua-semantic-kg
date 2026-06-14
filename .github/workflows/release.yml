@@ -102,6 +102,8 @@ jobs:
           cp binaries/*.zip npm-package/binaries/ 2>/dev/null || true
           cp npm/package.json npm-package/
           cp npm/install.js npm-package/
+          cp npm/setup.js npm-package/
+          cp npm/run.js npm-package/
           cp npm/README.md npm-package/
 
       - name: Publish to npm

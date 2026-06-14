@@ -20,11 +20,13 @@
   },
   "homepage": "https://github.com/trac41799/ga-bagua-semantic-kg#readme",
   "bin": {
-    "ga-semantics-mcp": "run.js"
+    "ga-semantics-mcp": "run.js",
+    "ga-semantics-setup": "setup.js"
   },
   "files": [
     "run.js",
     "install.js",
+    "setup.js",
     "README.md"
   ],
   "scripts": {

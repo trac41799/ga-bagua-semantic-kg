@@ -39,7 +39,7 @@ function getBinaryName(target) {
 }
 
 function getArchiveName(target) {
-  const base = `ga-semantics-mcp-${target}`;
+  const base = `ga-semantics-${target}`;
   return process.platform === "win32" ? `${base}.zip` : `${base}.tar.gz`;
 }
 
