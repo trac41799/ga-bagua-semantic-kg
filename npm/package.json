@@ -1,6 +1,6 @@
 {
   "name": "ga-semantics-mcp",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "GA-Bagua Semantic KG — MCP server for LLM semantic memory (Claude, Cursor, OpenCode, etc.)",
   "keywords": [
     "mcp",
@@ -32,6 +32,10 @@
   "scripts": {
     "install": "node install.js",
     "postinstall": "node install.js"
+  },
+  "dependencies": {
+    "unzipper": "^0.12.0",
+    "tar": "^6.2.0"
   },
   "engines": {
     "node": ">=16"

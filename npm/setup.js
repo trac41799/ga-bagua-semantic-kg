@@ -11,7 +11,7 @@ const pipelineAsync = promisify(pipeline);
 
 const OWNER = "trac41799";
 const REPO = "ga-bagua-semantic-kg";
-const VERSION = "0.1.6";
+const VERSION = "0.1.7";
 
 const RED = "\x1b[31m";
 const GREEN = "\x1b[32m";
