@@ -13,8 +13,6 @@
 <p align="center">
   <strong>LLM 의미 기억 — 8차원, 64괘 상태, 훈련 불필요.</strong><br>
   <a href="https://crates.io/crates/ga-semantics-core"><img src="https://img.shields.io/crates/v/ga-semantics-core?label=core" alt="Crates.io"></a>
-  <a href="https://crates.io/crates/ga-semantics-mcp"><img src="https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp" alt="Crates.io"></a>
-  <a href="https://crates.io/crates/ga-semantics-cli"><img src="https://img.shields.io/crates/v/ga-semantics-cli?label=cli" alt="Crates.io"></a>
   <a href="https://www.npmjs.com/package/ga-semantics-mcp"><img src="https://img.shields.io/npm/v/ga-semantics-mcp?color=red" alt="npm"></a>
   <a href="#license"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="License"></a>
 </p>
@@ -65,58 +63,6 @@
 | **팀 호환성** | 오행 기반 성격 매칭 및 팀 구성 | Compatible > identical pairs |
 | **학습 경로** | 오행 순서 커리큘럼 시퀀스 생성 | 올바른 단계 순서 |
 | **창의적 발상** | 로터를 통한 64괘 관점 탐색 | 3+ trigram coverage |
-
-## 작동 방식
-
-### 인코딩 (LLM, 일회성)
-```
-개념 설명 → SKILL.md 프로토콜 → LLM이 8개 계수 출력 → llm_encode() → 64바이트 다중벡터
-토큰 비용: 개념당 약 200토큰 (일회성)
-```
-
-### 검색 (대수적, 제로 토큰)
-```
-"제약하는 개념 찾기" → WuXingIndex가 토상 버킷 스캔 → dominant_similarity로 순위 → top-K 반환
-지연시간: 쿼리당 500ns. 토큰: 0.
-```
-
-### 파이프라인 패턴 (LLM + GA-Bagua)
-```
-1. GA-Bagua가 top-K 후보 제시 (0 토큰)
-2. LLM이 각 후보를 원본 설명과 대조 검증 (각 15토큰)
-3. LLM이 결과를 추론하고 발견사항 제시 (50토큰)
-쿼리당 총계: 약 150토큰 vs 모든 설명 읽기의 약 4,000토큰
-```
-
-## 팔괘의 8가지 역할
-
-| 역할 | 괘 | 오행 | Blade | 설명 |
-|------|---------|--------|-------|-------------|
-| 창조 | Qian ☰ | Metal | e123 | 새로운 패턴을 만들고 시작함 |
-| 수용 | Kun ☷ | Earth | scalar | 받아들이고, 따르고, 접지함 |
-| 인과 | Zhen ☳ | Wood | e1 | 촉발하고, 연쇄 반응을 시작함 |
-| 전달 | Kan ☵ | Water | e2 | 전도하고, 흐르고, 전송함 |
-| 제약 | Gen ☶ | Earth | e3 | 제한하고, 경계짓고, 억제함 |
-| 영향 | Xun ☴ | Wood | e23 | 스며들고, 점진적으로 영향을 줌 |
-| 명료화 | Li ☲ | Fire | e12 | 드러내고, 밝힘 |
-| 균형 | Dui ☱ | Metal | e31 | 반영하고, 균형잡고, 비춤 |
-
-## 현재 벤치마크
-
-| 지표 | 값 | 비고 |
-|--------|:-----:|-------|
-| Same-role P@1 (same domain) | 42% | dominant_similarity; 병목은 인코딩 구별성 |
-| Same-role R@10 (same domain) | 100% | 모든 동일 역할 피어가 top-10에 출현 |
-| 관계 분류 (테스트) | 45–52% | from_pair_multi (홀드아웃 쌍) |
-| 인코딩 안정성 | 99.8% | ±5% 노이즈 하에서 지배적 역할 유지 |
-| 멀티홉 (100홉) | 200µs, 제로 드리프트 | GA-Bagua 고유 |
-| 토큰 절약 (200쿼리) | 219x | $101.00 → $0.46/세션 |
-| 무작위 쌍 차단 | 93.5% → 0.0 conf | 선명도 임계값 0.25 |
-| 전체 8개 레이블 예측 | 예 | from_pair_multi가 모든 레이블 동시 점수화 |
-| 저장 | 64바이트/개념 | 100만 개념 = 64 MB |
-| 쿼리 지연시간 | 500ns | 대수적, API 불필요, GPU 불필요 |
-
----
 
 ## 설치
 
@@ -265,6 +211,58 @@ ga-semantics bench semantic
 ```
 
 전체 인코딩 프로토콜은 **[SKILL.md](docs/skills/bagua-encoder/SKILL.md)** 참조.
+
+---
+
+## 작동 방식
+
+### 인코딩 (LLM, 일회성)
+```
+개념 설명 → SKILL.md 프로토콜 → LLM이 8개 계수 출력 → llm_encode() → 64바이트 다중벡터
+토큰 비용: 개념당 약 200토큰 (일회성)
+```
+
+### 검색 (대수적, 제로 토큰)
+```
+"제약하는 개념 찾기" → WuXingIndex가 토상 버킷 스캔 → dominant_similarity로 순위 → top-K 반환
+지연시간: 쿼리당 500ns. 토큰: 0.
+```
+
+### 파이프라인 패턴 (LLM + GA-Bagua)
+```
+1. GA-Bagua가 top-K 후보 제시 (0 토큰)
+2. LLM이 각 후보를 원본 설명과 대조 검증 (각 15토큰)
+3. LLM이 결과를 추론하고 발견사항 제시 (50토큰)
+쿼리당 총계: 약 150토큰 vs 모든 설명 읽기의 약 4,000토큰
+```
+
+## 팔괘의 8가지 역할
+
+| 역할 | 괘 | 오행 | Blade | 설명 |
+|------|---------|--------|-------|-------------|
+| 창조 | Qian ☰ | Metal | e123 | 새로운 패턴을 만들고 시작함 |
+| 수용 | Kun ☷ | Earth | scalar | 받아들이고, 따르고, 접지함 |
+| 인과 | Zhen ☳ | Wood | e1 | 촉발하고, 연쇄 반응을 시작함 |
+| 전달 | Kan ☵ | Water | e2 | 전도하고, 흐르고, 전송함 |
+| 제약 | Gen ☶ | Earth | e3 | 제한하고, 경계짓고, 억제함 |
+| 영향 | Xun ☴ | Wood | e23 | 스며들고, 점진적으로 영향을 줌 |
+| 명료화 | Li ☲ | Fire | e12 | 드러내고, 밝힘 |
+| 균형 | Dui ☱ | Metal | e31 | 반영하고, 균형잡고, 비춤 |
+
+## 현재 벤치마크
+
+| 지표 | 값 | 비고 |
+|--------|:-----:|-------|
+| Same-role P@1 (same domain) | 42% | dominant_similarity; 병목은 인코딩 구별성 |
+| Same-role R@10 (same domain) | 100% | 모든 동일 역할 피어가 top-10에 출현 |
+| 관계 분류 (테스트) | 45–52% | from_pair_multi (홀드아웃 쌍) |
+| 인코딩 안정성 | 99.8% | ±5% 노이즈 하에서 지배적 역할 유지 |
+| 멀티홉 (100홉) | 200µs, 제로 드리프트 | GA-Bagua 고유 |
+| 토큰 절약 (200쿼리) | 219x | $101.00 → $0.46/세션 |
+| 무작위 쌍 차단 | 93.5% → 0.0 conf | 선명도 임계값 0.25 |
+| 전체 8개 레이블 예측 | 예 | from_pair_multi가 모든 레이블 동시 점수화 |
+| 저장 | 64바이트/개념 | 100만 개념 = 64 MB |
+| 쿼리 지연시간 | 500ns | 대수적, API 불필요, GPU 불필요 |
 
 ---
 

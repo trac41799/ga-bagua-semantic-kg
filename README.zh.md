@@ -13,8 +13,6 @@
 <p align="center">
   <strong>LLM 语义记忆 — 8 个维度，64 卦状态，零训练。</strong><br>
   <a href="https://crates.io/crates/ga-semantics-core"><img src="https://img.shields.io/crates/v/ga-semantics-core?label=core" alt="Crates.io"></a>
-  <a href="https://crates.io/crates/ga-semantics-mcp"><img src="https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp" alt="Crates.io"></a>
-  <a href="https://crates.io/crates/ga-semantics-cli"><img src="https://img.shields.io/crates/v/ga-semantics-cli?label=cli" alt="Crates.io"></a>
   <a href="https://www.npmjs.com/package/ga-semantics-mcp"><img src="https://img.shields.io/npm/v/ga-semantics-mcp?color=red" alt="npm"></a>
   <a href="#license"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="License"></a>
 </p>
@@ -65,58 +63,6 @@
 | **团队兼容性** | 基于五行的性格匹配与团队组建 | Compatible > identical pairs |
 | **学习路径** | 生成五行排序的课程序列 | 正确的阶段排序 |
 | **创意构思** | 通过旋量进行 64 卦视角探索 | 3+ trigram coverage |
-
-## 工作原理
-
-### 编码（LLM，一次性）
-```
-概念描述 → SKILL.md 协议 → LLM 输出 8 个系数 → llm_encode() → 64 字节多重向量
-Token 成本：每个概念约 200 token（一次性）
-```
-
-### 检索（代数运算，零 token）
-```
-"查找约束性概念" → WuXingIndex 扫描土相桶 → 按 dominant_similarity 排序 → 返回 top-K
-延迟：每次查询 500ns。Token：0。
-```
-
-### 流水线模式（LLM + GA-Bagua）
-```
-1. GA-Bagua 给出 top-K 候选（0 token）
-2. LLM 根据原始描述验证每个候选（每个 15 token）
-3. LLM 推理结果，呈现发现（50 token）
-每次查询总计：约 150 token，对比读取所有描述的约 4,000 token
-```
-
-## 八卦八种角色
-
-| 角色 | 卦象 | 五行 | Blade | 描述 |
-|------|---------|--------|-------|-------------|
-| 创造 | Qian ☰ | Metal | e123 | 创造、启动新模式 |
-| 接纳 | Kun ☷ | Earth | scalar | 接受、跟随、扎根 |
-| 因果 | Zhen ☳ | Wood | e1 | 触发、启动连锁反应 |
-| 传递 | Kan ☵ | Water | e2 | 传导、流动、传输 |
-| 约束 | Gen ☶ | Earth | e3 | 限制、约束、边界 |
-| 渗透 | Xun ☴ | Wood | e23 | 弥漫、逐渐影响 |
-| 澄清 | Li ☲ | Fire | e12 | 揭示、照亮 |
-| 平衡 | Dui ☱ | Metal | e31 | 镜像、平衡、反射 |
-
-## 当前基准测试
-
-| 指标 | 值 | 说明 |
-|--------|:-----:|-------|
-| Same-role P@1 (same domain) | 42% | dominant_similarity；瓶颈是编码区分度 |
-| Same-role R@10 (same domain) | 100% | 所有同角色对等项出现在 top-10 |
-| 关系分类（测试） | 45–52% | from_pair_multi 在保留对上 |
-| 编码稳定性 | 99.8% | ±5% 噪声下主导角色保持不变 |
-| 多跳（100 跳） | 200µs，零漂移 | GA-Bagua 独有 |
-| Token 节省（200 次查询） | 219x | $101.00 → $0.46 每会话 |
-| 随机对过滤 | 93.5% → 0.0 conf | 锐度阈值 0.25 |
-| 全部 8 个标签预测 | 是 | from_pair_multi 同时评分所有标签 |
-| 存储 | 64 字节/概念 | 100 万概念 = 64 MB |
-| 查询延迟 | 500ns | 代数运算，无 API，无 GPU |
-
----
 
 ## 安装
 
@@ -265,6 +211,58 @@ ga-semantics bench semantic
 ```
 
 完整编码协议请参阅 **[SKILL.md](docs/skills/bagua-encoder/SKILL.md)**。
+
+---
+
+## 工作原理
+
+### 编码（LLM，一次性）
+```
+概念描述 → SKILL.md 协议 → LLM 输出 8 个系数 → llm_encode() → 64 字节多重向量
+Token 成本：每个概念约 200 token（一次性）
+```
+
+### 检索（代数运算，零 token）
+```
+"查找约束性概念" → WuXingIndex 扫描土相桶 → 按 dominant_similarity 排序 → 返回 top-K
+延迟：每次查询 500ns。Token：0。
+```
+
+### 流水线模式（LLM + GA-Bagua）
+```
+1. GA-Bagua 给出 top-K 候选（0 token）
+2. LLM 根据原始描述验证每个候选（每个 15 token）
+3. LLM 推理结果，呈现发现（50 token）
+每次查询总计：约 150 token，对比读取所有描述的约 4,000 token
+```
+
+## 八卦八种角色
+
+| 角色 | 卦象 | 五行 | Blade | 描述 |
+|------|---------|--------|-------|-------------|
+| 创造 | Qian ☰ | Metal | e123 | 创造、启动新模式 |
+| 接纳 | Kun ☷ | Earth | scalar | 接受、跟随、扎根 |
+| 因果 | Zhen ☳ | Wood | e1 | 触发、启动连锁反应 |
+| 传递 | Kan ☵ | Water | e2 | 传导、流动、传输 |
+| 约束 | Gen ☶ | Earth | e3 | 限制、约束、边界 |
+| 渗透 | Xun ☴ | Wood | e23 | 弥漫、逐渐影响 |
+| 澄清 | Li ☲ | Fire | e12 | 揭示、照亮 |
+| 平衡 | Dui ☱ | Metal | e31 | 镜像、平衡、反射 |
+
+## 当前基准测试
+
+| 指标 | 值 | 说明 |
+|--------|:-----:|-------|
+| Same-role P@1 (same domain) | 42% | dominant_similarity；瓶颈是编码区分度 |
+| Same-role R@10 (same domain) | 100% | 所有同角色对等项出现在 top-10 |
+| 关系分类（测试） | 45–52% | from_pair_multi 在保留对上 |
+| 编码稳定性 | 99.8% | ±5% 噪声下主导角色保持不变 |
+| 多跳（100 跳） | 200µs，零漂移 | GA-Bagua 独有 |
+| Token 节省（200 次查询） | 219x | $101.00 → $0.46 每会话 |
+| 随机对过滤 | 93.5% → 0.0 conf | 锐度阈值 0.25 |
+| 全部 8 个标签预测 | 是 | from_pair_multi 同时评分所有标签 |
+| 存储 | 64 字节/概念 | 100 万概念 = 64 MB |
+| 查询延迟 | 500ns | 代数运算，无 API，无 GPU |
 
 ---
 

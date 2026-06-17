@@ -14,8 +14,6 @@
   <strong>LLM semantic memory — 8 bytes × 8 roles = 64 bytes per concept.<br>
   Deterministic, zero-training, interpretable.</strong><br>
   <a href="https://crates.io/crates/ga-semantics-core"><img src="https://img.shields.io/crates/v/ga-semantics-core?label=core" alt="Crates.io"></a>
-  <a href="https://crates.io/crates/ga-semantics-mcp"><img src="https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp" alt="Crates.io"></a>
-  <a href="https://crates.io/crates/ga-semantics-cli"><img src="https://img.shields.io/crates/v/ga-semantics-cli?label=cli" alt="Crates.io"></a>
   <a href="https://www.npmjs.com/package/ga-semantics-mcp"><img src="https://img.shields.io/npm/v/ga-semantics-mcp?color=red" alt="npm"></a>
   <a href="#license"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="License"></a>
    <a href="#tests"><img src="https://img.shields.io/badge/tests-228%20passing-brightgreen" alt="Tests"></a>
@@ -64,28 +62,6 @@ Agent query: "Which concepts constrain throughput?"
 | **Team compatibility** | WuXing-based personality matching and team formation | Compatible > identical pairs |
 | **Learning paths** | Generate WuXing-ordered curriculum sequences | Correct phase ordering |
 | **Creative ideation** | 64-hexagram perspective exploration via rotors | 3+ trigram coverage |
-
-## How It Works
-
-### Encoding (LLM, one-time)
-```
-Concept description → SKILL.md protocol → LLM outputs 8 coefficients → llm_encode() → 64-byte Multivector
-Token cost: ~200 tokens per concept (one-time)
-```
-
-### Retrieval (algebraic, zero-token)
-```
-"Find constraining concepts" → WuXingIndex scans Earth-phase bucket → ranks by dominant_similarity → returns top-K
-Latency: 500ns per query. Tokens: 0.
-```
-
-### Pipeline Pattern (LLM + GA-Bagua)
-```
-1. GA-Bagua surfaces top-K candidates (0 tokens)
-2. LLM verifies each candidate against original descriptions (15 tokens each)
-3. LLM reasons about results, presents findings (50 tokens)
-Total per query: ~150 tokens vs ~4,000 tokens reading all descriptions
-```
 
 ## Installation
 
@@ -236,6 +212,28 @@ Normalize to unit length. Output only a JSON array of 8 floats.
 See **[SKILL.md](docs/skills/bagua-encoder/SKILL.md)** for the full encoding protocol.
 
 ---
+
+## How It Works
+
+### Encoding (LLM, one-time)
+```
+Concept description → SKILL.md protocol → LLM outputs 8 coefficients → llm_encode() → 64-byte Multivector
+Token cost: ~200 tokens per concept (one-time)
+```
+
+### Retrieval (algebraic, zero-token)
+```
+"Find constraining concepts" → WuXingIndex scans Earth-phase bucket → ranks by dominant_similarity → returns top-K
+Latency: 500ns per query. Tokens: 0.
+```
+
+### Pipeline Pattern (LLM + GA-Bagua)
+```
+1. GA-Bagua surfaces top-K candidates (0 tokens)
+2. LLM verifies each candidate against original descriptions (15 tokens each)
+3. LLM reasons about results, presents findings (50 tokens)
+Total per query: ~150 tokens vs ~4,000 tokens reading all descriptions
+```
 
 ## Rust API
 

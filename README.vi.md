@@ -13,8 +13,6 @@
 <p align="center">
   <strong>Bộ nhớ ngữ nghĩa cho LLM — 8 chiều, 64 trạng thái quẻ, không cần huấn luyện.</strong><br>
   <a href="https://crates.io/crates/ga-semantics-core"><img src="https://img.shields.io/crates/v/ga-semantics-core?label=core" alt="Crates.io"></a>
-  <a href="https://crates.io/crates/ga-semantics-mcp"><img src="https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp" alt="Crates.io"></a>
-  <a href="https://crates.io/crates/ga-semantics-cli"><img src="https://img.shields.io/crates/v/ga-semantics-cli?label=cli" alt="Crates.io"></a>
   <a href="https://www.npmjs.com/package/ga-semantics-mcp"><img src="https://img.shields.io/npm/v/ga-semantics-mcp?color=red" alt="npm"></a>
   <a href="#license"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="License"></a>
 </p>
@@ -65,58 +63,6 @@ Suy luận hoàn tất trong **34 nano giây** đến **320 micro giây** với 
 | **Tương thích nhóm** | Ghép cặp tính cách và thành lập nhóm dựa trên Ngũ Hành | Compatible > identical pairs |
 | **Lộ trình học tập** | Tạo chuỗi chương trình giảng dạy theo thứ tự Ngũ Hành | Đúng thứ tự pha |
 | **Sáng tạo ý tưởng** | Khám phá góc nhìn 64 quẻ qua rotor | 3+ trigram coverage |
-
-## Cách Thức Hoạt động
-
-### Mã hóa (LLM, một lần)
-```
-Mô tả khái niệm → Giao thức SKILL.md → LLM xuất 8 hệ số → llm_encode() → Đa vectơ 64 byte
-Chi phí token: ~200 token mỗi khái niệm (một lần)
-```
-
-### Truy xuất (đại số, không token)
-```
-"Tìm khái niệm ràng buộc" → WuXingIndex quét bucket pha Thổ → xếp hạng dominant_similarity → trả về top-K
-Độ trễ: 500ns mỗi truy vấn. Token: 0.
-```
-
-### Mô hình Đường ống (LLM + GA-Bagua)
-```
-1. GA-Bagua đưa ra top-K ứng viên (0 token)
-2. LLM xác minh từng ứng viên với mô tả gốc (15 token mỗi cái)
-3. LLM suy luận kết quả, trình bày phát hiện (50 token)
-Tổng mỗi truy vấn: ~150 token so với ~4,000 token khi đọc tất cả mô tả
-```
-
-## 8 Vai trò Bát Quái
-
-| Vai trò | Quẻ | Ngũ Hành | Blade | Mô tả |
-|------|---------|--------|-------|-------------|
-| sáng tạo | Qian ☰ | Metal | e123 | Tạo ra, khởi xướng các khuôn mẫu mới |
-| tiếp nhận | Kun ☷ | Earth | scalar | Chấp nhận, tuân theo, tiếp đất |
-| nhân quả | Zhen ☳ | Wood | e1 | Kích hoạt, khởi tạo phản ứng dây chuyền |
-| truyền dẫn | Kan ☵ | Water | e2 | Dẫn truyền, lưu chuyển, truyền tải |
-| ràng buộc | Gen ☶ | Earth | e3 | Giới hạn, định biên, hạn chế |
-| ảnh hưởng | Xun ☴ | Wood | e23 | Thấm nhuần, ảnh hưởng dần dần |
-| làm rõ | Li ☲ | Fire | e12 | Tiết lộ, soi sáng |
-| cân bằng | Dui ☱ | Metal | e31 | Phản chiếu, cân bằng, phản ánh |
-
-## Điểm chuẩn Hiện tại
-
-| Chỉ số | Giá trị | Ghi chú |
-|--------|:-----:|-------|
-| Same-role P@1 (same domain) | 42% | dominant_similarity; nút thắt là độ phân biệt mã hóa |
-| Same-role R@10 (same domain) | 100% | Tất cả cùng vai trò xuất hiện trong top-10 |
-| Phân loại quan hệ (kiểm thử) | 45–52% | from_pair_multi trên cặp giữ lại |
-| Độ ổn định mã hóa | 99.8% | Vai trò trội được giữ dưới ±5% nhiễu |
-| Đa bước (100 bước) | 200µs, không lệch | Độc quyền GA-Bagua |
-| Tiết kiệm token (200 truy vấn) | 219x | $101.00 → $0.46 mỗi phiên |
-| Cặp ngẫu nhiên bị chặn | 93.5% → 0.0 conf | Ngưỡng sắc nét 0.25 |
-| Dự đoán đủ 8 nhãn | Có | from_pair_multi chấm tất cả đồng thời |
-| Lưu trữ | 64 byte/khái niệm | 1M khái niệm = 64 MB |
-| Độ trễ truy vấn | 500ns | Đại số, không API, không GPU |
-
----
 
 ## Cài đặt
 
@@ -265,6 +211,58 @@ Chuẩn hóa về độ dài đơn vị. Chỉ xuất ra một mảng JSON gồm
 ```
 
 Xem **[SKILL.md](docs/skills/bagua-encoder/SKILL.md)** để biết giao thức mã hóa đầy đủ.
+
+---
+
+## Cách Thức Hoạt động
+
+### Mã hóa (LLM, một lần)
+```
+Mô tả khái niệm → Giao thức SKILL.md → LLM xuất 8 hệ số → llm_encode() → Đa vectơ 64 byte
+Chi phí token: ~200 token mỗi khái niệm (một lần)
+```
+
+### Truy xuất (đại số, không token)
+```
+"Tìm khái niệm ràng buộc" → WuXingIndex quét bucket pha Thổ → xếp hạng dominant_similarity → trả về top-K
+Độ trễ: 500ns mỗi truy vấn. Token: 0.
+```
+
+### Mô hình Đường ống (LLM + GA-Bagua)
+```
+1. GA-Bagua đưa ra top-K ứng viên (0 token)
+2. LLM xác minh từng ứng viên với mô tả gốc (15 token mỗi cái)
+3. LLM suy luận kết quả, trình bày phát hiện (50 token)
+Tổng mỗi truy vấn: ~150 token so với ~4,000 token khi đọc tất cả mô tả
+```
+
+## 8 Vai trò Bát Quái
+
+| Vai trò | Quẻ | Ngũ Hành | Blade | Mô tả |
+|------|---------|--------|-------|-------------|
+| sáng tạo | Qian ☰ | Metal | e123 | Tạo ra, khởi xướng các khuôn mẫu mới |
+| tiếp nhận | Kun ☷ | Earth | scalar | Chấp nhận, tuân theo, tiếp đất |
+| nhân quả | Zhen ☳ | Wood | e1 | Kích hoạt, khởi tạo phản ứng dây chuyền |
+| truyền dẫn | Kan ☵ | Water | e2 | Dẫn truyền, lưu chuyển, truyền tải |
+| ràng buộc | Gen ☶ | Earth | e3 | Giới hạn, định biên, hạn chế |
+| ảnh hưởng | Xun ☴ | Wood | e23 | Thấm nhuần, ảnh hưởng dần dần |
+| làm rõ | Li ☲ | Fire | e12 | Tiết lộ, soi sáng |
+| cân bằng | Dui ☱ | Metal | e31 | Phản chiếu, cân bằng, phản ánh |
+
+## Điểm chuẩn Hiện tại
+
+| Chỉ số | Giá trị | Ghi chú |
+|--------|:-----:|-------|
+| Same-role P@1 (same domain) | 42% | dominant_similarity; nút thắt là độ phân biệt mã hóa |
+| Same-role R@10 (same domain) | 100% | Tất cả cùng vai trò xuất hiện trong top-10 |
+| Phân loại quan hệ (kiểm thử) | 45–52% | from_pair_multi trên cặp giữ lại |
+| Độ ổn định mã hóa | 99.8% | Vai trò trội được giữ dưới ±5% nhiễu |
+| Đa bước (100 bước) | 200µs, không lệch | Độc quyền GA-Bagua |
+| Tiết kiệm token (200 truy vấn) | 219x | $101.00 → $0.46 mỗi phiên |
+| Cặp ngẫu nhiên bị chặn | 93.5% → 0.0 conf | Ngưỡng sắc nét 0.25 |
+| Dự đoán đủ 8 nhãn | Có | from_pair_multi chấm tất cả đồng thời |
+| Lưu trữ | 64 byte/khái niệm | 1M khái niệm = 64 MB |
+| Độ trễ truy vấn | 500ns | Đại số, không API, không GPU |
 
 ---
 

@@ -13,8 +13,6 @@
 <p align="center">
   <strong>LLMの意味記憶 — 8次元、64卦状態、学習不要。</strong><br>
   <a href="https://crates.io/crates/ga-semantics-core"><img src="https://img.shields.io/crates/v/ga-semantics-core?label=core" alt="Crates.io"></a>
-  <a href="https://crates.io/crates/ga-semantics-mcp"><img src="https://img.shields.io/crates/v/ga-semantics-mcp?label=mcp" alt="Crates.io"></a>
-  <a href="https://crates.io/crates/ga-semantics-cli"><img src="https://img.shields.io/crates/v/ga-semantics-cli?label=cli" alt="Crates.io"></a>
   <a href="https://www.npmjs.com/package/ga-semantics-mcp"><img src="https://img.shields.io/npm/v/ga-semantics-mcp?color=red" alt="npm"></a>
   <a href="#license"><img src="https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue" alt="License"></a>
 </p>
@@ -65,58 +63,6 @@
 | **チーム互換性** | 五行ベースの性格マッチングとチーム編成 | Compatible > identical pairs |
 | **学習パス** | 五行順序のカリキュラムシーケンスを生成 | 正しいフェーズ順序 |
 | **創造的発想** | ローターによる64卦視点探索 | 3+ trigram coverage |
-
-## 仕組み
-
-### エンコード（LLM、一回限り）
-```
-概念説明 → SKILL.mdプロトコル → LLMが8つの係数を出力 → llm_encode() → 64バイト多重ベクトル
-トークンコスト：概念あたり約200トークン（一回限り）
-```
-
-### 検索（代数的、ゼロトークン）
-```
-"制約する概念を検索" → WuXingIndexが土相バケットをスキャン → dominant_similarityでランク付け → top-Kを返す
-レイテンシ：500ns/クエリ。トークン：0。
-```
-
-### パイプラインパターン（LLM + GA-Bagua）
-```
-1. GA-Baguaがtop-K候補を提示（0トークン）
-2. LLMが各候補を元の説明と照合（各15トークン）
-3. LLMが結果を推論し、発見を提示（50トークン）
-クエリあたり合計：約150トークン vs 全説明読込の約4,000トークン
-```
-
-## 八卦の8つの役割
-
-| 役割 | 卦 | 五行 | Blade | 説明 |
-|------|---------|--------|-------|-------------|
-| 生成 | Qian ☰ | Metal | e123 | 新しいパターンを創造、開始する |
-| 受容 | Kun ☷ | Earth | scalar | 受け入れ、従う、接地する |
-| 因果 | Zhen ☳ | Wood | e1 | 引き金となり、連鎖反応を開始する |
-| 伝達 | Kan ☵ | Water | e2 | 導き、流れ、伝達する |
-| 制約 | Gen ☶ | Earth | e3 | 制限し、境界を定め、抑制する |
-| 影響 | Xun ☴ | Wood | e23 | 浸透し、徐々に影響を与える |
-| 明確化 | Li ☲ | Fire | e12 | 明らかにし、照らし出す |
-| 均衡 | Dui ☱ | Metal | e31 | 反映し、均衡させ、映し出す |
-
-## 現在のベンチマーク
-
-| 指標 | 値 | 備考 |
-|--------|:-----:|-------|
-| Same-role P@1 (same domain) | 42% | dominant_similarity；ボトルネックはエンコードの識別性 |
-| Same-role R@10 (same domain) | 100% | 全ての同役割ピアがtop-10に出現 |
-| 関係分類（テスト） | 45–52% | from_pair_multi（ホールドアウトペア） |
-| エンコード安定性 | 99.8% | ±5%ノイズ下で支配的役割が保持される |
-| マルチホップ（100ホップ） | 200µs、ゼロドリフト | GA-Bagua固有 |
-| トークン節約（200クエリ） | 219x | $101.00 → $0.46/セッション |
-| ランダムペア遮断 | 93.5% → 0.0 conf | シャープネス閾値0.25 |
-| 全8ラベル予測 | はい | from_pair_multiが全て同時にスコア |
-| ストレージ | 64バイト/概念 | 100万概念 = 64 MB |
-| クエリレイテンシ | 500ns | 代数的、API不要、GPU不要 |
-
----
 
 ## インストール
 
@@ -265,6 +211,58 @@ ga-semantics bench semantic
 ```
 
 完全なエンコードプロトコルは **[SKILL.md](docs/skills/bagua-encoder/SKILL.md)** を参照。
+
+---
+
+## 仕組み
+
+### エンコード（LLM、一回限り）
+```
+概念説明 → SKILL.mdプロトコル → LLMが8つの係数を出力 → llm_encode() → 64バイト多重ベクトル
+トークンコスト：概念あたり約200トークン（一回限り）
+```
+
+### 検索（代数的、ゼロトークン）
+```
+"制約する概念を検索" → WuXingIndexが土相バケットをスキャン → dominant_similarityでランク付け → top-Kを返す
+レイテンシ：500ns/クエリ。トークン：0。
+```
+
+### パイプラインパターン（LLM + GA-Bagua）
+```
+1. GA-Baguaがtop-K候補を提示（0トークン）
+2. LLMが各候補を元の説明と照合（各15トークン）
+3. LLMが結果を推論し、発見を提示（50トークン）
+クエリあたり合計：約150トークン vs 全説明読込の約4,000トークン
+```
+
+## 八卦の8つの役割
+
+| 役割 | 卦 | 五行 | Blade | 説明 |
+|------|---------|--------|-------|-------------|
+| 生成 | Qian ☰ | Metal | e123 | 新しいパターンを創造、開始する |
+| 受容 | Kun ☷ | Earth | scalar | 受け入れ、従う、接地する |
+| 因果 | Zhen ☳ | Wood | e1 | 引き金となり、連鎖反応を開始する |
+| 伝達 | Kan ☵ | Water | e2 | 導き、流れ、伝達する |
+| 制約 | Gen ☶ | Earth | e3 | 制限し、境界を定め、抑制する |
+| 影響 | Xun ☴ | Wood | e23 | 浸透し、徐々に影響を与える |
+| 明確化 | Li ☲ | Fire | e12 | 明らかにし、照らし出す |
+| 均衡 | Dui ☱ | Metal | e31 | 反映し、均衡させ、映し出す |
+
+## 現在のベンチマーク
+
+| 指標 | 値 | 備考 |
+|--------|:-----:|-------|
+| Same-role P@1 (same domain) | 42% | dominant_similarity；ボトルネックはエンコードの識別性 |
+| Same-role R@10 (same domain) | 100% | 全ての同役割ピアがtop-10に出現 |
+| 関係分類（テスト） | 45–52% | from_pair_multi（ホールドアウトペア） |
+| エンコード安定性 | 99.8% | ±5%ノイズ下で支配的役割が保持される |
+| マルチホップ（100ホップ） | 200µs、ゼロドリフト | GA-Bagua固有 |
+| トークン節約（200クエリ） | 219x | $101.00 → $0.46/セッション |
+| ランダムペア遮断 | 93.5% → 0.0 conf | シャープネス閾値0.25 |
+| 全8ラベル予測 | はい | from_pair_multiが全て同時にスコア |
+| ストレージ | 64バイト/概念 | 100万概念 = 64 MB |
+| クエリレイテンシ | 500ns | 代数的、API不要、GPU不要 |
 
 ---
 
