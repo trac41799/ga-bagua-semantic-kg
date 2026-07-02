@@ -5,5 +5,6 @@ members = [
     "ga-semantics-mcp",
     "ga-doc-intel",
     "ga-cognitive",
+    "ga-benchmarks",
 ]
 resolver = "2"

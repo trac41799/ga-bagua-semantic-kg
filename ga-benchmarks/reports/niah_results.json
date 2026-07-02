@@ -1,0 +1,113 @@
+{
+  "test_id": "NIAH-01",
+  "name": "Needle-In-A-Haystack: GA-Bagua vs LLM-Alone",
+  "haystack_tokens": 8000,
+  "num_needles": 5,
+  "depth_map": {
+    "0": 10,
+    "1": 25,
+    "2": 50,
+    "3": 75,
+    "4": 90
+  },
+  "llm_alone": {
+    "total_tokens": 190953,
+    "per_query_tokens": 38190.6,
+    "accuracy": 1.0,
+    "queries": [
+      {
+        "needle": 0,
+        "question": "What is the codename and passphrase for the special project?",
+        "answer": "PHOENIX-ALPHA, CRYSTAL-DRAGON-7429",
+        "tokens": 38193,
+        "correct": true,
+        "fragments_matched": "2/2"
+      },
+      {
+        "needle": 1,
+        "question": "What is the database connection pool size and timeout?",
+        "answer": "427 connections, 83 seconds timeout.",
+        "tokens": 38178,
+        "correct": true,
+        "fragments_matched": "2/2"
+      },
+      {
+        "needle": 2,
+        "question": "Who is the emergency security contact and what is their email?",
+        "answer": "Dr. Sarah Chen, sarah.chen@example.com",
+        "tokens": 38184,
+        "correct": true,
+        "fragments_matched": "2/2"
+      },
+      {
+        "needle": 3,
+        "question": "What is the API rate limit threshold and burst allowance?",
+        "answer": "15,700 requests per minute, burst allowance of 2,300.",
+        "tokens": 38186,
+        "correct": true,
+        "fragments_matched": "2/2"
+      },
+      {
+        "needle": 4,
+        "question": "How often does encryption key rotation happen and what fingerprint?",
+        "answer": "Every 7 days, SHA256:9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d.",
+        "tokens": 38212,
+        "correct": true,
+        "fragments_matched": "2/2"
+      }
+    ]
+  },
+  "llm_ga_bagua": {
+    "encode_tokens": 1000,
+    "query_tokens": 1055,
+    "total_tokens": 2055,
+    "concepts_encoded": 5,
+    "accuracy": 1.0,
+    "queries": [
+      {
+        "needle": 0,
+        "question": "What is the codename and passphrase for the special project?",
+        "answer": "Codename: PHOENIX-ALPHA. Passphrase: CRYSTAL-DRAGON-7429.",
+        "tokens": 234,
+        "correct": true
+      },
+      {
+        "needle": 1,
+        "question": "What is the database connection pool size and timeout?",
+        "answer": "Database connection pool size: 427 connections, timeout: 83 seconds.",
+        "tokens": 174,
+        "correct": true
+      },
+      {
+        "needle": 2,
+        "question": "Who is the emergency security contact and what is their email?",
+        "answer": "Dr. Sarah Chen, sarah.chen@example.com",
+        "tokens": 215,
+        "correct": true
+      },
+      {
+        "needle": 3,
+        "question": "What is the API rate limit threshold and burst allowance?",
+        "answer": "Rate limit: 15,700 requests/minute with burst allowance of 2,300.",
+        "tokens": 178,
+        "correct": true
+      },
+      {
+        "needle": 4,
+        "question": "How often does encryption key rotation happen and what fingerprint?",
+        "answer": "Encryption key rotation happens every 7 days. Fingerprint: SHA256:9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d.",
+        "tokens": 254,
+        "correct": true
+      }
+    ]
+  },
+  "comparison": {
+    "llm_alone_tokens": 190953,
+    "llm_ga_bagua_tokens": 2055,
+    "token_savings": 188898,
+    "savings_ratio": 92.92116788321168,
+    "llm_alone_accuracy": 1.0,
+    "llm_ga_bagua_accuracy": 1.0,
+    "accuracy_delta": 0.0
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "next_concept_id": 6,
+  "next_relation_id": 1,
+  "concepts": [
+    {
+      "id": 1,
+      "name": "Project Phoenix",
+      "text": "Special project with codename PHOENIX-ALPHA and passphrase CRYSTAL-DRAGON-7429. Authorization expires 2027-03-15.",
+      "encoding": [
+        0.05923488777590923,
+        -0.05923488777590923,
+        -0.11846977555181847,
+        0.29617443887954614,
+        0.8885233166386384,
+        -0.1777046633277277,
+        0.23693955110363693,
+        -0.11846977555181847
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 2,
+      "name": "Database Connection Pool",
+      "text": "Database configuration: pool size 427 connections, timeout 83 seconds. Production-critical.",
+      "encoding": [
+        0.13245323570650439,
+        -0.06622661785325219,
+        0.19867985355975656,
+        0.9271726499455306,
+        -0.19867985355975656,
+        -0.13245323570650439,
+        -0.13245323570650439,
+        -0.06622661785325219
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 3,
+      "name": "Security Emergency Contact",
+      "text": "Emergency contact: Dr. Sarah Chen, sarah.chen@example.com, phone +1-555-0192. Escalation time: 15 minutes.",
+      "encoding": [
+        0.19999999999999998,
+        0.3333333333333333,
+        -0.19999999999999998,
+        -0.13333333333333333,
+        -0.13333333333333333,
+        0.8666666666666667,
+        -0.13333333333333333,
+        -0.06666666666666667
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 4,
+      "name": "API Rate Limit Threshold",
+      "text": "Rate limit: 15,700 requests/minute with burst allowance of 2,300. Triggers circuit-breaker on exceed.",
+      "encoding": [
+        0.05270755594836901,
+        -0.10541511189673802,
+        -0.5270755594836901,
+        0.7168227608978186,
+        0.15812266784510703,
+        -0.21083022379347605,
+        0.15812266784510703,
+        -0.31624533569021407
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 5,
+      "name": "Encryption Key Rotation",
+      "text": "Key rotation every 7 days using AES-256-GCM. Fingerprint: SHA256:9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d.",
+      "encoding": [
+        0.1414213562373095,
+        0.42426406871192845,
+        0.21213203435596423,
+        -0.282842712474619,
+        0.7778174593052023,
+        -0.21213203435596423,
+        -0.1414213562373095,
+        0.07071067811865475
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    }
+  ],
+  "relations": []
+}

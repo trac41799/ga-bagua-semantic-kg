@@ -1,0 +1,16 @@
+[package]
+name = "ga-benchmarks"
+version = "0.1.0"
+edition = "2021"
+description = "LLM integration benchmarks for GA-Bagua Semantic KG"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+ga-semantics-core = { path = "../ga-semantics-core", features = ["store"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+chrono = "0.4"
+
+[dev-dependencies]
+tempfile = "3"

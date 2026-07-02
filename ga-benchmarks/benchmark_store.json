@@ -1,0 +1,1047 @@
+{
+  "next_concept_id": 66,
+  "next_relation_id": 1,
+  "concepts": [
+    {
+      "id": 1,
+      "name": "Rate Limiter",
+      "text": "Restricts the number of requests a client can make in a time window",
+      "encoding": [
+        0.040234038111328425,
+        -0.09052658575048896,
+        -0.5129839859194375,
+        0.6839786478925833,
+        0.21122870008447425,
+        -0.2615212477236348,
+        0.17099466197314583,
+        -0.34198932394629167
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 2,
+      "name": "Circuit Breaker",
+      "text": "Prevents cascading failures by stopping calls to a failing service",
+      "encoding": [
+        0.05391638660171921,
+        -0.05391638660171921,
+        -0.4852474794154729,
+        0.754829412424069,
+        0.16174915980515764,
+        -0.21566554640687685,
+        0.10783277320343844,
+        -0.3234983196103153
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 3,
+      "name": "Message Queue",
+      "text": "Transmits events between services asynchronously with guaranteed delivery",
+      "encoding": [
+        0.1602560444155401,
+        0.2670934073592335,
+        0.8653826398439165,
+        -0.1068373629436934,
+        -0.1602560444155401,
+        0.1068373629436934,
+        0.3205120888310802,
+        0.053418681471846696
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 4,
+      "name": "Authentication Service",
+      "text": "Verifies user identity and issues access tokens",
+      "encoding": [
+        0.056613851707229795,
+        -0.1132277034144596,
+        -0.1132277034144596,
+        0.3962969619506085,
+        0.8492077756084468,
+        -0.1132277034144596,
+        0.16984155512168936,
+        -0.2264554068289192
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 5,
+      "name": "Load Balancer",
+      "text": "Distributes incoming traffic across multiple server instances",
+      "encoding": [
+        0.1132277034144596,
+        -0.16984155512168936,
+        0.5095246653650681,
+        -0.2264554068289192,
+        0.056613851707229795,
+        -0.1132277034144596,
+        0.792593923901217,
+        -0.056613851707229795
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 6,
+      "name": "Config Store",
+      "text": "Central repository for application configuration values with versioning",
+      "encoding": [
+        0.901127113779166,
+        0.06257827179021987,
+        -0.12515654358043973,
+        0.3128913589510993,
+        -0.06257827179021987,
+        0.12515654358043973,
+        -0.1877348153706596,
+        0.12515654358043973
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 7,
+      "name": "Event Trigger",
+      "text": "Initiates automated workflows when specific conditions are met",
+      "encoding": [
+        0.11846977555181848,
+        0.77005354108682,
+        -0.1777046633277277,
+        -0.23693955110363693,
+        -0.11846977555181848,
+        0.41464421443136457,
+        -0.1777046633277277,
+        0.29617443887954614
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 8,
+      "name": "Monitoring Dashboard",
+      "text": "Visualizes system metrics and alerts with real-time updates",
+      "encoding": [
+        0.064018439966448,
+        0.3841106397986879,
+        -0.128036879932896,
+        -0.32009219983223997,
+        0.256073759865792,
+        0.7682212795973759,
+        -0.19205531989934396,
+        0.19205531989934396
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 9,
+      "name": "Token Bucket",
+      "text": "Algorithm that controls data transmission rate using tokens",
+      "encoding": [
+        0.08482842907381935,
+        -0.127242643610729,
+        -0.583195449882508,
+        0.6574203253220999,
+        0.19086396541609352,
+        -0.2332781799530032,
+        0.15905330451341126,
+        -0.29689950175836777
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 10,
+      "name": "Service Mesh",
+      "text": "Infrastructure layer for service-to-service communication with observability",
+      "encoding": [
+        0.1486246194159923,
+        0.12385384951332692,
+        0.8669769465932884,
+        -0.18578077426999037,
+        -0.06192692475666346,
+        0.3096346237833173,
+        -0.12385384951332692,
+        0.24770769902665385
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 11,
+      "name": "API Gateway",
+      "text": "Single entry point for all client requests, handles routing and auth",
+      "encoding": [
+        0.11704114719613055,
+        -0.05852057359806528,
+        -0.4681645887845222,
+        0.7607674567748486,
+        0.29260286799032637,
+        -0.17556172079419582,
+        0.11704114719613055,
+        -0.2340822943922611
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 12,
+      "name": "Database Replica",
+      "text": "Read-only copy of primary database for scaling read operations",
+      "encoding": [
+        0.9149178015729322,
+        0.0672733677627156,
+        0.1345467355254312,
+        0.2690934710508624,
+        -0.0672733677627156,
+        0.2018201032881468,
+        -0.1345467355254312,
+        -0.0672733677627156
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 13,
+      "name": "Caching Layer",
+      "text": "Stores frequently accessed data in memory to reduce database load",
+      "encoding": [
+        0.06350006350009527,
+        -0.12700012700019053,
+        0.25400025400038106,
+        -0.19050019050028577,
+        0.8890008890013336,
+        -0.12700012700019053,
+        0.19050019050028577,
+        -0.19050019050028577
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 14,
+      "name": "Rate Limiter",
+      "text": "Restricts the number of requests a client can make in a time window",
+      "encoding": [
+        0.040234038111328425,
+        -0.09052658575048896,
+        -0.5129839859194375,
+        0.6839786478925833,
+        0.21122870008447425,
+        -0.2615212477236348,
+        0.17099466197314583,
+        -0.34198932394629167
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 15,
+      "name": "Circuit Breaker",
+      "text": "Prevents cascading failures by stopping calls to a failing service",
+      "encoding": [
+        0.05391638660171921,
+        -0.05391638660171921,
+        -0.4852474794154729,
+        0.754829412424069,
+        0.16174915980515764,
+        -0.21566554640687685,
+        0.10783277320343844,
+        -0.3234983196103153
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 16,
+      "name": "Message Queue",
+      "text": "Transmits events between services asynchronously with guaranteed delivery",
+      "encoding": [
+        0.1602560444155401,
+        0.2670934073592335,
+        0.8653826398439165,
+        -0.1068373629436934,
+        -0.1602560444155401,
+        0.1068373629436934,
+        0.3205120888310802,
+        0.053418681471846696
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 17,
+      "name": "Authentication Service",
+      "text": "Verifies user identity and issues access tokens",
+      "encoding": [
+        0.056613851707229795,
+        -0.1132277034144596,
+        -0.1132277034144596,
+        0.3962969619506085,
+        0.8492077756084468,
+        -0.1132277034144596,
+        0.16984155512168936,
+        -0.2264554068289192
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 18,
+      "name": "Load Balancer",
+      "text": "Distributes incoming traffic across multiple server instances",
+      "encoding": [
+        0.1132277034144596,
+        -0.16984155512168936,
+        0.5095246653650681,
+        -0.2264554068289192,
+        0.056613851707229795,
+        -0.1132277034144596,
+        0.792593923901217,
+        -0.056613851707229795
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 19,
+      "name": "Config Store",
+      "text": "Central repository for application configuration values with versioning",
+      "encoding": [
+        0.901127113779166,
+        0.06257827179021987,
+        -0.12515654358043973,
+        0.3128913589510993,
+        -0.06257827179021987,
+        0.12515654358043973,
+        -0.1877348153706596,
+        0.12515654358043973
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 20,
+      "name": "Event Trigger",
+      "text": "Initiates automated workflows when specific conditions are met",
+      "encoding": [
+        0.11846977555181848,
+        0.77005354108682,
+        -0.1777046633277277,
+        -0.23693955110363693,
+        -0.11846977555181848,
+        0.41464421443136457,
+        -0.1777046633277277,
+        0.29617443887954614
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 21,
+      "name": "Monitoring Dashboard",
+      "text": "Visualizes system metrics and alerts with real-time updates",
+      "encoding": [
+        0.064018439966448,
+        0.3841106397986879,
+        -0.128036879932896,
+        -0.32009219983223997,
+        0.256073759865792,
+        0.7682212795973759,
+        -0.19205531989934396,
+        0.19205531989934396
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 22,
+      "name": "Token Bucket",
+      "text": "Algorithm that controls data transmission rate using tokens",
+      "encoding": [
+        0.08482842907381935,
+        -0.127242643610729,
+        -0.583195449882508,
+        0.6574203253220999,
+        0.19086396541609352,
+        -0.2332781799530032,
+        0.15905330451341126,
+        -0.29689950175836777
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 23,
+      "name": "Service Mesh",
+      "text": "Infrastructure layer for service-to-service communication with observability",
+      "encoding": [
+        0.1486246194159923,
+        0.12385384951332692,
+        0.8669769465932884,
+        -0.18578077426999037,
+        -0.06192692475666346,
+        0.3096346237833173,
+        -0.12385384951332692,
+        0.24770769902665385
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 24,
+      "name": "API Gateway",
+      "text": "Single entry point for all client requests, handles routing and auth",
+      "encoding": [
+        0.11704114719613055,
+        -0.05852057359806528,
+        -0.4681645887845222,
+        0.7607674567748486,
+        0.29260286799032637,
+        -0.17556172079419582,
+        0.11704114719613055,
+        -0.2340822943922611
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 25,
+      "name": "Database Replica",
+      "text": "Read-only copy of primary database for scaling read operations",
+      "encoding": [
+        0.9149178015729322,
+        0.0672733677627156,
+        0.1345467355254312,
+        0.2690934710508624,
+        -0.0672733677627156,
+        0.2018201032881468,
+        -0.1345467355254312,
+        -0.0672733677627156
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 26,
+      "name": "Caching Layer",
+      "text": "Stores frequently accessed data in memory to reduce database load",
+      "encoding": [
+        0.06350006350009527,
+        -0.12700012700019053,
+        0.25400025400038106,
+        -0.19050019050028577,
+        0.8890008890013336,
+        -0.12700012700019053,
+        0.19050019050028577,
+        -0.19050019050028577
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 27,
+      "name": "Rate Limiter",
+      "text": "Restricts the number of requests a client can make in a time window",
+      "encoding": [
+        0.040234038111328425,
+        -0.09052658575048896,
+        -0.5129839859194375,
+        0.6839786478925833,
+        0.21122870008447425,
+        -0.2615212477236348,
+        0.17099466197314583,
+        -0.34198932394629167
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 28,
+      "name": "Circuit Breaker",
+      "text": "Prevents cascading failures by stopping calls to a failing service",
+      "encoding": [
+        0.05391638660171921,
+        -0.05391638660171921,
+        -0.4852474794154729,
+        0.754829412424069,
+        0.16174915980515764,
+        -0.21566554640687685,
+        0.10783277320343844,
+        -0.3234983196103153
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 29,
+      "name": "Message Queue",
+      "text": "Transmits events between services asynchronously with guaranteed delivery",
+      "encoding": [
+        0.1602560444155401,
+        0.2670934073592335,
+        0.8653826398439165,
+        -0.1068373629436934,
+        -0.1602560444155401,
+        0.1068373629436934,
+        0.3205120888310802,
+        0.053418681471846696
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 30,
+      "name": "Authentication Service",
+      "text": "Verifies user identity and issues access tokens",
+      "encoding": [
+        0.056613851707229795,
+        -0.1132277034144596,
+        -0.1132277034144596,
+        0.3962969619506085,
+        0.8492077756084468,
+        -0.1132277034144596,
+        0.16984155512168936,
+        -0.2264554068289192
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 31,
+      "name": "Load Balancer",
+      "text": "Distributes incoming traffic across multiple server instances",
+      "encoding": [
+        0.1132277034144596,
+        -0.16984155512168936,
+        0.5095246653650681,
+        -0.2264554068289192,
+        0.056613851707229795,
+        -0.1132277034144596,
+        0.792593923901217,
+        -0.056613851707229795
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 32,
+      "name": "Config Store",
+      "text": "Central repository for application configuration values with versioning",
+      "encoding": [
+        0.901127113779166,
+        0.06257827179021987,
+        -0.12515654358043973,
+        0.3128913589510993,
+        -0.06257827179021987,
+        0.12515654358043973,
+        -0.1877348153706596,
+        0.12515654358043973
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 33,
+      "name": "Event Trigger",
+      "text": "Initiates automated workflows when specific conditions are met",
+      "encoding": [
+        0.11846977555181848,
+        0.77005354108682,
+        -0.1777046633277277,
+        -0.23693955110363693,
+        -0.11846977555181848,
+        0.41464421443136457,
+        -0.1777046633277277,
+        0.29617443887954614
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 34,
+      "name": "Monitoring Dashboard",
+      "text": "Visualizes system metrics and alerts with real-time updates",
+      "encoding": [
+        0.064018439966448,
+        0.3841106397986879,
+        -0.128036879932896,
+        -0.32009219983223997,
+        0.256073759865792,
+        0.7682212795973759,
+        -0.19205531989934396,
+        0.19205531989934396
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 35,
+      "name": "Token Bucket",
+      "text": "Algorithm that controls data transmission rate using tokens",
+      "encoding": [
+        0.08482842907381935,
+        -0.127242643610729,
+        -0.583195449882508,
+        0.6574203253220999,
+        0.19086396541609352,
+        -0.2332781799530032,
+        0.15905330451341126,
+        -0.29689950175836777
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 36,
+      "name": "Service Mesh",
+      "text": "Infrastructure layer for service-to-service communication with observability",
+      "encoding": [
+        0.1486246194159923,
+        0.12385384951332692,
+        0.8669769465932884,
+        -0.18578077426999037,
+        -0.06192692475666346,
+        0.3096346237833173,
+        -0.12385384951332692,
+        0.24770769902665385
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 37,
+      "name": "API Gateway",
+      "text": "Single entry point for all client requests, handles routing and auth",
+      "encoding": [
+        0.11704114719613055,
+        -0.05852057359806528,
+        -0.4681645887845222,
+        0.7607674567748486,
+        0.29260286799032637,
+        -0.17556172079419582,
+        0.11704114719613055,
+        -0.2340822943922611
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 38,
+      "name": "Database Replica",
+      "text": "Read-only copy of primary database for scaling read operations",
+      "encoding": [
+        0.9149178015729322,
+        0.0672733677627156,
+        0.1345467355254312,
+        0.2690934710508624,
+        -0.0672733677627156,
+        0.2018201032881468,
+        -0.1345467355254312,
+        -0.0672733677627156
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 39,
+      "name": "Caching Layer",
+      "text": "Stores frequently accessed data in memory to reduce database load",
+      "encoding": [
+        0.06350006350009527,
+        -0.12700012700019053,
+        0.25400025400038106,
+        -0.19050019050028577,
+        0.8890008890013336,
+        -0.12700012700019053,
+        0.19050019050028577,
+        -0.19050019050028577
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 40,
+      "name": "Rate Limiter",
+      "text": "Restricts the number of requests a client can make in a time window",
+      "encoding": [
+        0.040234038111328425,
+        -0.09052658575048896,
+        -0.5129839859194375,
+        0.6839786478925833,
+        0.21122870008447425,
+        -0.2615212477236348,
+        0.17099466197314583,
+        -0.34198932394629167
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 41,
+      "name": "Circuit Breaker",
+      "text": "Prevents cascading failures by stopping calls to a failing service",
+      "encoding": [
+        0.05391638660171921,
+        -0.05391638660171921,
+        -0.4852474794154729,
+        0.754829412424069,
+        0.16174915980515764,
+        -0.21566554640687685,
+        0.10783277320343844,
+        -0.3234983196103153
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 42,
+      "name": "Message Queue",
+      "text": "Transmits events between services asynchronously with guaranteed delivery",
+      "encoding": [
+        0.1602560444155401,
+        0.2670934073592335,
+        0.8653826398439165,
+        -0.1068373629436934,
+        -0.1602560444155401,
+        0.1068373629436934,
+        0.3205120888310802,
+        0.053418681471846696
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 43,
+      "name": "Authentication Service",
+      "text": "Verifies user identity and issues access tokens",
+      "encoding": [
+        0.056613851707229795,
+        -0.1132277034144596,
+        -0.1132277034144596,
+        0.3962969619506085,
+        0.8492077756084468,
+        -0.1132277034144596,
+        0.16984155512168936,
+        -0.2264554068289192
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 44,
+      "name": "Load Balancer",
+      "text": "Distributes incoming traffic across multiple server instances",
+      "encoding": [
+        0.1132277034144596,
+        -0.16984155512168936,
+        0.5095246653650681,
+        -0.2264554068289192,
+        0.056613851707229795,
+        -0.1132277034144596,
+        0.792593923901217,
+        -0.056613851707229795
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 45,
+      "name": "Config Store",
+      "text": "Central repository for application configuration values with versioning",
+      "encoding": [
+        0.901127113779166,
+        0.06257827179021987,
+        -0.12515654358043973,
+        0.3128913589510993,
+        -0.06257827179021987,
+        0.12515654358043973,
+        -0.1877348153706596,
+        0.12515654358043973
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 46,
+      "name": "Event Trigger",
+      "text": "Initiates automated workflows when specific conditions are met",
+      "encoding": [
+        0.11846977555181848,
+        0.77005354108682,
+        -0.1777046633277277,
+        -0.23693955110363693,
+        -0.11846977555181848,
+        0.41464421443136457,
+        -0.1777046633277277,
+        0.29617443887954614
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 47,
+      "name": "Monitoring Dashboard",
+      "text": "Visualizes system metrics and alerts with real-time updates",
+      "encoding": [
+        0.064018439966448,
+        0.3841106397986879,
+        -0.128036879932896,
+        -0.32009219983223997,
+        0.256073759865792,
+        0.7682212795973759,
+        -0.19205531989934396,
+        0.19205531989934396
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 48,
+      "name": "Token Bucket",
+      "text": "Algorithm that controls data transmission rate using tokens",
+      "encoding": [
+        0.08482842907381935,
+        -0.127242643610729,
+        -0.583195449882508,
+        0.6574203253220999,
+        0.19086396541609352,
+        -0.2332781799530032,
+        0.15905330451341126,
+        -0.29689950175836777
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 49,
+      "name": "Service Mesh",
+      "text": "Infrastructure layer for service-to-service communication with observability",
+      "encoding": [
+        0.1486246194159923,
+        0.12385384951332692,
+        0.8669769465932884,
+        -0.18578077426999037,
+        -0.06192692475666346,
+        0.3096346237833173,
+        -0.12385384951332692,
+        0.24770769902665385
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 50,
+      "name": "API Gateway",
+      "text": "Single entry point for all client requests, handles routing and auth",
+      "encoding": [
+        0.11704114719613055,
+        -0.05852057359806528,
+        -0.4681645887845222,
+        0.7607674567748486,
+        0.29260286799032637,
+        -0.17556172079419582,
+        0.11704114719613055,
+        -0.2340822943922611
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 51,
+      "name": "Database Replica",
+      "text": "Read-only copy of primary database for scaling read operations",
+      "encoding": [
+        0.9149178015729322,
+        0.0672733677627156,
+        0.1345467355254312,
+        0.2690934710508624,
+        -0.0672733677627156,
+        0.2018201032881468,
+        -0.1345467355254312,
+        -0.0672733677627156
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 52,
+      "name": "Caching Layer",
+      "text": "Stores frequently accessed data in memory to reduce database load",
+      "encoding": [
+        0.06350006350009527,
+        -0.12700012700019053,
+        0.25400025400038106,
+        -0.19050019050028577,
+        0.8890008890013336,
+        -0.12700012700019053,
+        0.19050019050028577,
+        -0.19050019050028577
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 53,
+      "name": "Rate Limiter",
+      "text": "Restricts the number of requests a client can make in a time window",
+      "encoding": [
+        0.040234038111328425,
+        -0.09052658575048896,
+        -0.5129839859194375,
+        0.6839786478925833,
+        0.21122870008447422,
+        -0.2615212477236348,
+        0.17099466197314583,
+        -0.34198932394629167
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 54,
+      "name": "Circuit Breaker",
+      "text": "Prevents cascading failures by stopping calls to a failing service",
+      "encoding": [
+        0.05391638660171921,
+        -0.05391638660171921,
+        -0.4852474794154729,
+        0.754829412424069,
+        0.16174915980515764,
+        -0.21566554640687685,
+        0.10783277320343843,
+        -0.3234983196103153
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 55,
+      "name": "Message Queue",
+      "text": "Transmits events between services asynchronously with guaranteed delivery",
+      "encoding": [
+        0.1602560444155401,
+        0.2670934073592335,
+        0.8653826398439165,
+        -0.10683736294369339,
+        -0.1602560444155401,
+        0.10683736294369339,
+        0.3205120888310802,
+        0.053418681471846696
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 56,
+      "name": "Authentication Service",
+      "text": "Verifies user identity and issues access tokens",
+      "encoding": [
+        0.056613851707229795,
+        -0.11322770341445959,
+        -0.11322770341445959,
+        0.3962969619506085,
+        0.8492077756084468,
+        -0.11322770341445959,
+        0.16984155512168936,
+        -0.22645540682891918
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 57,
+      "name": "Load Balancer",
+      "text": "Distributes incoming traffic across multiple server instances",
+      "encoding": [
+        0.11322770341445959,
+        -0.16984155512168936,
+        0.5095246653650681,
+        -0.22645540682891918,
+        0.056613851707229795,
+        -0.11322770341445959,
+        0.792593923901217,
+        -0.056613851707229795
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 58,
+      "name": "Config Store",
+      "text": "Central repository for application configuration values with versioning",
+      "encoding": [
+        0.901127113779166,
+        0.06257827179021987,
+        -0.12515654358043973,
+        0.3128913589510993,
+        -0.06257827179021987,
+        0.12515654358043973,
+        -0.18773481537065959,
+        0.12515654358043973
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 59,
+      "name": "Event Trigger",
+      "text": "Initiates automated workflows when specific conditions are met",
+      "encoding": [
+        0.11846977555181847,
+        0.77005354108682,
+        -0.1777046633277277,
+        -0.23693955110363693,
+        -0.11846977555181847,
+        0.41464421443136457,
+        -0.1777046633277277,
+        0.29617443887954614
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 60,
+      "name": "Monitoring Dashboard",
+      "text": "Visualizes system metrics and alerts with real-time updates",
+      "encoding": [
+        0.064018439966448,
+        0.3841106397986879,
+        -0.128036879932896,
+        -0.32009219983223997,
+        0.256073759865792,
+        0.7682212795973759,
+        -0.19205531989934396,
+        0.19205531989934396
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 61,
+      "name": "Token Bucket",
+      "text": "Algorithm that controls data transmission rate using tokens",
+      "encoding": [
+        0.08482842907381935,
+        -0.127242643610729,
+        -0.583195449882508,
+        0.6574203253220999,
+        0.19086396541609352,
+        -0.2332781799530032,
+        0.15905330451341126,
+        -0.29689950175836777
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 62,
+      "name": "Service Mesh",
+      "text": "Infrastructure layer for service-to-service communication with observability",
+      "encoding": [
+        0.1486246194159923,
+        0.12385384951332692,
+        0.8669769465932884,
+        -0.18578077426999037,
+        -0.06192692475666346,
+        0.3096346237833173,
+        -0.12385384951332692,
+        0.24770769902665385
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 63,
+      "name": "API Gateway",
+      "text": "Single entry point for all client requests, handles routing and auth",
+      "encoding": [
+        0.11704114719613055,
+        -0.05852057359806528,
+        -0.4681645887845222,
+        0.7607674567748486,
+        0.29260286799032637,
+        -0.17556172079419582,
+        0.11704114719613055,
+        -0.2340822943922611
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 64,
+      "name": "Database Replica",
+      "text": "Read-only copy of primary database for scaling read operations",
+      "encoding": [
+        0.9149178015729322,
+        0.0672733677627156,
+        0.1345467355254312,
+        0.2690934710508624,
+        -0.0672733677627156,
+        0.20182010328814678,
+        -0.1345467355254312,
+        -0.0672733677627156
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    },
+    {
+      "id": 65,
+      "name": "Caching Layer",
+      "text": "Stores frequently accessed data in memory to reduce database load",
+      "encoding": [
+        0.06350006350009527,
+        -0.12700012700019053,
+        0.25400025400038106,
+        -0.19050019050028577,
+        0.8890008890013336,
+        -0.12700012700019053,
+        0.19050019050028577,
+        -0.19050019050028577
+      ],
+      "created_at": "1970-01-01T00:00:14Z"
+    }
+  ],
+  "relations": []
+}

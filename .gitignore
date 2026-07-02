@@ -23,6 +23,14 @@ build_err.txt
 # Node
 node_modules/
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
 # Build artifacts
 *.zip
 *.tar.gz
+
+# Test artifacts
+test_store.json

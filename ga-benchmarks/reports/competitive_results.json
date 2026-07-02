@@ -1,0 +1,34 @@
+{
+  "llm_alone": {
+    "total_tokens": 190847,
+    "accuracy": 1.0,
+    "per_query": 38169.4
+  },
+  "tfidf_rag": {
+    "chunks": 381,
+    "embed_tokens": 19050,
+    "total_tokens": 21326,
+    "accuracy": 1.0,
+    "per_query": 455.2
+  },
+  "bm25_rag": {
+    "chunks": 381,
+    "embed_tokens": 19050,
+    "total_tokens": 21442,
+    "accuracy": 1.0,
+    "per_query": 478.4
+  },
+  "llm_summary": {
+    "summary_tokens": 38746,
+    "total_tokens": 42003,
+    "accuracy": 1.0,
+    "per_query": 651.4
+  },
+  "ga_bagua": {
+    "encode_tokens": 1000,
+    "total_tokens": 1617,
+    "accuracy": 1.0,
+    "concepts": 5,
+    "per_query": 123.4
+  }
+}
