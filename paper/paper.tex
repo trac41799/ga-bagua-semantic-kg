@@ -1,0 +1,454 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{mathrsfs}
+\usepackage{array}
+
+% Clifford algebra notation
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\geo}{\,}
+\newcommand{\grade}[1]{\langle #1 \rangle}
+\newcommand{\rev}[1]{\widetilde{#1}}
+\newcommand{\dual}[1]{#1^*}
+\newcommand{\R}{\mathbb{R}}
+
+% Trigram symbols
+\newcommand{\trigram}[1]{\text{#1}}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!40!black,
+  urlcolor=blue!60!black
+}
+
+\title{\textbf{GA-Bagua: A Deterministic Semantic Index for LLM Agents}\\[4pt]
+       \large Using Cl(3) Geometric Algebra and the I-Ching Bagua Isomorphism}
+
+\author{\textsc{Trac Nguyen}\\[2pt]
+        \small\texttt{github.com/trac41799/ga-bagua-semantic-kg}}
+
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Large Language Model (LLM) agents incur substantial token costs when reasoning
+across many concepts, as each query requires rereading all concept descriptions.
+We present GA-Bagua, a deterministic, zero-training semantic index that encodes
+arbitrary text concepts into 8-element vectors in the Clifford algebra
+$\Cl(3,0)$, storing each concept in 64 bytes. The 8 basis blades of $\Cl(3)$
+are mapped 1:1 to the 8 trigrams ($\trigram{b\={a}gu\`{a}}$) of the I-Ching,
+yielding an interpretable taxonomy of 8 named semantic roles: generative,
+receptive, causal, transmissive, constraining, influential, clarifying, and
+balancing. After a one-time LLM encoding step ($\sim$200 tokens), all semantic
+operations execute algebraically in $\sim$500\,ns with zero API calls. We
+evaluate retrieval and relation classification on a 50-concept, 3-domain
+benchmark and report 42\% Precision@1 for same-domain retrieval, 45--52\%
+relation classification accuracy, and 219$\times$ token savings at scale. We
+discuss the encoding quality bottleneck---LLM WuXing phase alignment at 15--19\%
+---as the primary limitation and outline future directions for multi-encoding
+strategies and higher-dimensional algebras.
+\end{abstract}
+
+%=====================================================================
+\section{Introduction}
+%=====================================================================
+
+LLM agents tasked with reasoning over large concept sets face a fundamental
+scalability challenge. When an agent must answer queries such as ``which of
+these 100 concepts constrains throughput?'', it must read all 100 concept
+descriptions per query. At $\sim$1,000 tokens per concept set and $\sim$200
+queries per session, the cost exceeds \$100 in API fees---a barrier to
+practical deployment \cite{devlin2019bert}.
+
+Existing approaches mitigate this through embedding vectors and vector
+databases. However, learned embeddings suffer from three limitations: (1) they
+require domain-specific training data, (2) they are opaque---cosine similarity
+provides a scalar with no explanation of \emph{why} two concepts relate, and
+(3) they cannot model asymmetric, compositional, or cyclical relationships
+through algebraic operations \cite{trouillon2016complex,sun2019rotate}.
+
+GA-Bagua addresses these limitations through a deterministic, algebraic
+approach. Rather than learning embeddings from data, it uses the mathematical
+structure of $\Cl(3,0)$---the 3-dimensional Clifford algebra over the
+reals---whose 8 basis blades are isomorphic to the 8 Bagua trigrams of the
+I-Ching \cite{wilhelm1967iching}. This isomorphism provides each coefficient
+with a named, interpretable semantic role, and the geometric product enables
+algebraic composition, analogy, and multi-hop reasoning at nanosecond latency
+with zero token cost after the initial encoding.
+
+The contributions of this work are:
+\begin{enumerate}[nosep]
+\item A formal mapping between the 8 basis blades of $\Cl(3,0)$ and the 8
+  Bagua trigrams, establishing an interpretable 8-role semantic taxonomy.
+\item A deterministic encoding protocol (SKILL.md) that instructs an LLM to
+  map concept descriptions to 8 coefficients, with each coefficient
+  representing one semantic role.
+\item A comprehensive system architecture including a Rust library, an MCP
+  server exposing 33 tools, a CLI, a phase-bucketed retrieval index,
+  document intelligence, and cognitive modeling subsystems.
+\item An honest empirical evaluation documenting what works (multi-hop
+  stability, token savings, noise rejection) and what does not (encoding
+  alignment ceiling, classification accuracy floor).
+\end{enumerate}
+
+%=====================================================================
+\section{Mathematical Foundations}
+%=====================================================================
+
+\subsection{Clifford Algebra $\Cl(3,0)$}
+
+The Clifford algebra $\Cl(3,0)$ is generated by three orthogonal basis
+vectors $\{e_1, e_2, e_3\}$ satisfying:
+\begin{equation}
+  e_i^2 = 1, \qquad e_i e_j = -e_j e_i \; (i \neq j).
+\end{equation}
+A general \emph{multivector} $A \in \Cl(3,0)$ is a sum of all $2^3 = 8$ basis
+blades:
+\begin{equation}
+  A = a_0 \cdot 1 + a_1 e_1 + a_2 e_2 + a_3 e_3
+    + a_{12} e_{12} + a_{23} e_{23} + a_{31} e_{31}
+    + a_{123} e_{123},
+\end{equation}
+where $a_S \in \R$ and $e_{ij\ldots}$ denotes $e_i e_j \ldots$. The
+coefficient $a_0$ is the scalar part, $(a_1, a_2, a_3)$ form the vector part,
+$(a_{12}, a_{23}, a_{31})$ the bivector part, and $a_{123}$ the trivector
+(pseudoscalar) part.
+
+\subsection{Geometric Product}
+
+The fundamental operation is the geometric product, defined for basis vectors
+as:
+\begin{equation}
+  e_i e_j = \begin{cases}
+    1      & \text{if } i = j, \\
+    e_{ij} & \text{if } i < j, \\
+    -e_{ji} & \text{if } i > j.
+  \end{cases}
+\end{equation}
+Extended bilinearly to all multivectors, the geometric product can be
+expressed through a compile-time $8 \times 8$ Cayley table. For two
+multivectors $A = \sum_S a_S e_S$ and $B = \sum_T b_T e_T$:
+\begin{equation}
+  AB = \sum_{S,T} a_S b_T \cdot \operatorname{sign}(S, T) \cdot e_{S \triangle T},
+\end{equation}
+where $S \triangle T$ is the symmetric difference of blade index sets and
+$\operatorname{sign}(S,T)$ is the parity of the reordering permutation.
+
+The geometric product decomposes into the inner product (commutator) and wedge
+product (anti-commutator):
+\begin{equation}
+  AB = A \cdot B + A \wedge B.
+\end{equation}
+
+\subsection{Key Operations}
+
+\paragraph{Grade Projection.} $\grade{A}_k$ extracts the grade-$k$ components
+of $A$. For $\Cl(3,0)$, grades range from 0 (scalar) to 3 (trivector).
+
+\paragraph{Reverse.} $\rev{A} = \sum_{k=0}^{3} (-1)^{k(k-1)/2} \grade{A}_k$
+flips the sign of grade-2 and grade-3 components.
+
+\paragraph{Norm.} $\|A\| = \sqrt{\grade{\rev{A} A}_0}$.
+
+\paragraph{Inverse.} $A^{-1} = \rev{A} / \|A\|^2$, defined when $\|A\| \neq 0$.
+
+\paragraph{Dual.} $\dual{A} = A e_{123}$, mapping grade $k$ to grade $3-k$.
+
+\paragraph{Rotors.} An even-grade multivector $R$ satisfying $R \rev{R} = 1$
+defines a rotation (sandwich product):
+\begin{equation}
+  A' = R A \rev{R}.
+\end{equation}
+Rotors compose associatively: $R_{1 \rightarrow 3} = R_2 R_1$ enables
+multi-hop transformations.
+
+\subsection{The $\Cl(3,0) \leftrightarrow$ Bagua Isomorphism}
+
+The I-Ching (Book of Changes) defines 8 trigrams ($\trigram{b\={a}gu\`{a}}$),
+each composed of three lines (broken $=$ yin, solid $=$ yang). Each trigram
+represents a fundamental state or transformative principle. The $\Cl(3,0)$
+basis blades---one scalar, three vectors, three bivectors, one trivector
+---form exactly 8 elements, matching the 8 trigrams.
+
+\Cref{tab:isomorphism} presents the complete isomorphism.
+
+\begin{table}[ht]
+\centering
+\caption{The $\Cl(3,0) \leftrightarrow$ Bagua isomorphism and semantic role
+taxonomy.}
+\label{tab:isomorphism}
+\begin{tabular}{ccllcc}
+\toprule
+\textbf{Grade} & \textbf{Blade} & \textbf{Trigram} & \textbf{Name} &
+\textbf{Semantic Role} & \textbf{Bits}\\
+\midrule
+0 & $1$ & $\trigram{\raisebox{-1pt}{\char"2637}}$ & K\={u}n (Earth)
+  & Receptive & $\Box\Box\Box$\\
+\addlinespace
+1 & $e_1$ & $\trigram{\raisebox{-1pt}{\char"2633}}$ & Zh\`{e}n (Thunder)
+  & Causal & $\blacksquare\Box\Box$\\
+1 & $e_2$ & $\trigram{\raisebox{-1pt}{\char"2635}}$ & K\v{a}n (Water)
+  & Transmissive & $\Box\blacksquare\Box$\\
+1 & $e_3$ & $\trigram{\raisebox{-1pt}{\char"2636}}$ & G\`{e}n (Mountain)
+  & Constraining & $\Box\Box\blacksquare$\\
+\addlinespace
+2 & $e_{12}$ & $\trigram{\raisebox{-1pt}{\char"2634}}$ & X\`{u}n (Wind)
+  & Influential & $\blacksquare\blacksquare\Box$\\
+2 & $e_{23}$ & $\trigram{\raisebox{-1pt}{\char"2632}}$ & L\'{\i} (Fire)
+  & Clarifying & $\Box\blacksquare\blacksquare$\\
+2 & $e_{31}$ & $\trigram{\raisebox{-1pt}{\char"2631}}$ & Du\`{\i} (Lake)
+  & Balancing & $\blacksquare\Box\blacksquare$\\
+\addlinespace
+3 & $e_{123}$ & $\trigram{\raisebox{-1pt}{\char"2630}}$ & Qi\'{a}n (Heaven)
+  & Generative & $\blacksquare\blacksquare\blacksquare$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{WuXing 5-Phase Cycle}
+
+Beyond the 8 trigrams, the I-Ching embeds the WuXing (Five Elements/Phases)
+taxonomy: Wood, Fire, Earth, Metal, Water. These form two deterministic cycles:
+\begin{itemize}[nosep]
+\item \textbf{Generating cycle}: Wood $\to$ Fire $\to$ Earth $\to$ Metal
+  $\to$ Water $\to$ Wood.
+\item \textbf{Controlling cycle}: Wood $\to$ Earth $\to$ Water $\to$ Fire
+  $\to$ Metal $\to$ Wood.
+\end{itemize}
+Each trigram is mapped to one WuXing phase, and the cycle provides a
+deterministic look-up for relation classification between two concepts.
+
+%=====================================================================
+\section{System Architecture}
+%=====================================================================
+
+GA-Bagua is implemented as a Rust workspace comprising 5 crates and
+distributed via npm (MCP server), Cargo (CLI), Docker, and prebuilt binaries
+for 5 platforms.
+
+\subsection{Encoding Pipeline}
+
+Encoding is a \emph{one-time} LLM operation. The LLM reads a concept
+description and produces 8 coefficients following the SKILL.md protocol, which
+defines a structured rubric mapping semantic properties to the 8 roles. The
+coefficients are normalized to unit norm and stored as 8 f64 values (64 bytes).
+
+Once encoded, all subsequent operations are purely algebraic:
+\begin{enumerate}[nosep]
+\item LLM encodes concept $\to 8$ coefficients (one-time, $\sim$200 tokens).
+\item Coefficients stored in a WuXing-bucketed index (5 phase buckets).
+\item All queries: algebraic ops on multivectors ($\sim$500\,ns, 0 tokens).
+\item LLM optionally verifies top-$K$ results ($\sim$15 tokens each).
+\end{enumerate}
+
+\subsection{Crate Architecture}
+
+\begin{itemize}[nosep]
+\item \texttt{ga-semantics-core}: Core algebra engine---multivectors, rotors,
+  Bagua taxonomy, encoding, WuXing index, relation classification.
+\item \texttt{ga-semantics-mcp}: MCP server exposing 33 tools to AI agents
+  (Claude Desktop, Cursor, OpenCode, Claude Code CLI, etc.) via stdio or HTTP.
+\item \texttt{ga-semantics-cli}: CLI with 12+ subcommands for interactive and
+  scripted use.
+\item \texttt{ga-doc-intel}: Document intelligence---alignment, synthesis,
+  coherence, fallacy detection, contract auditing.
+\item \texttt{ga-cognitive}: Cognitive systems---agent store, belief tracking,
+  compatibility, learning paths, goal decomposition.
+\end{itemize}
+
+\subsection{MCP Server and Integration}
+
+The MCP server registers 33 deterministic tools with JSON schemas and operates
+via stdio (local agent) or HTTP (port 3100). Supported MCP clients include
+Claude Desktop, Cursor, OpenCode, Claude Code CLI, Continue.dev, Cline, and
+Windsurf.
+
+\subsection{Retrieval Index}
+
+The WuXingIndex buckets encoded concepts by their WuXing phase (5 buckets),
+enabling $O(n/5)$ search with configurable per-role weighting, complementary
+trigram queries, and multi-hop path traversal along the generating or
+controlling cycle.
+
+%=====================================================================
+\section{Semantic Operations}
+%=====================================================================
+
+All operations accept multivectors $A, B, C$ and return results in $\sim$500\,ns.
+
+\paragraph{Semantic Similarity.}
+\begin{equation}
+  \operatorname{sim}(A, B) = \frac{\grade{\rev{A} B}_0}{\|A\| \cdot \|B\|} \in [-1, 1].
+\end{equation}
+
+\paragraph{Dominant Similarity.} Role-weighted similarity for retrieval:
+\begin{equation}
+  \operatorname{dom\_sim}(A, B) = \sum_{r=1}^{8} w_r \cdot |a_r| \cdot |b_r|.
+\end{equation}
+
+\paragraph{Semantic Difference.}
+\begin{equation}
+  \operatorname{diff}(A, B) = \frac{\|\grade{AB}_2\|}{\|A\|\cdot\|B\|} \in [0, 1].
+\end{equation}
+
+\paragraph{Analogy.} Via rotor application:
+\begin{equation}
+  \operatorname{analogy}(A, B, C) = (A^{-1} B)\, C\, \rev{(A^{-1} B)}.
+\end{equation}
+
+\paragraph{Relation Classification.} The \texttt{from\_pair\_multi} classifier
+scores all 8 role labels simultaneously using 4 evidence sources: WuXing cycle
+exact match ($w = 0.5$), partial 2-step cycle ($w = 0.1$), trigram blade
+quality ($w = 0.2$), and geometric product blade magnitude ($w = 0.2$).
+Confidence is the margin ratio between top and second scores; pairs below a
+sharpness threshold (0.25) are gated to 0.0 confidence.
+
+\paragraph{Composition.} $R_{A \to C} = R_{B \to C}\,R_{A \to B}$ enables
+multi-hop relation chaining with zero drift even at 100-hop chains.
+
+%=====================================================================
+\section{Experimental Evaluation}
+%=====================================================================
+
+\subsection{Benchmark Setup}
+
+We evaluate on a benchmark dataset of 50 concepts spanning 3 domains
+(software architecture, business operations, biological systems) with 53
+labeled relation pairs (28 train, 25 test). All benchmarks run as
+\texttt{cargo test} with no external API calls and are fully reproducible.
+
+\subsection{Results}
+
+\Cref{tab:results} presents the key metrics. Multi-hop stability, token
+savings, storage density, and noise rejection are strong. Retrieval precision
+and classification accuracy reflect the known encoding quality bottleneck.
+
+\begin{table}[ht]
+\centering
+\caption{Key benchmark results. R@$K$ = recall at $K$, P@$K$ = precision at $K$.}
+\label{tab:results}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Result} & \textbf{Target}\\
+\midrule
+Same-role P@1 (same domain)     & 42\%     & 70\%\\
+Same-role R@10 (same domain)    & 100\%    & ---\\
+Relation classification (test)  & 45--52\% & 65\%\\
+WuXing encoding alignment       & 15--19\% & $>$50\%\\
+Multi-hop stability (100 hops)  & Zero drift & ---\\
+Token savings (200 queries)     & 219$\times$ & ---\\
+Storage density                 & 64 B/concept & ---\\
+Query latency                   & $\sim$500\,ns & ---\\
+Encoding stability              & 99.8\% & ---\\
+Random noise gated              & 93.5\% $\to$ 0.0 conf & ---\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Honest Limitations}
+
+\paragraph{Encoding Alignment.} The WuXing phase alignment rate of 15--19\%
+is the primary bottleneck. The SKILL.md protocol encodes intrinsic conceptual
+properties but does not guarantee alignment with the WuXing relational
+taxonomy. When the LLM feedback loop restored WuXing signal (f1=0.6, f2=1.0),
+accuracy paradoxically collapsed because a single concept participates in
+multiple relationships but maps to only one WuXing phase---an inherent
+property of the 5-phase taxonomy. Multi-encoding strategies (one per
+relationship context) are a planned future direction.
+
+\paragraph{Classifier Signal Sources.} A grid search on feature weights
+revealed that the WuXing cycle features (f1, f2) contribute zero signal to
+classification at current encoding quality. The only reliable signal is $A$'s
+dominant trigram blade (f3). The geometric product $A \cdot B$ as a primary
+classifier scored 5.7\% accuracy---worse than random (12.5\%).
+
+\paragraph{85\% Test Accuracy is Overfitted.} The apparent 80--87\% accuracy
+with learned weights was achieved by grid-searching on the same dataset
+(92.9\% train, 80\% test), and the optimizer discovered trivial weights (only
+f3 matters). Proper cross-validation on independent datasets is needed to
+validate generalization.
+
+%=====================================================================
+\section{Related Work}
+%=====================================================================
+
+\paragraph{Geometric Algebra for KGs.} GeomE \cite{xu2020geome} first applied
+Clifford algebras to knowledge graph embeddings, using the full multivector as
+a latent representation. GA-Bagua extends this approach with explicit semantic
+role labels and an MCP-first delivery model. Pustejovsky \cite{pustejovsky2026functional}
+proposes a functional geometric algebra for natural language semantics; GA-Bagua's
+8-role taxonomy can be seen as a concrete instantiation.
+
+\paragraph{Complex/Non-Euclidean Embeddings.} ComplEx \cite{trouillon2016complex}
+and RotatE \cite{sun2019rotate} model asymmetric and compositional relations
+in complex space, but lack interpretable role labels. GA-Bagua provides
+interpretability through the Bagua taxonomy at the cost of lower accuracy on
+standard link prediction benchmarks.
+
+\paragraph{Compositional Distributional Semantics.} Coecke et al.
+\cite{coecke2010mathematical} established a categorical framework for
+composing word meanings; GA-Bagua's rotor composition can be viewed as a
+concrete algebraic realization within a Clifford algebra.
+
+%=====================================================================
+\section{Discussion and Future Work}
+%=====================================================================
+
+GA-Bagua demonstrates that a deterministic, algebraic approach to semantic
+representation is viable for specific use cases---particularly those
+requiring interpretable role labels, composable operations, and sub-microsecond
+latency. The encoding quality bottleneck defines the current practical
+ceiling.
+
+\paragraph{Immediate Priorities.} (1) Improve the SKILL.md encoding protocol
+to raise WuXing phase alignment above 50\%. (2) Build independently-labeled
+benchmark datasets across diverse domains. (3) Test encoding consistency
+across LLM providers (Claude, GPT-4, Gemini).
+
+\paragraph{Long-Term Directions.} (1) Multi-encoding strategies where each
+concept has multiple representations depending on relational context. (2)
+Exploration of $\Cl(4,0)$ and $\Cl(5,0)$ for higher expressive capacity,
+though the loss of the clean 8-fold Bagua mapping must be weighed against
+gains. (3) Integration with real-world LLM agent applications for
+end-to-end evaluation of token savings and accuracy uplift on practical
+tasks.
+
+%=====================================================================
+\section{Conclusion}
+%=====================================================================
+
+We have presented GA-Bagua, a deterministic, zero-training semantic index
+that encodes arbitrary concepts into 64-byte multivectors in $\Cl(3,0)$,
+with an interpretable 8-role taxonomy derived from the Bagua trigram
+isomorphism. The system achieves 219$\times$ token savings, 500\,ns query
+latency, and zero-drift multi-hop composition. Current limitations in
+encoding quality are honestly documented, and we outline clear paths to
+improvement. The complete system is available as open-source software
+under MIT/Apache-2.0 dual licensing.
+
+\section*{Availability}
+
+Source code, documentation, benchmarks, and installation instructions
+are available at:
+\begin{center}
+\url{https://github.com/trac41799/ga-bagua-semantic-kg}
+\end{center}
+The MCP server is published as \texttt{ga-semantics-mcp} on npm, and the
+core library as \texttt{ga-semantics-core} on crates.io.
+
+%=====================================================================
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
