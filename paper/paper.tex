@@ -656,9 +656,88 @@ Query latency                    &  $\sim$500\,ns & --- & Met \\
 Encoding stability ($\pm$10\%)   &  99.8\%   & ---    & Met \\
 Noise rejection (random pairs)   &  93.5\%   & ---    & Met \\
 Analogy accuracy                 &  35.0\%   &  70\%   & Below target \\
+\midrule
+\multicolumn{4}{c}{\textit{Real LLM Benchmarks (DeepSeek V3, Sections 5.4)}} \\
+\midrule
+NIAH-01 accuracy (5 needles)     & 100\%     & --- & Met (92.9$\times$ savings) \\
+COMPETE accuracy (5 queries)     & 100\%     & --- & Met (118$\times$ vs Alone) \\
+COMPETE vs RAG token savings     & 13.2$\times$ & --- & Met (207$\times$ storage) \\
+35/35 Acceptance Criteria        & All passed & --- & Met \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{Real LLM Integration Benchmarks (NIAH and COMPETE)}
+
+To address the critical absence of LLM-in-the-loop evaluation, we implemented
+a Python benchmark harness (\texttt{ga-benchmarks}) that connects GA-Bagua's
+MCP server to a real LLM (DeepSeek V3 via OpenRouter) and measures token
+consumption, accuracy, and latency at every step. All tests use the DeepSeek
+API's \texttt{usage.total\_tokens} for auditable token counting.
+
+\paragraph{NIAH-01: Needle-in-a-Haystack.} Five factual ``needles'' (project
+codename, database config, security contact, API limits, encryption details)
+are embedded at depths of 10\%, 25\%, 50\%, 75\%, and 90\% within an
+8,000-token haystack document. The LLM answers 5 targeted questions. With
+GA-Bagua, the haystack is pre-encoded into 5 concept multivectors (1,000
+encoding tokens, one-time). Per-query cost: $\sim$211 tokens vs.
+$\sim$38,191 tokens for LLM-alone.
+
+\begin{table}[ht]
+\centering
+\caption{NIAH-01: Needle-in-a-haystack results with DeepSeek V3.}
+\label{tab:niah}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Configuration} & \textbf{Tokens} & \textbf{Accuracy} & \textbf{Savings} \\
+\midrule
+LLM-alone (full document)    & 190,953  & 100\% & --- \\
+LLM + GA-Bagua (5 encodes)   &   2,055  & 100\% & 92.9$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{COMPETE: Competitive Baselines.} Five configurations are evaluated
+on an information retrieval task over the same 8K-token document (5 queries):
+LLM-alone, TF-IDF chunk-based RAG, BM25 RAG, LLM-generated summary, and
+GA-Bagua. All achieve 100\% accuracy, but token costs diverge dramatically.
+
+\begin{table}[ht]
+\centering
+\caption{COMPETE: Competitive baseline results. All configurations 100\%
+accurate on 5-question retrieval task.}
+\label{tab:compete}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Configuration} & \textbf{Tokens} & \textbf{Per-Query} & \textbf{vs GA-Bagua} \\
+\midrule
+LLM-alone (full context)    & 190,847  & 38,169  & 118.0$\times$ \\
+LLM + Summary               &  42,003  &  8,401  &  26.0$\times$ \\
+LLM + TF-IDF RAG            &  21,326  &  4,265  &  13.2$\times$ \\
+LLM + BM25 RAG              &  21,442  &  4,288  &  13.3$\times$ \\
+\textbf{LLM + GA-Bagua}     & \textbf{1,617}  & \textbf{123}   & \textbf{1.0$\times$ (baseline)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+RAG configurations consume $\sim$19K tokens for chunk embedding alone. GA-Bagua
+encodes 5 concepts at 1,000 tokens total (one-time) and stores them in 832 bytes
+vs. 168KB for raw chunks (207$\times$ storage savings). Importantly, GA-Bagua
+provides interpretable relation labels (e.g., ``receptive'') that RAG cannot.
+
+\paragraph{35/35 Acceptance Criteria Passed.} Across all 6 micro-benchmarks and
+2 real-LLM tests, all 35 acceptance criteria defined in the TDD benchmark plan
+pass. Key metrics include: P@5 = 58.5\%, MRR = 0.769, Hits@1 = 76.9\% on
+same-role retrieval, 100\% on 4-pair relation classification, 100\% on 4-pair
+cross-document alignment, and 51.3$\times$ token savings in the micro-scale
+token efficiency test.
+
+\paragraph{Caveat.} These are micro-scale benchmarks (13 hand-crafted concepts,
+5 needles, 8K-token documents). The full-scale validation at 40+ concepts with
+64+ queries and 64K+ token documents---as defined in the TDD plan---remains
+future work. However, the LLM encoder (SKILL.md) is now demonstrably invoked
+and measured in real sessions, partially closing the most critical gap
+identified in our benchmark analysis.
 
 %=====================================================================
 \section{Discussion: What Works and What Does Not}
@@ -693,12 +772,17 @@ rising to 0.6), accuracy paradoxically \emph{collapsed} because each concept
 participates in multiple contradictory relationships but maps to a single
 WuXing phase---an inherent property of the 5-phase taxonomy.
 
-\paragraph{No LLM-in-the-Loop Benchmarks.} Every benchmark suite uses
-hand-crafted deterministic coefficient arrays. The LLM encoder (SKILL.md) is
-never invoked during evaluation. We do not know whether a real LLM would
-produce encodings of sufficient quality, and we have no measurement of LLM
-accuracy when answering questions using GA-Bagua as a tool. This is the most
-critical gap between the current benchmarks and the stated value proposition.
+\paragraph{LLM-in-the-Loop Benchmarks (Partial, Micro-Scale).} Previous
+versions of this report identified the complete absence of LLM-in-the-loop
+evaluation as the most critical gap. This has been partially addressed: the
+NIAH-01 and COMPETE benchmarks (Section 5.4) now use the DeepSeek V3 API with
+GA-Bagua's MCP server in the loop, measuring real token counts from
+\texttt{usage.total\_tokens}. However, these tests operate at micro-scale
+(5--13 hand-crafted concepts, 8K-token documents). The full-scale validation
+defined in the TDD benchmark plan---40+ real LLM-encoded concepts, 64+
+queries, 64K+ token documents, independently-labeled ground truth---remains
+future work. The encoder (SKILL.md) is now demonstrably invoked in real
+LLM sessions, but encoding quality at scale remains unvalidated.
 
 \paragraph{Overfitted Feature Weights.} A grid search on the 28-pair training
 set discovered optimal weights (f3 = 0.2, f1 = f2 = f4 = 0.0) achieving 80\%
@@ -712,10 +796,13 @@ product $AB$ as a primary classifier achieved 5.7\% accuracy---worse than
 random (12.5\%). This negative result was a valuable finding that ruled out a
 seemingly natural approach and motivated the multi-hypothesis architecture.
 
-\paragraph{No Competitive Baselines.} The competitive landscape table in the
-documentation is purely analytical. No head-to-head runs have been conducted
-against GraphRAG, LightRAG, Mem0, sentence-transformers, or any other system
-on the same task and data.
+\paragraph{Competitive Baselines (Partial).} The COMPETE benchmark (Section
+5.4) now provides head-to-head token measurements against TF-IDF RAG, BM25
+RAG, and LLM+Summary on the same task with the same LLM. GA-Bagua achieves
+13--118$\times$ token savings. However, these comparisons are against
+lightweight baselines, not against full GraphRAG, LightRAG, Mem0, or
+sentence-transformer pipelines. The benchmark is also micro-scale (5
+queries).
 
 %=====================================================================
 \section{Related Work}
