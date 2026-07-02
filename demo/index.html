@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA-Bagua Semantic KG — Interactive Demo</title>
+<style>
+:root { --bg: #0d1117; --fg: #c9d1d9; --accent: #58a6ff; --accent2: #3fb950;
+  --border: #30363d; --card: #161b22; --dim: #8b949e; --warn: #d2991d; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg); color: var(--fg); line-height: 1.6; }
+a { color: var(--accent); text-decoration: none; }
+
+.container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+header { text-align: center; margin-bottom: 2rem; }
+header h1 { font-size: 1.6rem; color: var(--accent); }
+header p { color: var(--dim); margin-top: 0.25rem; }
+
+.card { background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+
+label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
+input[type="text"] { width: 100%; padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--bg); color: var(--fg); font-size: 0.95rem; }
+input[type="text"]:focus { outline: none; border-color: var(--accent); }
+input[type="range"] { width: 100%; margin: 0.5rem 0 0; }
+button { padding: 0.6rem 1.4rem; border: 1px solid var(--border);
+  border-radius: 6px; background: #238636; color: #fff; cursor: pointer;
+  font-size: 0.9rem; font-weight: 500; }
+button:hover { background: #2ea043; }
+button.secondary { background: var(--card); color: var(--fg); }
+button.secondary:hover { background: var(--border); }
+
+.roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+.role-card { border: 1px solid var(--border); border-radius: 6px;
+  padding: 0.75rem; text-align: center; transition: all 0.2s; }
+.role-card.active { border-color: var(--accent2); background: rgba(63,185,80,0.08); }
+.role-symbol { font-size: 1.8rem; }
+.role-name { font-weight: 600; font-size: 0.8rem; }
+.role-value { color: var(--dim); font-size: 0.75rem; font-family: monospace; }
+
+.bar { height: 6px; margin-top: 0.3rem; border-radius: 3px;
+  background: var(--border); overflow: hidden; transition: width 0.3s; }
+.bar-inner { height: 100%; background: var(--accent2); border-radius: 3px; width: 0;
+  transition: width 0.5s ease; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+.stat { text-align: center; }
+.stat-value { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+.stat-label { font-size: 0.75rem; color: var(--dim); }
+
+.results { margin-top: 1rem; }
+.result-row { display: flex; justify-content: space-between; padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.result-label { font-weight: 500; }
+.result-val { color: var(--accent2); font-family: monospace; }
+
+.presets { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+.preset { padding: 0.3rem 0.7rem; border-radius: 12px;
+  border: 1px solid var(--border); color: var(--dim); cursor: pointer;
+  font-size: 0.75rem; background: transparent; transition: all 0.15s; }
+.preset:hover { color: var(--fg); border-color: var(--accent); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 640px) {
+  .roles { grid-template-columns: repeat(2, 1fr); }
+  .two-col { grid-template-columns: 1fr; }
+}
+
+footer { text-align: center; color: var(--dim); font-size: 0.75rem;
+  margin-top: 3rem; padding: 1rem; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>&#9776; GA-Bagua Semantic KG</h1>
+  <p>Deterministic 64-byte semantic index for LLM agents &mdash;
+  Cl(3) Geometric Algebra mapped to the 8 Bagua trigrams</p>
+</header>
+
+<div class="card">
+  <label for="concept">Describe a concept to encode</label>
+  <input type="text" id="concept" placeholder="e.g., 'A rate limiter that caps API calls per minute'"
+    value="Rate Limiter — a gate that restricts throughput to protect downstream services">
+  <div class="presets" id="presets"></div>
+  <div style="margin-top: 1rem;">
+    <button onclick="encodeConcept()">Encode</button>
+    <button class="secondary" onclick="randomize()">Random Concept</button>
+    <button class="secondary" onclick="loadExample('compare')">Compare Two</button>
+  </div>
+</div>
+
+<div class="two-col" id="singleView">
+<div class="card">
+  <label>The 8 Coefficients (64 bytes)</label>
+  <div class="roles" id="rolesA"></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-value" id="normA">—</div><div class="stat-label">Norm</div></div>
+    <div class="stat"><div class="stat-value" id="domRoleA">—</div><div class="stat-label">Dominant Role</div></div>
+    <div class="stat"><div class="stat-value" id="sharpA">—</div><div class="stat-label">Sharpness</div></div>
+  </div>
+</div>
+
+<div class="card" id="conceptB" style="display:none">
+  <label for="conceptB">Second concept</label>
+  <input type="text" id="conceptBInput" placeholder="e.g., 'A message queue that buffers asynchronous tasks'"
+    value="Circuit Breaker — a safety switch that stops cascading failures">
+  <button onclick="encodeConceptB()" style="margin-top:0.5rem;">Encode</button>
+  <div class="roles" id="rolesB" style="margin-top:1rem;"></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-value" id="normB">—</div><div class="stat-label">Norm</div></div>
+    <div class="stat"><div class="stat-value" id="domRoleB">—</div><div class="stat-label">Dominant Role</div></div>
+    <div class="stat"><div class="stat-value" id="sharpB">—</div><div class="stat-label">Sharpness</div></div>
+  </div>
+  <div class="results" id="comparison" style="margin-top:1rem;"></div>
+</div>
+</div>
+
+<div class="card" style="background:var(--card); border-color:var(--warn);">
+  <strong>&#9888; This is a demo</strong> &mdash; encoding is simulated client-side.
+  Real encoding is done by an LLM using the
+  <a href="https://github.com/trac41799/ga-bagua-semantic-kg/blob/main/docs/skills/bagua-encoder/SKILL.md" target="_blank">SKILL.md protocol</a>
+  and produces more nuanced coefficients. Install the full MCP server:
+  <code style="display:block;margin-top:0.4rem;padding:0.5rem;border-radius:4px;background:var(--bg);">
+  npm install -g ga-semantics-mcp
+  </code>
+</div>
+
+<footer>
+  <a href="https://github.com/trac41799/ga-bagua-semantic-kg" target="_blank">GitHub</a> &middot;
+  <a href="https://github.com/trac41799/ga-bagua-semantic-kg/blob/main/docs/SYSTEM_GUIDE.md" target="_blank">System Guide</a> &middot;
+  <a href="https://github.com/trac41799/ga-bagua-semantic-kg/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a>
+</footer>
+</div>
+
+<script>
+const ROLES = [
+  { id: 0, name: "Generative", symbol: "☰", trigram: "Qian", blade: "e123", meaning: "Creative origin" },
+  { id: 1, name: "Receptive", symbol: "☷", trigram: "Kun", blade: "1", meaning: "Ground state" },
+  { id: 2, name: "Causal", symbol: "☳", trigram: "Zhen", blade: "e1", meaning: "Initiating" },
+  { id: 3, name: "Transmissive", symbol: "☵", trigram: "Kan", blade: "e2", meaning: "Flowing" },
+  { id: 4, name: "Constraining", symbol: "☶", trigram: "Gen", blade: "e3", meaning: "Bounding" },
+  { id: 5, name: "Influential", symbol: "☴", trigram: "Xun", blade: "e12", meaning: "Penetrating" },
+  { id: 6, name: "Clarifying", symbol: "☲", trigram: "Li", blade: "e23", meaning: "Illuminating" },
+  { id: 7, name: "Balancing", symbol: "☱", trigram: "Dui", blade: "e31", meaning: "Reflecting" },
+];
+
+const CONCEPTS = {
+  "Rate Limiter": [0.04, -0.09, -0.51, 0.68, 0.21, -0.26, 0.17, -0.34],
+  "Message Queue": [0.12, -0.31, 0.08, -0.05, -0.72, 0.19, -0.44, 0.28],
+  "Circuit Breaker": [0.28, -0.55, 0.09, -0.17, 0.02, 0.71, -0.19, -0.08],
+  "Load Balancer": [0.44, -0.61, 0.07, -0.53, -0.12, 0.31, -0.08, 0.09],
+  "Cache Layer": [0.05, -0.19, -0.02, -0.03, 0.83, -0.28, -0.35, 0.21],
+  "Database Index": [-0.33, 0.08, -0.15, 0.58, -0.11, -0.45, 0.55, -0.09],
+  "Event Bus": [0.39, -0.72, 0.15, 0.05, 0.28, -0.42, 0.11, -0.13],
+  "Authentication Service": [-0.18, -0.06, 0.25, 0.11, 0.79, -0.24, 0.12, -0.41],
+  "Photo-synthesis": [0.71, -0.55, 0.03, -0.01, -0.12, 0.38, -0.18, -0.06],
+  "Predator": [0.29, -0.06, 0.88, -0.17, -0.08, 0.26, -0.12, 0.05],
+  "Homeostasis": [-0.05, 0.14, 0.11, -0.08, 0.91, -0.21, 0.11, -0.25],
+  "Market Competition": [-0.11, 0.08, 0.78, -0.23, 0.34, 0.09, 0.41, -0.12],
+};
+
+function l2norm(coeffs) {
+  return Math.sqrt(coeffs.reduce((s, v) => s + v * v, 0));
+}
+
+function dominantRole(coeffs) {
+  let maxI = 0, maxV = Math.abs(coeffs[0]);
+  for (let i = 1; i < 8; i++) {
+    if (Math.abs(coeffs[i]) > maxV) { maxV = Math.abs(coeffs[i]); maxI = i; }
+  }
+  return ROLES[maxI];
+}
+
+function sharpness(coeffs) {
+  const sorted = [...coeffs].map(Math.abs).sort((a, b) => b - a);
+  return sorted[0] / (sorted[0] + sorted[1] + 1e-10);
+}
+
+function dotProduct(a, b) {
+  return a.reduce((s, v, i) => s + v * b[i], 0);
+}
+
+function similarity(a, b) {
+  return dotProduct(a, b) / (l2norm(a) * l2norm(b) + 1e-10);
+}
+
+function buildCoeffs(seed) {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) { h = ((h << 5) - h) + seed.charCodeAt(i); h |= 0; }
+  const coeffs = [];
+  for (let i = 0; i < 8; i++) {
+    h = ((h << 5) - h) + i * 2654435761; h |= 0;
+    coeffs.push((h & 0xffff) / 0xffff * 2 - 1);
+  }
+  const norm = l2norm(coeffs);
+  return coeffs.map(v => +(v / norm).toFixed(4));
+}
+
+function renderRoles(containerId, coeffs) {
+  const c = document.getElementById(containerId);
+  const dom = dominantRole(coeffs);
+  c.innerHTML = ROLES.map((r, i) => {
+    const val = coeffs[i];
+    const active = r.name === dom.name;
+    const pct = Math.min(Math.abs(val) * 100, 100);
+    return `<div class="role-card${active ? ' active' : ''}">
+      <div class="role-symbol">${r.symbol}</div>
+      <div class="role-name">${r.name}</div>
+      <div class="role-value">${val >= 0 ? '+' : ''}${val.toFixed(3)}</div>
+      <div class="bar"><div class="bar-inner" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+let lastA = null, lastB = null;
+
+function encodeConcept() {
+  const text = document.getElementById('concept').value.trim();
+  let coeffs;
+  if (CONCEPTS[text]) {
+    coeffs = CONCEPTS[text];
+  } else {
+    coeffs = buildCoeffs(text);
+  }
+  lastA = coeffs;
+  renderRoles('rolesA', coeffs);
+  document.getElementById('normA').textContent = l2norm(coeffs).toFixed(3);
+  const dom = dominantRole(coeffs);
+  document.getElementById('domRoleA').textContent = dom.symbol + ' ' + dom.name;
+  document.getElementById('sharpA').textContent = (sharpness(coeffs) * 100).toFixed(0) + '%';
+  if (lastB) updateComparison();
+}
+
+function encodeConceptB() {
+  const text = document.getElementById('conceptBInput').value.trim();
+  let coeffs;
+  if (CONCEPTS[text]) {
+    coeffs = CONCEPTS[text];
+  } else {
+    coeffs = buildCoeffs(text);
+  }
+  lastB = coeffs;
+  renderRoles('rolesB', coeffs);
+  document.getElementById('normB').textContent = l2norm(coeffs).toFixed(3);
+  const dom = dominantRole(coeffs);
+  document.getElementById('domRoleB').textContent = dom.symbol + ' ' + dom.name;
+  document.getElementById('sharpB').textContent = (sharpness(coeffs) * 100).toFixed(0) + '%';
+  if (lastA) updateComparison();
+}
+
+function updateComparison() {
+  const sim = similarity(lastA, lastB);
+  const domA = dominantRole(lastA);
+  const domB = dominantRole(lastB);
+  document.getElementById('comparison').innerHTML = `
+    <div class="result-row"><span class="result-label">Semantic Similarity</span><span class="result-val">${sim.toFixed(4)}</span></div>
+    <div class="result-row"><span class="result-label">Dominant Role A</span><span class="result-val">${domA.symbol} ${domA.name}</span></div>
+    <div class="result-row"><span class="result-label">Dominant Role B</span><span class="result-val">${domB.symbol} ${domB.name}</span></div>
+    <div class="result-row"><span class="result-label">Storage per concept</span><span class="result-val">64 bytes</span></div>
+    <div class="result-row"><span class="result-label">Operation time</span><span class="result-val">~500ns</span></div>
+  `;
+}
+
+function randomize() {
+  const keys = Object.keys(CONCEPTS);
+  const key = keys[Math.floor(Math.random() * keys.length)];
+  document.getElementById('concept').value = key;
+  encodeConcept();
+}
+
+function loadExample(mode) {
+  if (mode === 'compare') {
+    document.getElementById('conceptB').style.display = 'block';
+    document.getElementById('concept').value = 'Rate Limiter';
+    document.getElementById('conceptBInput').value = 'Circuit Breaker';
+    encodeConcept();
+    encodeConceptB();
+  }
+}
+
+function initPresets() {
+  const container = document.getElementById('presets');
+  Object.keys(CONCEPTS).forEach(name => {
+    const btn = document.createElement('span');
+    btn.className = 'preset';
+    btn.textContent = name;
+    btn.onclick = () => { document.getElementById('concept').value = name; encodeConcept(); };
+    container.appendChild(btn);
+  });
+}
+
+initPresets();
+encodeConcept();
+</script>
+</body>
+</html>
