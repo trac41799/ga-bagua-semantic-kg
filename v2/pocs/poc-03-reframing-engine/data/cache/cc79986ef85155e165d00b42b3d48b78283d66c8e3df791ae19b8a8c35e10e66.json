@@ -1,0 +1,14 @@
+{
+ "key": "cc79986ef85155e165d00b42b3d48b78283d66c8e3df791ae19b8a8c35e10e66",
+ "text": "{\"name\": \"Single-step confirmation flow\"}",
+ "usage": {
+  "prompt_tokens": 154,
+  "completion_tokens": 9,
+  "total_tokens": 163,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 154
+ }
+}

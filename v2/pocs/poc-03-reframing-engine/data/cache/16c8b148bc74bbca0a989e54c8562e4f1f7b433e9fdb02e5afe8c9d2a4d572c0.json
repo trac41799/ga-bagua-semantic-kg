@@ -1,0 +1,14 @@
+{
+ "key": "16c8b148bc74bbca0a989e54c8562e4f1f7b433e9fdb02e5afe8c9d2a4d572c0",
+ "text": "{\"name\": \"Daylight exposure as metabolic shield\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 11,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

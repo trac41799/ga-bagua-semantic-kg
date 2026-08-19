@@ -1,0 +1,14 @@
+{
+ "key": "11825df89c998a0330ce35878d22bf5a3cd5eaca91703bb5d3c060e4cc916cb6",
+ "text": "{\"name\": \"Microbiome editing curbs colitis relapse\"}",
+ "usage": {
+  "prompt_tokens": 153,
+  "completion_tokens": 13,
+  "total_tokens": 166,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 153
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "140f2913dbc8f4e3a78fb2645c3cc3a64c2c4b10408eb45cd83c0fd0b1284524",
+ "text": "{\"name\": \"Protecting adolescent sleep\"}",
+ "usage": {
+  "prompt_tokens": 158,
+  "completion_tokens": 9,
+  "total_tokens": 167,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 158
+ }
+}

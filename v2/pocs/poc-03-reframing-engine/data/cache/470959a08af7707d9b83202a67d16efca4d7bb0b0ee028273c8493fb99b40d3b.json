@@ -1,0 +1,14 @@
+{
+ "key": "470959a08af7707d9b83202a67d16efca4d7bb0b0ee028273c8493fb99b40d3b",
+ "text": "{\"name\": \"Microbiome editing as hidden risk\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 12,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

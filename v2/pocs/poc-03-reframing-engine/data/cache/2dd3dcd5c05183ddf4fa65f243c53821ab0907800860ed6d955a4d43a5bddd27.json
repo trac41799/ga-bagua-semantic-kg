@@ -1,0 +1,14 @@
+{
+ "key": "2dd3dcd5c05183ddf4fa65f243c53821ab0907800860ed6d955a4d43a5bddd27",
+ "text": "{\"name\": \"Urban glow, metabolic toll\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 10,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

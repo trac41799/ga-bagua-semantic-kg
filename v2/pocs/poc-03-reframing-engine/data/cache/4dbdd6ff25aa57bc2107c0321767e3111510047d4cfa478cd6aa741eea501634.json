@@ -1,0 +1,14 @@
+{
+ "key": "4dbdd6ff25aa57bc2107c0321767e3111510047d4cfa478cd6aa741eea501634",
+ "text": "{\"name\": \"Net-zero procurement mandate\"}",
+ "usage": {
+  "prompt_tokens": 157,
+  "completion_tokens": 9,
+  "total_tokens": 166,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 157
+ }
+}

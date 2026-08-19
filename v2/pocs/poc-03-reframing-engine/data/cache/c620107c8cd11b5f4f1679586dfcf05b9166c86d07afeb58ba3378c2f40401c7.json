@@ -1,0 +1,14 @@
+{
+ "key": "c620107c8cd11b5f4f1679586dfcf05b9166c86d07afeb58ba3378c2f40401c7",
+ "text": "{\"name\": \"Fingerprint speed, lock's silent cost\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 14,
+  "total_tokens": 176,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

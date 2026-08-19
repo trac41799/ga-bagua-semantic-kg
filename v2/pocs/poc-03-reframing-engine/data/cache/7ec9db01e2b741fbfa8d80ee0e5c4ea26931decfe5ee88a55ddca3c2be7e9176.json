@@ -1,0 +1,14 @@
+{
+ "key": "7ec9db01e2b741fbfa8d80ee0e5c4ea26931decfe5ee88a55ddca3c2be7e9176",
+ "text": "{\"name\": \"Uncached load, peak-hour strain\"}",
+ "usage": {
+  "prompt_tokens": 164,
+  "completion_tokens": 13,
+  "total_tokens": 177,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 164
+ }
+}

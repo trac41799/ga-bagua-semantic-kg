@@ -1,0 +1,14 @@
+{
+ "key": "5e8628763086f98e893f98c375fc0cba55e0525a571bbdccc7dafef7aa0345c5",
+ "text": "{\"name\": \"Command palette shortcut\"}",
+ "usage": {
+  "prompt_tokens": 153,
+  "completion_tokens": 8,
+  "total_tokens": 161,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 153
+ }
+}

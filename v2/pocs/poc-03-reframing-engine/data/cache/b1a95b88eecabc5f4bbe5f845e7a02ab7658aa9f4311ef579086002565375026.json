@@ -1,0 +1,14 @@
+{
+ "key": "b1a95b88eecabc5f4bbe5f845e7a02ab7658aa9f4311ef579086002565375026",
+ "text": "{\"name\": \"Two-step trust as friction\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 10,
+  "total_tokens": 170,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

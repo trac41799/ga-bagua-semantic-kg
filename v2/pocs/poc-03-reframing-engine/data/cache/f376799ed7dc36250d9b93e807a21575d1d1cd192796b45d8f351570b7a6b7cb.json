@@ -1,0 +1,14 @@
+{
+ "key": "f376799ed7dc36250d9b93e807a21575d1d1cd192796b45d8f351570b7a6b7cb",
+ "text": "{\"name\": \"Tariff cap as shock trigger\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 11,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

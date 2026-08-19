@@ -1,0 +1,14 @@
+{
+ "key": "ffdedf0b581334bae5c603c22d2edec35783ba0977018dd0d35346e0fdb0695d",
+ "text": "{\"name\": \"Dementia onset delayed by bilingualism\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 12,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

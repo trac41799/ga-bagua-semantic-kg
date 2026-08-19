@@ -1,0 +1,14 @@
+{
+ "key": "748a723c2fe2e3befff46a808f52ad76fb503c576560dc78334c796306e6eb71",
+ "text": "{\"name\": \"Baseline noise reduction claim\"}",
+ "usage": {
+  "prompt_tokens": 158,
+  "completion_tokens": 10,
+  "total_tokens": 168,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 158
+ }
+}

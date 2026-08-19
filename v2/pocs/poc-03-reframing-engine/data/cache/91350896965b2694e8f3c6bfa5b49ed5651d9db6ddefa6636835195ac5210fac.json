@@ -1,0 +1,14 @@
+{
+ "key": "91350896965b2694e8f3c6bfa5b49ed5651d9db6ddefa6636835195ac5210fac",
+ "text": "{\"name\": \"Charging speed as hidden risk\"}",
+ "usage": {
+  "prompt_tokens": 163,
+  "completion_tokens": 12,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 163
+ }
+}

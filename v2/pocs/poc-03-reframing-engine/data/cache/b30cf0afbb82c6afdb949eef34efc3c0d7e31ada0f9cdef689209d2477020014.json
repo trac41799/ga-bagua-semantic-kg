@@ -1,0 +1,14 @@
+{
+ "key": "b30cf0afbb82c6afdb949eef34efc3c0d7e31ada0f9cdef689209d2477020014",
+ "text": "{\"name\": \"The battery's slowest charge phase\"}",
+ "usage": {
+  "prompt_tokens": 164,
+  "completion_tokens": 12,
+  "total_tokens": 176,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 164
+ }
+}

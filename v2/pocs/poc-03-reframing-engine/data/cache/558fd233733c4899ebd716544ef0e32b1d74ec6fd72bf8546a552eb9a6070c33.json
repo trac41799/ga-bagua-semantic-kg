@@ -1,0 +1,14 @@
+{
+ "key": "558fd233733c4899ebd716544ef0e32b1d74ec6fd72bf8546a552eb9a6070c33",
+ "text": "{\"name\": \"Two-factor entry as required gate\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 11,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "cf357340de6ac3710d092e5e859831990727e765a4c212ebe6a74577450bd4e3",
+ "text": "{\"name\": \"Peak-hour load, cached truth\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 12,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

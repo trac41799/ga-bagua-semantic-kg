@@ -1,0 +1,2 @@
+# TDD — POC-14 Rotor Transition Algebra MCP
+**Cases:** R1: compose/invert/apply/distance hand cases (π/2 e12: e1→e2; π: e1→−e1; invert round-trip; distance 0 for same rotor). R2: 100 random chains (depth ≤10) — unit norm preserved, inverse round-trip ≤1e-12, composition associative. R3: strict validation (unknown op, non-unit rotor input → error). R4: MCP tools/list + tools/call (sim). R5: official MCP client call. R6: no LLM imports; tests green (≥10).

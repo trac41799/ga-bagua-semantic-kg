@@ -1,0 +1,14 @@
+{
+ "key": "51a55d35478c4b382f5ffd0fe49b29c6c2553c21d43ba4fdd046e66e9661371f",
+ "text": "{\"name\": \"Net-zero preference as hidden risk\"}",
+ "usage": {
+  "prompt_tokens": 164,
+  "completion_tokens": 11,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 164
+ }
+}

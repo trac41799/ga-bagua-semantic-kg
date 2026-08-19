@@ -1,0 +1,14 @@
+{
+ "key": "cd351300eff367b63b6ad7f01ac4cd6d8a1c53ed83dd8f9fb5dd48543bd29161",
+ "text": "{\"name\": \"Bilingualism as cognitive shield\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 11,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

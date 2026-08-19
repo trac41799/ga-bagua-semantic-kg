@@ -1,0 +1,14 @@
+{
+ "key": "394ccee42690cf821a7faad38b49ac130fe66da88a4dd9f8274ee66abc7e0923",
+ "text": "[\"Snapshots daily, but no absolute promise\",\n\"Backup claims vs. real-world failure risks\",\n\"Automated copies, yet human error remains\",\n\"Zero loss is a marketing ideal, not fact\",\n\"Daily saves, but restore is untested\",\n\"Guarantee assumes perfect hardware forever\",\n\"Cloud safety depends on your provider's uptime\",\n\"Snapshots protect data, not your access to it\"]",
+ "usage": {
+  "prompt_tokens": 81,
+  "completion_tokens": 86,
+  "total_tokens": 167,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 81
+ }
+}

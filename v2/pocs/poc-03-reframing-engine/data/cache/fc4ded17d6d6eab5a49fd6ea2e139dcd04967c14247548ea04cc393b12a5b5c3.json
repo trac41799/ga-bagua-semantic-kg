@@ -1,0 +1,14 @@
+{
+ "key": "fc4ded17d6d6eab5a49fd6ea2e139dcd04967c14247548ea04cc393b12a5b5c3",
+ "text": "{\"name\": \"Tariff cap as household burden ceiling\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 12,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

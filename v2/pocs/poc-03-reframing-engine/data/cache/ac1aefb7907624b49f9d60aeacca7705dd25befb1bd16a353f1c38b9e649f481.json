@@ -1,0 +1,14 @@
+{
+ "key": "ac1aefb7907624b49f9d60aeacca7705dd25befb1bd16a353f1c38b9e649f481",
+ "text": "{\"name\": \"Clouds seed from plastic skies\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 11,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

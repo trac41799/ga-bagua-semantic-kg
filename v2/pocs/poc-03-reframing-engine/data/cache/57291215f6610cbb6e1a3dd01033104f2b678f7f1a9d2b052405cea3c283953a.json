@@ -1,0 +1,14 @@
+{
+ "key": "57291215f6610cbb6e1a3dd01033104f2b678f7f1a9d2b052405cea3c283953a",
+ "text": "{\"name\": \"Two-step trust, one-step risk\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 12,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

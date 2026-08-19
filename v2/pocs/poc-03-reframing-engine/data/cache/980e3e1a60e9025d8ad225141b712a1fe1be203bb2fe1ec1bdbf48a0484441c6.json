@@ -1,0 +1,14 @@
+{
+ "key": "980e3e1a60e9025d8ad225141b712a1fe1be203bb2fe1ec1bdbf48a0484441c6",
+ "text": "[\n  \"Friction warms Enceladus' hidden sea.\",\n  \"Moon's tidal pull melts its icy core.\",\n  \"Internal heat keeps ocean liquid beneath.\",\n  \"Gravitational flexing powers a watery interior.\",\n  \"Enceladus' tides create a warm abyss.\",\n  \"Subsurface water survives via tidal energy.\",\n  \"Ocean persists from moon's orbital strain.\",\n  \"Heat from squeezing sustains a deep sea.\"\n]",
+ "usage": {
+  "prompt_tokens": 85,
+  "completion_tokens": 93,
+  "total_tokens": 178,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 85
+ }
+}

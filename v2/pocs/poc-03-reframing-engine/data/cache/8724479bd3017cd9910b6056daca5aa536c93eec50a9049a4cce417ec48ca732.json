@@ -1,0 +1,14 @@
+{
+ "key": "8724479bd3017cd9910b6056daca5aa536c93eec50a9049a4cce417ec48ca732",
+ "text": "{\"name\": \"Oversized vehicles as civic burden\"}",
+ "usage": {
+  "prompt_tokens": 163,
+  "completion_tokens": 12,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 163
+ }
+}

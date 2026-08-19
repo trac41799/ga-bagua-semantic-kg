@@ -1,0 +1,14 @@
+{
+ "key": "298f97b0dcd129ad4f2cd873a479e1bd00a85af240eb490293f57433a9d693ed",
+ "text": "{\"name\": \"Bilingualism as cognitive reserve\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 11,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

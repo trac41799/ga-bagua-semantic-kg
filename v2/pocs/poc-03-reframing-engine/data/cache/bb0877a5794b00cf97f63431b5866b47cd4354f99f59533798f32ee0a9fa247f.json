@@ -1,0 +1,14 @@
+{
+ "key": "bb0877a5794b00cf97f63431b5866b47cd4354f99f59533798f32ee0a9fa247f",
+ "text": "{\"name\": \"Slow lock, fast claim\"}",
+ "usage": {
+  "prompt_tokens": 163,
+  "completion_tokens": 10,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 163
+ }
+}

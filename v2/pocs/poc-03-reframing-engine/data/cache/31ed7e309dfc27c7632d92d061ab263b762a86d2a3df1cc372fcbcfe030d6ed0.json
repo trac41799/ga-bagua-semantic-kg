@@ -1,0 +1,14 @@
+{
+ "key": "31ed7e309dfc27c7632d92d061ab263b762a86d2a3df1cc372fcbcfe030d6ed0",
+ "text": "[\n  \"Affordable water is a basic right.\",\n  \"Household budgets need water price protection.\",\n  \"Water pricing should reflect local earnings.\",\n  \"Caps prevent utility overcharging.\",\n  \"Income-linked rates ensure fair access.\",\n  \"Water bills must not burden the poor.\",\n  \"Regulate tariffs to shield families.\",\n  \"Price ceilings promote social equity.\"\n]",
+ "usage": {
+  "prompt_tokens": 82,
+  "completion_tokens": 76,
+  "total_tokens": 158,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 82
+ }
+}

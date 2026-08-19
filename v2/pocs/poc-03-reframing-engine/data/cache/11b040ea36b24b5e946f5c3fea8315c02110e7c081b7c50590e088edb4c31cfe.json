@@ -1,0 +1,14 @@
+{
+ "key": "11b040ea36b24b5e946f5c3fea8315c02110e7c081b7c50590e088edb4c31cfe",
+ "text": "{\"name\": \"Battery-first default theme\"}",
+ "usage": {
+  "prompt_tokens": 155,
+  "completion_tokens": 10,
+  "total_tokens": 165,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 155
+ }
+}

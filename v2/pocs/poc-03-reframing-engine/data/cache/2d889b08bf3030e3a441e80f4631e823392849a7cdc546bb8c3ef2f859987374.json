@@ -1,0 +1,14 @@
+{
+ "key": "2d889b08bf3030e3a441e80f4631e823392849a7cdc546bb8c3ef2f859987374",
+ "text": "{\"name\": \"Guaranteed safety, yet wind shifts\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 13,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "c0731359ce9d9d6b184655e09e64e6ca93512964fcc1353ff0e269e33591b1fa",
+ "text": "{\"name\": \"Net-zero preference as blade's edge\"}",
+ "usage": {
+  "prompt_tokens": 163,
+  "completion_tokens": 12,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 163
+ }
+}

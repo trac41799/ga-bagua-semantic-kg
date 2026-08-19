@@ -1,0 +1,14 @@
+{
+ "key": "122350d775f3f553246ae0ddbc90ddf3f7fc3fcafbf7708797dc3524006fae84",
+ "text": "{\"score\": 5}",
+ "usage": {
+  "prompt_tokens": 214,
+  "completion_tokens": 6,
+  "total_tokens": 220,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 214
+ }
+}

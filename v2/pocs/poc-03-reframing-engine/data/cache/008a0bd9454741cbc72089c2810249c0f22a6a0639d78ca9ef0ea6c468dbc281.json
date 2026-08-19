@@ -1,0 +1,14 @@
+{
+ "key": "008a0bd9454741cbc72089c2810249c0f22a6a0639d78ca9ef0ea6c468dbc281",
+ "text": "{\"name\": \"Battery-first design, user choice second\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 13,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

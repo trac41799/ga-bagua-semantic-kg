@@ -1,0 +1,14 @@
+{
+ "key": "1d07b771f53d5dbbe6548a9849fc11fe4bc78bae2b9e7d0bdff1d048a64a1b4a",
+ "text": "{\"name\": \"Compact vehicles as civic virtue\"}",
+ "usage": {
+  "prompt_tokens": 164,
+  "completion_tokens": 10,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 164
+ }
+}

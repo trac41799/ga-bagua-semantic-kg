@@ -1,0 +1,14 @@
+{
+ "key": "618c90d392d48256ecb0583d8925d3e423275a08fb8c4166bb8dfcfa7e622873",
+ "text": "{\"name\": \"Uncompromised 4K streaming capacity\"}",
+ "usage": {
+  "prompt_tokens": 158,
+  "completion_tokens": 14,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 158
+ }
+}

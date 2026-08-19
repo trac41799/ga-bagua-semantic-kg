@@ -1,0 +1,40 @@
+# GitHub discovers workflows only under the repository-root .github/workflows.
+# The product keeps its source CI beside the package; this root workflow mirrors
+# those checks with the required working directory.
+name: iching-tools
+
+on:
+  push:
+    paths:
+      - "v2/products/iching-tools/**"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    paths:
+      - "v2/products/iching-tools/**"
+      - ".github/workflows/ci.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: v2/products/iching-tools
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependencies
+        run: python -m pip install numpy pytest mcp build jsonschema
+      - name: Full regression suite
+        run: python -m pytest coverage/tests reframe/tests statediff/tests mcp/tests cl3calc/tests xai/tests rotor/tests tests -q
+      - name: Fresh distribution and clean install
+        run: |
+          rm -rf .tmp-iching-dist .tmp-iching-install
+          python -m build --wheel --sdist --outdir .tmp-iching-dist
+          python -m pip install --quiet --no-deps --target .tmp-iching-install .tmp-iching-dist/*.whl
+          PYTHONPATH="$PWD/.tmp-iching-install" python -S -c "import iching_mcp, iching_mcp.server; assert iching_mcp.__version__ == '0.2.0'"
+      - name: Official SDK source and installed-wheel probes
+        run: |
+          python -m pytest mcp/tests/test_debug.py -q
+          python -m pytest tests/test_distribution.py -q

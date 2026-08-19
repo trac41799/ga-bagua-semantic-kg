@@ -1,0 +1,31 @@
+# CI — iching-tools: full regression + distribution gates (no real LLM calls)
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install numpy pytest mcp build jsonschema
+      - name: Full regression suite
+        run: python -m pytest coverage/tests reframe/tests statediff/tests mcp/tests cl3calc/tests xai/tests rotor/tests tests -q
+      - name: Unified CLI (sim)
+        run: |
+          python -m iching_tools.cli --version
+          python -m iching_tools.cli coverage --task t --plan p --json --sim
+          python -m iching_tools.cli reframe --statement s --json --sim
+          python -m iching_tools.cli statediff --before b --after a --json --sim
+      - name: Build verification
+        run: |
+          rm -rf .tmp-iching-dist .tmp-iching-install
+          python -m build --wheel --sdist --outdir .tmp-iching-dist
+          python -m pip install --quiet --no-deps --target .tmp-iching-install .tmp-iching-dist/*.whl
+          PYTHONPATH="$PWD/.tmp-iching-install" python -S -c "import iching_mcp, iching_mcp.server; assert iching_mcp.__version__ == '0.2.0'"
+          PYTHONPATH="$PWD/.tmp-iching-install" python -c "import iching_mcp; print(iching_mcp.__version__)"

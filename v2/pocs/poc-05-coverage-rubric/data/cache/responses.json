@@ -1,0 +1,362 @@
+{
+ "1_A": "- **Define scope & success metrics (Week 1):** Finalize the API's core endpoints, target users, and 3-5 measurable KPIs (e.g., time-to-first-call, adoption rate, error rate).  \n- **Build a public beta with 5 design partners (Weeks 2-6):** Recruit 5 companies from your network, give them early access, and collect structured feedback on DX, docs, and edge cases.  \n- **Finalize docs & sandbox (Weeks 7-8):** Publish interactive API reference, quickstart guide, and a free sandbox environment with sample keys\u2014no signup friction.  \n- **Harden production (Weeks 9-10):** Load-test, add rate limiting, monitoring, and a status page. Fix all P0/P1 bugs from beta feedback.  \n- **Create launch assets (Week 11):** Write a launch blog post, 2-minute demo video, and a landing page with code snippets and pricing tiers.  \n- **Soft launch to existing customers (Week 11):** Send a private invite to your current user base for early access, gather last-minute feedback, and fix critical issues.  \n- **Public launch",
+ "1_audit_A": [
+  0,
+  1,
+  0,
+  1,
+  1,
+  1
+ ],
+ "1_B": "Here is a concise, actionable plan to launch your new API product in 3 months, verified against all 8 aspects.\n\n**The Plan (8 Bullets):**\n\n1. **Secure Executive & Engineering Buy-In (Receptive):** Present the business case and technical scope to the CTO/VP of Product and the lead architect. Get explicit sign-off on the 3-month timeline, resource allocation, and the \"MVP scope\" (defined in bullet 3) to prevent scope creep.\n2. **Trigger the Build Phase (Causal):** Kick off the project immediately by holding a \"Day 1\" sprint planning session. The trigger is the signed-off scope; the first sprint must begin within 48 hours to hit the 90-day deadline.\n3. **Define the \"MVP Scope\" & Data Contract (Constraining):** Lock the API to a maximum of 3 core endpoints (e.g., Create, Read, Delete). Publish the OpenAPI/Swagger spec on Day 3. This is the hard guardrail\u2014any feature request outside this spec is deferred to v2.\n4. **Establish the Developer Experience (DX) Pipeline (Transmissive):** Build the flow of *value* to the end-user. This includes",
+ "1_audit_B": [
+  1,
+  1,
+  1,
+  1,
+  1,
+  1
+ ],
+ "2_A": "- **Detect connectivity:** Use `NetworkInfo`/`ConnectivityManager` (Android) or `NWPathMonitor` (iOS) to monitor reachability; expose a global `isOffline` state via a reactive store (e.g., Riverpod/Bloc).\n- **Cache data locally:** Implement a local database (SQLite/Realm) or file-based cache for all API responses; store timestamps for TTL-based invalidation.\n- **Queue user actions:** Intercept write operations (POST/PUT/DELETE) when offline; persist them in an outbox table with retry logic and conflict resolution (e.g., last-write-wins).\n- **Sync on reconnect:** On network regain, flush the outbox sequentially, handle server errors (409/422) with user prompts, and refresh cached data from the server.\n- **Show offline UI:** Display a persistent banner/toast when offline; disable non-cached features and show placeholder skeletons for missing content.\n- **Preload critical content:** On app launch (when online), prefetch key screens (home, profile, recent items) into cache to ensure meaningful offline usability.\n- **Handle media/files:** Download images/videos to local storage on demand (with size limits",
+ "2_audit_A": [
+  1,
+  1,
+  0,
+  1,
+  1,
+  1
+ ],
+ "2_B": "**Plan: Add Offline Mode to Mobile App**\n\n1. **Receptive:** Secure buy-in from Product, Engineering, and Support leads by presenting a phased rollout (e.g., read-only first, then sync) and defining success metrics (e.g., % sessions started offline, crash-free rate).\n2. **Causal:** Trigger offline mode when the device loses connectivity (detected via `NetworkInfo`/`ConnectivityManager`); also trigger a manual \"Download for Offline\" action from content screens.\n3. **Transmissive:** Implement a local database (SQLite/Room/CoreData) to cache user data, media, and API responses; queue user actions (writes) in an outbox; sync via a background worker when connectivity returns, with conflict resolution (last-write-wins or version vectors).\n4. **Constraining:** Enforce storage budget (e.g., max 500MB cache, auto-evict least-recently-used media); respect OS battery/data-saver settings; limit offline writes to non-critical actions (e.g., no payments).\n5. **Clarifying:** Surface a persistent banner/icon showing \"Offline \u2013 changes will sync later\"; show per-item sync status (pending/synced/f",
+ "2_audit_B": [
+  1,
+  1,
+  1,
+  1,
+  1,
+  1
+ ],
+ "3_A": "- **Audit current billing data & contracts**: Export all customer records, payment history, and active subscriptions; document existing API integrations and custom features.  \n- **Define migration scope & success criteria**: List must-have features (e.g., dunning, tax handling) and set measurable KPIs (downtime < 2h, zero data loss, 99.9% invoice accuracy).  \n- **Select & sandbox-test new provider**: Run parallel tests for recurring billing, proration, refunds, and multi-currency; validate compliance (PCI-DSS, GDPR).  \n- **Build data mapping & transformation scripts**: Map legacy fields to new schema; clean duplicates and stale records; create rollback snapshots.  \n- **Run a full dry-run migration**: Migrate a cloned dataset to staging, reconcile totals, and test end-to-end flows (payments, receipts, customer portal).  \n- **Schedule cutover during low-traffic window**: Freeze writes, migrate live data, verify integrity, then switch DNS/API endpoints; keep old system read-only for 30 days.  \n- **Execute parallel run & monitor**: Run both systems for 2\u20134 weeks, compare revenue reports daily, and auto-alert on discrepancies.  \n",
+ "3_audit_A": [
+  1,
+  1,
+  0,
+  1,
+  1,
+  1
+ ],
+ "3_B": "Here is a concise, actionable plan for migrating your billing system to a new provider, verified against all 8 aspects.\n\n---\n\n**Migration Plan: Billing System Provider Switch**\n\n1. **Secure Executive & Finance Sign-off (Receptive):** Obtain formal approval from the CFO and Head of Engineering. They must accept the migration timeline, cost, and operational risk before any work begins.\n2. **Trigger the \"Cutover\" (Causal):** Define a specific, date-stamped \"Go-Live\" event (e.g., first day of the next fiscal quarter) that triggers the final data sync and provider switch. All pre-migration work is tied to this date.\n3. **Establish Data & API Pipeline (Transmissive):** Build a one-time ETL (Extract, Transform, Load) job to move customer records, invoices, and payment history. Simultaneously, set up a live webhook relay to stream new transactions from the old provider to the new one during the parallel-run phase.\n4. **Apply Guardrails & Budget (Constraining):** Cap the migration budget at $50k (including parallel-run fees) and enforce a strict \"no new features\" freeze on the billing codebase for 2 weeks prior to cutover to",
+ "3_audit_B": [
+  1,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "4_A": "- **Add product recommendation widgets** (e.g., \"You may also like,\" \"Frequently bought together\") to product detail and cart pages, powered by order history and browsing behavior.  \n- **Implement a rules engine** for manual curation (e.g., new arrivals, clearance, category-based) to override algorithmic picks for seasonal or promotional pushes.  \n- **Track implicit signals** (clicks, add-to-cart, time-on-page) and explicit ratings to continuously refine relevance, with A/B testing against a control group.  \n- **Personalize by segment** (new vs. returning, high-value, geo) using existing customer data, ensuring privacy compliance (e.g., no PII in analytics).  \n- **Add a \"Recently viewed\" carousel** on the homepage and product pages to reduce friction for returning shoppers.  \n- **Include social proof** (e.g., \"X people bought this in the last 24h\") to boost conversion, but cap frequency to avoid fatigue.  \n- **Launch with a 2-week shadow mode** (log impressions/clicks without showing) to validate model accuracy before full rollout.  \n- **Set success metrics**: +5% average order value, +10% add-to-cart rate, and",
+ "4_audit_A": [
+  1,
+  0,
+  0,
+  1,
+  1,
+  1
+ ],
+ "4_B": "**Plan: Ship Storefront Recommendation Feature**\n\n1. **Receptive:** Secure sign-off from Product, Engineering, and Data Science leads on the recommendation algorithm (e.g., \"Frequently Bought Together\" vs. \"Customers Also Viewed\") and the UI placement (product page vs. cart).  \n2. **Causal:** Trigger the feature via a user\u2019s explicit product view or cart-add event, which fires a real-time API call to the recommendation engine.  \n3. **Transmissive:** Stream product IDs, user session context, and historical purchase data to the recommendation service; return ranked product IDs with titles, prices, and images to the storefront frontend.  \n4. **Constraining:** Limit to top 5 recommendations per request, cap API latency at 200ms, and enforce a 10% max discount on recommended items to protect margins.  \n5. **Clarifying:** Instrument A/B testing (50/50 split) and track click-through rate (CTR), add-to-cart rate, and revenue per session; display a debug overlay in staging to verify ranking logic.  \n6. **Influential:** Change frontend convention from static \"Related Products\" to dynamic, personalized recommendations; update design system docs and train",
+ "4_audit_B": [
+  1,
+  1,
+  1,
+  1,
+  1,
+  1
+ ],
+ "5_A": "- **Audit & inventory:** List all internal tools, their current auth methods, and identify SSO-compatible ones (SAML/OIDC).  \n- **Select provider:** Choose an IdP (e.g., Okta, Azure AD, Google Workspace) based on existing stack, cost, and compliance needs.  \n- **Prioritize rollout:** Start with high-traffic, critical tools (email, HR, code repos) in a pilot group of 10\u201320 users.  \n- **Standardize policies:** Enforce MFA, least-privilege access, and automated deprovisioning (SCIM) for all SSO-connected apps.  \n- **Migrate in phases:** Move tools in weekly batches, with a rollback plan per app and a dedicated support channel for issues.  \n- **Communicate & train:** Publish a user guide, schedule 2\u20133 live demos, and set a clear deadline for legacy password retirement.  \n- **Monitor & audit:** Track login success/failure rates, SSO adoption metrics, and run quarterly access reviews.  \n- **Retire legacy auth:** Disable local passwords and manual account creation once each tool reaches 95% SSO usage.",
+ "5_audit_A": [
+  1,
+  1,
+  1,
+  1,
+  1,
+  1
+ ],
+ "5_B": "Here is a concise, actionable plan to introduce SSO across all internal tools, verified against all 8 aspects:\n\n1. **Receptive (Stakeholders):** Secure buy-in from IT Security (risk reduction), HR (offboarding speed), and Department Heads (productivity). Appoint an SSO Product Owner to own the rollout and communicate the \"one password, one login\" benefit to all employees.\n2. **Causal (Trigger):** Launch the plan immediately upon selecting an IdP (e.g., Okta, Azure AD) and completing a pilot with 2 low-risk tools (e.g., Slack, Confluence) to validate the integration flow.\n3. **Transmissive (Flow):** Migrate all user directories (AD/LDAP) into the IdP. Provision SCIM-based user provisioning to sync accounts, groups, and attributes to every connected tool, and route all authentication traffic through the IdP.\n4. **Constraining (Guardrails):** Enforce a strict budget for IdP licensing and integration effort. Mandate a \"SSO-first\" policy: no new tool is approved without SAML/OIDC support, and legacy tools without SSO are flagged for replacement within 6 months.\n5. **Cl",
+ "5_audit_B": [
+  1,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "6_A": "- **Immediately declare a SEV-1 incident** and page on-call engineers; pause all non-critical deployments and feature releases.  \n- **Isolate the failure** \u2013 check database health (CPU, connections, replication lag, disk space) and recent deploys/config changes; roll back if a change correlates.  \n- **Enable read-only mode or failover** to a replica if available; if not, queue checkout requests (e.g., 503 with retry-After) to prevent cascading load.  \n- **Restore service** \u2013 restart DB, kill stuck queries, or scale up resources; if data corruption is suspected, restore from latest backup to a staging instance first.  \n- **Communicate transparently** \u2013 post status to internal Slack and public status page every 15 min; include ETA, impact scope, and workaround (e.g., \u201cuse phone orders\u201d).  \n- **Verify data integrity** post-recovery \u2013 run consistency checks, confirm no lost orders/payments, and reconcile with payment gateway logs.  \n- **Conduct a blameless postmortem** within 48h \u2013 document root cause, timeline, monitoring gaps, and add automated alerts for DB connection saturation and failover drills.  \n- **",
+ "6_audit_A": [
+  0,
+  1,
+  1,
+  1,
+  1,
+  1
+ ],
+ "6_B": "**Incident Response Plan: Database Outage Affecting Checkout**\n\n1. **Receptive:** Notify on-call DBA, engineering lead, and customer support manager immediately. They must acknowledge the alert and assume roles (incident commander, comms lead, technical lead).\n2. **Causal:** Trigger the plan when checkout API error rates exceed 5% or database connection pool saturation is detected (via monitoring alerts). Do not wait for customer complaints.\n3. **Transmissive:** Route all checkout traffic to a read-replica or cached product/cart data (if available) to keep the UI functional. Simultaneously, stream database logs and slow-query metrics to the engineering war-room channel for diagnosis.\n4. **Constraining:** Do not perform failover or restart the primary database without DBA approval. Limit any schema changes or heavy queries during the incident. Cap customer-facing error messages to a generic \"try again later\" to avoid exposing internals.\n5. **Clarifying:** Display a live dashboard showing: checkout error rate, database connection count, query latency, and order completion rate. Post a public status-page update within 5 minutes, updated every 15 minutes.\n6. **Influential:** Shift the team from \"fix",
+ "6_audit_B": [
+  1,
+  1,
+  1,
+  1,
+  1,
+  1
+ ],
+ "7_A": "- **Activate IR plan:** Immediately convene the incident response team, isolate affected systems, and preserve evidence (logs, memory, disk images) per legal hold.\n- **Assess scope & legal triggers:** Determine data types exposed, affected individuals, and jurisdictions; map to breach notification laws (e.g., GDPR 72h, HIPAA 60d, state laws) and contractual obligations.\n- **Draft notification content:** Prepare clear, plain-language notices (what happened, data involved, risks, actions taken, protective steps for users, contact info) in required languages and formats.\n- **Notify regulators first:** Submit formal breach report to relevant authorities within statutory deadlines, including preliminary and follow-up details as investigation progresses.\n- **Notify affected individuals:** Send personalized notifications (email, mail, or in-app) promptly after regulator filing, unless law enforcement requests delay; include credit monitoring offers if financial data exposed.\n- **Notify partners & vendors:** Inform third parties (e.g., payment processors, hosting providers, insurers) per contracts, and coordinate public statements with PR/legal to avoid misinformation.\n- **Document everything:** Log all decisions, timestamps, communications, and evidence for audit trails; update incident log and post-incident review materials.\n- **Post-inc",
+ "7_audit_A": [
+  0,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "7_B": "Here is a concise, actionable plan for handling a security breach notification process, verified against all 8 aspects.\n\n**Plan: Breach Notification & Response Protocol**\n\n1. **Activate the Incident Response (IR) Team** (Receptive): Immediately notify the pre-designated IR lead (CISO or Head of Security) and legal counsel. They must accept ownership of the process and authorize all subsequent steps.\n2. **Trigger: Confirm & Triage** (Causal): The plan activates upon verified detection of a breach (e.g., SIEM alert, user report, or third-party notice). The IR lead confirms the breach is real and classifies its severity (Low/Medium/Critical) within 1 hour.\n3. **Contain & Preserve Evidence** (Constraining): Isolate affected systems (disconnect from network) without destroying forensic data. Apply the \"preservation hold\" to all logs and backups. No data deletion or system rebuild is permitted until forensics are complete.\n4. **Forensic Investigation & Data Flow** (Transmissive): Move all relevant logs, affected data samples, and system images to a secure, isolated forensic environment. The investigation team transmits a preliminary root-cause and scope report (types of data, number of records",
+ "7_audit_B": [
+  0,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "8_A": "- **Isolate & Assess:** Immediately stop all automated deployments and rollbacks. Identify the exact scope of corruption (files, configs, database, or infrastructure) via logs, checksums, and health checks.\n- **Restore from Last Known Good Snapshot:** Use your most recent verified backup (VM snapshot, container image, or DB dump) to restore the environment to a stable state. Verify integrity post-restore.\n- **Validate Dependencies & Secrets:** Re-check environment variables, API keys, and service connections. Ensure they match the restored version, not the corrupted one.\n- **Re-run Deployment in Dry-Run Mode:** Execute the deployment pipeline with `--dry-run` or staging equivalent to catch missing artifacts or config drift before touching production.\n- **Apply Incremental Fixes:** If corruption was partial (e.g., only a few files), patch them manually from source control, then re-verify checksums and service health.\n- **Test Core Functionality:** Run smoke tests (login, DB read/write, API endpoints) and load checks to confirm the environment is operational.\n- **Document Root Cause & Prevent Recurrence:** Record what caused the corruption (e.g., bad release, disk full, human error). Add guardrails: backup",
+ "8_audit_A": [
+  0,
+  1,
+  0,
+  1,
+  1,
+  1
+ ],
+ "8_B": "Here is a concise, actionable recovery plan for a corrupted deployment environment:\n\n1. **Isolate & Quarantine (Receptive/Constraining):** Immediately halt all automated CI/CD pipelines and block external traffic to the affected environment. Notify the DevOps and Security teams (the receivers) to accept the incident and prevent further corruption spread. Apply a strict \"no manual changes\" guardrail until root cause is identified.\n\n2. **Trigger & Snapshot (Causal/Clarifying):** Trigger the recovery protocol by taking a full snapshot/backup of the current corrupted state (for forensic analysis). Then, identify the last known-good deployment artifact (commit hash, image tag, or config version) from your artifact registry to serve as the baseline for restoration.\n\n3. **Restore Core Infrastructure (Transmissive/Generative):** Re-provision the environment from Infrastructure-as-Code (IaC) templates (e.g., Terraform, CloudFormation) using the last known-good state. This flows clean compute, network, and storage resources into place, bypassing any corrupted binaries or configs.\n\n4. **Rollback Application & Data (Transmissive/Constraining):** Deploy the last known-good application artifact and restore the database from the",
+ "8_audit_B": [
+  0,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "9_A": "- **Acknowledge within 1 hour** on official channels: state you're aware, investigating, and will update shortly. Do not speculate.  \n- **Assemble a rapid-response team** (PR, legal, product, customer support) to verify facts and trace the source of the misinformation.  \n- **Publish a clear, factual correction** (with timestamps, data, or screenshots) on your website and top social platforms; pin it to profiles.  \n- **Engage directly with high-reach spreaders** (journalists, influencers) privately to share accurate info and request corrections or context.  \n- **Deploy a monitoring tool** (e.g., Brandwatch, Meltwater) to track hashtags, keywords, and sentiment; log all mentions for trend analysis.  \n- **Prepare a FAQ and script** for customer support to handle inbound queries consistently and calmly.  \n- **Escalate legal review** if misinformation is defamatory or violates platform policies; file takedown requests where applicable.  \n- **Post-incident review** within 48 hours: document what worked, update crisis playbook, and issue a transparent public recap to rebuild trust.",
+ "9_audit_A": [
+  0,
+  1,
+  1,
+  1,
+  1,
+  1
+ ],
+ "9_B": "Here is a concise, actionable plan to manage a viral misinformation event about your product.\n\n---\n\n**Viral Misinformation Response Plan**\n\n1. **Activate the Crisis Team (Receptive):** Immediately assemble the pre-designated crisis team (PR Lead, Legal, Product Lead, Customer Support Head, and a C-suite executive). The C-suite executive must formally approve the activation and delegate decision-making authority to this team for the duration of the event.\n\n2. **Trigger the \"Golden Hour\" Protocol (Causal):** The plan is triggered the moment a piece of misinformation about the product reaches a defined threshold (e.g., 1,000 engagements on a single post, or coverage by a tier-1 media outlet). Do not wait for the story to peak; initiate the protocol immediately upon threshold detection.\n\n3. **Establish a Centralized Intelligence Feed (Transmissive):** Create a single, live-updating document (e.g., a Slack channel + shared dashboard) where all monitoring tools (social listening, support tickets, press mentions) funnel data. This ensures that every team member sees the same claims, sentiment, and spread velocity in real-time, preventing conflicting internal narratives.\n\n4. **Apply the \"Verify & Legal\" Guardrail (Constraining",
+ "9_audit_B": [
+  0,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "10_A": "- **Immediately block** the offending IPs, API keys, and user agents via WAF/CDN rules; apply temporary rate limits (e.g., 10 req/min) to those entities.\n- **Rotate** compromised API keys and tokens; revoke sessions for affected accounts; force re-authentication.\n- **Patch** the rate-limit bypass logic (e.g., fix header spoofing, IP trust, or distributed counter flaws) and deploy hotfix.\n- **Add** secondary controls: per-account velocity checks, CAPTCHA on suspicious patterns, and anomaly detection alerts.\n- **Audit** logs for data exfiltration or unauthorized actions; preserve evidence for forensics.\n- **Notify** affected customers/partners per SLA; document incident timeline and root cause.\n- **Increase** monitoring on all endpoints for 48h; verify no residual abuse or new bypass vectors.\n- **Post-incident**: update runbooks, add regression tests for rate-limit logic, and review access controls.",
+ "10_audit_A": [
+  1,
+  0,
+  1,
+  1,
+  1,
+  1
+ ],
+ "10_B": "Here is a concise, actionable incident response plan to mitigate an API abuse/rate-limit bypass.\n\n**Immediate Containment & Eradication**\n1. **Kill Switch & Blocking:** Immediately revoke the compromised API keys/tokens and block the offending source IPs, ASNs, or user agents at the WAF/edge. If the bypass exploits a specific endpoint, enable a temporary \"maintenance mode\" or hard cap (e.g., 1 request/sec) on that route.\n2. **Patch the Logic Flaw:** Identify the bypass vector (e.g., missing header validation, IP spoofing via `X-Forwarded-For`, or race condition in the counter). Deploy a hotfix to enforce rate limits based on a server-side, cryptographically signed token (JWT) rather than client-supplied headers.\n\n**Analysis & Recovery**\n3. **Forensic Triage:** Pull full request logs (timestamps, payloads, headers) for the attack window. Determine the blast radius: which endpoints were hit, what data was exfiltrated, and whether the abuse caused database saturation or cost overruns.\n4. **Data & Quota Restoration:** Roll back any corrupted data or inflated usage metrics. Issue new",
+ "10_audit_B": [
+  0,
+  1,
+  0,
+  1,
+  1,
+  1
+ ],
+ "11_A": "Here is a concise, actionable plan to draft your remote-work policy:\n\n1. **Define Scope & Eligibility:** State which roles (e.g., all full-time, specific departments) are eligible and the required work location (e.g., same country, time-zone overlap).\n2. **Set Core Hours & Availability:** Specify mandatory overlap hours (e.g., 10 AM\u20133 PM local time) and require a reliable internet connection and a distraction-free workspace.\n3. **Establish Communication Protocols:** Mandate daily check-ins (e.g., Slack status updates) and define response-time expectations (e.g., within 2 business hours) for emails and messages.\n4. **Outline Equipment & Security:** Detail company-provided hardware, software, and VPN requirements; prohibit public Wi-Fi for sensitive data and require password managers.\n5. **Clarify Expense & Reimbursement:** State what is covered (e.g., monthly internet stipend, ergonomic chair) and the approval process for one-time home-office purchases.\n6. **Define Performance Metrics:** Shift focus from hours to deliverables\u2014list measurable KPIs (e.g., project milestones, ticket closure rates) and schedule bi-weekly 1:1s.\n7. **Address Legal & Tax Compliance:** Include a",
+ "11_audit_A": [
+  1,
+  1,
+  0,
+  0,
+  1,
+  0
+ ],
+ "11_B": "Here is a concise, actionable plan to draft and implement a remote-work policy.\n\n---\n\n**Plan: Draft & Implement a Remote-Work Policy**\n\n1. **Receptive (Audience & Buy-in):** Identify the final approvers (CEO/HR Director) and key stakeholders (Department Heads, Team Leads). Schedule a pre-draft alignment meeting to secure their mandate and gather non-negotiable requirements (e.g., security, client-facing hours).\n2. **Causal (Trigger & Scope):** Define the policy\u2019s activation triggers (e.g., employee request, emergency closure, hybrid schedule). Explicitly state which roles are eligible (full-time remote, hybrid, or fully on-site) based on job function, not seniority.\n3. **Transmissive (Flow of Work & Communication):** Specify mandatory communication protocols: core overlap hours (e.g., 10 AM\u20133 PM), required tools (Slack/Teams/Zoom), and response-time SLAs. Define how project files, approvals, and status updates flow through shared drives and PM software.\n4. **Constraining (Guardrails & Limits):** Set hard boundaries: approved geographic locations (for tax/legal), equipment budget caps (e.g., $500 one-time stipend),",
+ "11_audit_B": [
+  1,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "12_A": "1. **Define scope & criteria:** Identify all vendors handling personal/sensitive data; document data types, processing purposes, and applicable regulations (e.g., GDPR, CCPA, HIPAA).  \n2. **Risk-tier vendors:** Classify each vendor as high, medium, or low risk based on data sensitivity, volume, and access level; prioritize reviews accordingly.  \n3. **Standardize assessment questionnaire:** Create a template covering security controls, sub-processors, data retention/deletion, breach notification, and compliance certifications (e.g., SOC 2, ISO 27001).  \n4. **Schedule recurring reviews:** Conduct initial due diligence before onboarding, then re-assess high-risk vendors annually, medium every 2 years, low every 3 years or upon material changes.  \n5. **Collect & validate evidence:** Request completed questionnaires, audit reports, and policy documents; verify claims via spot checks or third-party attestations.  \n6. **Score & document findings:** Use a scoring rubric (e.g., 1\u20135) for each criterion; record gaps, risks, and remediation deadlines in a central vendor register.  \n7. **Escalate & remediate:** For critical gaps, issue formal action plans with owners and due dates; escalate unresolved high",
+ "12_audit_A": [
+  1,
+  1,
+  0,
+  1,
+  1,
+  1
+ ],
+ "12_B": "Here is a concise, actionable plan to create a vendor data-processing review process.\n\n---\n\n**Plan: Establish a Vendor Data-Processing Review Process**\n\n1. **Define Scope & Receptive Owners:** Identify the \"receptive\" stakeholders (Legal, InfoSec, Procurement, Data Privacy Officer) and formally assign them as joint owners. Draft a charter defining which vendors are in-scope (e.g., all sub-processors, high-risk data handlers) and secure their sign-off.\n2. **Trigger & Intake:** Establish the \"causal\" trigger\u2014a mandatory review gate before any vendor contract is signed, renewed, or undergoes a significant data-handling change (e.g., new data fields, new sub-processor). Create a standardized intake form requiring the business sponsor to declare data types, volumes, and processing purposes.\n3. **Data Flow Mapping & Transmission:** Require the vendor to submit a \"transmissive\" data-flow diagram and a sub-processor list. This must detail exactly what data moves (PII, financial, etc.), where it is stored (geography), and how it is transmitted (APIs, SFTP, etc.).\n4. **Apply Guardrails & Constraints:** Enforce \"constraining\" rules using a risk-tiering matrix (",
+ "12_audit_B": [
+  1,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "13_A": "**AI Safety Usage Policy (Internal Teams)**\n\n1. **Human Oversight:** All AI-generated outputs must be reviewed and approved by a qualified human before use in production, external communications, or any decision affecting users, employees, or legal compliance.\n2. **Data Handling:** Never input confidential, personal, or proprietary data into public AI tools. Use only approved, sandboxed environments with data-loss prevention enabled.\n3. **Prohibited Use Cases:** Do not use AI for autonomous code deployment, medical/legal/financial advice, or any action that could cause physical, financial, or reputational harm without explicit written sign-off from a designated safety lead.\n4. **Verification & Hallucination Checks:** Treat all AI outputs as unverified drafts. Cross-check facts, citations, and code against primary sources; flag any uncertainty to the requester.\n5. **Bias & Fairness Review:** For any AI used in hiring, scoring, or user-facing personalization, run a documented bias audit before launch and re-audit quarterly.\n6. **Incident Reporting:** Immediately report any harmful, biased, or unexpected output\u2014or any security breach\u2014to the AI Safety Officer within 24 hours. No blame, but mandatory logging.\n7. **",
+ "13_audit_A": [
+  1,
+  0,
+  0,
+  1,
+  1,
+  0
+ ],
+ "13_B": "**AI Safety Usage Policy (Internal Teams)**\n\n1. **Receptive:** All employees, contractors, and vendors with access to internal AI systems must acknowledge this policy annually via the HR portal. Department heads are accountable for enforcing it within their teams.\n2. **Causal:** The policy activates immediately upon any AI system interaction (prompt, API call, or model training) and triggers a mandatory review whenever a new AI tool is onboarded or a model is updated.\n3. **Transmissive:** All prompts, outputs, and training data must flow through approved, logged channels. No proprietary or PII data may be transmitted to unapproved external models; internal sandboxes are the only route for sensitive data.\n4. **Constraining:** Usage is limited to approved use cases (e.g., code generation, internal summarization). Budget caps apply per team for compute costs, and all outputs must pass a human-review checkpoint before deployment to production.\n5. **Clarifying:** Every AI output must be labeled with model version, confidence score, and a \"human-verified\" flag. A central dashboard tracks prompt volume, error rates, and policy violations in real time.\n6. **Influential:** Teams must shift from \"copy-paste\" reliance to a \"",
+ "13_audit_B": [
+  1,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "14_A": "- **Set absolute emissions reduction targets** for Scope 3 categories (purchased goods, logistics) aligned with a 1.5\u00b0C science-based pathway, with interim 5-year milestones.  \n- **Mandate supplier emissions disclosure** via CDP or equivalent, requiring tier-1 suppliers to report annually and cascade reporting to tier-2/3 for high-impact categories (steel, aluminum, chemicals, transport).  \n- **Introduce a carbon-weighted procurement score** that factors in supplier carbon intensity (kgCO\u2082e/$) into bid evaluation, with a 10\u201315% price preference for low-carbon alternatives.  \n- **Launch a supplier decarbonization program** offering technical assistance, co-investment grants, and preferential payment terms for suppliers adopting renewable energy, electrified fleets, or material efficiency measures.  \n- **Set maximum carbon intensity thresholds** for high-emission inputs (e.g., cement, plastics), with phased penalties (e.g., reduced order volume) for non-compliance after a 2-year grace period.  \n- **Optimize logistics** by consolidating shipments, shifting to rail/sea over air, and requiring carriers to report fuel efficiency; set a target to cut transport emissions 20% by 2030.",
+ "14_audit_A": [
+  0,
+  1,
+  0,
+  0,
+  1,
+  0
+ ],
+ "14_B": "Here is a concise, actionable plan to design a carbon-reduction policy for a supply chain, verified against all 8 aspects.\n\n---\n\n**Plan: Supply Chain Carbon-Reduction Policy**\n\n1. **Secure Executive & Supplier Buy-In (Receptive):** Obtain formal sign-off from the Chief Procurement Officer and CEO. Simultaneously, issue a \"Supplier Code of Conduct\" addendum requiring top-tier suppliers to acknowledge the policy and appoint a sustainability liaison before onboarding or contract renewal.\n\n2. **Trigger via Spend Thresholds (Causal):** Activate the policy automatically for any new contract, renewal, or purchase order exceeding $50,000, or for any supplier accounting for >5% of total logistics emissions. This ensures the policy applies to high-impact flows without manual oversight.\n\n3. **Establish Data & Incentive Flows (Transmissive):** Mandate quarterly submission of supplier energy usage, transport mode, and fuel consumption data via a shared digital portal. Simultaneously, flow a \"Green Transition Fund\" (e.g., 0.5% of PO value) to suppliers who meet reduction milestones, and transmit monthly carbon dashboards to all internal stakeholders.\n\n4. **Apply Hard Guardrails (Constraining):** Cap total supply chain emissions at a ",
+ "14_audit_B": [
+  1,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "15_A": "- **Define scope & goals:** State the project\u2019s purpose, target users, and what types of contributions are welcome (code, docs, tests, design, bug reports).  \n- **Set contribution workflow:** Specify the exact steps: fork \u2192 branch \u2192 commit with conventional commit messages \u2192 open pull request (PR) \u2192 link related issue \u2192 request review.  \n- **Establish coding standards:** Reference style guides (e.g., PEP8, ESLint), formatting tools (Black, Prettier), and required linting/tests before submission.  \n- **Define review process:** Assign maintainers, set review turnaround time (e.g., 48h), require at least one approval, and outline how to handle disagreements or stalled PRs.  \n- **Mandate testing & CI:** Require unit/integration tests for new features, ensure all checks pass in CI (e.g., GitHub Actions), and document how to run tests locally.  \n- **Clarify licensing & DCO:** State the project license (e.g., MIT), require a Developer Certificate of Origin (DCO) or signed-off commits, and explain how to add copyright headers if needed.  \n- **Provide onboarding docs:** Create a `CONTRIBUTING.md` with setup instructions",
+ "15_audit_A": [
+  0,
+  0,
+  0,
+  0,
+  1,
+  0
+ ],
+ "15_B": "Here is a concise, actionable plan to establish an open-source contribution policy.\n\n---\n\n**Open-Source Contribution Policy: Implementation Plan**\n\n1. **Define Scope & Ownership (Receptive & Constraining):** Assign a single owner (e.g., Legal/Engineering Lead) to draft the policy. Explicitly define which repositories are covered (internal vs. public) and which contributions require prior approval (e.g., security-sensitive code, proprietary algorithms). State that all contributions must comply with existing IP and export control laws.\n\n2. **Trigger & Workflow (Causal & Transmissive):** Establish a mandatory pre-contribution checklist. The trigger is any employee\u2019s intent to submit code, docs, or comments to an external project. Route all contributions through a lightweight review ticket (e.g., GitHub Issue or Jira) that flows from Contributor \u2192 Technical Reviewer \u2192 Legal (if flagged) \u2192 Approval.\n\n3. **Define the Flow of Rights (Transmissive & Constraining):** Mandate a standard Contributor License Agreement (CLA) or Developer Certificate of Origin (DCO) for all external submissions. Ensure the policy explicitly transfers or licenses IP rights to the external project, while preserving the company\u2019s right to use the code internally. Include a budget for legal review time per",
+ "15_audit_B": [
+  1,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "16_A": "- **Weeks 1-2 (Discovery & Baseline):** Conduct 8-10 semi-structured interviews with new users (0-14 days old) to map their initial goals, pain points, and mental models; simultaneously run a 5-day unmoderated usability test on the current onboarding flow to capture drop-off points and task success rates.\n- **Week 3 (Synthesis & Hypothesis):** Cluster findings into themes (e.g., confusion, missing motivation, feature overload); create 3-4 user journey maps highlighting friction; draft 2-3 testable hypotheses (e.g., \"If we remove optional fields, activation time drops by 30%\").\n- **Week 4 (Co-Design & Prototype):** Run 2 co-design workshops with 4-6 users each to sketch alternative onboarding sequences; build a low-fidelity interactive prototype (Figma) with 2-3 variations (e.g., progressive disclosure vs. checklist vs. video-first).\n- **Week 5 (Validation Testing):** Conduct A/B usability tests (moderated, n=12) comparing the current flow vs. top prototype; measure time-to-first-value, error rate, and System Usability Scale (SUS); observe emotional reactions",
+ "16_audit_A": [
+  0,
+  0,
+  0,
+  0,
+  1,
+  1
+ ],
+ "16_B": "Here is a concise, actionable 6-week plan for a user research study on onboarding.\n\n---\n\n**6-Week Onboarding Research Plan**\n\n1. **Week 1 \u2013 Align & Instrument (Receptive/Clarifying):** Meet with Product, Design, and Engineering leads to align on the single most critical onboarding drop-off point (e.g., \"first value\" vs. \"team setup\"). Define success metrics (activation rate, time-to-value) and set up analytics event tracking for all onboarding steps.\n2. **Week 2 \u2013 Recruit & Baseline (Transmissive/Constraining):** Recruit 8\u201310 new users (mix of free and paid tiers) via in-app prompts and email. Constrain the study to users who signed up in the last 7 days. Run a baseline quantitative funnel analysis to identify the exact step with the highest abandonment.\n3. **Week 3 \u2013 Observe & Interview (Causal/Influential):** Conduct 60-minute moderated usability tests and 30-minute contextual interviews with 5 users. Focus on the identified drop-off step. Observe real behavior (not opinions) and probe for mental models. Record sessions with consent.\n4. **Week 4 \u2013 Diary Study & Survey (Transmissive",
+ "16_audit_B": [
+  0,
+  1,
+  0,
+  0,
+  1,
+  1
+ ],
+ "17_A": "- **Define scope & metrics:** Select 3 DBs (e.g., Milvus, Qdrant, pgvector) and fix dataset (e.g., 1M vectors, 768-dim), distance metric (cosine), and query workload (top-10, top-100). Choose metrics: p95 latency, QPS, recall@10, memory footprint, and ingestion throughput.\n- **Standardize environment:** Use identical hardware (CPU, RAM, NVMe), single-node, same Docker/OS version, and pin library versions. Run each DB in isolation with fixed index parameters (e.g., HNSW M=16, efConstruction=200).\n- **Build a benchmark harness:** Write a Python script (using `vectordb-bench` or custom) that generates queries, runs warm-up, then measures latency/recall over 10k queries with 3 repetitions. Save raw results as JSON.\n- **Test index types:** For each DB, benchmark at least two index configs (e.g., HNSW vs IVF/Flat) to compare trade-offs between speed and accuracy.\n- **Measure scalability:** Run a second pass with 10M vectors (or 10x dataset) to record latency/QPS",
+ "17_audit_A": [
+  0,
+  0,
+  0,
+  0,
+  1,
+  0
+ ],
+ "17_B": "Here is a concise, actionable plan for a vector database benchmarking study, verified against all 8 aspects.\n\n**Plan: Vector Database Benchmarking Study (Qdrant vs. Milvus vs. Weaviate)**\n\n1. **Define the Receptive Stakeholders & Success Criteria (Receptive):** Secure sign-off from the CTO and Engineering Lead on the *decision criteria* (e.g., p95 latency < 50ms, recall > 0.95, cost per 1M vectors) before running tests. The final report must answer their specific questions (e.g., \"Which scales best on our AWS budget?\").\n2. **Trigger the Study with a Fixed Dataset & Query Set (Causal):** Use a public dataset (e.g., 1M vectors from SIFT/LAION) and a fixed set of 1,000 benchmark queries. The study begins only when the dataset is loaded and a baseline index (HNSW) is configured identically across all three systems.\n3. **Establish the Data & Resource Flow (Transmissive):** Build a single Python harness (using each vendor's SDK) that streams vectors in, executes queries, and exports raw results (latency, recall, throughput) to a shared CSV/",
+ "17_audit_B": [
+  0,
+  1,
+  1,
+  0,
+  1,
+  1
+ ],
+ "18_A": "- **Define primary metric:** Checkout completion rate (primary) and average order value (secondary).  \n- **Segment users:** Split by new vs. returning customers and device type (mobile/desktop) to control for behavioral differences.  \n- **Set sample size & duration:** Use power analysis (\u03b1=0.05, \u03b2=0.20) to determine minimum sample; run for at least 2 full business cycles (e.g., 2 weeks) to account for weekly trends.  \n- **Randomize assignment:** Use server-side hashing (e.g., user ID modulo) for stable assignment; avoid client-side redirects to prevent leakage.  \n- **Implement guardrails:** Monitor error rates, page load time, and support tickets daily; pause test if any metric degrades >5% vs. control.  \n- **Analyze with CUPED:** Use pre-experiment checkout history as a covariate to reduce variance and increase sensitivity.  \n- **Run sequential testing:** Use an alpha-spending approach (e.g., O\u2019Brien-Fleming) to allow early stopping for clear winners/losers without inflating false positives.  \n- **Pre-register decision rule:** Declare a winner only if lift \u22652% (relative",
+ "18_audit_A": [
+  1,
+  0,
+  0,
+  1,
+  1,
+  0
+ ],
+ "18_B": "Here is a concise, actionable plan for designing an A/B test for the new checkout flow.\n\n---\n\n**A/B Test Plan: New Checkout Flow**\n\n1.  **Define Receptivity & Guardrails:** Secure sign-off from Product, Engineering, and Data stakeholders on the primary metric (Conversion Rate) and guardrails (e.g., Average Order Value, Refund Rate, Support Tickets). Establish a minimum sample size per variant (e.g., 10,000 users) and a hard stop date (e.g., 2 weeks) to prevent peeking.\n2.  **Trigger & Segment:** Target **new users** (no prior purchase) on **desktop** during the **checkout initiation event** (clicking \"Proceed to Checkout\"). Exclude returning customers and mobile users to isolate the new flow's impact on first-time buyers.\n3.  **Transmit Data & Resources:** Route 50% of eligible traffic to the **Control** (legacy flow) and 50% to **Treatment** (new flow) via the feature flag system. Instrument both variants to transmit identical event payloads (step completion, time-on-step, error messages) to the analytics pipeline.\n4.  **Clarify Metrics & Visibility:**",
+ "18_audit_B": [
+  1,
+  0,
+  1,
+  0,
+  1,
+  1
+ ],
+ "19_A": "- **Define scope & objectives:** Establish clear goals (e.g., reduce MTTR, prevent repeat incidents) and criteria for which incidents trigger a postmortem (e.g., Sev1/2, customer impact, data loss).\n- **Standardize the process:** Create a lightweight, blameless template (timeline, impact, root cause, action items) and a mandatory review workflow (draft \u2192 peer review \u2192 final sign-off).\n- **Assign roles & ownership:** Designate a rotating facilitator (not the incident commander) to drive the meeting, and a named owner for each action item with a due date.\n- **Schedule timely reviews:** Hold the postmortem within 48\u201372 hours of resolution while context is fresh; cap meetings at 60 minutes to maintain focus.\n- **Focus on systemic fixes:** Prioritize action items into categories (process, tooling, training, code) and require at least one preventive measure per incident, not just mitigation.\n- **Track and close action items:** Integrate action items into your ticketing system with automated reminders; review open items weekly and escalate stale ones.\n- **Publish and share learnings:** Store postmortems in a searchable repository, send a brief summary to all engineers, and hold",
+ "19_audit_A": [
+  0,
+  1,
+  0,
+  1,
+  1,
+  1
+ ],
+ "19_B": "Here is a concise, actionable plan to establish an incident postmortem analysis program.\n\n---\n\n**Postmortem Program Implementation Plan**\n\n1. **Define Scope & Receptivity (Receptive/Constraining):** Secure executive sponsorship and publish a charter defining which incidents require postmortems (e.g., Sev-1/2, customer-facing downtime, data loss). Explicitly state the program is **blameless** and focused on systemic failures, not individual performance.\n\n2. **Trigger & Triage (Causal):** Automate the creation of a postmortem draft immediately upon incident closure via your incident management tool (e.g., PagerDuty, Incident.io). Assign a dedicated facilitator within 24 hours to ensure the process starts while memory is fresh.\n\n3. **Data Flow & Timeline (Transmissive):** Aggregate all incident artifacts (chat logs, deploy records, metrics, alerts, and the incident timeline) into a single shared document. Ensure the facilitator has read-access to all systems to reconstruct the sequence of events without friction.\n\n4. **Guardrails & Timeboxing (Constraining):** Enforce a strict **5-business-day** completion SLA. Limit the final document to a 1-page executive summary plus a detailed appendix.",
+ "19_audit_B": [
+  1,
+  1,
+  1,
+  1,
+  1,
+  1
+ ],
+ "20_A": "- **Define success metrics:** Set primary thresholds (e.g., recall \u2265 0.85 at precision \u2265 0.70) and secondary metrics (AUC-PR, cost-per-false-positive vs. false-negative) based on business impact.\n- **Split data temporally:** Train on historical data (e.g., months 1\u20136), validate on months 7\u20138, and hold out months 9\u201310 for final testing to simulate real-world drift.\n- **Build a stratified test set:** Ensure the test set includes rare fraud cases, new fraud patterns, and normal transactions across all merchant types, amounts, and channels.\n- **Run baseline comparisons:** Evaluate against a simple rule-based model and a logistic regression to quantify value added by the complex classifier.\n- **Test robustness to drift:** Inject synthetic shifts (e.g., 20% increase in transaction velocity, new merchant category) into validation data to measure performance degradation.\n- **Perform error analysis:** Manually review top 100 false positives and top 50 false negatives; categorize by reason (e.g., amount, time, device) to guide feature engineering.\n- **Run calibration check:** Plot reliability curves; if miscalibrated, apply Platt scaling or isotonic regression and re-",
+ "20_audit_A": [
+  0,
+  0,
+  0,
+  0,
+  1,
+  0
+ ],
+ "20_B": "Here is a concise, actionable plan for a model-evaluation campaign for a fraud classifier, verified against all 8 aspects.\n\n---\n\n**Plan: Fraud Classifier Evaluation Campaign**\n\n1. **Define success metrics & thresholds (Clarifying):** Pre-agree on primary KPIs (e.g., Precision@Recall=0.90, AUC-PR, FPR at high-recall operating point) and a minimum lift over the current rule-based baseline. Publish a scorecard dashboard for live tracking.\n\n2. **Secure stakeholder sign-off (Receptive):** Obtain written approval from Fraud Ops, Compliance, and Product leads on the evaluation criteria, test window, and decision gates (e.g., \"pass\" = deploy, \"fail\" = retrain, \"hold\" = shadow mode).\n\n3. **Trigger the campaign (Causal):** Launch the evaluation automatically when (a) a new model version is trained, or (b) a scheduled monthly drift check flags a PSI > 0.2 on feature distributions.\n\n4. **Run shadow-mode inference (Transmissive):** Stream live transactions to the candidate model in parallel with production, sending predictions (scores, feature attributions) to a secure evaluation data lake\u2014without affecting live decisions.\n\n",
+ "20_audit_B": [
+  0,
+  0,
+  1,
+  0,
+  1,
+  1
+ ]
+}

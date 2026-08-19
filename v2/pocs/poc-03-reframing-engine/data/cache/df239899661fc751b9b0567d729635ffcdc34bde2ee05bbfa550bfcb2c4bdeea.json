@@ -1,0 +1,14 @@
+{
+ "key": "df239899661fc751b9b0567d729635ffcdc34bde2ee05bbfa550bfcb2c4bdeea",
+ "text": "{\"name\": \"Net-zero procurement as double-edged blade\"}",
+ "usage": {
+  "prompt_tokens": 163,
+  "completion_tokens": 12,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 163
+ }
+}

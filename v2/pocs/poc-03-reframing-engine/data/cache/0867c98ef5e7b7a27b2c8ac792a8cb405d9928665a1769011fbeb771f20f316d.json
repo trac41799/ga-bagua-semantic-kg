@@ -1,0 +1,14 @@
+{
+ "key": "0867c98ef5e7b7a27b2c8ac792a8cb405d9928665a1769011fbeb771f20f316d",
+ "text": "{\"name\": \"Frozen moon, hidden warmth\"}",
+ "usage": {
+  "prompt_tokens": 165,
+  "completion_tokens": 11,
+  "total_tokens": 176,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 165
+ }
+}

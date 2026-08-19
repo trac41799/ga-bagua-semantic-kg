@@ -1,0 +1,14 @@
+{
+ "key": "9171ef08cd57fc5e6fc5ee466a63a38699eb39513b4e331a520c8c56d2fe37fc",
+ "text": "[\n  \"Annual transparency for feed algorithms required.\",\n  \"Ranking logic disclosure becomes yearly duty.\",\n  \"Platforms must reveal feed rules each year.\",\n  \"Yearly publication of algorithmic ranking standards.\",\n  \"Feed curation criteria to be made public annually.\",\n  \"Algorithmic feed policies need annual exposure.\",\n  \"Hosts must share ranking methods once a year.\",\n  \"Annual audit of feed ranking transparency.\"\n]",
+ "usage": {
+  "prompt_tokens": 78,
+  "completion_tokens": 84,
+  "total_tokens": 162,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 78
+ }
+}

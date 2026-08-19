@@ -1,0 +1,14 @@
+{
+ "key": "72a56de7bf075c94bd44d7dc96d34cb689fe789f070e1ec622f03aeddd438747",
+ "text": "{\"name\": \"Bilingualism's protective effect questioned\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 12,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

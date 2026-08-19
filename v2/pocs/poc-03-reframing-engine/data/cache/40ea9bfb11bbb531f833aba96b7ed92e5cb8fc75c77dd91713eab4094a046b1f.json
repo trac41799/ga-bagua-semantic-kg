@@ -1,0 +1,14 @@
+{
+ "key": "40ea9bfb11bbb531f833aba96b7ed92e5cb8fc75c77dd91713eab4094a046b1f",
+ "text": "{\"name\": \"Affordability as structural ceiling\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 11,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

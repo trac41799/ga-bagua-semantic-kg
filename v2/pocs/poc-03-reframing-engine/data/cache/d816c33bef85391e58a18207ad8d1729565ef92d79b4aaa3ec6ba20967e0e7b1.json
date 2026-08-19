@@ -1,0 +1,14 @@
+{
+ "key": "d816c33bef85391e58a18207ad8d1729565ef92d79b4aaa3ec6ba20967e0e7b1",
+ "text": "{\"name\": \"Single confirmation as hidden risk\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 10,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

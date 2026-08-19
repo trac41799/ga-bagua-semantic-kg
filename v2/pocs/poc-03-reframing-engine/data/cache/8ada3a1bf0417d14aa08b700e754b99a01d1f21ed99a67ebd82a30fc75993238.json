@@ -1,0 +1,14 @@
+{
+ "key": "8ada3a1bf0417d14aa08b700e754b99a01d1f21ed99a67ebd82a30fc75993238",
+ "text": "{\"name\": \"Relapse reduction as blade's edge\"}",
+ "usage": {
+  "prompt_tokens": 159,
+  "completion_tokens": 12,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 159
+ }
+}

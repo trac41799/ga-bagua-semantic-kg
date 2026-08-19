@@ -1,0 +1,14 @@
+{
+ "key": "d7e5b05f7f9821c2abbfb7568fac3562be50c3fdadc72f5980715e938d1566ff",
+ "text": "{\"name\": \"Fingerprint speed, hidden friction\"}",
+ "usage": {
+  "prompt_tokens": 163,
+  "completion_tokens": 12,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 163
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "b1232ed1c82cd14581b75c12358f24d033d4144c08ab1e0f73b4911ef7c93780",
+ "text": "{\"name\": \"Hidden command, silent blade\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 10,
+  "total_tokens": 170,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

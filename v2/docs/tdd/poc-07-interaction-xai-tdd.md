@@ -1,0 +1,2 @@
+# TDD — POC-07 Interaction XAI
+**Cases:** 07.1 spectrum recovers planted 2-way and 3-way coefficients ≤1e-9 (synthetic f, 6 inputs); 07.2 planted subsets identified with no false positives at 1e-6 tolerance; 07.3 bagua vs numbered explanations contain identical math facts (parseable diff); 07.4 rater 1–5 strict parse; 07.5 runner renders math + naming verdicts; 07.6 determinism (math arm); 07.7 SimulatedLLM runner. **DoD:** pytest green (≥9), real run verdicts, README with synthetic-f disclaimer.

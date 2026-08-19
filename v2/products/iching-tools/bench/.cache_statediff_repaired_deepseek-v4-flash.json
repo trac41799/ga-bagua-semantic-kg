@@ -1,0 +1,90 @@
+{
+  "1": {
+    "raw": "cache hit ratio: 94% -> 99%  \np99 latency: 120ms -> 95ms  \nerror rate: 0.2% -> 0.1%",
+    "error": null
+  },
+  "2": {
+    "raw": "replicas: 3 -> 6\ncpu_utilization: 80% -> 45%\nqueue_depth: 400 -> 40",
+    "error": null
+  },
+  "3": {
+    "raw": "connection count: 500 -> 250\nread throughput: 2k/s -> 5k/s\nwrite latency: 8ms -> 5ms",
+    "error": null
+  },
+  "4": {
+    "raw": "rollout: 10% -> 100%\nerror budget: 60% left -> 45% left\nalerts: 12/day -> 3/day",
+    "error": null
+  },
+  "5": {
+    "raw": "token issuance rate: 1k/hour -> 1.4k/hour\nrevocation list size: 5k -> 12k\nlogin failure rate: 2% -> 0.4%",
+    "error": null
+  },
+  "6": {
+    "raw": "inventory turns: 4/year -> 5.5/year\nstockout rate: 7% -> 2%\norder fill time: 3 days -> 1.5 days",
+    "error": null
+  },
+  "7": {
+    "raw": "customer churn rate: 3.2%/month -> 2.1%/month\nNPS: 28 -> 41\nsupport tickets: 900/week -> 600/week",
+    "error": null
+  },
+  "8": {
+    "raw": "pipeline conversion: 18% -> 24%\ndeal size: $22k -> $19k\nsales cycle: 45 days -> 38 days",
+    "error": null
+  },
+  "9": {
+    "raw": "return rate: 6% -> 4%\nrepeat purchase: 34% -> 47%\ncart abandonment: 68% -> 54%",
+    "error": null
+  },
+  "10": {
+    "raw": "Marketing spend: $80k/month -> $95k/month\nCAC: $45 -> $38\nLTV: $210 -> $245",
+    "error": null
+  },
+  "11": {
+    "raw": "herbivore population: 400 -> 250\nplant cover: 55% -> 70%\npredator count: 12 -> 9",
+    "error": null
+  },
+  "12": {
+    "raw": "blood glucose: 6.8 mmol/L -> 5.1 mmol/L\ninsulin: 8 uU/mL -> 12 uU/mL\nheart rate: 62 bpm -> 58 bpm",
+    "error": null
+  },
+  "13": {
+    "raw": null,
+    "error": "ProtocolError: line does not match 'aspect: before -> after': 'fish count: '"
+  },
+  "14": {
+    "raw": "pollinator visits: 30/hour -> 55/hour\nseed set: 40% -> 62%\nflower density: 5/m2 -> 9/m2",
+    "error": null
+  },
+  "15": {
+    "raw": "immune cell count: 5k/uL -> 8k/uL\ninflammation marker: 12 pg/mL -> 4 pg/mL\nrecovery days: 7 days -> 4 days",
+    "error": null
+  },
+  "16": {
+    "raw": "permits issued: 120/month -> 90/month\napproval time: 14 days -> 9 days\nappeals: 8/month -> 3/month",
+    "error": null
+  },
+  "17": {
+    "raw": null,
+    "error": "ProtocolError: expected exactly 3 aspect lines, got 2"
+  },
+  "18": {
+    "raw": "response time: 45 min -> 25 min  \ncoverage area: 60% -> 85%  \nequipment readiness: 70% -> 92%",
+    "error": null
+  },
+  "19": {
+    "raw": "throughput: 300/month -> 450/month\nbacklog: 2k -> 800\naccuracy: 96% -> 99%",
+    "error": null
+  },
+  "20": {
+    "raw": "inspection rate: 12% -> 25%\nviolations found: 30/month -> 18/month\nfines: $40k/month -> $25k/month",
+    "error": null
+  },
+  "_metadata": {
+    "method": "same_record_value_pair_v1",
+    "protocol": "state_diff.measurement.same_record_value_pair_v1",
+    "model": "deepseek-v4-flash",
+    "source_hash": "f580b9962b412b5101a7aa2c85f3baa32bad1f249aa254804cb71d5beb400963",
+    "protocol_hash": "6f7637c577ec6aacc587f6750165c1f82fe431825d216a7e2810bfad2aab47f7",
+    "model_status": "single_model"
+  }
+}

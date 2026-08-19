@@ -1,0 +1,14 @@
+{
+ "key": "31205ad8abbfd110a713df33debae1b9728f6cd0c5c2c7147f9deb99931e6f17",
+ "text": "{\"name\": \"Hidden command surface\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 8,
+  "total_tokens": 168,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

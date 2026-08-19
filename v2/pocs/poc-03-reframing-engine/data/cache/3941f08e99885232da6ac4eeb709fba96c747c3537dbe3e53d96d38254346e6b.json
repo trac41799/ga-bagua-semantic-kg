@@ -1,0 +1,14 @@
+{
+ "key": "3941f08e99885232da6ac4eeb709fba96c747c3537dbe3e53d96d38254346e6b",
+ "text": "{\"name\": \"Fingerprint speed, trust in motion\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 13,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

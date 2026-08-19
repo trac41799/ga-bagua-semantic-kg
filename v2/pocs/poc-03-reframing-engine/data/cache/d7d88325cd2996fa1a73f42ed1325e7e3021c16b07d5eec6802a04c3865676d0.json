@@ -1,0 +1,14 @@
+{
+ "key": "d7d88325cd2996fa1a73f42ed1325e7e3021c16b07d5eec6802a04c3865676d0",
+ "text": "{\"name\": \"Loss is inherent in all systems\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 11,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

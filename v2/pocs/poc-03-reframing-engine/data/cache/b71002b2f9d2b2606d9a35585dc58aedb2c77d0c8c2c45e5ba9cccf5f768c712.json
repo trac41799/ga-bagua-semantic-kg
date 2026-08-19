@@ -1,0 +1,14 @@
+{
+ "key": "b71002b2f9d2b2606d9a35585dc58aedb2c77d0c8c2c45e5ba9cccf5f768c712",
+ "text": "{\"name\": \"Transparent ranking, accountable feeds\"}",
+ "usage": {
+  "prompt_tokens": 157,
+  "completion_tokens": 11,
+  "total_tokens": 168,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 157
+ }
+}

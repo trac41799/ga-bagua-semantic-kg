@@ -1,0 +1,14 @@
+{
+ "key": "a0c2c921e9c9f4e07397bbc1cbc10484c5daad919014d0e817470f6d0fdb6a8d",
+ "text": "{\"name\": \"Palette command triggers keyboard shortcut\"}",
+ "usage": {
+  "prompt_tokens": 159,
+  "completion_tokens": 11,
+  "total_tokens": 170,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 159
+ }
+}

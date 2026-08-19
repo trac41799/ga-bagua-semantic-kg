@@ -1,0 +1,14 @@
+{
+ "key": "7c67eb70ef5bcf92299a4daf9458f9b7fac23f50ed39f535a69955f582b00f93",
+ "text": "[\n  \"Handles 20 concurrent 4K streams flawlessly.\",\n  \"No lag for 20 devices watching ultra HD.\",\n  \"Streams 4K to 20 gadgets at once.\",\n  \"Supports 20 simultaneous 4K viewers.\",\n  \"20 devices, 4K, zero buffering.\",\n  \"Keeps 20 screens in 4K without stutter.\",\n  \"4K on 20 devices, seamless playback.\",\n  \"20-way 4K streaming, no interruptions.\"\n]",
+ "usage": {
+  "prompt_tokens": 85,
+  "completion_tokens": 106,
+  "total_tokens": 191,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 85
+ }
+}

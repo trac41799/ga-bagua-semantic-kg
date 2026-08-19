@@ -1,0 +1,14 @@
+{
+ "key": "76ba047cabced87cdf76410342fdc27b2c06ba96148c8919712be734e8b6798e",
+ "text": "{\"name\": \"Transparent ranking criteria mandate\"}",
+ "usage": {
+  "prompt_tokens": 157,
+  "completion_tokens": 10,
+  "total_tokens": 167,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 157
+ }
+}

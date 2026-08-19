@@ -1,0 +1,14 @@
+{
+ "key": "3a917161213267839408cebb4a9cfa283ac6820507d5ff986581cbb2435381ee",
+ "text": "{\"name\": \"Unstable ground beneath smooth stream\"}",
+ "usage": {
+  "prompt_tokens": 165,
+  "completion_tokens": 11,
+  "total_tokens": 176,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 165
+ }
+}

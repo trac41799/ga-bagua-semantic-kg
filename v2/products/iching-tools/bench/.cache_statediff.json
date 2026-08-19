@@ -1,0 +1,82 @@
+{
+  "1": {
+    "raw": "cache hit ratio: 94% -> 99%  \np99 latency: 120ms -> 95ms  \nerror rate: 0.2% -> 0.1%",
+    "error": null
+  },
+  "2": {
+    "raw": "replicas: 3 -> 6\nCPU utilization: 80% -> 45%\nqueue depth: 400 -> 40",
+    "error": null
+  },
+  "3": {
+    "raw": "database connections: 500 -> 250\nread throughput: 2k/s -> 5k/s\nwrite latency: 8ms -> 5ms",
+    "error": null
+  },
+  "4": {
+    "raw": "rollout: 10% -> 100% of users  \nerror budget: 60% -> 45% left  \nalerts: 12/day -> 3/day",
+    "error": null
+  },
+  "5": {
+    "raw": "Token issuance: 1k/hour -> 1.4k/hour  \nRevocation list: 5k -> 12k  \nLogin failures: 2% -> 0.4%",
+    "error": null
+  },
+  "6": {
+    "raw": "inventory turns: 4/year -> 5.5/year  \nstockout rate: 7% -> 2%  \norder fill time: 3 days -> 1.5 days",
+    "error": null
+  },
+  "7": {
+    "raw": "churn: 3.2%/month -> 2.1%/month  \nNPS: 28 -> 41  \nsupport tickets: 900/week -> 600/week",
+    "error": null
+  },
+  "8": {
+    "raw": "pipeline conversion: 18% -> 24%  \ndeal size: $22k -> $19k  \nsales cycle: 45 days -> 38 days",
+    "error": null
+  },
+  "9": {
+    "raw": "return rate: 6% -> 4%  \nrepeat purchase: 34% -> 47%  \ncart abandonment: 68% -> 54%",
+    "error": null
+  },
+  "10": {
+    "raw": "Marketing efficiency: $80k/mo spend, $45 CAC, $210 LTV -> $95k/mo spend, $38 CAC, $245 LTV  \nProfitability per customer: $165 margin -> $207 margin  \nROI per dollar spent: 2.63x -> 2.58x (spend up, but CAC/LTV improved)",
+    "error": null
+  },
+  "11": {
+    "raw": "herbivore population: 400 -> 250\nplant cover: 55% -> 70%\npredator count: 12 -> 9",
+    "error": null
+  },
+  "12": {
+    "raw": "blood glucose: 6.8 mmol/L -> 5.1 mmol/L\ninsulin: 8 uU/mL -> 12 uU/mL\nheart rate: 62 bpm -> 58 bpm",
+    "error": null
+  },
+  "13": {
+    "raw": "temperature: 18C -> 22C  \noxygen: 6 mg/L -> 4.5 mg/L  \nfish count: 120 -> 80",
+    "error": null
+  },
+  "14": {
+    "raw": "pollinator visits: 30/hour -> 55/hour  \nseed set: 40% -> 62%  \nflower density: 5/m2 -> 9/m2",
+    "error": null
+  },
+  "15": {
+    "raw": "immune cell count: 5k/uL -> 8k/uL  \ninflammation marker: 12 pg/mL -> 4 pg/mL  \nrecovery days: 7 -> 4",
+    "error": null
+  },
+  "16": {
+    "raw": "permits issued: 120/month -> 90/month  \napproval time: 14 days -> 9 days  \nappeals: 8/month -> 3/month",
+    "error": null
+  },
+  "17": {
+    "raw": "budget deficit: 4.2% -> 2.8%\naudit findings: 15 -> 6\npublic complaints: 220/month -> 130/month",
+    "error": null
+  },
+  "18": {
+    "raw": " time: 45 min -> 25 min  \ncoverage area: 60% -> 85%  \nequipment readiness: 70% -> 92%",
+    "error": null
+  },
+  "19": {
+    "raw": "throughput: 300/month -> 450/month  \nbacklog: 2k -> 800  \naccuracy: 96% -> 99%",
+    "error": null
+  },
+  "20": {
+    "raw": "inspection rate: 12% -> 25%  \nviolations found: 30/month -> 18/month  \nfines: $40k/month -> $25k/month",
+    "error": null
+  }
+}

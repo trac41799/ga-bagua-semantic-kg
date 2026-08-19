@@ -1,0 +1,14 @@
+{
+ "key": "b57a81b1013f237b399eeb4017c09e68c5135a4d06e9b06ed5813ad8a006c090",
+ "text": "{\"name\": \"Frozen shell, hidden warmth\"}",
+ "usage": {
+  "prompt_tokens": 165,
+  "completion_tokens": 11,
+  "total_tokens": 176,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 165
+ }
+}

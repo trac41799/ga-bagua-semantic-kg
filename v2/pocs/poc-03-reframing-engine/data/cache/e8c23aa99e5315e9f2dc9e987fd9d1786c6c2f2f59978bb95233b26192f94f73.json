@@ -1,0 +1,14 @@
+{
+ "key": "e8c23aa99e5315e9f2dc9e987fd9d1786c6c2f2f59978bb95233b26192f94f73",
+ "text": "{\"name\": \"Rapid charge, doubled speed\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 11,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

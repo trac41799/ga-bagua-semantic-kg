@@ -1,0 +1,14 @@
+{
+ "key": "f3b794e6b07bc454e383e316a28e20bd7cdbb39e9fab3ebf43a783d057724fcf",
+ "text": "[\"Single-step payment confirmation only\", \"No second factor in checkout\", \"One verification for transactions\", \"Payment needs just one approval\", \"Checkout skips two-factor auth\", \"Single confirmation, no 2FA\", \"Transaction verified once, not twice\", \"Payment flow omits dual entry\"",
+ "usage": {
+  "prompt_tokens": 81,
+  "completion_tokens": 61,
+  "total_tokens": 142,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 81
+ }
+}

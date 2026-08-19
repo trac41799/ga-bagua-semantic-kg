@@ -1,0 +1,14 @@
+{
+ "key": "6ef45e2ba039c0b8ef770533a9adc50650d79c4041d62a29493b070537925dc7",
+ "text": "{\"name\": \"Cognitive reserve as delayed symptom mask\"}",
+ "usage": {
+  "prompt_tokens": 160,
+  "completion_tokens": 11,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 160
+ }
+}

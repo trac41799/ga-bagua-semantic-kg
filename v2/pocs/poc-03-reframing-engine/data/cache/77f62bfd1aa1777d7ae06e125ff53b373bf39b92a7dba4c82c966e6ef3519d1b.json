@@ -1,0 +1,14 @@
+{
+ "key": "77f62bfd1aa1777d7ae06e125ff53b373bf39b92a7dba4c82c966e6ef3519d1b",
+ "text": "{\"name\": \"Urban light, metabolic shadow\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 10,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

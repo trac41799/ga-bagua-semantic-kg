@@ -1,0 +1,14 @@
+{
+ "key": "68f471be45ac5d1a3e8d19dea33daff2ff129ea7a64f8959d8f690f95e6d961c",
+ "text": "{\"name\": \"Sleep as a social contract\"}",
+ "usage": {
+  "prompt_tokens": 165,
+  "completion_tokens": 10,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 165
+ }
+}

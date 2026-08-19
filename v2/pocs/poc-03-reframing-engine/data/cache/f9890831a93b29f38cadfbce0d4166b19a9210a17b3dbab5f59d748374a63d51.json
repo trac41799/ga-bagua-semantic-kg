@@ -1,0 +1,14 @@
+{
+ "key": "f9890831a93b29f38cadfbce0d4166b19a9210a17b3dbab5f59d748374a63d51",
+ "text": "{\"name\": \"Ocean heat from tidal friction\"}",
+ "usage": {
+  "prompt_tokens": 164,
+  "completion_tokens": 10,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 164
+ }
+}

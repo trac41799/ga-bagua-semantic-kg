@@ -1,0 +1,14 @@
+{
+ "key": "26ab9c32daf722e5aeca4ce0b9ebfe1f3b4b84bdba7c51142465aa5040b9845f",
+ "text": "[\n  \"Reducing database strain via brief result retention.\",\n  \"Peak-hour traffic eased by temporary query storage.\",\n  \"Sixty-second replay buffer for frequent searches.\",\n  \"Curbing server spikes with short-lived snapshots.\",\n  \"Quick-hit caching to smooth demand surges.\",\n  \"Minimizing backend hits during busy windows.\",\n  \"Short-term memory for high-volume queries.\",\n  \"Load shedding through ephemeral result reuse.\"\n]",
+ "usage": {
+  "prompt_tokens": 83,
+  "completion_tokens": 90,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 83
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "9ba2440940116d9e2a06cf55c769b1ca5a962a894bb7aaac716881a026ab2cb5",
+ "text": "{\"name\": \"Instant fingerprint access\"}",
+ "usage": {
+  "prompt_tokens": 156,
+  "completion_tokens": 8,
+  "total_tokens": 164,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 156
+ }
+}

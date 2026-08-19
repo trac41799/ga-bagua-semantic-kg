@@ -1,0 +1,14 @@
+{
+ "key": "98a23a23f9131fc3bd0c17e1f8aac5f6069be06751857add8bbdcd3d883cb2d1",
+ "text": "{\"name\": \"Fingerprint speed as identity gate\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 12,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

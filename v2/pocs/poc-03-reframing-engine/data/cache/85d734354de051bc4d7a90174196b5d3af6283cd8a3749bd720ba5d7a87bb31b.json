@@ -1,0 +1,14 @@
+{
+ "key": "85d734354de051bc4d7a90174196b5d3af6283cd8a3749bd720ba5d7a87bb31b",
+ "text": "[\n  \"Fast charging reaches 80% in under 20 minutes.\",\n  \"A quick top-up to 80% takes just 18 minutes.\",\n  \"18 minutes to 80%: rapid battery boost.\",\n  \"Battery hits 80% charge in a third of an hour.\",\n  \"From empty to 80% in 18 minutes flat.\",\n  \"Charging speed: 80% capacity in 18 minutes.\",\n  \"18-minute charge gets you to 80% battery.\",\n  \"Quick charge: 0 to 80% in 18 minutes.\"\n]",
+ "usage": {
+  "prompt_tokens": 83,
+  "completion_tokens": 120,
+  "total_tokens": 203,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 83
+ }
+}

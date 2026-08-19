@@ -1,0 +1,14 @@
+{
+ "key": "d1198b3904f407abee64397374a4f1179e974bf159bf86a6062ab5e8fce7f57d",
+ "text": "{\"name\": \"Fast charging breakthrough\"}",
+ "usage": {
+  "prompt_tokens": 156,
+  "completion_tokens": 8,
+  "total_tokens": 164,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 156
+ }
+}

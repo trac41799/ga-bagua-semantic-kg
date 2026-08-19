@@ -1,0 +1,14 @@
+{
+ "key": "89dedf6e267f33ccb1840ba41cef9bce90817edd97ec94c04cd78fe480c22081",
+ "text": "{\"name\": \"Hidden ranking logic exposed\"}",
+ "usage": {
+  "prompt_tokens": 158,
+  "completion_tokens": 9,
+  "total_tokens": 167,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 158
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "7706e228b625e481a1051359694f594f7c42feb14f184a4eccf6470520c7cdee",
+ "text": "[\"Microplastics seed clouds, changing weather patterns\",\n\"Cloud formation now influenced by plastic pollution\",\n\"Plastic particles act as cloud condensation nuclei\",\n\"Airborne plastics disrupt natural precipitation cycles\",\n\"Microplastics modify cloud physics globally\",\n\"Plastic pollution reaches atmospheric cloud processes\",\n\"Cloud nucleation rates shift due to microplastic influx\",\n\"Atmospheric plastics impact cloud droplet formation\"]",
+ "usage": {
+  "prompt_tokens": 79,
+  "completion_tokens": 77,
+  "total_tokens": 156,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 79
+ }
+}

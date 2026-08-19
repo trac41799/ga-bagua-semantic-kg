@@ -1,0 +1,2 @@
+# TDD — POC-09 Situation Labeling
+**Cases:** 09.1 arm-B prompt contains the "scaffold, no predictive claims" constraint; 09.2 arm-B output references a trigram pair (parseable; failure counted not retried); 09.3 rater 1–5 strict parse; 09.4 paired delta math; 09.5 runner renders table+verdict; 09.6 SimulatedLLM runner; 09.7 determinism on cache. **DoD:** pytest green (≥8), real run verdict, README with proxy label + scaffold-only statement.

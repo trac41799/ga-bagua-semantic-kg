@@ -1,0 +1,14 @@
+{
+ "key": "8cf40b1222582ff07f0805b41563f3b3295feb07752f66eb1bee5771566e23fc",
+ "text": "{\"name\": \"Selective visibility over completeness\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 10,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "713e14a2d663495d6b109bddb117204e7808eb2cb39feae15d42e12f1bcc07d8",
+ "text": "{\"name\": \"Pricing out big vehicles\"}",
+ "usage": {
+  "prompt_tokens": 156,
+  "completion_tokens": 10,
+  "total_tokens": 166,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 156
+ }
+}

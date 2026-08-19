@@ -1,0 +1,14 @@
+{
+ "key": "c6e182b817e5047ed0eeed8cc4d64a8fad26aeb59109a0e89b7a0b61005864c9",
+ "text": "{\"name\": \"Silence as measured subtraction\"}",
+ "usage": {
+  "prompt_tokens": 164,
+  "completion_tokens": 10,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 164
+ }
+}

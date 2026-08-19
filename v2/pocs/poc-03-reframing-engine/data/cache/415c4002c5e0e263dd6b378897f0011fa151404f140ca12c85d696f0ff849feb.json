@@ -1,0 +1,14 @@
+{
+ "key": "415c4002c5e0e263dd6b378897f0011fa151404f140ca12c85d696f0ff849feb",
+ "text": "{\"name\": \"Trusting the unseen safety net\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 11,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

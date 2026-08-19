@@ -1,0 +1,14 @@
+{
+ "key": "7168557f0a74657f995f25c59e96e9915c1f351500f4ee65d14e6e1034667f9d",
+ "text": "{\"name\": \"Net-zero procurement as moral imperative\"}",
+ "usage": {
+  "prompt_tokens": 165,
+  "completion_tokens": 11,
+  "total_tokens": 176,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 165
+ }
+}

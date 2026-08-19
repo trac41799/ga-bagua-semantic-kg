@@ -1,0 +1,2 @@
+# TDD — POC-05 Coverage Rubric
+**Cases:** 05.1 prompts differ only by checklist block; 05.2 rater parses 6-bit JSON strictly (malformed → counted, no retry); 05.3 20 tasks frozen (hash file); 05.4 paired delta math correct (hand case); 05.5 runner renders table+verdict; 05.6 SimulatedLLM runner exit 0; 05.7 determinism on cache. **DoD:** pytest green (≥8), real run renders verdict, README with proxy label.

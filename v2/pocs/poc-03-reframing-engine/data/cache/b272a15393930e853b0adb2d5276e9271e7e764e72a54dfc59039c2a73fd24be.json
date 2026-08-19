@@ -1,0 +1,14 @@
+{
+ "key": "b272a15393930e853b0adb2d5276e9271e7e764e72a54dfc59039c2a73fd24be",
+ "text": "{\"name\": \"Caching as load shield\"}",
+ "usage": {
+  "prompt_tokens": 156,
+  "completion_tokens": 10,
+  "total_tokens": 166,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 156
+ }
+}

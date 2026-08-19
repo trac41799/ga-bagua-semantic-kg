@@ -1,0 +1,14 @@
+{
+ "key": "2437576dba5a9063abed1806a86b024c7aadae4e9eb86c04f992b1496ccddca4",
+ "text": "[\"Earbuds cut noise by 35 dB on average\", \"Ambient sound drops 35 dB with these buds\", \"These earbuds lower background noise 35 dB\", \"Noise reduction averages 35 decibels\", \"35 dB average noise cancellation in earbuds\", \"Earbuds achieve 35 dB noise dampening\", \"Average ambient noise reduction: 35 dB\", \"These buds reduce surrounding noise 35 dB\"]",
+ "usage": {
+  "prompt_tokens": 85,
+  "completion_tokens": 91,
+  "total_tokens": 176,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 85
+ }
+}

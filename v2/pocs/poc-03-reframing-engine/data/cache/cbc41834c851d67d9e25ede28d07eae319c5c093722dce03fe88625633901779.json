@@ -1,0 +1,14 @@
+{
+ "key": "cbc41834c851d67d9e25ede28d07eae319c5c093722dce03fe88625633901779",
+ "text": "{\"name\": \"Night light as metabolic shield\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 10,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

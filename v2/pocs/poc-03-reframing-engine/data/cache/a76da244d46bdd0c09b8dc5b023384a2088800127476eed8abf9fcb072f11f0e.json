@@ -1,0 +1,14 @@
+{
+ "key": "a76da244d46bdd0c09b8dc5b023384a2088800127476eed8abf9fcb072f11f0e",
+ "text": "{\"name\": \"Household income caps utility tariffs\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 11,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

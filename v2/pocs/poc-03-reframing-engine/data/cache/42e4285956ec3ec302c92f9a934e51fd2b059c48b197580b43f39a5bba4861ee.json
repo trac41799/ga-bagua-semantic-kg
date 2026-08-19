@@ -1,0 +1,14 @@
+{
+ "key": "42e4285956ec3ec302c92f9a934e51fd2b059c48b197580b43f39a5bba4861ee",
+ "text": "{\"name\": \"Tariff cap as hidden trap\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 11,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "c8b992c6f9725621c0a5167077247c1957ce930ae62f0fb0a19d732b70485d84",
+ "text": "{\"name\": \"Algorithmic transparency mandate\"}",
+ "usage": {
+  "prompt_tokens": 151,
+  "completion_tokens": 9,
+  "total_tokens": 160,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 151
+ }
+}

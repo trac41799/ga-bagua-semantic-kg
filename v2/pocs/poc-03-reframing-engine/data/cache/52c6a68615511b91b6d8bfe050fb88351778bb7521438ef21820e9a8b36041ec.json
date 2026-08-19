@@ -1,0 +1,14 @@
+{
+ "key": "52c6a68615511b91b6d8bfe050fb88351778bb7521438ef21820e9a8b36041ec",
+ "text": "{\"name\": \"Silence as imposed stillness\"}",
+ "usage": {
+  "prompt_tokens": 165,
+  "completion_tokens": 10,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 165
+ }
+}

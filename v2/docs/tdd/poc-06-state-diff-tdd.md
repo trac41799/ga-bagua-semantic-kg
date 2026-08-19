@@ -1,0 +1,2 @@
+# TDD — POC-06 State-Diff Vocabulary
+**Cases:** 06.1 planted deltas recoverable automatically from (before,after) pairs (≥1 delta per pair, check); 06.2 arm-B template strictly 3 aspect lines (parse-validated; malformed counted); 06.3 rater 1–5 strict parse; 06.4 paired delta math (hand case); 06.5 runner renders table+verdict; 06.6 SimulatedLLM runner; 06.7 determinism. **DoD:** pytest green (≥8), real run verdict, README with proxy label.

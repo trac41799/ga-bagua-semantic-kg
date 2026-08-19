@@ -1,0 +1,14 @@
+{
+ "key": "93515ab1d59255552dcf6eac23a923c783829a88921f71cab7ca2c0940e7df74",
+ "text": "{\"name\": \"Battery-first design choice\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 10,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

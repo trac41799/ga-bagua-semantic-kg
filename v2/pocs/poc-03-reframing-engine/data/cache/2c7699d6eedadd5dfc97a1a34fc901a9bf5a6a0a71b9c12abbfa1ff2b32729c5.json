@@ -1,0 +1,14 @@
+{
+ "key": "2c7699d6eedadd5dfc97a1a34fc901a9bf5a6a0a71b9c12abbfa1ff2b32729c5",
+ "text": "{\"name\": \"Battery savings as default theme\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 11,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

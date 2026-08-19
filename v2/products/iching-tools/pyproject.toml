@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "iching-tools"
+version = "0.2.0"
+description = "LLM-supportive tools from validated I-Ching applications: 8-role coverage checklist (coverage_audit), 8 cube-move reframing (reframe), 3-aspect state-diff (state_diff), plus exact-math MCP tools (Cl3 calculator, interaction spectrum, rotor algebra). Structure as scaffold — naming only, no semantic claims."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = []
+
+[project.scripts]
+itools = "iching_tools.cli:main"
+iching-coverage = "iching_coverage.cli:main"
+iching-reframe = "iching_reframe.cli:main"
+iching-statediff = "iching_statediff.cli:main"
+iching-mcp = "iching_mcp.server:main"
+
+[tool.setuptools]
+packages = [
+    "iching_tools",
+    "iching_coverage", "iching_reframe", "iching_statediff",
+    "iching_cl3calc", "iching_xai", "iching_rotor",
+    "iching_mcp",
+]
+
+[tool.setuptools.package-dir]
+iching_tools = "iching_tools"
+iching_coverage = "coverage/iching_coverage"
+iching_reframe = "reframe/iching_reframe"
+iching_statediff = "statediff/iching_statediff"
+iching_cl3calc = "cl3calc/iching_cl3calc"
+iching_xai = "xai/iching_xai"
+iching_rotor = "rotor/iching_rotor"
+iching_mcp = "iching_mcp"

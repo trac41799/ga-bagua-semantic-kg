@@ -1,0 +1,14 @@
+{
+ "key": "6ce4d99cfa7db5d81f49fb17f403bfda42fd7e090b23d3661689d9ab24ab4388",
+ "text": "{\"name\": \"Network capacity as hidden constraint\"}",
+ "usage": {
+  "prompt_tokens": 164,
+  "completion_tokens": 10,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 164
+ }
+}

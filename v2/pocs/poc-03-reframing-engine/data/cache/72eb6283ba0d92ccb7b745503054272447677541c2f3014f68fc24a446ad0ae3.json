@@ -1,0 +1,14 @@
+{
+ "key": "72eb6283ba0d92ccb7b745503054272447677541c2f3014f68fc24a446ad0ae3",
+ "text": "{\"name\": \"Surface symptom, hidden root\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 10,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "078dbf372c2ad38721829824390c1e6d8125738733315d33be7b6dcdd6ea1852",
+ "text": "[\n  \"Later start times boost teen health.\",\n  \"Early bells harm growing brains.\",\n  \"Sleep is a student's right.\",\n  \"8:30 aligns with teen biology.\",\n  \"School schedules should follow science.\",\n  \"Adolescents need morning rest.\",\n  \"Current start times risk development.\",\n  \"A later bell supports learning.\"\n]",
+ "usage": {
+  "prompt_tokens": 85,
+  "completion_tokens": 71,
+  "total_tokens": 156,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 85
+ }
+}

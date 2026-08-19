@@ -1,0 +1,14 @@
+{
+ "key": "fda97e15fb9f206743277187556963db2fc7fe70d2d8ade68fa2d4f6ac25155a",
+ "text": "{\"name\": \"Clouds seeded by plastic rain\"}",
+ "usage": {
+  "prompt_tokens": 159,
+  "completion_tokens": 11,
+  "total_tokens": 170,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 159
+ }
+}

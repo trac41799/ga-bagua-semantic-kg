@@ -1,0 +1,14 @@
+{
+ "key": "970f8c5af9c516cec12032826ac355af06d78eab5a0b5bb00c022b63d7281a26",
+ "text": "{\"name\": \"Slow charge, fast promise\"}",
+ "usage": {
+  "prompt_tokens": 163,
+  "completion_tokens": 10,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 163
+ }
+}

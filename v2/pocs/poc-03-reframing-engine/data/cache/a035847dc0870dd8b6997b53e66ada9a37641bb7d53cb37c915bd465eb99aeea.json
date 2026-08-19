@@ -1,0 +1,14 @@
+{
+ "key": "a035847dc0870dd8b6997b53e66ada9a37641bb7d53cb37c915bd465eb99aeea",
+ "text": "{\"name\": \"Adolescent sleep as daytime priority\"}",
+ "usage": {
+  "prompt_tokens": 166,
+  "completion_tokens": 12,
+  "total_tokens": 178,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 166
+ }
+}

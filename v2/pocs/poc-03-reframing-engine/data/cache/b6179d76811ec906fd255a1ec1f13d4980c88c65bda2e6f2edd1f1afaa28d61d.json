@@ -1,0 +1,14 @@
+{
+ "key": "b6179d76811ec906fd255a1ec1f13d4980c88c65bda2e6f2edd1f1afaa28d61d",
+ "text": "{\"name\": \"Frozen moon, hidden ocean\"}",
+ "usage": {
+  "prompt_tokens": 166,
+  "completion_tokens": 11,
+  "total_tokens": 177,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 166
+ }
+}

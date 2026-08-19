@@ -1,0 +1,14 @@
+{
+ "key": "a20a2290763a0330604911280cd38118a219f4e0b8988f176dd17e8eff5a80cc",
+ "text": "{\"name\": \"Adolescent sleep as institutional priority\"}",
+ "usage": {
+  "prompt_tokens": 165,
+  "completion_tokens": 12,
+  "total_tokens": 177,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 165
+ }
+}

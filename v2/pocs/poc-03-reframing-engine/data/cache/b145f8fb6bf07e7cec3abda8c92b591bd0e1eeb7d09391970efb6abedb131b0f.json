@@ -1,0 +1,14 @@
+{
+ "key": "b145f8fb6bf07e7cec3abda8c92b591bd0e1eeb7d09391970efb6abedb131b0f",
+ "text": "{\"name\": \"Battery drain as hidden cost\"}",
+ "usage": {
+  "prompt_tokens": 163,
+  "completion_tokens": 11,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 163
+ }
+}

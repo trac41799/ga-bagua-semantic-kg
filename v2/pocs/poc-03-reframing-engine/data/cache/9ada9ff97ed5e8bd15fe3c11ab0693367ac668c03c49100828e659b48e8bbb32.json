@@ -1,0 +1,14 @@
+{
+ "key": "9ada9ff97ed5e8bd15fe3c11ab0693367ac668c03c49100828e659b48e8bbb32",
+ "text": "[\n  \"A quick key combo opens all commands.\",\n  \"Press three keys to access every action.\",\n  \"The universal shortcut for command search.\",\n  \"Ctrl+Shift+K summons the tool menu.\",\n  \"A global hotkey reveals the command list.\",\n  \"Three-finger salute to the command palette.\",\n  \"The key chord for universal command access.\",\n  \"Shortcut to the master command interface.\"\n]",
+ "usage": {
+  "prompt_tokens": 80,
+  "completion_tokens": 84,
+  "total_tokens": 164,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 80
+ }
+}

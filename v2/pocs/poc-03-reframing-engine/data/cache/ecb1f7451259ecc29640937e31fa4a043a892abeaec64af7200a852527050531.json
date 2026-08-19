@@ -1,0 +1,14 @@
+{
+ "key": "ecb1f7451259ecc29640937e31fa4a043a892abeaec64af7200a852527050531",
+ "text": "{\"name\": \"Light exposure drives metabolic risk\"}",
+ "usage": {
+  "prompt_tokens": 155,
+  "completion_tokens": 10,
+  "total_tokens": 165,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 155
+ }
+}

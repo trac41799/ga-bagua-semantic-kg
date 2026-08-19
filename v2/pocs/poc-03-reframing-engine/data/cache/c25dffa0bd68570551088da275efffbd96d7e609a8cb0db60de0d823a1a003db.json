@@ -1,0 +1,14 @@
+{
+ "key": "c25dffa0bd68570551088da275efffbd96d7e609a8cb0db60de0d823a1a003db",
+ "text": "{\"name\": \"Silence as a blade\"}",
+ "usage": {
+  "prompt_tokens": 165,
+  "completion_tokens": 10,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 165
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "34aeb0a10e9e53aee6c38fe90673daf514b7c0e5e3a8d68c6d404fa3a2ed6301",
+ "text": "[0.2, 0.0, 0.3, 0.8, 0.6, 0.4, 0.0, 0.1]",
+ "usage": {
+  "prompt_tokens": 257,
+  "completion_tokens": 40,
+  "total_tokens": 297,
+  "prompt_tokens_details": {
+   "cached_tokens": 128
+  },
+  "prompt_cache_hit_tokens": 128,
+  "prompt_cache_miss_tokens": 129
+ }
+}

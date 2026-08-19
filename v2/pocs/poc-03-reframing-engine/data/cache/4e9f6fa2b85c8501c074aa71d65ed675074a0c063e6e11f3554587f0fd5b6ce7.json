@@ -1,0 +1,14 @@
+{
+ "key": "4e9f6fa2b85c8501c074aa71d65ed675074a0c063e6e11f3554587f0fd5b6ce7",
+ "text": "{\"name\": \"Daylight darkness shields metabolic health\"}",
+ "usage": {
+  "prompt_tokens": 163,
+  "completion_tokens": 11,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 163
+ }
+}

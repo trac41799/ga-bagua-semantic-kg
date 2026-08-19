@@ -1,0 +1,14 @@
+{
+ "key": "bb4a530e0bb82db4af9f427873d2277054b9fcc656d1b39264e413b099f652ca",
+ "text": "{\"name\": \"Charging speed as hidden cost\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 12,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

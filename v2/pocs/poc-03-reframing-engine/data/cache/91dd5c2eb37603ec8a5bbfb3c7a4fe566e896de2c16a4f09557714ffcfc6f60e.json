@@ -1,0 +1,14 @@
+{
+ "key": "91dd5c2eb37603ec8a5bbfb3c7a4fe566e896de2c16a4f09557714ffcfc6f60e",
+ "text": "{\"name\": \"Single-step trust in motion\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 10,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

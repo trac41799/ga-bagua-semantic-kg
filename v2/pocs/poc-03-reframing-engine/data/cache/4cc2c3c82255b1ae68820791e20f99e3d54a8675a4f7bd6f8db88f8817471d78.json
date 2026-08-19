@@ -1,0 +1,14 @@
+{
+ "key": "4cc2c3c82255b1ae68820791e20f99e3d54a8675a4f7bd6f8db88f8817471d78",
+ "text": "[\n  \"SUV surcharge to slim city traffic\",\n  \"Big cars pay more downtown\",\n  \"Pricing out oversized urban vehicles\",\n  \"Heavier footprint, heavier fee\",\n  \"City core tax on bulky rides\",\n  \"Discouraging gas-guzzling giants\",\n  \"SUV toll to reclaim streets\",\n  \"Penalty for parking space hogs\"\n]",
+ "usage": {
+  "prompt_tokens": 83,
+  "completion_tokens": 76,
+  "total_tokens": 159,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 83
+ }
+}

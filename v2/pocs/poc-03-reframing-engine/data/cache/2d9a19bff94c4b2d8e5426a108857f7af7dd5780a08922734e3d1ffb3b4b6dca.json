@@ -1,0 +1,14 @@
+{
+ "key": "2d9a19bff94c4b2d8e5426a108857f7af7dd5780a08922734e3d1ffb3b4b6dca",
+ "text": "{\"name\": \"Relapse risk as blade's edge\"}",
+ "usage": {
+  "prompt_tokens": 159,
+  "completion_tokens": 12,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 159
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "5f123bf3923cd4a929c3ff2edb22179ea9e5f0fd7a5545215215322ba14ba9b4",
+ "text": "{\"name\": \"Battery-first default, user choice second\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 13,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

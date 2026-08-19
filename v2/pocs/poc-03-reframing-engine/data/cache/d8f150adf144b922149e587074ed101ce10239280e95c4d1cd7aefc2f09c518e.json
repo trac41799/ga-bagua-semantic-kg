@@ -1,0 +1,14 @@
+{
+ "key": "d8f150adf144b922149e587074ed101ce10239280e95c4d1cd7aefc2f09c518e",
+ "text": "[\"Bilingualism may postpone dementia symptoms\",\n\"Speaking two languages could shield the brain\",\n\"Dementia onset later in bilingual individuals\",\n\"Learning languages early might protect cognition\",\n\"Bilingual brains resist dementia longer\",\n\"Delayed dementia linked to dual-language use\",\n\"Early language learning offers cognitive reserve\",\n\"Bilingualism as a buffer against dementia\"]",
+ "usage": {
+  "prompt_tokens": 81,
+  "completion_tokens": 70,
+  "total_tokens": 151,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 81
+ }
+}

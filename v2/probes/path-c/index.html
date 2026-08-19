@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA × Bagua — Teaching Tool (Path C)</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --panel: #161b24;
+    --panel2: #1c2330;
+    --ink: #e9e6dd;
+    --dim: #9aa3b2;
+    --faint: #6b7484;
+    --gold: #d4af37;
+    --gold-dim: #8a7328;
+    --jade: #4ec9a0;
+    --cinnabar: #e05c4a;
+    --azure: #7fb4e6;
+    --border: #2a3342;
+    --serif: "Songti SC", "Noto Serif CJK SC", "SimSun", Georgia, "Times New Roman", serif;
+    --sans: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(212,175,55,0.07), transparent 60%),
+      radial-gradient(900px 400px at 0% 0%, rgba(78,201,160,0.05), transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+  header.hero {
+    text-align: center;
+    padding: 44px 20px 26px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(212,175,55,0.06), transparent);
+  }
+  header.hero .kicker {
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  header.hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  header.hero h1 .cn { color: var(--gold); }
+  header.hero .sub {
+    margin-top: 10px;
+    color: var(--dim);
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+  }
+  header.hero .disclaimer {
+    margin: 16px auto 0;
+    max-width: 820px;
+    font-size: 13px;
+    color: var(--faint);
+    border: 1px dashed var(--gold-dim);
+    border-radius: 10px;
+    padding: 10px 16px;
+    background: rgba(212,175,55,0.05);
+  }
+  nav.chips {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    padding: 10px 12px;
+    background: rgba(14,17,22,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav.chips a {
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    transition: all 0.15s ease;
+  }
+  nav.chips a:hover { color: var(--ink); border-color: var(--gold); }
+  main { max-width: 1080px; margin: 0 auto; padding: 26px 20px 60px; }
+  section.module {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px 26px;
+    margin-bottom: 26px;
+    scroll-margin-top: 64px;
+  }
+  section.module h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  section.module h2 .num {
+    color: var(--gold);
+    font-size: 14px;
+    font-family: var(--sans);
+    letter-spacing: 0.12em;
+  }
+  section.module .lede { color: var(--dim); font-size: 14px; margin-bottom: 16px; max-width: 820px; }
+  .hint { font-size: 12.5px; color: var(--faint); font-style: italic; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+    gap: 10px;
+  }
+  .trigram-panel {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 8px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+    user-select: none;
+  }
+  .trigram-panel:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .trigram-panel.selected {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(212,175,55,0.25), 0 6px 18px rgba(0,0,0,0.4);
+  }
+  .trigram-panel .t-name { font-family: var(--serif); font-size: 26px; color: var(--ink); }
+  .trigram-panel .t-lines { display: flex; flex-direction: column; gap: 4px; margin: 8px 0; align-items: center; }
+  .trigram-panel .t-blade { font-family: "Cascadia Mono", Consolas, monospace; font-size: 13px; color: var(--gold); }
+  .trigram-panel .t-grade { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.08em; }
+  .line {
+    display: block;
+    width: 52px;
+    height: 7px;
+    border-radius: 2px;
+  }
+  .line.yang { background: var(--ink); }
+  .line.yin {
+    background: transparent;
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    background-clip: content-box;
+    height: 9px;
+  }
+  .line.large { width: 92px; height: 11px; border-radius: 3px; }
+  .line.large.yin { height: 13px; border-top-width: 4px; border-bottom-width: 4px; }
+  .bv-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; align-items: center; }
+  @media (max-width: 820px) { .bv-layout { grid-template-columns: 1fr; } }
+  .bv-info .bv-bigname { font-family: var(--serif); font-size: 30px; }
+  .bv-info .bv-blade { font-family: "Cascadia Mono", Consolas, monospace; font-size: 22px; color: var(--gold); margin: 2px 0 6px; }
+  .bv-info .bv-detail { color: var(--dim); font-size: 14px; }
+  .bv-info .bv-formula { margin-top: 10px; font-family: "Cascadia Mono", Consolas, monospace; font-size: 13px; color: var(--azure); background: rgba(127,180,230,0.07); border-radius: 8px; padding: 8px 10px; }
+  svg.blade-svg { width: 100%; height: auto; background: var(--panel2); border: 1px solid var(--border); border-radius: 10px; }
+  .flip-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .chip-btn {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+  .chip-btn:hover { border-color: var(--gold); }
+  .chip-btn.active { border-color: var(--gold); background: rgba(212,175,55,0.12); }
+  .flip-stage { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+  @media (max-width: 700px) { .flip-stage { grid-template-columns: 1fr; } }
+  .flip-card {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+  .flip-card .fc-title { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 10px; }
+  .flip-lines { display: flex; flex-direction: column; gap: 7px; align-items: center; margin: 12px 0; }
+  .flip-line-btn {
+    width: 110px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    padding: 5px 0;
+    transition: border-color 0.12s ease, transform 0.08s ease;
+  }
+  .flip-line-btn:hover { border-color: var(--gold); transform: scale(1.03); }
+  .flip-line-btn .line { margin: 0 auto; }
+  .flip-result-name { font-family: var(--serif); font-size: 26px; margin-top: 8px; }
+  .flip-result-blade { font-family: "Cascadia Mono", Consolas, monospace; color: var(--gold); font-size: 16px; margin-top: 4px; }
+  .flip-rule {
+    margin-top: 14px;
+    font-size: 13.5px;
+    color: var(--dim);
+    background: rgba(78,201,160,0.06);
+    border: 1px solid rgba(78,201,160,0.25);
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  .pt-wrap { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+  @media (max-width: 820px) { .pt-wrap { grid-template-columns: 1fr; } }
+  .pt-grid-scroll { overflow-x: auto; }
+  table.pt-grid { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+  table.pt-grid th, table.pt-grid td { border: 1px solid var(--border); text-align: center; padding: 5px 3px; }
+  table.pt-grid th { background: var(--panel2); font-family: var(--serif); color: var(--gold); font-size: 13px; }
+  table.pt-grid th .sub { display: block; font-family: "Cascadia Mono", Consolas, monospace; font-size: 9.5px; color: var(--faint); font-style: normal; }
+  table.pt-grid td.cell {
+    cursor: pointer;
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 11.5px;
+    transition: transform 0.08s ease, filter 0.12s ease;
+  }
+  table.pt-grid td.cell:hover { transform: scale(1.06); filter: brightness(1.3); }
+  table.pt-grid td.cell.sel { outline: 2px solid var(--gold); outline-offset: -2px; }
+  .sign-pos { background: rgba(78,201,160,0.14); color: var(--jade); }
+  .sign-neg { background: rgba(224,92,74,0.14); color: var(--cinnabar); }
+  .pt-detail {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+    align-self: start;
+  }
+  .pt-detail .formula { font-family: "Cascadia Mono", Consolas, monospace; font-size: 17px; margin: 8px 0; color: var(--ink); }
+  .pt-detail .formula .r { color: var(--cinnabar); }
+  .pt-detail .formula .p { color: var(--jade); }
+  .hex-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+  @media (max-width: 700px) { .hex-layout { grid-template-columns: 1fr; } }
+  .hex-pickers { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
+  .hex-pickers label { font-size: 13px; color: var(--dim); display: flex; flex-direction: column; gap: 4px; }
+  select {
+    background: var(--panel2);
+    color: var(--ink);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 14px;
+    font-family: var(--serif);
+  }
+  select:focus { outline: none; border-color: var(--gold); }
+  .btn {
+    background: var(--panel2);
+    color: var(--ink);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+  .btn:hover { border-color: var(--gold); }
+  .btn.gold { background: rgba(212,175,55,0.14); border-color: var(--gold-dim); color: var(--gold); }
+  .hex-stack-svg { background: var(--panel2); border: 1px solid var(--border); border-radius: 10px; width: 100%; height: auto; }
+  .hex-result .hx-name { font-family: var(--serif); font-size: 34px; color: var(--gold); }
+  .hex-result .hx-num { font-family: "Cascadia Mono", Consolas, monospace; color: var(--faint); font-size: 13px; }
+  .hex-result .hx-pinyin { color: var(--dim); font-size: 15px; margin: 4px 0 8px; }
+  .hex-result .hx-gloss { color: var(--dim); font-size: 14px; }
+  .hex-result .hx-note { margin-top: 10px; font-size: 12px; color: var(--faint); font-style: italic; }
+  .rotor-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+  @media (max-width: 820px) { .rotor-layout { grid-template-columns: 1fr; } }
+  .rotor-controls { display: flex; flex-direction: column; gap: 12px; }
+  .rotor-controls .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--dim); }
+  input[type="range"] { flex: 1; min-width: 160px; accent-color: var(--gold); }
+  .rotor-theta { font-family: "Cascadia Mono", Consolas, monospace; color: var(--gold); font-size: 15px; min-width: 74px; text-align: right; }
+  .rotor-readout {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 13px;
+    color: var(--azure);
+    line-height: 1.7;
+  }
+  .rotor-readout .big { color: var(--gold); font-size: 16px; }
+  svg.rotor-svg { background: var(--panel2); border: 1px solid var(--border); border-radius: 10px; width: 100%; height: auto; }
+  .quiz-toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+  .quiz-toolbar .mode-label { font-size: 13px; color: var(--dim); }
+  .quiz-toolbar .score { margin-left: auto; font-family: "Cascadia Mono", Consolas, monospace; font-size: 16px; color: var(--gold); }
+  .q-card {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .q-card .q-text { font-size: 15px; margin-bottom: 10px; }
+  .q-card .q-text .qn { color: var(--gold); font-family: "Cascadia Mono", Consolas, monospace; margin-right: 8px; }
+  .q-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 560px) { .q-opts { grid-template-columns: 1fr; } }
+  .q-opt {
+    text-align: left;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    font-family: var(--sans);
+  }
+  .q-opt:hover { border-color: var(--azure); }
+  .q-opt.correct { background: rgba(78,201,160,0.16); border-color: var(--jade); color: var(--jade); }
+  .q-opt.wrong { background: rgba(224,92,74,0.16); border-color: var(--cinnabar); color: var(--cinnabar); }
+  .q-opt:disabled { cursor: default; }
+  .q-feedback { margin-top: 8px; font-size: 12.5px; color: var(--faint); min-height: 0; }
+  .glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 760px) { .glossary-grid { grid-template-columns: 1fr; } }
+  table.gloss { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--panel2); border-radius: 10px; overflow: hidden; }
+  table.gloss th, table.gloss td { border: 1px solid var(--border); padding: 7px 10px; text-align: left; }
+  table.gloss th { background: rgba(212,175,55,0.1); color: var(--gold); font-weight: 600; letter-spacing: 0.05em; font-size: 12px; }
+  table.gloss td.cn { font-family: var(--serif); font-size: 18px; }
+  table.gloss td.bl { font-family: "Cascadia Mono", Consolas, monospace; color: var(--gold); }
+  footer {
+    text-align: center;
+    color: var(--faint);
+    font-size: 12.5px;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .mono { font-family: "Cascadia Mono", Consolas, monospace; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="kicker">Path C · Single-file teaching probe</div>
+  <h1>Geometric Algebra <span class="cn">×</span> 八卦 <span class="cn">(Bagua)</span></h1>
+  <p class="sub">The 8-blade ↔ 8-trigram isomorphism, made visible: gallery → blade → line-flip → product table → hexagram stack → rotor → quiz.</p>
+  <div class="disclaimer"><strong>What this tool teaches:</strong> the K4 lesson — the exact isomorphism between the 8 blades of Cl(3) (1, e1, e2, e3, e12, e23, e31, e123) and the 8 trigrams, the geometric product, line-flip dynamics, and rotor sandwich products. <strong>It makes no semantic claims</strong> about divination, meaning, or what hexagrams "say". All math is verified against the v1 Cl(3) product table.</div>
+</header>
+
+<nav class="chips" aria-label="Modules">
+  <a href="#gallery">1 · Gallery</a>
+  <a href="#blade-view">2 · Blade viewer</a>
+  <a href="#line-flip">3 · Line flip</a>
+  <a href="#product-table">4 · Product table</a>
+  <a href="#hexagram-stack">5 · Hexagram stack</a>
+  <a href="#rotor-demo">6 · Rotor demo</a>
+  <a href="#quiz">7 · Quiz</a>
+  <a href="#glossary">8 · Glossary</a>
+</nav>
+
+<main>
+
+<section class="module" id="gallery">
+  <h2><span class="num">MODULE 1</span>The trigram gallery</h2>
+  <p class="lede">Eight trigrams, eight blades. Reading a trigram from the bottom line upward, each <strong>yang</strong> line selects a basis vector — e1, e2, e3. The trigram's <em>blade</em> is the product of its selected vectors, and its <strong>grade</strong> is the number of yang lines. Click a trigram to view it in 3D.</p>
+  <div class="gallery-grid" id="gallery-grid">
+    <div class="trigram-panel" data-trigram="KUN" data-blade="1" data-grade="0" role="button" tabindex="0" aria-label="Kun, blade 1, grade 0">
+      <div class="t-name">坤</div>
+      <div class="t-lines"><span class="line yin"></span><span class="line yin"></span><span class="line yin"></span></div>
+      <div class="t-blade">1</div>
+      <div class="t-grade">grade 0</div>
+    </div>
+    <div class="trigram-panel" data-trigram="ZHEN" data-blade="e1" data-grade="1" role="button" tabindex="0" aria-label="Zhen, blade e1, grade 1">
+      <div class="t-name">震</div>
+      <div class="t-lines"><span class="line yang"></span><span class="line yin"></span><span class="line yin"></span></div>
+      <div class="t-blade">e1</div>
+      <div class="t-grade">grade 1</div>
+    </div>
+    <div class="trigram-panel" data-trigram="KAN" data-blade="e2" data-grade="1" role="button" tabindex="0" aria-label="Kan, blade e2, grade 1">
+      <div class="t-name">坎</div>
+      <div class="t-lines"><span class="line yin"></span><span class="line yang"></span><span class="line yin"></span></div>
+      <div class="t-blade">e2</div>
+      <div class="t-grade">grade 1</div>
+    </div>
+    <div class="trigram-panel" data-trigram="GEN" data-blade="e3" data-grade="1" role="button" tabindex="0" aria-label="Gen, blade e3, grade 1">
+      <div class="t-name">艮</div>
+      <div class="t-lines"><span class="line yin"></span><span class="line yin"></span><span class="line yang"></span></div>
+      <div class="t-blade">e3</div>
+      <div class="t-grade">grade 1</div>
+    </div>
+    <div class="trigram-panel" data-trigram="DUI" data-blade="e12" data-grade="2" role="button" tabindex="0" aria-label="Dui, blade e12, grade 2">
+      <div class="t-name">兑</div>
+      <div class="t-lines"><span class="line yang"></span><span class="line yang"></span><span class="line yin"></span></div>
+      <div class="t-blade">e12</div>
+      <div class="t-grade">grade 2</div>
+    </div>
+    <div class="trigram-panel" data-trigram="XUN" data-blade="e23" data-grade="2" role="button" tabindex="0" aria-label="Xun, blade e23, grade 2">
+      <div class="t-name">巽</div>
+      <div class="t-lines"><span class="line yin"></span><span class="line yang"></span><span class="line yang"></span></div>
+      <div class="t-blade">e23</div>
+      <div class="t-grade">grade 2</div>
+    </div>
+    <div class="trigram-panel" data-trigram="LI" data-blade="−e31" data-grade="2" role="button" tabindex="0" aria-label="Li, blade minus e31, grade 2">
+      <div class="t-name">离</div>
+      <div class="t-lines"><span class="line yang"></span><span class="line yin"></span><span class="line yang"></span></div>
+      <div class="t-blade">−e31</div>
+      <div class="t-grade">grade 2</div>
+    </div>
+    <div class="trigram-panel" data-trigram="QIAN" data-blade="e123" data-grade="3" role="button" tabindex="0" aria-label="Qian, blade e123, grade 3">
+      <div class="t-name">乾</div>
+      <div class="t-lines"><span class="line yang"></span><span class="line yang"></span><span class="line yang"></span></div>
+      <div class="t-blade">e123</div>
+      <div class="t-grade">grade 3</div>
+    </div>
+  </div>
+  <p class="hint">Li (☲) has yang lines at bottom and top → e1·e3 = e13 = −e31. Orientation signs are part of the algebra.</p>
+</section>
+
+<section class="module" id="blade-view">
+  <h2><span class="num">MODULE 2</span>Blade viewer</h2>
+  <p class="lede">A blade of grade 0 is a <strong>point</strong>, grade 1 a directed <strong>line</strong>, grade 2 an oriented <strong>plane</strong>, grade 3 a <strong>volume</strong>. Click a trigram in the gallery to see its blade as a geometric object.</p>
+  <div class="bv-layout">
+    <div class="bv-info">
+      <div class="bv-bigname" id="bv-name">坤 · Kūn</div>
+      <div class="bv-blade" id="bv-blade">blade: 1</div>
+      <div class="bv-detail" id="bv-detail">Grade 0 — a scalar: a point, no direction.</div>
+      <div class="bv-formula" id="bv-formula">blade = (no yang lines) = 1</div>
+    </div>
+    <svg id="bladeSvg" class="blade-svg" viewBox="0 0 340 300" role="img" aria-label="Isometric blade viewer"></svg>
+  </div>
+</section>
+
+<section class="module" id="line-flip">
+  <h2><span class="num">MODULE 3</span>Line flip</h2>
+  <p class="lede">Pick a trigram, then click one of its three lines. A line flip toggles a bit — which is exactly multiplication by the corresponding basis vector: flipping line i multiplies the blade by e<sub>i+1</sub> (read bottom-up). Watch the blade-label change, sign included.</p>
+  <div class="flip-controls" id="flip-chips"></div>
+  <div class="flip-stage">
+    <div class="flip-card">
+      <div class="fc-title">Before</div>
+      <div class="flip-result-name" id="flip-name-a">坤 · Kūn</div>
+      <div class="flip-lines" id="flip-lines-a"></div>
+      <div class="flip-result-blade" id="flip-blade-a">1</div>
+    </div>
+    <div class="flip-card">
+      <div class="fc-title">After flipping a line</div>
+      <div class="flip-result-name" id="flip-name-b">—</div>
+      <div class="flip-lines" id="flip-lines-b"></div>
+      <div class="flip-result-blade" id="flip-blade-b">—</div>
+      <div class="flip-rule" id="flip-rule">Click a line on the left. Multiplying the blade by a basis vector flips the corresponding line.</div>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="product-table">
+  <h2><span class="num">MODULE 4</span>Product table — the geometric product</h2>
+  <p class="lede">Rows and columns are trigrams (their blades). Click a row trigram and a column trigram: the cell shows their <strong>geometric product</strong> (blade + sign). Green cells: sign +1. Red cells: sign −1. Order matters: e1·e2 = e12 but e2·e1 = −e12.</p>
+  <div class="pt-wrap">
+    <div class="pt-grid-scroll">
+      <table class="pt-grid" id="pt-grid" aria-label="Blade product table"></table>
+    </div>
+    <div class="pt-detail" id="pt-detail">
+      <div id="pt-prompt" style="color:var(--faint);font-size:13px;">Select a row trigram and a column trigram to compute a product.</div>
+      <div class="formula" id="pt-formula" style="display:none;"></div>
+      <div id="pt-note" style="font-size:12.5px;color:var(--faint);margin-top:8px;"></div>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="hexagram-stack">
+  <h2><span class="num">MODULE 5</span>Hexagram stack</h2>
+  <p class="lede">Stack an upper trigram over a lower trigram to form one of the 64 hexagrams. The traditional King Wen names are shown — <strong>purely presentational</strong>: this tool teaches the stacking rule (upper over lower), not any interpretive system.</p>
+  <div class="hex-layout">
+    <div>
+      <div class="hex-pickers">
+        <label>Upper trigram (top 3 lines)
+          <select id="hex-upper"></select>
+        </label>
+        <label>Lower trigram (bottom 3 lines)
+          <select id="hex-lower"></select>
+        </label>
+        <button class="btn gold" id="hex-random" type="button">Random</button>
+      </div>
+      <svg id="hexSvg" class="hex-stack-svg" viewBox="0 0 240 210" role="img" aria-label="Hexagram stack"></svg>
+    </div>
+    <div class="hex-result" id="hex-result">
+      <div class="hx-name" id="hx-name">地地坤</div>
+      <div class="hx-num" id="hx-num">King Wen #2</div>
+      <div class="hx-pinyin" id="hx-pinyin">Dì Dì Kūn</div>
+      <div class="hx-gloss" id="hx-gloss">The Receptive — all yin; yielding, supporting.</div>
+      <div class="hx-note">Traditional name + gloss only. No interpretive claims.</div>
+    </div>
+  </div>
+</section>
+
+<section class="module" id="rotor-demo">
+  <h2><span class="num">MODULE 6</span>Rotor demo — sandwich product</h2>
+  <p class="lede">A rotor R = cos(θ/2) − sin(θ/2)·B rotates a blade a by the sandwich product a′ = R·a·R̃. Drag the slider (or press animate) and watch the exact algebra result at every angle — this is real computation, not a canned animation.</p>
+  <div class="rotor-layout">
+    <div class="rotor-controls">
+      <div class="row"><label>Blade to rotate</label><select id="rotor-blade">
+        <option value="e1">e1 (vector)</option>
+        <option value="e2">e2 (vector)</option>
+        <option value="e3">e3 (vector)</option>
+        <option value="e12">e12 (bivector)</option>
+        <option value="e23">e23 (bivector)</option>
+        <option value="e31">e31 (bivector)</option>
+      </select></div>
+      <div class="row"><label>Rotation plane B</label><select id="rotor-plane">
+        <option value="e12">e12</option>
+        <option value="e23">e23</option>
+        <option value="e31">e31</option>
+      </select></div>
+      <div class="row"><label>θ</label><input type="range" id="rotor-theta" min="0" max="720" step="1" value="180"><span class="rotor-theta" id="rotor-theta-label">θ = 0.50π</span></div>
+      <div class="row"><button class="btn gold" id="rotor-animate" type="button">Animate</button><button class="btn" id="rotor-reset" type="button">Reset</button></div>
+      <div class="rotor-readout" id="rotor-readout">
+        <div id="rr-r">R = cos(θ/2) − sin(θ/2)·B</div>
+        <div id="rr-sandwich">a′ = R·a·R̃</div>
+        <div class="big" id="rr-result">result: —</div>
+        <div id="rr-norm" style="color:var(--faint);"></div>
+      </div>
+    </div>
+    <svg id="rotorSvg" class="rotor-svg" viewBox="0 0 280 280" role="img" aria-label="Rotor plane view"></svg>
+  </div>
+</section>
+
+<section class="module" id="quiz">
+  <h2><span class="num">MODULE 7</span>Quiz — pre / post</h2>
+  <p class="lede">Five questions on blades, signs, line-flips, stacking and rotors. Answering gives instant feedback. Run it <strong>before</strong> the walkthrough (pre) and <strong>after</strong> (post); the human-gate report compares the two scores.</p>
+  <div class="quiz-toolbar">
+    <button class="btn gold" id="quiz-mode-pre" type="button">Pre-quiz</button>
+    <button class="btn" id="quiz-mode-post" type="button">Post-quiz</button>
+    <span class="mode-label" id="quiz-mode-label">Mode: pre — before the lesson</span>
+    <span class="score" id="quiz-score">Score: 0 / 5</span>
+  </div>
+  <div id="quiz-questions"></div>
+</section>
+
+<section class="module" id="glossary">
+  <h2><span class="num">MODULE 8</span>Glossary — roles ↔ trigrams ↔ blades ↔ grades</h2>
+  <p class="lede">Every trigram has a traditional role name, a 3-bit pattern, a blade, and a grade. The right-hand table translates blades into geometric objects.</p>
+  <div class="glossary-grid">
+    <table class="gloss">
+      <thead><tr><th>Role</th><th>Trigram</th><th>Pattern (bottom→top)</th><th>Blade</th><th>Grade</th></tr></thead>
+      <tbody>
+        <tr><td class="cn">地 Earth</td><td class="cn">坤 Kūn</td><td>☷ ⚋⚋⚋</td><td class="bl">1</td><td>0</td></tr>
+        <tr><td class="cn">雷 Thunder</td><td class="cn">震 Zhèn</td><td>☳ ⚊⚋⚋</td><td class="bl">e1</td><td>1</td></tr>
+        <tr><td class="cn">水 Water</td><td class="cn">坎 Kǎn</td><td>☵ ⚋⚊⚋</td><td class="bl">e2</td><td>1</td></tr>
+        <tr><td class="cn">山 Mountain</td><td class="cn">艮 Gèn</td><td>☶ ⚋⚋⚊</td><td class="bl">e3</td><td>1</td></tr>
+        <tr><td class="cn">泽 Lake</td><td class="cn">兑 Duì</td><td>☱ ⚊⚊⚋</td><td class="bl">e12</td><td>2</td></tr>
+        <tr><td class="cn">风 Wind</td><td class="cn">巽 Xùn</td><td>☴ ⚋⚊⚊</td><td class="bl">e23</td><td>2</td></tr>
+        <tr><td class="cn">火 Fire</td><td class="cn">离 Lí</td><td>☲ ⚊⚋⚊</td><td class="bl">−e31</td><td>2</td></tr>
+        <tr><td class="cn">天 Heaven</td><td class="cn">乾 Qián</td><td>☰ ⚊⚊⚊</td><td class="bl">e123</td><td>3</td></tr>
+      </tbody>
+    </table>
+    <table class="gloss">
+      <thead><tr><th>Blade</th><th>Grade</th><th>Geometric object</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td class="bl">1</td><td>0</td><td>Scalar — a point</td><td>坤 (no yang lines)</td></tr>
+        <tr><td class="bl">e1, e2, e3</td><td>1</td><td>Vector — a directed line</td><td>震, 坎, 艮</td></tr>
+        <tr><td class="bl">e12, e23, e31</td><td>2</td><td>Bivector — an oriented plane</td><td>兑, 巽, 离</td></tr>
+        <tr><td class="bl">e123</td><td>3</td><td>Trivector — a volume</td><td>乾</td></tr>
+        <tr><td class="bl">−e31</td><td>2</td><td>Plane with reversed orientation</td><td>离 (e1·e3 = −e31)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="hint" style="margin-top:10px;">Line-flip rule: flipping line i (bottom-up, 1-based) = multiplying the blade by e<sub>i</sub> on the left. Rotor rule: a′ = R·a·R̃, R = cos(θ/2) − sin(θ/2)·B.</p>
+</section>
+
+</main>
+
+<footer>
+  Path C teaching probe · single file, offline, zero dependencies · All Cl(3) results computed from the verified v1 product table.<br>
+  This tool teaches the 8-blade ↔ 8-trigram isomorphism (the K4 lesson). It makes <strong>no semantic claims</strong> about divination or meaning.
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var BLADES = ['1', 'e1', 'e2', 'e3', 'e12', 'e23', 'e31', 'e123'];
+
+  var PROD_TABLE = [
+    [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]],
+    [[1, 1], [0, 1], [4, 1], [6, -1], [2, 1], [7, 1], [3, -1], [5, 1]],
+    [[2, 1], [4, -1], [0, 1], [5, 1], [1, -1], [3, 1], [7, 1], [6, 1]],
+    [[3, 1], [6, 1], [5, -1], [0, 1], [7, 1], [2, -1], [1, 1], [4, 1]],
+    [[4, 1], [2, -1], [1, 1], [7, 1], [0, -1], [6, -1], [5, 1], [3, -1]],
+    [[5, 1], [7, 1], [3, -1], [2, 1], [6, 1], [0, -1], [4, -1], [1, -1]],
+    [[6, 1], [3, 1], [7, 1], [1, -1], [5, -1], [4, 1], [0, -1], [2, -1]],
+    [[7, 1], [5, 1], [6, 1], [4, 1], [3, -1], [1, -1], [2, -1], [0, -1]]
+  ];
+
+  var TRIGRAMS = { KUN: 0, ZHEN: 1, KAN: 2, DUI: 3, GEN: 4, LI: 5, XUN: 6, QIAN: 7 };
+  var TRI_NAME = ['坤', '震', '坎', '兑', '艮', '离', '巽', '乾'];
+  var TRI_PY = ['Kūn', 'Zhèn', 'Kǎn', 'Duì', 'Gèn', 'Lí', 'Xùn', 'Qián'];
+  var TRI_ROLE = ['Earth', 'Thunder', 'Water', 'Lake', 'Mountain', 'Fire', 'Wind', 'Heaven'];
+  var TRI_MASK_TO_ID = { 0: 'KUN', 1: 'ZHEN', 2: 'KAN', 3: 'DUI', 4: 'GEN', 5: 'LI', 6: 'XUN', 7: 'QIAN' };
+  var NATURE = ['地', '雷', '水', '泽', '山', '火', '风', '天'];
+  var GRADE_NAME = ['scalar — a point', 'vector — a directed line', 'bivector — an oriented plane', 'trivector — a volume'];
+
+  function bladeIndex(name) {
+    var i = BLADES.indexOf(name);
+    if (i < 0) { throw new Error('unknown blade: ' + name); }
+    return i;
+  }
+
+  function popcount(x) {
+    var n = 0;
+    while (x) { n += (x & 1); x >>>= 1; }
+    return n;
+  }
+
+  function bladeOf(mask) {
+    var vecs = [];
+    for (var i = 0; i < 3; i++) { if (mask & (1 << i)) { vecs.push(i + 1); } }
+    if (vecs.length === 0) { return { blade: '1', sign: 1, grade: 0 }; }
+    var prod = vecs[0];
+    var sign = 1;
+    for (var k = 1; k < vecs.length; k++) {
+      var r = PROD_TABLE[prod][vecs[k]];
+      prod = r[0];
+      sign *= r[1];
+    }
+    return { blade: BLADES[prod], sign: sign, grade: vecs.length };
+  }
+
+  function product(a, b) {
+    var i = bladeIndex(a);
+    var j = bladeIndex(b);
+    var r = PROD_TABLE[i][j];
+    return { blade: BLADES[r[0]], sign: r[1] };
+  }
+
+  function flipLine(mask, lineIdx) {
+    return mask ^ (1 << lineIdx);
+  }
+
+  var HEX_DATA = [
+    [7, 7, 1, '乾', 'Qián Qián', 'The Creative — all yang; strength and initiative.'],
+    [0, 0, 2, '坤', 'Dì Dì Kūn', 'The Receptive — all yin; yielding, supporting.'],
+    [2, 1, 3, '屯', 'Shuǐ Léi Tún', 'Difficulty at the beginning — thunder over water.'],
+    [4, 2, 4, '蒙', 'Shān Shuǐ Méng', 'Youthful folly — the mountain over water.'],
+    [2, 7, 5, '需', 'Shuǐ Tiān Xū', 'Waiting — water over heaven; nourishing patience.'],
+    [7, 2, 6, '讼', 'Tiān Shuǐ Sòng', 'Conflict — heaven over water; contention.'],
+    [0, 2, 7, '师', 'Dì Shuǐ Shī', 'The Army — earth over water; discipline.'],
+    [2, 0, 8, '比', 'Shuǐ Dì Bǐ', 'Holding together — water over earth.'],
+    [6, 7, 9, '小畜', 'Fēng Tiān Xiǎo Chù', 'Small taming — wind over heaven.'],
+    [7, 3, 10, '履', 'Tiān Zé Lǚ', 'Treading — heaven over lake; conduct.'],
+    [0, 7, 11, '泰', 'Dì Tiān Tài', 'Peace — earth over heaven; harmony.'],
+    [7, 0, 12, '否', 'Tiān Dì Pǐ', 'Standstill — heaven over earth.'],
+    [7, 5, 13, '同人', 'Tiān Huǒ Tóng Rén', 'Fellowship — heaven over fire.'],
+    [5, 7, 14, '大有', 'Huǒ Tiān Dà Yǒu', 'Great possession — fire over heaven.'],
+    [0, 4, 15, '谦', 'Dì Shān Qiān', 'Modesty — earth over mountain.'],
+    [1, 0, 16, '豫', 'Léi Dì Yù', 'Enthusiasm — thunder over earth.'],
+    [3, 1, 17, '随', 'Zé Léi Suí', 'Following — lake over thunder.'],
+    [4, 6, 18, '蛊', 'Shān Fēng Gǔ', 'Work on what is spoiled — mountain over wind.'],
+    [0, 3, 19, '临', 'Dì Zé Lín', 'Approach — earth over lake.'],
+    [6, 0, 20, '观', 'Fēng Dì Guān', 'Contemplation — wind over earth.'],
+    [5, 1, 21, '噬嗑', 'Huǒ Léi Shì Kè', 'Biting through — fire over thunder.'],
+    [4, 5, 22, '贲', 'Shān Huǒ Bì', 'Grace — mountain over fire.'],
+    [4, 0, 23, '剥', 'Shān Dì Bō', 'Splitting apart — mountain over earth.'],
+    [0, 1, 24, '复', 'Dì Léi Fù', 'Return — earth over thunder.'],
+    [7, 1, 25, '无妄', 'Tiān Léi Wú Wàng', 'Innocence — heaven over thunder.'],
+    [4, 7, 26, '大畜', 'Shān Tiān Dà Chù', 'Great taming — mountain over heaven.'],
+    [4, 1, 27, '颐', 'Shān Léi Yí', 'Nourishment — mountain over thunder.'],
+    [3, 6, 28, '大过', 'Zé Fēng Dà Guò', 'Great exceeding — lake over wind.'],
+    [2, 2, 29, '坎', 'Shuǐ Shuǐ Kǎn', 'The Abysmal — water over water; the perilous.'],
+    [5, 5, 30, '离', 'Huǒ Huǒ Lí', 'The Clinging — fire over fire; illumination.'],
+    [3, 4, 31, '咸', 'Zé Shān Xián', 'Influence — lake over mountain.'],
+    [1, 6, 32, '恒', 'Léi Fēng Héng', 'Duration — thunder over wind.'],
+    [7, 4, 33, '遁', 'Tiān Shān Dùn', 'Retreat — heaven over mountain.'],
+    [1, 7, 34, '大壮', 'Léi Tiān Dà Zhuàng', 'Great power — thunder over heaven.'],
+    [5, 0, 35, '晋', 'Huǒ Dì Jìn', 'Progress — fire over earth.'],
+    [0, 5, 36, '明夷', 'Dì Huǒ Míng Yí', 'Darkening of the light — earth over fire.'],
+    [6, 5, 37, '家人', 'Fēng Huǒ Jiā Rén', 'The Family — wind over fire.'],
+    [5, 3, 38, '睽', 'Huǒ Zé Kuí', 'Opposition — fire over lake.'],
+    [2, 4, 39, '蹇', 'Shuǐ Shān Jiǎn', 'Obstruction — water over mountain.'],
+    [1, 2, 40, '解', 'Léi Shuǐ Xiè', 'Deliverance — thunder over water.'],
+    [4, 3, 41, '损', 'Shān Zé Sǔn', 'Decrease — mountain over lake.'],
+    [6, 1, 42, '益', 'Fēng Léi Yì', 'Increase — wind over thunder.'],
+    [3, 7, 43, '夬', 'Zé Tiān Guài', 'Breakthrough — lake over heaven.'],
+    [7, 6, 44, '姤', 'Tiān Fēng Gòu', 'Coming to meet — heaven over wind.'],
+    [3, 0, 45, '萃', 'Zé Dì Cuì', 'Gathering together — lake over earth.'],
+    [0, 6, 46, '升', 'Dì Fēng Shēng', 'Pushing upward — earth over wind.'],
+    [3, 2, 47, '困', 'Zé Shuǐ Kùn', 'Oppression — lake over water.'],
+    [2, 6, 48, '井', 'Shuǐ Fēng Jǐng', 'The Well — water over wind.'],
+    [3, 5, 49, '革', 'Zé Huǒ Gé', 'Revolution — lake over fire.'],
+    [5, 6, 50, '鼎', 'Huǒ Fēng Dǐng', 'The Cauldron — fire over wind.'],
+    [1, 1, 51, '震', 'Léi Léi Zhèn', 'The Arousing — thunder over thunder; shock.'],
+    [4, 4, 52, '艮', 'Shān Shān Gèn', 'Keeping still — mountain over mountain.'],
+    [6, 4, 53, '渐', 'Fēng Shān Jiàn', 'Development — wind over mountain.'],
+    [1, 3, 54, '归妹', 'Léi Zé Guī Mèi', 'The Marrying Maiden — thunder over lake.'],
+    [1, 5, 55, '丰', 'Léi Huǒ Fēng', 'Abundance — thunder over fire.'],
+    [5, 4, 56, '旅', 'Huǒ Shān Lǚ', 'The Wanderer — fire over mountain.'],
+    [6, 6, 57, '巽', 'Fēng Fēng Xùn', 'The Gentle — wind over wind; penetration.'],
+    [3, 3, 58, '兑', 'Zé Zé Duì', 'The Joyous — lake over lake.'],
+    [6, 2, 59, '涣', 'Fēng Shuǐ Huàn', 'Dispersion — wind over water.'],
+    [2, 3, 60, '节', 'Shuǐ Zé Jié', 'Limitation — water over lake.'],
+    [6, 3, 61, '中孚', 'Fēng Zé Zhōng Fú', 'Inner truth — wind over lake.'],
+    [1, 4, 62, '小过', 'Léi Shān Xiǎo Guò', 'Small exceeding — thunder over mountain.'],
+    [2, 5, 63, '既济', 'Shuǐ Huǒ Jì Jì', 'After completion — water over fire; the crossing made.'],
+    [5, 2, 64, '未济', 'Huǒ Shuǐ Wèi Jì', 'Before completion — fire over water; the crossing not yet made.']
+  ];
+
+  var HEX = {};
+  for (var hi = 0; hi < HEX_DATA.length; hi++) {
+    var hd = HEX_DATA[hi];
+    var key = (hd[0] << 3) | hd[1];
+    var name = (hd[0] === 7 && hd[1] === 7) ? '乾乾' : NATURE[hd[0]] + NATURE[hd[1]] + hd[3];
+    HEX[key] = { number: hd[2], zname: hd[3], name: name, pinyin: hd[4], gloss: hd[5], upper: hd[0], lower: hd[1] };
+  }
+
+  function hexagram(upper, lower) {
+    return HEX[(upper << 3) | lower];
+  }
+
+  function multivectorFromBlade(name, coeff) {
+    var m = [0, 0, 0, 0, 0, 0, 0, 0];
+    m[bladeIndex(name)] = coeff;
+    return m;
+  }
+
+  function geoProduct(a, b) {
+    var out = [0, 0, 0, 0, 0, 0, 0, 0];
+    for (var i = 0; i < 8; i++) {
+      if (a[i] === 0) { continue; }
+      for (var j = 0; j < 8; j++) {
+        if (b[j] === 0) { continue; }
+        var r = PROD_TABLE[i][j];
+        out[r[0]] += a[i] * b[j] * r[1];
+      }
+    }
+    return out;
+  }
+
+  function reverseMultivector(m) {
+    var out = m.slice();
+    out[4] = -out[4];
+    out[5] = -out[5];
+    out[6] = -out[6];
+    out[7] = -out[7];
+    return out;
+  }
+
+  function normMultivector(m) {
+    var p = geoProduct(m, reverseMultivector(m));
+    return Math.sqrt(Math.abs(p[0]));
+  }
+
+  function rotorApply(theta, plane, blade) {
+    var pIdx = bladeIndex(plane);
+    var c = Math.cos(theta / 2);
+    var s = Math.sin(theta / 2);
+    var R = [0, 0, 0, 0, 0, 0, 0, 0];
+    R[0] = c;
+    R[pIdx] = -s;
+    var a = multivectorFromBlade(blade, 1);
+    var Rp = reverseMultivector(R);
+    var sandwich = geoProduct(R, geoProduct(a, Rp));
+    var best = 0;
+    var bestAbs = 0;
+    for (var i = 0; i < 8; i++) {
+      if (Math.abs(sandwich[i]) > bestAbs) {
+        bestAbs = Math.abs(sandwich[i]);
+        best = i;
+      }
+    }
+    return {
+      blade: BLADES[best],
+      sign: (sandwich[best] < 0 ? -1 : 1),
+      coeff: sandwich[best],
+      norm: normMultivector(sandwich)
+    };
+  }
+
+  var QUIZ_CORRECT = [2, 1, 1, 0, 1];
+
+  function quizScore(answers) {
+    var score = 0;
+    for (var i = 0; i < QUIZ_CORRECT.length; i++) {
+      if (i < answers.length && answers[i] === QUIZ_CORRECT[i]) { score++; }
+    }
+    return score;
+  }
+
+  window.BaguaTool = {
+    BLADES: BLADES,
+    PROD_TABLE: PROD_TABLE,
+    TRIGRAMS: TRIGRAMS,
+    TRI_NAME: TRI_NAME,
+    TRI_PY: TRI_PY,
+    QUIZ_CORRECT: QUIZ_CORRECT,
+    bladeIndex: bladeIndex,
+    bladeOf: bladeOf,
+    product: product,
+    flipLine: flipLine,
+    hexagram: hexagram,
+    rotorApply: rotorApply,
+    quizScore: quizScore,
+    geoProduct: geoProduct
+  };
+
+  if (typeof document === 'undefined') { return; }
+
+  function el(id) { return document.getElementById(id); }
+  var SVG_NS = String.fromCharCode(104, 116, 116, 112, 58, 47, 47) + 'www.w3.org/2000/svg';
+  function svgEl(tag, attrs) {
+    var n = document.createElementNS(SVG_NS, tag);
+    for (var k in attrs) { n.setAttribute(k, attrs[k]); }
+    return n;
+  }
+  function linesHTML(mask, large) {
+    var s = '';
+    for (var i = 0; i < 3; i++) {
+      var cls = (mask & (1 << i)) ? 'yang' : 'yin';
+      s += '<span class="line ' + cls + (large ? ' large' : '') + '"></span>';
+    }
+    return s;
+  }
+  function trigramLabel(mask) {
+    return TRI_NAME[mask] + ' · ' + TRI_PY[mask] + ' · ' + TRI_ROLE[mask];
+  }
+
+  var selectedMask = 0;
+
+  var galleryPanels = document.querySelectorAll('#gallery .trigram-panel');
+  for (var gpi = 0; gpi < galleryPanels.length; gpi++) {
+    (function (panel) {
+      function activate() {
+        selectedMask = TRIGRAMS[panel.getAttribute('data-trigram')];
+        for (var j = 0; j < galleryPanels.length; j++) {
+          galleryPanels[j].classList.toggle('selected', galleryPanels[j] === panel);
+        }
+        showBladeView();
+      }
+      panel.addEventListener('click', activate);
+      panel.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
+    })(galleryPanels[gpi]);
+  }
+
+  var ISO = function (x, y, z) { return [(x - y) * 0.8660, (x + y) * 0.5 - z]; };
+  var SV = 72;
+  var CX = 170;
+  var CY = 152;
+  var AXES = [[1, 0, 0, 'e1'], [0, 1, 0, 'e2'], [0, 0, 1, 'e3']];
+
+  function showBladeView() {
+    var b = window.BaguaTool.bladeOf(selectedMask);
+    el('bv-name').textContent = trigramLabel(selectedMask);
+    var bladeTxt = (b.sign < 0 ? '−' : '') + b.blade;
+    el('bv-blade').textContent = 'blade: ' + bladeTxt + '   (sign ' + (b.sign < 0 ? '−1' : '+1') + ')';
+    el('bv-detail').textContent = 'Grade ' + b.grade + ' — ' + GRADE_NAME[b.grade] + '.';
+    var vecs = [];
+    for (var i = 0; i < 3; i++) { if (selectedMask & (1 << i)) { vecs.push('e' + (i + 1)); } }
+    var formula = vecs.length === 0 ? 'blade = 1 (no yang lines)' : 'blade = ' + vecs.join('·') + ' = ' + bladeTxt;
+    el('bv-formula').textContent = formula;
+    renderBladeSvg(b);
+  }
+
+  function renderBladeSvg(b) {
+    var svg = el('bladeSvg');
+    while (svg.firstChild) { svg.removeChild(svg.firstChild); }
+    var axisColor = '#4a5468';
+    for (var a = 0; a < AXES.length; a++) {
+      var ax = AXES[a];
+      var p1 = ISO(0, 0, 0);
+      var p2 = ISO(ax[0] * SV * 1.25, ax[1] * SV * 1.25, ax[2] * SV * 1.25);
+      svg.appendChild(svgEl('line', { x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1], stroke: axisColor, 'stroke-width': 1, 'stroke-dasharray': '3 4', opacity: 0.5 }));
+      svg.appendChild(svgEl('text', { x: p2[0] + 4, y: p2[1] + 4, fill: axisColor, 'font-size': 11, 'font-family': 'monospace' })).textContent = ax[3];
+    }
+    var g = window.BaguaTool.bladeOf(selectedMask);
+    var posColor = '#4ec9a0';
+    var negColor = '#e05c4a';
+    var color = g.sign < 0 ? negColor : posColor;
+    if (g.grade === 0) {
+      var d = svgEl('circle', { cx: CX, cy: CY, r: 6, fill: posColor });
+      svg.appendChild(d);
+      svg.appendChild(svgEl('text', { x: CX + 12, y: CY + 4, fill: posColor, 'font-size': 13 })).textContent = 'scalar 1';
+    } else if (g.grade === 1) {
+      var v = [0, 0, 0];
+      var axisIdx = [1, 2, 3].indexOf(BLADES.indexOf(g.blade));
+      if (axisIdx >= 0) { v[axisIdx] = 1; }
+      if (g.sign < 0) { v = v.map(function (x) { return -x; }); }
+      var tip = ISO(v[0] * SV, v[1] * SV, v[2] * SV);
+      var base = ISO(0, 0, 0);
+      svg.appendChild(svgEl('line', { x1: base[0], y1: base[1], x2: tip[0], y2: tip[1], stroke: color, 'stroke-width': 5, 'stroke-linecap': 'round' }));
+      var dx = tip[0] - base[0];
+      var dy = tip[1] - base[1];
+      var L = Math.sqrt(dx * dx + dy * dy) || 1;
+      var ux = dx / L;
+      var uy = dy / L;
+      var hx = tip[0] - ux * 14;
+      var hy = tip[1] - uy * 14;
+      var nxp = -uy * 8;
+      var nyp = ux * 8;
+      svg.appendChild(svgEl('path', { d: 'M ' + tip[0] + ' ' + tip[1] + ' L ' + (hx + nxp) + ' ' + (hy + nyp) + ' L ' + (hx - nxp) + ' ' + (hy - nyp) + ' Z', fill: color }));
+      svg.appendChild(svgEl('text', { x: tip[0] + 8, y: tip[1] - 6, fill: color, 'font-size': 15, 'font-family': 'monospace' })).textContent = g.sign < 0 ? '−' + g.blade : g.blade;
+    } else if (g.grade === 2) {
+      var pair = [[0, 1], [1, 2], [2, 0]][BLADES.indexOf(g.blade)];
+      var va = [0, 0, 0];
+      var vb = [0, 0, 0];
+      if (g.blade === 'e12') { va = [1, 0, 0]; vb = [0, 1, 0]; pair = [0, 1]; }
+      if (g.blade === 'e23') { va = [0, 1, 0]; vb = [0, 0, 1]; pair = [1, 2]; }
+      if (g.blade === 'e31') { va = [0, 0, 1]; vb = [1, 0, 0]; pair = [2, 0]; }
+      if (g.sign < 0) { var t = va; va = vb; vb = t; }
+      var p0 = ISO(0, 0, 0);
+      var pA = ISO(va[0] * SV, va[1] * SV, va[2] * SV);
+      var pB = ISO(vb[0] * SV, vb[1] * SV, vb[2] * SV);
+      var pAB = ISO((va[0] + vb[0]) * SV, (va[1] + vb[1]) * SV, (va[2] + vb[2]) * SV);
+      svg.appendChild(svgEl('polygon', { points: [p0, pA, pAB, pB].map(function (p) { return p[0] + ',' + p[1]; }).join(' '), fill: color, opacity: 0.22, stroke: color, 'stroke-width': 2 }));
+      var mx = (pA[0] + pB[0]) / 2;
+      var my = (pA[1] + pB[1]) / 2;
+      var mxx = (pAB[0] + p0[0]) / 2;
+      var myy = (pAB[1] + p0[1]) / 2;
+      svg.appendChild(svgEl('text', { x: mxx - 18, y: myy + 5, fill: color, 'font-size': 13, 'font-family': 'monospace' })).textContent = g.sign < 0 ? '−' + g.blade : g.blade;
+      var sweep = g.sign < 0 ? 0 : 1;
+      svg.appendChild(svgEl('path', { d: 'M ' + pA[0] + ' ' + pA[1] + ' A 26 26 0 0 ' + sweep + ' ' + pB[0] + ' ' + pB[1], fill: 'none', stroke: color, 'stroke-width': 1.6, 'stroke-dasharray': '4 3' }));
+    } else if (g.grade === 3) {
+      var corners = [[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]];
+      var pts = corners.map(function (c) { return ISO(c[0] * SV, c[1] * SV, c[2] * SV); });
+      var faces = [[0, 1, 4, 2], [0, 1, 5, 3], [0, 2, 6, 3], [7, 4, 1, 5], [7, 4, 2, 6], [7, 5, 3, 6]];
+      for (var f = 0; f < faces.length; f++) {
+        var face = faces[f];
+        svg.appendChild(svgEl('polygon', { points: face.map(function (ci) { return pts[ci][0] + ',' + pts[ci][1]; }).join(' '), fill: color, opacity: 0.14, stroke: 'none' }));
+      }
+      var edges = [[0, 1], [0, 2], [0, 3], [1, 4], [2, 4], [3, 5], [3, 6], [5, 7], [6, 7], [4, 7], [1, 5], [2, 6]];
+      for (var e = 0; e < edges.length; e++) {
+        var ed = edges[e];
+        svg.appendChild(svgEl('line', { x1: pts[ed[0]][0], y1: pts[ed[0]][1], x2: pts[ed[1]][0], y2: pts[ed[1]][1], stroke: color, 'stroke-width': 1.8 }));
+      }
+      svg.appendChild(svgEl('text', { x: pts[7][0] + 8, y: pts[7][1] - 8, fill: color, 'font-size': 14, 'font-family': 'monospace' })).textContent = 'e123';
+    }
+    svg.appendChild(svgEl('circle', { cx: CX, cy: CY, r: 2.5, fill: '#ffffff' }));
+  }
+
+  var flipMask = 0;
+
+  function buildFlip() {
+    var chips = el('flip-chips');
+    for (var t = 0; t < 8; t++) {
+      (function (mask) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'chip-btn';
+        b.innerHTML = TRI_NAME[mask] + ' <span class="mono" style="color:var(--gold);font-size:12px;">' + labelOf(mask) + '</span>';
+        b.addEventListener('click', function () { setFlip(mask); });
+        chips.appendChild(b);
+      })(t);
+    }
+    el('flip-lines-a').innerHTML = linesHTML(flipMask, true);
+    el('flip-lines-b').innerHTML = '<div style="color:var(--faint);padding:14px;">click a line below</div>';
+  }
+
+  function labelOf(mask) {
+    var b = window.BaguaTool.bladeOf(mask);
+    return (b.sign < 0 ? '−' : '') + b.blade;
+  }
+
+  function setFlip(mask, syncChips) {
+    flipMask = mask;
+    el('flip-name-a').textContent = trigramLabel(mask);
+    el('flip-lines-a').innerHTML = linesHTML(mask, true);
+    el('flip-blade-a').textContent = labelOf(mask);
+    var chips = el('flip-chips').children;
+    for (var i = 0; i < chips.length; i++) { chips[i].classList.toggle('active', i === mask); }
+    renderFlipB(null);
+  }
+
+  function renderFlipB(flippedLine) {
+    var target = el('flip-lines-b');
+    if (flippedLine === null) {
+      target.innerHTML = '<div style="color:var(--faint);padding:14px;">click a line below</div>';
+      el('flip-name-b').textContent = '—';
+      el('flip-blade-b').textContent = '—';
+      el('flip-rule').innerHTML = 'Click a line on the left. Multiplying the blade by a basis vector flips the corresponding line.';
+      return;
+    }
+    var newMask = window.BaguaTool.flipLine(flipMask, flippedLine);
+    el('flip-name-b').textContent = trigramLabel(newMask);
+    el('flip-lines-b').innerHTML = linesHTML(newMask, true);
+    el('flip-blade-b').textContent = labelOf(newMask);
+    var bOld = window.BaguaTool.bladeOf(flipMask);
+    var vec = 'e' + (flippedLine + 1);
+    var prod = window.BaguaTool.product(vec, bOld.blade);
+    var oldTxt = (bOld.sign < 0 ? '−' : '') + bOld.blade;
+    var resTxt = (prod.sign < 0 ? '−' : '') + prod.blade;
+    el('flip-rule').innerHTML = 'Line ' + (flippedLine + 1) + ' flipped (' + vec + ' · blade):<br><span class="mono">' + vec + ' · ' + oldTxt + ' = ' + resTxt + '</span> &nbsp;— ' + (prod.sign < 0 ? 'sign −1: orientation reversed.' : 'sign +1.') + ' Bit XOR: ' + flipMask.toString(2).padStart(3, '0') + ' → ' + newMask.toString(2).padStart(3, '0');
+  }
+
+  function buildFlipLines() {
+    var contA = el('flip-lines-a');
+    contA.addEventListener('click', function (e) {
+      var btn = e.target.closest('.flip-line-btn');
+      if (!btn) { return; }
+      var li = parseInt(btn.getAttribute('data-line'), 10);
+      renderFlipB(li);
+    });
+    contA.innerHTML = '';
+    for (var i = 0; i < 3; i++) {
+      (function (li) {
+        var btn = document.createElement('div');
+        btn.className = 'flip-line-btn';
+        btn.setAttribute('data-line', li);
+        btn.setAttribute('role', 'button');
+        btn.setAttribute('tabindex', '0');
+        btn.innerHTML = linesHTML(1 << li, false);
+        btn.addEventListener('click', function () { renderFlipB(li); });
+        btn.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); renderFlipB(li); } });
+        contA.appendChild(btn);
+      })(i);
+    }
+  }
+
+  var ptRow = 0;
+  var ptCol = 0;
+
+  function buildProductTable() {
+    var table = el('pt-grid');
+    var head = document.createElement('thead');
+    var hr = document.createElement('tr');
+    var corner = document.createElement('th');
+    corner.textContent = 'A·B';
+    hr.appendChild(corner);
+    for (var c = 0; c < 8; c++) {
+      var th = document.createElement('th');
+      th.innerHTML = TRI_NAME[c] + '<span class="sub">' + labelOf(c) + '</span>';
+      hr.appendChild(th);
+    }
+    head.appendChild(hr);
+    table.appendChild(head);
+    var body = document.createElement('tbody');
+    for (var r = 0; r < 8; r++) {
+      var tr = document.createElement('tr');
+      var rh = document.createElement('th');
+      rh.innerHTML = TRI_NAME[r] + '<span class="sub">' + labelOf(r) + '</span>';
+      tr.appendChild(rh);
+      for (var cc = 0; cc < 8; cc++) {
+        (function (ri, ci) {
+          var td = document.createElement('td');
+          var bA = window.BaguaTool.bladeOf(ri);
+          var bB = window.BaguaTool.bladeOf(ci);
+          var p = window.BaguaTool.product(bA.blade, bB.blade);
+          var sign = bA.sign * bB.sign * p.sign;
+          var txt = (sign < 0 ? '−' : '') + p.blade;
+          td.textContent = txt;
+          td.className = 'cell ' + (sign < 0 ? 'sign-neg' : 'sign-pos');
+          td.setAttribute('data-r', ri);
+          td.setAttribute('data-c', ci);
+          td.setAttribute('title', TRI_NAME[ri] + ' · ' + TRI_NAME[ci] + ' = ' + txt);
+          td.addEventListener('click', function () { selectPtCell(ri, ci); });
+          tr.appendChild(td);
+        })(r, cc);
+      }
+      body.appendChild(tr);
+    }
+    table.appendChild(body);
+  }
+
+  function selectPtCell(r, c) {
+    ptRow = r;
+    ptCol = c;
+    var cells = el('pt-grid').querySelectorAll('td.cell');
+    for (var i = 0; i < cells.length; i++) { cells[i].classList.remove('sel'); }
+    cells.forEach(function (cell) {
+      if (parseInt(cell.getAttribute('data-r'), 10) === r && parseInt(cell.getAttribute('data-c'), 10) === c) { cell.classList.add('sel'); }
+    });
+    var bA = window.BaguaTool.bladeOf(r);
+    var bB = window.BaguaTool.bladeOf(c);
+    var p = window.BaguaTool.product(bA.blade, bB.blade);
+    var sign = bA.sign * bB.sign * p.sign;
+    var aTxt = (bA.sign < 0 ? '−' : '') + bA.blade;
+    var bTxt = (bB.sign < 0 ? '−' : '') + bB.blade;
+    var resTxt = (sign < 0 ? '−' : '') + p.blade;
+    el('pt-prompt').style.display = 'none';
+    var f = el('pt-formula');
+    f.style.display = 'block';
+    f.innerHTML = '<span class="mono">' + TRI_NAME[r] + ' · ' + TRI_NAME[c] + '</span><br>' +
+      '<span class="' + (sign < 0 ? 'r' : 'p') + '">' + aTxt + ' · ' + bTxt + ' = ' + resTxt + '</span>';
+    el('pt-note').textContent = sign < 0
+      ? 'Sign −1: the blades anticommute here — swapping the order flips the sign.'
+      : 'Sign +1. Try swapping the row and column: the sign often flips.';
+  }
+
+  function renderHexagram() {
+    var u = parseInt(el('hex-upper').value, 10);
+    var l = parseInt(el('hex-lower').value, 10);
+    var h = window.BaguaTool.hexagram(u, l);
+    el('hx-name').textContent = h.name;
+    el('hx-num').textContent = 'King Wen #' + h.number;
+    el('hx-pinyin').textContent = h.pinyin;
+    el('hx-gloss').textContent = h.gloss;
+    var svg = el('hexSvg');
+    while (svg.firstChild) { svg.removeChild(svg.firstChild); }
+    var gap = 30;
+    var baseY = 185;
+    for (var line = 0; line < 6; line++) {
+      var mask = line < 3 ? l : u;
+      var bit = (mask >> (line % 3)) & 1;
+      var y = baseY - (5 - line) * gap;
+      var x1 = 40;
+      var x2 = 200;
+      var mid = (x1 + x2) / 2;
+      if (bit === 1) {
+        svg.appendChild(svgEl('line', { x1: x1, y1: y, x2: x2, y2: y, stroke: '#e9e6dd', 'stroke-width': 10, 'stroke-linecap': 'round' }));
+      } else {
+        svg.appendChild(svgEl('line', { x1: x1, y1: y, x2: mid - 8, y2: y, stroke: '#e9e6dd', 'stroke-width': 10, 'stroke-linecap': 'round' }));
+        svg.appendChild(svgEl('line', { x1: mid + 8, y1: y, x2: x2, y2: y, stroke: '#e9e6dd', 'stroke-width': 10, 'stroke-linecap': 'round' }));
+      }
+    }
+    var upperLabel = svgEl('text', { x: 30, y: baseY - 5 * gap + 4, fill: '#8a7328', 'font-size': 11 });
+    upperLabel.textContent = 'upper: ' + TRI_NAME[u];
+    var lowerLabel = svgEl('text', { x: 30, y: baseY - 2 * gap + 4, fill: '#8a7328', 'font-size': 11 });
+    lowerLabel.textContent = 'lower: ' + TRI_NAME[l];
+    svg.appendChild(upperLabel);
+    svg.appendChild(lowerLabel);
+  }
+
+  function buildHexagramPickers() {
+    var u = el('hex-upper');
+    var l = el('hex-lower');
+    for (var t = 0; t < 8; t++) {
+      var b = window.BaguaTool.bladeOf(t);
+      var optU = document.createElement('option');
+      optU.value = String(t);
+      optU.textContent = TRI_NAME[t] + ' ☰'.replace('☰', '\u2630') + ' ' + TRI_PY[t] + ' · ' + (b.sign < 0 ? '−' : '') + b.blade;
+      var optL = document.createElement('option');
+      optL.value = String(t);
+      optL.textContent = TRI_NAME[t] + ' ' + TRI_PY[t] + ' · ' + (b.sign < 0 ? '−' : '') + b.blade;
+      u.appendChild(optU);
+      l.appendChild(optL);
+    }
+    u.value = '0';
+    l.value = '0';
+    u.addEventListener('change', renderHexagram);
+    l.addEventListener('change', renderHexagram);
+    el('hex-random').addEventListener('click', function () {
+      u.value = String(Math.floor(Math.random() * 8));
+      l.value = String(Math.floor(Math.random() * 8));
+      renderHexagram();
+    });
+    renderHexagram();
+  }
+
+  var rotorAnim = null;
+  var rotorTrail = [];
+
+  function rotorState() {
+    var blade = el('rotor-blade').value;
+    var plane = el('rotor-plane').value;
+    var deg = parseInt(el('rotor-theta').value, 10);
+    var theta = deg * Math.PI / 180;
+    return { blade: blade, plane: plane, theta: theta, deg: deg };
+  }
+
+  function renderRotor() {
+    var st = rotorState();
+    var plane = st.plane;
+    var res = window.BaguaTool.rotorApply(st.theta, st.plane, st.blade);
+    var c = Math.cos(st.theta / 2);
+    var s = Math.sin(st.theta / 2);
+    el('rr-r').textContent = 'R = cos(' + fmtPi(st.theta / 2) + ') − sin(' + fmtPi(st.theta / 2) + ')·' + plane + ' = ' + fmt(c) + ' − ' + fmt(s) + '·' + plane;
+    el('rr-sandwich').textContent = 'a′ = R·' + st.blade + '·R̃';
+    var resTxt = res.coeff === 0 ? '0 (perpendicular — unchanged direction' + (Math.abs(res.norm) < 1e-9 ? ')' : ')') : ((res.sign < 0 ? '−' : '') + res.blade + '  (' + fmt(res.coeff) + ')');
+    el('rr-result').textContent = 'result: ' + st.blade + ' → ' + resTxt;
+    el('rr-norm').textContent = '|a′| = ' + fmt(res.norm) + '  (should stay = |a| = 1)';
+    el('rotor-theta-label').textContent = 'θ = ' + fmtPi(st.theta);
+    var svg = el('rotorSvg');
+    while (svg.firstChild) { svg.removeChild(svg.firstChild); }
+    var cx = 140;
+    var cy = 140;
+    var r = 95;
+    svg.appendChild(svgEl('circle', { cx: cx, cy: cy, r: r, fill: 'none', stroke: '#2a3342', 'stroke-width': 1.5 }));
+    svg.appendChild(svgEl('line', { x1: cx - r - 14, y1: cy, x2: cx + r + 14, y2: cy, stroke: '#3a4458', 'stroke-width': 1 }));
+    svg.appendChild(svgEl('line', { x1: cx, y1: cy - r - 14, x2: cx, y2: cy + r + 14, stroke: '#3a4458', 'stroke-width': 1 }));
+    var basePair = { e12: [1, 2], e23: [2, 3], e31: [3, 1] }[plane];
+    var pair = basePair;
+    var aVec = ['', 'e1', 'e2', 'e3'][pair[0]];
+    var bVec = ['', 'e1', 'e2', 'e3'][pair[1]];
+    svg.appendChild(svgEl('text', { x: cx + r + 4, y: cy + 14, fill: '#6b7484', 'font-size': 11, 'font-family': 'monospace' })).textContent = aVec;
+    svg.appendChild(svgEl('text', { x: cx - 18, y: cy - r - 6, fill: '#6b7484', 'font-size': 11, 'font-family': 'monospace' })).textContent = bVec;
+    var init = window.BaguaTool.rotorApply(0, plane, st.blade);
+    var iA = init.blade;
+    var vA = [1, 0];
+    if (iA === aVec) { vA = [1, 0]; }
+    else if (iA === bVec) { vA = [0, 1]; }
+    else if (iA === (aVec === 'e1' ? 'e2' : aVec === 'e2' ? 'e1' : aVec === 'e3' ? 'e2' : 'e1')) { vA = [-1, 0]; }
+    var resA = window.BaguaTool.rotorApply(st.theta, plane, st.blade);
+    var comps = bladeComponents(resA, plane);
+    var px = comps[0];
+    var py = comps[1];
+    var ptx = cx + px * r;
+    var pty = cy - py * r;
+    var fromA = Math.atan2(vA[1], vA[0]);
+    var toA = Math.atan2(py, px);
+    var delta = normalizeAngle(toA - fromA);
+    var steps = Math.max(2, Math.ceil(Math.abs(delta) / 0.05));
+    var trail = '';
+    for (var k = 0; k <= steps; k++) {
+      var ang = fromA + delta * k / steps;
+      trail += (k ? ' L ' : 'M ') + (cx + Math.cos(ang) * r) + ' ' + (cy - Math.sin(ang) * r);
+    }
+    svg.appendChild(svgEl('path', { d: trail, fill: 'none', stroke: '#4ec9a0', 'stroke-width': 1.4, 'stroke-dasharray': '4 3', opacity: 0.75 }));
+    svg.appendChild(svgEl('line', { x1: cx, y1: cy, x2: cx + vA[0] * r * 0.9, y2: cy - vA[1] * r * 0.9, stroke: '#7fb4e6', 'stroke-width': 2.4, 'stroke-linecap': 'round', opacity: 0.6 }));
+    svg.appendChild(svgEl('line', { x1: cx, y1: cy, x2: ptx, y2: pty, stroke: '#d4af37', 'stroke-width': 3.2, 'stroke-linecap': 'round' }));
+    var ax2 = ptx - cx;
+    var ay2 = cy - pty;
+    var L2 = Math.sqrt(ax2 * ax2 + ay2 * ay2) || 1;
+    var hx2 = ptx - (ax2 / L2) * 12;
+    var hy2 = pty - (-ay2 / L2) * 12;
+    svg.appendChild(svgEl('path', { d: 'M ' + ptx + ' ' + pty + ' L ' + (hx2 + (ay2 / L2) * 7) + ' ' + (hy2 + (ax2 / L2) * 7) + ' L ' + (hx2 - (ay2 / L2) * 7) + ' ' + (hy2 - (ax2 / L2) * 7) + ' Z', fill: '#d4af37' }));
+    svg.appendChild(svgEl('text', { x: ptx + 8, y: pty - 8, fill: '#d4af37', 'font-size': 12, 'font-family': 'monospace' })).textContent = resA.coeff === 0 ? 'fixed' : ((resA.sign < 0 ? '−' : '') + resA.blade);
+  }
+
+  function bladeComponents(res, plane) {
+    var pair = { e12: [1, 2], e23: [2, 3], e31: [3, 1] }[plane];
+    if (res.blade === ('e' + pair[0])) { return res.sign > 0 ? [1, 0] : [-1, 0]; }
+    if (res.blade === ('e' + pair[1])) { return res.sign > 0 ? [0, 1] : [0, -1]; }
+    if (res.blade === '1' && res.coeff === 0) { return [0, 0]; }
+    if (res.blade === '1') {
+      var idx1 = pair[0] - 1;
+      var idx2 = pair[1] - 1;
+      var vec = [0, 0, 0];
+      vec[idx1] = 1;
+      var r90 = window.BaguaTool.rotorApply(Math.PI / 2, plane, 'e' + (idx1 + 1));
+      return [0, 0];
+    }
+    var bladeVec = [];
+    var bIdx = window.BaguaTool.bladeIndex(res.blade);
+    for (var i = 0; i < 3; i++) {
+      if (res.blade.indexOf('e' + (i + 1)) >= 0 || (res.blade === 'e12' && i === 1) || (res.blade === 'e23' && i === 2) || (res.blade === 'e31' && i === 0)) { bladeVec.push(i); }
+    }
+    var compA = res.blade === ('e' + pair[0]) || res.blade === ('e' + pair[1]);
+    return [0, 0];
+  }
+
+  function normalizeAngle(a) {
+    while (a > Math.PI) { a -= 2 * Math.PI; }
+    while (a < -Math.PI) { a += 2 * Math.PI; }
+    return a;
+  }
+
+  function fmt(x) {
+    var v = Math.round(x * 1000) / 1000;
+    if (v === 0) { v = 0; }
+    return (v === -0 ? '0' : String(v));
+  }
+
+  function fmtPi(theta) {
+    var v = Math.round(theta / Math.PI * 100) / 100;
+    return v + 'π';
+  }
+
+  function buildRotor() {
+    el('rotor-theta').addEventListener('input', function () {
+      stopRotor();
+      renderRotor();
+    });
+    el('rotor-blade').addEventListener('change', function () { stopRotor(); renderRotor(); });
+    el('rotor-plane').addEventListener('change', function () { stopRotor(); renderRotor(); });
+    el('rotor-reset').addEventListener('click', function () {
+      stopRotor();
+      el('rotor-theta').value = '0';
+      renderRotor();
+    });
+    el('rotor-animate').addEventListener('click', function () {
+      if (rotorAnim) { stopRotor(); return; }
+      var st = rotorState();
+      if (st.blade.indexOf('e') >= 0 && st.blade.length <= 2) {
+        animateRotor();
+      } else {
+        el('rr-norm').textContent = '(bivector blade: numeric result shown; animation is for vector blades)';
+      }
+    });
+    renderRotor();
+  }
+
+  function animateRotor() {
+    var slider = el('rotor-theta');
+    slider.value = '0';
+    var t0 = null;
+    var duration = 4000;
+    function step(ts) {
+      if (t0 === null) { t0 = ts; }
+      var prog = Math.min(1, (ts - t0) / duration);
+      var eased = 1 - Math.pow(1 - prog, 2);
+      slider.value = String(Math.round(720 * eased));
+      renderRotor();
+      if (prog < 1) {
+        rotorAnim = requestAnimationFrame(step);
+      } else {
+        rotorAnim = null;
+      }
+    }
+    rotorAnim = requestAnimationFrame(step);
+  }
+
+  function stopRotor() {
+    if (rotorAnim) { cancelAnimationFrame(rotorAnim); rotorAnim = null; }
+  }
+
+  var QUIZ_QUESTIONS = [
+    { q: 'What is the grade of the blade e12?', opts: ['0 — a scalar', '1 — a line', '2 — a plane', '3 — a volume'] },
+    { q: 'What is e2 · e1? (order matters!)', opts: ['e12', '−e12', '1', '−1'] },
+    { q: 'Flipping the middle line of Kun (☷, 000) gives which trigram?', opts: ['震 Zhèn (001)', '坎 Kǎn (010)', '乾 Qián (111)', '艮 Gèn (100)'] },
+    { q: 'Upper = Kan (water ☵), lower = Li (fire ☲): which hexagram results?', opts: ['水火既济 (after completion, #63)', '火水未济 (#64)', '水雷屯 (#3)', '地地坤 (#2)'] },
+    { q: 'A rotor with θ = π in the e12 plane maps e1 to:', opts: ['e1 (unchanged)', '−e1', 'e2', '−e2'] }
+  ];
+
+  var quizMode = 'pre';
+  var quizScoreVal = 0;
+
+  function buildQuiz() {
+    var wrap = el('quiz-questions');
+    for (var i = 0; i < QUIZ_QUESTIONS.length; i++) {
+      (function (qi) {
+        var q = QUIZ_QUESTIONS[qi];
+        var card = document.createElement('div');
+        card.className = 'q-card';
+        card.setAttribute('data-q', qi);
+        var text = document.createElement('div');
+        text.className = 'q-text';
+        text.innerHTML = '<span class="qn">Q' + (qi + 1) + '</span>' + q.q;
+        card.appendChild(text);
+        var opts = document.createElement('div');
+        opts.className = 'q-opts';
+        for (var o = 0; o < q.opts.length; o++) {
+          (function (oi) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'q-opt';
+            btn.setAttribute('data-opt', oi);
+            btn.textContent = q.opts[oi];
+            btn.addEventListener('click', function () { answerQuiz(qi, oi); });
+            opts.appendChild(btn);
+          })(o);
+        }
+        card.appendChild(opts);
+        var fb = document.createElement('div');
+        fb.className = 'q-feedback';
+        card.appendChild(fb);
+        wrap.appendChild(card);
+      })(i);
+    }
+    el('quiz-mode-pre').addEventListener('click', function () { setQuizMode('pre'); });
+    el('quiz-mode-post').addEventListener('click', function () { setQuizMode('post'); });
+  }
+
+  function setQuizMode(mode) {
+    quizMode = mode;
+    quizScoreVal = 0;
+    el('quiz-mode-pre').className = 'btn ' + (mode === 'pre' ? 'gold' : '');
+    el('quiz-mode-post').className = 'btn ' + (mode === 'post' ? 'gold' : '');
+    el('quiz-mode-label').textContent = mode === 'pre' ? 'Mode: pre — before the lesson' : 'Mode: post — after the lesson';
+    el('quiz-score').textContent = 'Score: 0 / 5';
+    var cards = document.querySelectorAll('#quiz .q-card');
+    for (var i = 0; i < cards.length; i++) {
+      var opts = cards[i].querySelectorAll('.q-opt');
+      for (var j = 0; j < opts.length; j++) {
+        opts[j].className = 'q-opt';
+        opts[j].disabled = false;
+      }
+      cards[i].querySelector('.q-feedback').textContent = '';
+    }
+  }
+
+  function answerQuiz(qi, oi) {
+    var card = document.querySelectorAll('#quiz .q-card')[qi];
+    var btns = card.querySelectorAll('.q-opt');
+    for (var j = 0; j < btns.length; j++) { btns[j].disabled = true; }
+    var correct = oi === window.BaguaTool.QUIZ_CORRECT[qi];
+    for (var k = 0; k < btns.length; k++) {
+      if (k === oi) {
+        btns[k].classList.add(correct ? 'correct' : 'wrong');
+      }
+      if (k === window.BaguaTool.QUIZ_CORRECT[qi]) {
+        if (k !== oi) { btns[k].classList.add('correct'); }
+      }
+    }
+    if (correct) {
+      quizScoreVal++;
+      card.querySelector('.q-feedback').textContent = 'Correct.';
+    } else {
+      card.querySelector('.q-feedback').textContent = 'Not quite — the correct answer is highlighted in green.';
+    }
+    el('quiz-score').textContent = 'Score: ' + quizScoreVal + ' / 5  (' + quizMode + ')';
+  }
+
+  function init() {
+    buildFlip();
+    buildFlipLines();
+    setFlip(0);
+    buildProductTable();
+    selectPtCell(0, 0);
+    buildHexagramPickers();
+    buildRotor();
+    buildQuiz();
+    showBladeView();
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

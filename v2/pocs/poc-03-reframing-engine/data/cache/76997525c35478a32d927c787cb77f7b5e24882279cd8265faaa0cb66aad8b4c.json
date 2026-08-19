@@ -1,0 +1,14 @@
+{
+ "key": "76997525c35478a32d927c787cb77f7b5e24882279cd8265faaa0cb66aad8b4c",
+ "text": "{\"name\": \"Microplastics seed cloud formation\"}",
+ "usage": {
+  "prompt_tokens": 152,
+  "completion_tokens": 11,
+  "total_tokens": 163,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 152
+ }
+}

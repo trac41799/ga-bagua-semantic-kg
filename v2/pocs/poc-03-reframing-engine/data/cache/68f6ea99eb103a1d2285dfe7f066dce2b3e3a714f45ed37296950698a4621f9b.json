@@ -1,0 +1,14 @@
+{
+ "key": "68f6ea99eb103a1d2285dfe7f066dce2b3e3a714f45ed37296950698a4621f9b",
+ "text": "{\"name\": \"Command palette as global blade\"}",
+ "usage": {
+  "prompt_tokens": 159,
+  "completion_tokens": 10,
+  "total_tokens": 169,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 159
+ }
+}

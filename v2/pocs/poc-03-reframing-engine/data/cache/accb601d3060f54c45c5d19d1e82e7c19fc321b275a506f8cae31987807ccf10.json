@@ -1,0 +1,14 @@
+{
+ "key": "accb601d3060f54c45c5d19d1e82e7c19fc321b275a506f8cae31987807ccf10",
+ "text": "{\"name\": \"Oversized vehicles as revenue source\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 12,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

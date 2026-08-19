@@ -1,0 +1,14 @@
+{
+ "key": "8e05d8057dece95295bd9a847514928b4d9bc672b31cfabe626ab17812a4cffb",
+ "text": "{\"name\": \"Slow trickle, not fast charge\"}",
+ "usage": {
+  "prompt_tokens": 163,
+  "completion_tokens": 12,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 163
+ }
+}

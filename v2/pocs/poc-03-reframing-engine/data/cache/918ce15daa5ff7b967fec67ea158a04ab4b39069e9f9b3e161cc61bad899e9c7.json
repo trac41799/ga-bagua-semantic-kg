@@ -1,0 +1,14 @@
+{
+ "key": "918ce15daa5ff7b967fec67ea158a04ab4b39069e9f9b3e161cc61bad899e9c7",
+ "text": "{\"name\": \"Affordable water for households\"}",
+ "usage": {
+  "prompt_tokens": 155,
+  "completion_tokens": 10,
+  "total_tokens": 165,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 155
+ }
+}

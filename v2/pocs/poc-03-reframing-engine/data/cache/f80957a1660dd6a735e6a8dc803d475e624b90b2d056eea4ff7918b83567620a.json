@@ -1,0 +1,14 @@
+{
+ "key": "f80957a1660dd6a735e6a8dc803d475e624b90b2d056eea4ff7918b83567620a",
+ "text": "{\"name\": \"Urban glow, metabolic cost\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 10,
+  "total_tokens": 171,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

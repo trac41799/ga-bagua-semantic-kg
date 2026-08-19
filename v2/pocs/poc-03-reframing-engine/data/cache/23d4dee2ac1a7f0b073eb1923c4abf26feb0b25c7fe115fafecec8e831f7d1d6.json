@@ -1,0 +1,14 @@
+{
+ "key": "23d4dee2ac1a7f0b073eb1923c4abf26feb0b25c7fe115fafecec8e831f7d1d6",
+ "text": "[\n  \"Market forces should decide supplier choices.\",\n  \"Carbon targets may exclude capable small businesses.\",\n  \"Cost-effectiveness outweighs environmental pledges.\",\n  \"Procurement rules should prioritize local jobs.\",\n  \"Net-zero goals risk supply chain fragility.\",\n  \"Mandates stifle innovation in green tech.\",\n  \"Public funds should focus on immediate needs.\",\n  \"Voluntary incentives beat regulatory mandates.\"\n]",
+ "usage": {
+  "prompt_tokens": 84,
+  "completion_tokens": 80,
+  "total_tokens": 164,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 84
+ }
+}

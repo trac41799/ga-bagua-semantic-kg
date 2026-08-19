@@ -1,0 +1,14 @@
+{
+ "key": "eeea927c66278b358133f7d226bee74dae6f39de295ffcba8a8fe7e99f68a30c",
+ "text": "{\"name\": \"Ambient noise reduction, inverted\"}",
+ "usage": {
+  "prompt_tokens": 164,
+  "completion_tokens": 11,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 164
+ }
+}

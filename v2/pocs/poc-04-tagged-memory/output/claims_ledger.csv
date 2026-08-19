@@ -1,0 +1,11 @@
+run_timestamp,mode,phase,scope,metric_value,gate,verdict
+2026-08-09T00:26:24,sim,tag_quality,30 reference items,0.6666666666666666,0.8,FAIL
+2026-08-09T00:26:24,sim,stability,30 reference items x2 runs,0.8333333333333334,0.8,PASS
+2026-08-09T00:26:24,sim,filtering_precision_mean,10 filter queries,0.4622138387927862,0.5,FAIL
+2026-08-09T00:26:24,sim,noninterference,"10 queries, tagged vs untagged",1.0,1.0,PASS
+2026-08-09T00:26:24,sim,reference_freeze,reference_tags.sha256,1.0,1.0,PASS
+2026-08-09T00:54:03,real,tag_quality,30 reference items,0.6666666666666666,0.8,FAIL
+2026-08-09T00:54:03,real,stability,30 reference items x2 runs,0.8333333333333334,0.8,PASS
+2026-08-09T00:54:03,real,filtering_precision_mean,10 filter queries,0.4622138387927862,0.5,FAIL
+2026-08-09T00:54:03,real,noninterference,"10 queries, tagged vs untagged",1.0,1.0,PASS
+2026-08-09T00:54:03,real,reference_freeze,reference_tags.sha256,1.0,1.0,PASS

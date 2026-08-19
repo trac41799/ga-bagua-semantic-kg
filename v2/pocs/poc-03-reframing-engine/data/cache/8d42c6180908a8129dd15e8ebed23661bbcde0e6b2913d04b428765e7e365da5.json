@@ -1,0 +1,14 @@
+{
+ "key": "8d42c6180908a8129dd15e8ebed23661bbcde0e6b2913d04b428765e7e365da5",
+ "text": "{\"name\": \"Uncertainty in payment confirmation\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 11,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

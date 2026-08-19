@@ -1,0 +1,14 @@
+{
+ "key": "585a81bb55719be8fefc041cc5039bea5239345ecdfb0fa394795b831555c669",
+ "text": "{\"name\": \"Oversized vehicles pay double price\"}",
+ "usage": {
+  "prompt_tokens": 162,
+  "completion_tokens": 12,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 162
+ }
+}

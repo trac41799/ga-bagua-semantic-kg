@@ -1,0 +1,14 @@
+{
+ "key": "a4a7f598913261a4ac3ae2a26e11bf0e64e686a810b2a7011f7ff028e18042cf",
+ "text": "{\"name\": \"Router's hidden fragility under load\"}",
+ "usage": {
+  "prompt_tokens": 165,
+  "completion_tokens": 11,
+  "total_tokens": 176,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 165
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "key": "4440dd0ae9740f7f18d6827c77baa4ee8a54680577fbdf458762eddfc3261676",
+ "text": "{\"name\": \"Silence as amplified absence\"}",
+ "usage": {
+  "prompt_tokens": 166,
+  "completion_tokens": 10,
+  "total_tokens": 176,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 166
+ }
+}

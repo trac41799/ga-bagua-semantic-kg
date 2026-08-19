@@ -1,0 +1,14 @@
+{
+ "key": "ae3e3ef59a0991a718aa9d4f692a30dba3f91888faafe01182fce20bc520ab1c",
+ "text": "[\"Gut microbiome editing curbs UC flare-ups\",\n\"CRISPR therapy lowers colitis recurrence\",\n\"Engineered microbes prevent UC relapse\",\n\"Gene-edited gut flora cuts UC return\",\n\"Microbiome CRISPR reduces colitis episodes\",\n\"Targeted gut bacteria edits slash relapse\",\n\"UC remission improved via CRISPR microbiome\",\n\"Gene therapy in gut lowers colitis relapse\"]",
+ "usage": {
+  "prompt_tokens": 80,
+  "completion_tokens": 72,
+  "total_tokens": 152,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 80
+ }
+}

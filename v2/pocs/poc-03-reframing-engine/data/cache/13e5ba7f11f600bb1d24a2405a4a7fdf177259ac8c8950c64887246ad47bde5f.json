@@ -1,0 +1,14 @@
+{
+ "key": "13e5ba7f11f600bb1d24a2405a4a7fdf177259ac8c8950c64887246ad47bde5f",
+ "text": "{\"name\": \"Bilingualism delays dementia onset\"}",
+ "usage": {
+  "prompt_tokens": 154,
+  "completion_tokens": 11,
+  "total_tokens": 165,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 154
+ }
+}

@@ -1,0 +1,2 @@
+# TDD — POC-08 Reframing v2
+**Cases:** 08.1 few-shot prompt contains ≥2 exemplars per move type; 08.2 arm-A prompt unchanged vs POC-03; 08.3 8 distinct positions per trigram (re-verify); 08.4 complement identity (Kan→Li etc.); 08.5 diversity metric hand case; 08.6 coherence bounded [1,5]; 08.7 runner renders both margins + verdict; 08.8 SimulatedLLM runner; 08.9 determinism on cache. **DoD:** pytest green (≥12), real run verdict, README documenting re-pre-registration.

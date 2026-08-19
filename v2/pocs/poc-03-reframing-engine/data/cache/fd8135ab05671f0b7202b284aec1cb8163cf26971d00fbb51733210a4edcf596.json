@@ -1,0 +1,14 @@
+{
+ "key": "fd8135ab05671f0b7202b284aec1cb8163cf26971d00fbb51733210a4edcf596",
+ "text": "{\"name\": \"Household income as tariff ceiling\"}",
+ "usage": {
+  "prompt_tokens": 161,
+  "completion_tokens": 11,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 161
+ }
+}

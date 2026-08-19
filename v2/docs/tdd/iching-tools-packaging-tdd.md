@@ -1,0 +1,2 @@
+# TDD — iching-tools Packaging
+**Cases:** P1: `python -m build` → wheel+sdist exist; clean venv install; `itools --version` = 0.2.0; `itools reframe --sim` works from the installed entry. P2: CI YAML valid (parse with yaml if available; else structural checks) with pytest + bench + build jobs. P3: official MCP-SDK client: initialize, tools/list (6 tools), tools/call each (sim) — all succeed. P4: 3 SKILL.md files exist with the validated prompts + evidence lines. P5: all prior suites green (≥40). **DoD:** packaging + compat + skills verified; gates extended (G18).

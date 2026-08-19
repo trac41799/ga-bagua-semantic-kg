@@ -1,0 +1,9 @@
+metric,value,baseline,split,seed,date
+D1_rubric_R10,0.3698,>=0.60,24 queries,20260809,2026-08-08
+D2_pipeline_recall,0.3310,0.95*full:0.7023,24 queries,20260809,2026-08-08
+D2_break_even,23,<=10,ledger,20260809,2026-08-08
+D3_rubric_minus_tfidf,+0.1057,+0.10,24 queries,20260809,2026-08-08
+D3_rubric_minus_bm25,+0.1140,+0.10,24 queries,20260809,2026-08-08
+encode_tokens,42801,one-time,ledger,20260809,2026-08-08
+verify_per_query,123.5,per-query,ledger,20260809,2026-08-08
+full_per_query,2041.5,per-query,ledger,20260809,2026-08-08

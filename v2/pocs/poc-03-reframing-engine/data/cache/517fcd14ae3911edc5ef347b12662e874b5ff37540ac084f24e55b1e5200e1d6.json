@@ -1,0 +1,14 @@
+{
+ "key": "517fcd14ae3911edc5ef347b12662e874b5ff37540ac084f24e55b1e5200e1d6",
+ "text": "[\n  \"Dashboard prioritizes top error codes over complete logs.\",\n  \"Full error log hidden behind top-three summary.\",\n  \"Only three error codes displayed, not all.\",\n  \"Error log truncated to most common issues.\",\n  \"Dashboard highlights frequent errors, omits rest.\",\n  \"Top three errors shown, full log absent.\",\n  \"Error codes limited to top three, not exhaustive.\",\n  \"Dashboard summarizes errors, not full history.\"\n]",
+ "usage": {
+  "prompt_tokens": 82,
+  "completion_tokens": 90,
+  "total_tokens": 172,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "prompt_cache_hit_tokens": 0,
+  "prompt_cache_miss_tokens": 82
+ }
+}
